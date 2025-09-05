@@ -1,0 +1,19 @@
+# Emacs
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+*.elc
+auto-save-list
+tramp
+.\#*
+
+# Emacs lock files
+.#*
+
+# Org-mode
+.org-id-locations
+*_archive
+
+# Backup files
+*.bak
