@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-09-04 Thu 23:23 -->
+<!-- 2025-09-04 Thu 23:49 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Org Publish Configuration</title>
@@ -66,7 +66,6 @@ This section defines the entire publishing workflow, including the gatekeeper fu
 (setq org-publish-project-alist
   '(
     ;; --- COMPONENT 1: Publishes the site's root files ---
-    ;; Takes files from ~/coppermind/resources/site/ and publishes them to ~/site/
     ("coppermind-site-root"
      :base-directory       "~/coppermind/resources/site/"
      :publishing-directory "~/site/"
@@ -74,26 +73,32 @@ This section defines the entire publishing workflow, including the gatekeeper fu
      :recursive            t
      :publishing-function  org-html-publish-to-html
      :publish-p            my/org-publish-if-publish-property
-
-     ;; Generates the sitemap for the *entire project* in this directory
      :auto-sitemap         t
      :sitemap-filename     "sitemap.org"
      :sitemap-title        "Sitemap"
-
-     ;; Exclude the assets sub-directory, as it's handled by another component
      :exclude              "assets/"
-
-     ;; Common HTML properties
      :headline-levels      4
      :html-head-include-default-style nil
      :html-head-include-scripts nil
      :html-head "&lt;link rel=\"stylesheet\" type=\"text/css\" href=\"/assets/style.css\"/&gt;"
+     ;; --- ADD THIS PREAMBLE ---
+     :html-preamble "&lt;header class=\"container\"&gt;
+                       &lt;h1&gt;Coppermind&lt;/h1&gt;
+                       &lt;nav class=\"yorha-nav\"&gt;
+                         &lt;ul&gt;
+                           &lt;li&gt;&lt;a href=\"/index.html\"&gt;HOME&lt;/a&gt;&lt;/li&gt;
+                           &lt;li&gt;&lt;a href=\"/sitemap.html\"&gt;SITEMAP&lt;/a&gt;&lt;/li&gt;
+                           &lt;li&gt;&lt;a href=\"#\"&gt;SYSTEM&lt;/a&gt;&lt;/li&gt;
+                           &lt;li&gt;&lt;a href=\"#\"&gt;PROJECTS&lt;/a&gt;&lt;/li&gt;
+                         &lt;/ul&gt;
+                       &lt;/nav&gt;
+                     &lt;/header&gt;
+                     &lt;div class=\"pattern\"&gt;&lt;div class=\"pattern-inner\"&gt;&lt;/div&gt;&lt;/div&gt;"
      :section-numbers      nil
      :with-toc             t
      :toc-depth            2)
 
     ;; --- COMPONENT 2: Publishes the main Org Roam notes ---
-    ;; Takes files from ~/coppermind/ and publishes them to ~/site/
     ("coppermind-roam-notes"
      :base-directory       "~/coppermind/"
      :publishing-directory "~/site/"
@@ -101,21 +106,29 @@ This section defines the entire publishing workflow, including the gatekeeper fu
      :recursive            t
      :publishing-function  org-html-publish-to-html
      :publish-p            my/org-publish-if-publish-property
-
-     ;; IMPORTANT: Exclude the 'resources' directory to avoid conflict
-     ;; with the 'coppermind-site-root' component.
      :exclude              "resources/"
-
-     ;; Common HTML properties (repeated for clarity)
      :headline-levels      4
      :html-head-include-default-style nil
      :html-head-include-scripts nil
      :html-head "&lt;link rel=\"stylesheet\" type=\"text/css\" href=\"/assets/style.css\"/&gt;"
+     ;; --- AND ADD THE SAME PREAMBLE HERE ---
+     :html-preamble "&lt;header class=\"container\"&gt;
+                       &lt;h1&gt;Coppermind&lt;/h1&gt;
+                       &lt;nav class=\"yorha-nav\"&gt;
+                         &lt;ul&gt;
+                           &lt;li&gt;&lt;a href=\"/index.html\"&gt;HOME&lt;/a&gt;&lt;/li&gt;
+                           &lt;li&gt;&lt;a href=\"/sitemap.html\"&gt;SITEMAP&lt;/a&gt;&lt;/li&gt;
+                           &lt;li&gt;&lt;a href=\"#\"&gt;SYSTEM&lt;/a&gt;&lt;/li&gt;
+                           &lt;li&gt;&lt;a href=\"#\"&gt;PROJECTS&lt;/a&gt;&lt;/li&gt;
+                         &lt;/ul&gt;
+                       &lt;/nav&gt;
+                     &lt;/header&gt;
+                     &lt;div class=\"pattern\"&gt;&lt;div class=\"pattern-inner\"&gt;&lt;/div&gt;&lt;/div&gt;"
      :section-numbers      nil
      :with-toc             t
      :toc-depth            2)
 
-    ;; --- COMPONENT 3: Copies static assets ---
+    ;; --- COMPONENT 3: Copies static assets (no change needed here) ---
     ("coppermind-assets"
      :base-directory       "~/coppermind/resources/site/assets/"
      :publishing-directory "~/site/assets/"
@@ -123,7 +136,7 @@ This section defines the entire publishing workflow, including the gatekeeper fu
      :recursive            t
      :publishing-function  org-publish-attachment)
 
-    ;; --- META-PROJECT: Combines all components for publishing ---
+    ;; --- META-PROJECT ---
     ("coppermind"
      :components ("coppermind-site-root" "coppermind-roam-notes" "coppermind-assets"))
     ))
