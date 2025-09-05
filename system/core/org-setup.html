@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2025-09-04 Thu 22:35 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Org Mode Configuration</title>
+<meta name="author" content="Coppermind" />
+<meta name="description" content="All configuration for Org Mode, including Babel languages and core settings." />
+<meta name="generator" content="Org Mode" />
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Org Mode Configuration</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgc0d3204">Header</a></li>
+<li><a href="#orgb46aa11">Org Mode Core</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgc0d3204" class="outline-2">
+<h2 id="orgc0d3204">Header</h2>
+<div class="outline-text-2" id="text-orgc0d3204">
+<p>
+This module configures Org Mode, the backbone of this literate configuration system.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;;; org-setup.el --- Configuration for Org Mode -*- lexical-binding: t -*-
+
+;;; Commentary:
+;; This file is tangled from ~/coppermind/system/core/org-setup.org.
+;; It contains all settings related to Org Mode.
+
+;;; Code:
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb46aa11" class="outline-2">
+<h2 id="orgb46aa11">Org Mode Core</h2>
+<div class="outline-text-2" id="text-orgb46aa11">
+<p>
+This `use-package` block configures the core behavior of Org Mode. It sets default directories, enables Babel languages, and defines some quality-of-life settings.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(use-package org
+      :ensure t
+      :pin gnu
+      :demand t
+      ;; We don't need to :ensure org because it's built into modern Emacs.
+      :config
+      ;; --- 1. Babel Languages ---
+      ;; This is the crucial part to ensure that Emacs Lisp source blocks
+      ;; are executable and can be tangled correctly.
+      (org-babel-do-load-languages
+       'org-babel-load-languages
+       '((emacs-lisp . t)
+         (shell . t))) ; It's useful to enable shell scripts as well.
+
+      ;; --- 2. Core Settings ---
+      (setq org-directory             "~/coppermind"
+            org-agenda-files          '("~/coppermind")
+            org-default-notes-file    (expand-file-name "inbox.org" org-directory)
+            org-ellipsis              " ▾" ; A nicer folding indicator.
+            org-startup-indented      t    ; Prettier indentation at startup.
+            org-log-done              'time ; Record when a TODO item is marked DONE.
+    ))
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;;; org-setup.el ends here
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div class="footer-content">
+                 <p>Last modified: </p>
+                 <p>This site is built with Emacs and Org-mode.</p>
+                 <p><a href="https://github.com/calebc42">My GitHub</a></p>
+                 <p><a href="https://linkedin/in/calebc42">My Linkedin</a></p>
+               </div>
+</div>
+</body>
+</html>

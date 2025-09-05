@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2025-09-04 Thu 22:35 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Helpful-Setup Configuration</title>
+<meta name="author" content="Coppermind" />
+<meta name="generator" content="Org Mode" />
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Helpful-Setup Configuration</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org4038b56">Header</a></li>
+<li><a href="#orgb7ebf36">Configuration</a></li>
+<li><a href="#orga19554a">Footer</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org4038b56" class="outline-2">
+<h2 id="org4038b56">Header</h2>
+<div class="outline-text-2" id="text-org4038b56">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;;; helpful-setup.el --- Configuration for Helpful -*- lexical-binding: t -*-
+
+;;; Commentary:
+;; This file is tangled from ~/coppermind/system/modules/helpful-setup.org.
+
+;;; Code:
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgb7ebf36" class="outline-2">
+<h2 id="orgb7ebf36">Configuration</h2>
+<div class="outline-text-2" id="text-orgb7ebf36">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(use-package helpful
+  :ensure t
+  :demand t
+  :bind
+  ;; Remap the default help keys to their helpful equivalents
+  (("C-h f" . helpful-function)
+   ("C-h v" . helpful-variable)
+   ("C-h k" . helpful-key)
+   ("C-h c" . helpful-command)
+   ("C-h m" . helpful-macro)  
+   ("C-c h" . helpful-at-point)))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orga19554a" class="outline-2">
+<h2 id="orga19554a">Footer</h2>
+<div class="outline-text-2" id="text-orga19554a">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;;; helpful-setup.el ends here
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div class="footer-content">
+                 <p>Last modified: </p>
+                 <p>This site is built with Emacs and Org-mode.</p>
+                 <p><a href="https://github.com/calebc42">My GitHub</a></p>
+                 <p><a href="https://linkedin/in/calebc42">My Linkedin</a></p>
+               </div>
+</div>
+</body>
+</html>

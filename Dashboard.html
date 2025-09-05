@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2025-09-04 Thu 22:58 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Coppermind Dashboard</title>
+<meta name="author" content="Coppermind" />
+<meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="assets/style.css"/>
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Coppermind Dashboard</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org91c3aa1">Processing Queue</a>
+<ul>
+<li><a href="#org74100f2">Inbox Items</a></li>
+<li><a href="#org06d957e">Reviews Due</a></li>
+</ul>
+</li>
+<li><a href="#orgd4d18dd">Projects</a>
+<ul>
+<li><a href="#orge33ead2">Next Actions</a></li>
+<li><a href="#org3f53aab">Active Projects</a></li>
+</ul>
+</li>
+<li><a href="#org556b2c3">Resources</a>
+<ul>
+<li><a href="#orgc6f84ad">Recently Modified</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org91c3aa1" class="outline-2">
+<h2 id="org91c3aa1">Processing Queue</h2>
+<div class="outline-text-2" id="text-org91c3aa1">
+</div>
+<div id="outline-container-org74100f2" class="outline-3">
+<h3 id="org74100f2">Inbox Items</h3>
+<div class="outline-text-3" id="text-org74100f2">
+</div>
+</div>
+<div id="outline-container-org06d957e" class="outline-3">
+<h3 id="org06d957e">Reviews Due</h3>
+<div class="outline-text-3" id="text-org06d957e">
+<p>
+(and (todo "TODO") (pred&lt;(org-roam-node-prop ?n "REVIEW<sub>DUE</sub>") (org-read-date nil t "&lt;today&gt;")))
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd4d18dd" class="outline-2">
+<h2 id="orgd4d18dd">Projects</h2>
+<div class="outline-text-2" id="text-orgd4d18dd">
+</div>
+<div id="outline-container-orge33ead2" class="outline-3">
+<h3 id="orge33ead2">Next Actions</h3>
+<div class="outline-text-3" id="text-orge33ead2">
+<p>
+(and (todo "TODO") (prop "STATUS" "next"))
+</p>
+</div>
+</div>
+<div id="outline-container-org3f53aab" class="outline-3">
+<h3 id="org3f53aab">Active Projects</h3>
+<div class="outline-text-3" id="text-org3f53aab">
+<p>
+(and (todo "TODO") (prop "STATUS" "active"))
+</p>
+</div>
+</div>
+</div>
+<div id="outline-container-org556b2c3" class="outline-2">
+<h2 id="org556b2c3">Resources</h2>
+<div class="outline-text-2" id="text-org556b2c3">
+</div>
+<div id="outline-container-orgc6f84ad" class="outline-3">
+<h3 id="orgc6f84ad">Recently Modified</h3>
+<div class="outline-text-3" id="text-orgc6f84ad">
+<p>
+(and (prop "TYPE" "resource") (sort-by 'mtime &gt;))
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div class="footer-content">
+                 <p>Last modified: </p>
+                 <p>This site is built with Emacs and Org-mode.</p>
+                 <p><a href="https://github.com/calebc42">My GitHub</a></p>
+                 <p><a href="https://linkedin/in/calebc42">My Linkedin</a></p>
+               </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2025-09-04 Thu 22:35 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Coppermind Dashboard Setup</title>
+<meta name="author" content="Coppermind" />
+<meta name="description" content="Creates and manages the main Coppermind dashboard." />
+<meta name="generator" content="Org Mode" />
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Coppermind Dashboard Setup</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org0efbcfe">Header</a></li>
+<li><a href="#org4c0b6e4">Dashboard Generation</a></li>
+<li><a href="#org0f6d94a">Footer</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org0efbcfe" class="outline-2">
+<h2 id="org0efbcfe">Header</h2>
+<div class="outline-text-2" id="text-org0efbcfe">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;;; dashboard-setup.el --- Manages the Coppermind Dashboard -*- lexical-binding: t -*-
+
+;;; Commentary:
+;; This module defines the structure and dynamic blocks for the main
+;; dashboard file, Dashboard.org.
+
+;;; Code:
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org4c0b6e4" class="outline-2">
+<h2 id="org4c0b6e4">Dashboard Generation</h2>
+<div class="outline-text-2" id="text-org4c0b6e4">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(defun coppermind/create-dashboard-file ()
+  "Create or overwrite the main Dashboard.org file in the coppermind root."
+  (interactive)
+  (let ((dashboard-file (expand-file-name "~/coppermind/Dashboard.org")))
+    (with-temp-buffer
+      (insert "#+title: Coppermind Dashboard\n\n")
+      (insert "* Processing Queue\n\n")
+      (insert "** Inbox Items\n")
+      (insert "#+begin: clocktable :maxlevel 2 :scope file:\"~/coppermind/inbox.org\"\n#+end:\n\n")
+      (insert "** Reviews Due\n")
+      (insert "#+begin: org-roam-ql\n")
+      (insert "  (and (todo \"TODO\") (pred&lt;(org-roam-node-prop ?n \"REVIEW_DUE\") (org-read-date nil t \"&lt;today&gt;\")))\n")
+      (insert "#+end:\n\n")
+
+      (insert "* Projects\n\n")
+      (insert "** Next Actions\n")
+      (insert "#+begin: org-roam-ql\n")
+      (insert "  (and (todo \"TODO\") (prop \"STATUS\" \"next\"))\n")
+      (insert "#+end:\n\n")
+      (insert "** Active Projects\n")
+      (insert "#+begin: org-roam-ql\n")
+      (insert "  (and (todo \"TODO\") (prop \"STATUS\" \"active\"))\n")
+      (insert "#+end:\n\n")
+
+      (insert "* Resources\n\n")
+      (insert "** Recently Modified\n")
+      (insert "#+begin: org-roam-ql\n")
+      (insert "  (and (prop \"TYPE\" \"resource\") (sort-by 'mtime &gt;))\n")
+      (insert "#+end:\n\n")
+
+      ;; Write the buffer content to the file
+      (write-file dashboard-file))
+    (message "Coppermind Dashboard created/updated.")))
+
+;; Create the dashboard when this module is loaded.
+(coppermind/create-dashboard-file)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org0f6d94a" class="outline-2">
+<h2 id="org0f6d94a">Footer</h2>
+<div class="outline-text-2" id="text-org0f6d94a">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(provide 'dashboard-setup)
+;;; dashboard-setup.el ends here
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div class="footer-content">
+                 <p>Last modified: </p>
+                 <p>This site is built with Emacs and Org-mode.</p>
+                 <p><a href="https://github.com/calebc42">My GitHub</a></p>
+                 <p><a href="https://linkedin/in/calebc42">My Linkedin</a></p>
+               </div>
+</div>
+</body>
+</html>

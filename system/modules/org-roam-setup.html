@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2025-09-04 Thu 22:35 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Org Roam Configuration</title>
+<meta name="author" content="Coppermind" />
+<meta name="description" content="Configuration for the org-roam package, templates, and core workflow." />
+<meta name="generator" content="Org Mode" />
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Org Roam Configuration</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org2e30218">Header</a></li>
+<li><a href="#orgbab66e2">Configuration</a></li>
+<li><a href="#org64d00ec">Footer</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org2e30218" class="outline-2">
+<h2 id="org2e30218">Header</h2>
+<div class="outline-text-2" id="text-org2e30218">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;;; org-roam-setup.el --- Configuration for Org Roam -*- lexical-binding: t -*-
+;;; Commentary:
+;; This file is tangled from ~/coppermind/system/modules/org-roam-setup.org.
+;; It configures Org-roam for non-hierarchical, relationship-based note-taking.
+;; It depends on functions defined in 'coppermind-lib'.
+;;; Code:
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgbab66e2" class="outline-2">
+<h2 id="orgbab66e2">Configuration</h2>
+<div class="outline-text-2" id="text-orgbab66e2">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(use-package org-roam
+  :ensure t
+  :init
+  ;; Ensure emacsql can find the sqlite3 executable.
+  (when (executable-find "sqlite3")
+    (setq emacsql-sqlite-executable (executable-find "sqlite3")))
+  :after org
+  :hook (after-init . org-roam-db-autosync-mode)
+  :custom
+  (org-roam-directory (file-truename "~/coppermind"))
+  (org-roam-completion-everywhere t)
+  (org-roam-node-display-template
+   (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+  :bind (("C-c n f" . org-roam-node-find)
+         ("C-c n i" . org-roam-node-insert)
+         ("C-c n c" . org-roam-capture)
+         ("C-c n b" . org-roam-buffer-toggle)
+         ("C-c n p" . coppermind/set-property-interactively))
+  :config
+  ;; Keep the database in a central, known location.
+  (setq org-roam-db-location (expand-file-name "org-roam.db" user-emacs-directory))
+  ;; --- DYNAMIC CAPTURE TEMPLATES ---
+  ;; These templates call functions from coppermind-lib.el to generate
+  ;; files with a property drawer based on the schema in ~/coppermind/system/properties/
+(setq org-roam-capture-templates
+      '(("r" "resource" plain
+         (function coppermind/resource-template)  ; &lt;- Fixed: no arguments
+         :target (file "resources/%&lt;%Y%m%d%H%M%S&gt;-${slug}.org")
+         :unnarrowed t)
+        ("p" "project" plain
+         (function coppermind/project-template)   ; &lt;- Fixed: no arguments
+         :target (file "projects/%&lt;%Y%m%d%H%M%S&gt;-${slug}.org")
+         :unnarrowed t)
+        ("i" "inbox" plain "* %?"
+         :target (file+olp "inbox.org" ("Inbox"))
+         :unnarrowed t)))
+  )
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org64d00ec" class="outline-2">
+<h2 id="org64d00ec">Footer</h2>
+<div class="outline-text-2" id="text-org64d00ec">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;;; org-roam-setup.el ends here
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div class="footer-content">
+                 <p>Last modified: </p>
+                 <p>This site is built with Emacs and Org-mode.</p>
+                 <p><a href="https://github.com/calebc42">My GitHub</a></p>
+                 <p><a href="https://linkedin/in/calebc42">My Linkedin</a></p>
+               </div>
+</div>
+</body>
+</html>

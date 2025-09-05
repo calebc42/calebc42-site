@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2025-09-04 Thu 22:35 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Autoinsert Configuration</title>
+<meta name="author" content="Caleb Christensen" />
+<meta name="description" content="Automatically inserts boilerplate text into new files." />
+<meta name="generator" content="Org Mode" />
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Autoinsert Configuration</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org627eb6a">Header</a></li>
+<li><a href="#org249c90b">Helper Functions</a></li>
+<li><a href="#org8bc57ea">Auto-insert Configuration</a></li>
+<li><a href="#org5fe5fab">Footer</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org627eb6a" class="outline-2">
+<h2 id="org627eb6a">Header</h2>
+<div class="outline-text-2" id="text-org627eb6a">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;;; autoinsert-setup.el --- Boilerplate automation for new files -*- lexical-binding: t -*-
+
+;;; Commentary:
+;; This file is tangled from ~/coppermind/system/core/autoinsert-setup.org.
+;; It defines templates for new files, particularly for new literate config modules.
+;; It is location-aware and works for the core, lib, and modules directories.
+
+;;; Code:
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org249c90b" class="outline-2">
+<h2 id="org249c90b">Helper Functions</h2>
+<div class="outline-text-2" id="text-org249c90b">
+<p>
+These functions streamline the process of creating and finding configuration modules.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(defun my/new-config-module (package-name)
+  "Create a new configuration module for PACKAGE-NAME.
+Prompts for a location based on the centrally defined
+`my/config-subdirectories'."
+  (interactive "sPackage or Library name: ")
+  (let* ((dir-choice
+          ;; Use the variable from config.el as the source for completion options
+          (completing-read "Create in: " my/config-subdirectories nil t))
+         (destination-dir
+          (expand-file-name (concat dir-choice "/") my/org-config-root-path))
+         ;; Add a standard suffix for consistency
+         (filename (concat package-name "-setup.org")))
+    (find-file (expand-file-name filename destination-dir))))
+
+;; Bind this to a convenient key for quick access
+(global-set-key (kbd "C-c m n") #'my/new-config-module)
+
+(defun my/goto-config-directory ()
+  "Quickly navigate to one of the config subdirectories."
+  (interactive)
+  (let* ((dir-choice (completing-read "Go to: " my/config-subdirectories nil t))
+         (destination-dir (expand-file-name (concat dir-choice "/") my/org-config-root-path)))
+    (dired destination-dir)))
+
+(global-set-key (kbd "C-c m d") #'my/goto-config-directory)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org8bc57ea" class="outline-2">
+<h2 id="org8bc57ea">Auto-insert Configuration</h2>
+<div class="outline-text-2" id="text-org8bc57ea">
+<p>
+This section configures the `auto-insert` package to use our dynamic template.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(use-package autoinsert
+  :ensure nil ; It's a built-in package
+  :demand t
+  :config
+  (defun my/insert-config-module-header ()
+    "Insert boilerplate for a literate config by reading a template file
+and formatting it with dynamic values."
+    (interactive)
+    (let* ((full-path (buffer-file-name))
+           (filename (file-name-nondirectory full-path))
+           (module-name (file-name-sans-extension filename))
+           (package-name (if (string-suffix-p "-setup" module-name)
+                             (substring module-name 0 -6)
+                           module-name))
+           (sub-dir (car (cl-remove-if-not
+                         (lambda (dir) (string-match-p (concat "/" dir "/") full-path))
+                         my/config-subdirectories)))
+           (tangle-path (format "~/.emacs.d/lisp/%s/%s.el" sub-dir module-name))
+           (display-name (capitalize (replace-regexp-in-string "-" " " package-name)))
+           (template-path (expand-file-name "config-module.org" "~/coppermind/resources/templates/"))
+           (template-string (with-temp-buffer
+                              (insert-file-contents-literally template-path)
+                              (buffer-string))))
+      (insert
+       (format
+        template-string
+        ;; Arguments to format string (these are the same as before):
+        display-name      ; Title
+        package-name      ; Description
+        package-name      ; PROVIDES
+        tangle-path       ; Tangle path
+        module-name       ; File header
+        display-name      ; File header comment
+        sub-dir           ; Dynamic path part
+        filename          ; Commentary path
+        package-name      ; use-package name
+        module-name))))   ; Footer comment
+
+  ;; --- Tell Emacs where to find template files in general ---
+  (setq auto-insert-directory (expand-file-name "templates/" "~/coppermind/system/"))
+
+  ;; --- RULE 1: For your special config files, use the dynamic function ---
+  (let* ((config-path-regex (regexp-quote my/org-config-root-path))
+         (subdirs-regex (string-join my/config-subdirectories "\\|")))
+    (add-to-list 'auto-insert-alist
+                 `(,(format "%s\\(%s\\)/.+\\.org\\'" config-path-regex subdirs-regex)
+                   . my/insert-config-module-header)))
+
+  ;; --- RULE 2: For any other .org file, use the simple default template ---
+  (add-to-list 'auto-insert-alist '("\\.org\\'" . "default.org"))
+
+  (auto-insert-mode 1))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org5fe5fab" class="outline-2">
+<h2 id="org5fe5fab">Footer</h2>
+<div class="outline-text-2" id="text-org5fe5fab">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;;; autoinsert-setup.el ends here
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div class="footer-content">
+                 <p>Last modified: </p>
+                 <p>This site is built with Emacs and Org-mode.</p>
+                 <p><a href="https://github.com/calebc42">My GitHub</a></p>
+                 <p><a href="https://linkedin/in/calebc42">My Linkedin</a></p>
+               </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2025-09-04 Thu 22:35 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Emacs Initialization</title>
+<meta name="author" content="Coppermind" />
+<meta name="description" content="The bootstrap file for a literate Emacs configuration. This is the first file Emacs loads." />
+<meta name="generator" content="Org Mode" />
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Emacs Initialization</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgeb1e243">Header</a></li>
+<li><a href="#org3a7e949">Package System</a></li>
+<li><a href="#org371037a">Core Packages &amp; Configuration Loading</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgeb1e243" class="outline-2">
+<h2 id="orgeb1e243">Header</h2>
+<div class="outline-text-2" id="text-orgeb1e243">
+<p>
+This file, `init.el`, is the starting point for Emacs. Its primary job is to set up the package management system and then load the main configuration file, `config.el`, which is tangled from `configuration.org`.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;;; init.el --- Bootstrap for a Literate Emacs Configuration -*- lexical-binding: t -*-
+
+;;; Commentary:
+;; This is the first file loaded by Emacs.
+;; Its purpose is to set up package management and load the main config.
+;; It is tangled from ~/coppermind/system/initialization.org.
+
+;;; Code:
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3a7e949" class="outline-2">
+<h2 id="org3a7e949">Package System</h2>
+<div class="outline-text-2" id="text-org3a7e949">
+<p>
+First, we define the location for `custom.el`, where Emacs stores settings from the `M-x customize` interface. Then, we configure `package.el` to use the MELPA, Org, and GNU ELPA archives, which provide access to thousands of packages.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;; --------------------------------------------------
+;; Customization Settings
+;; --------------------------------------------------
+;; Set the location of the custom file.
+(setq custom-file (expand-file-name "custom.el" user-emacs-directory))
+(when (file-exists-p custom-file)
+  (load custom-file))
+
+;; Initialize the package system
+(require 'package)
+(setq package-enable-at-startup nil)
+(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives '("org"   . "https://orgmode.org/elpa/") t)
+(add-to-list 'package-archives '("gnu"   . "https://elpa.gnu.org/packages/") t)
+
+;; Initialize packages and refresh contents if necessary
+(package-initialize)
+
+(unless (and package-archive-contents
+             (package-installed-p 'use-package)
+               (package-installed-p 'tsort))
+  (condition-case err
+      (package-refresh-contents)
+    (error (message "Failed to refresh packages: %s" (error-message-string err)))))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org371037a" class="outline-2">
+<h2 id="org371037a">Core Packages &amp; Configuration Loading</h2>
+<div class="outline-text-2" id="text-org371037a">
+<p>
+Here, we install and configure `use-package`, a macro that dramatically simplifies package management. We also set some performance-related garbage collection thresholds.
+</p>
+
+<p>
+The most important part is the final line, which loads `config.el`. This is where the rest of your personalized configuration will live.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;; --------------------------------------------------
+;; Essential Package Installation
+;; --------------------------------------------------
+;; Install use-package if missing
+(unless (package-installed-p 'use-package)
+  (package-install 'use-package))
+
+;; Configure use-package before requiring it
+(setq use-package-always-ensure t
+      use-package-expand-minimally t
+      use-package-verbose t)  ; Helpful for debugging
+
+(require 'use-package)
+
+;; --------------------------------------------------
+;; Performance Optimization
+;; --------------------------------------------------
+;; Improve garbage collection performance
+(setq gc-cons-threshold (* 100 1024 1024)) ; 100MB during startup
+(setq read-process-output-max (* 3 1024 1024)) ; 3MB chunks instead of 4KB default
+(add-hook 'emacs-startup-hook
+          (lambda ()
+            (setq gc-cons-threshold (* 50 1024 1024)))) ; 50MB after startup
+;; Higher threshold when using memory-intensive modes
+(add-hook 'org-mode-hook (lambda () (setq gc-cons-threshold (* 100 1024 1024))))
+(add-hook 'lsp-mode-hook (lambda () (setq gc-cons-threshold (* 100 1024 1024))))
+
+;; --------------------------------------------------
+;; Environment Setup
+;; --------------------------------------------------
+;; Set up exec-path-from-shell to inherit the shell environment
+(use-package exec-path-from-shell
+  :if (or (memq window-system '(mac ns x))
+      (daemonp)
+      (getenv "Debian-sandbox"))
+  :init
+  (exec-path-from-shell-initialize))
+
+;; --------------------------------------------------
+;; Main Configuration Load
+;; --------------------------------------------------
+;; Load the tangled configuration with error handling
+(condition-case err
+    (load (expand-file-name "config" user-emacs-directory) t t)
+  (error
+   (warn "Error loading configuration: %s" (error-message-string err))
+   (load (expand-file-name "default.el" user-emacs-directory) t t)))
+
+ ;;; init.el ends here
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div class="footer-content">
+                 <p>Last modified: </p>
+                 <p>This site is built with Emacs and Org-mode.</p>
+                 <p><a href="https://github.com/calebc42">My GitHub</a></p>
+                 <p><a href="https://linkedin/in/calebc42">My Linkedin</a></p>
+               </div>
+</div>
+</body>
+</html>

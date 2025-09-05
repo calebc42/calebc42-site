@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2025-09-04 Thu 22:35 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Embark-Setup Configuration</title>
+<meta name="author" content="Coppermind" />
+<meta name="description" content="facilitates performing actions on &quot;targets&quot; within Emacs, both in normal buffers and during minibuffer completion." />
+<meta name="generator" content="Org Mode" />
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Embark-Setup Configuration</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org48d04fa">Header</a></li>
+<li><a href="#org19ed438">Configuration</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org48d04fa" class="outline-2">
+<h2 id="org48d04fa">Header</h2>
+<div class="outline-text-2" id="text-org48d04fa">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;;; embark-setup.el --- Configuration for Embark -*- lexical-binding: t -*-
+
+;;; Commentary:
+;; This file is tangled from ~/coppermind/system/modules/embark-setup.org.
+
+;;; Code:
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org19ed438" class="outline-2">
+<h2 id="org19ed438">Configuration</h2>
+<div class="outline-text-2" id="text-org19ed438">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(use-package embark
+  :demand t
+  :bind
+  (("C-." . embark-act)
+   ("M-." . embark-dwim)))
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;;; embark-setup.el ends here
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div class="footer-content">
+                 <p>Last modified: </p>
+                 <p>This site is built with Emacs and Org-mode.</p>
+                 <p><a href="https://github.com/calebc42">My GitHub</a></p>
+                 <p><a href="https://linkedin/in/calebc42">My Linkedin</a></p>
+               </div>
+</div>
+</body>
+</html>

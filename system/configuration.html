@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2025-09-04 Thu 22:35 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Main Emacs Configuration</title>
+<meta name="author" content="Coppermind" />
+<meta name="description" content="The central hub for the literate Emacs configuration. It defines the system's structure and loads all other modules." />
+<meta name="generator" content="Org Mode" />
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Main Emacs Configuration</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org65358d6">Header</a></li>
+<li><a href="#orgaa9d7f4">System Architecture &amp; Paths</a></li>
+<li><a href="#org67c9792">Configuration Management</a></li>
+<li><a href="#org5e1a42c">Module Loading</a></li>
+<li><a href="#org3e77711">Footer</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org65358d6" class="outline-2">
+<h2 id="org65358d6">Header</h2>
+<div class="outline-text-2" id="text-org65358d6">
+<p>
+This file is the core of the configuration. It is responsible for defining the directory structure, providing helper functions to manage the configuration, and loading all modules in the correct, predictable order.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;;; config.el --- Main configuration hub -*- lexical-binding: t -*-
+
+;;; Commentary:
+;; This file is tangled from ~/coppermind/system/configuration.org.
+;; It defines the configuration's structure, provides management functions,
+;; and loads all modules in the correct sequence (core -&gt; lib -&gt; modules).
+
+;;; Code:
+(message "--- Loading config.el ---")
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgaa9d7f4" class="outline-2">
+<h2 id="orgaa9d7f4">System Architecture &amp; Paths</h2>
+<div class="outline-text-2" id="text-orgaa9d7f4">
+<p>
+This section defines the directory structure for the entire configuration. It is the "single source of truth" for all paths. Helper functions will reference these variables, ensuring a DRY (Don't Repeat Yourself) and easily maintainable setup.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;; --- 1. Source Paths (The Literate Org Files) ---
+(defvar my/org-config-root-path (expand-file-name "~/coppermind/system/")
+  "The root path of the literate configuration source.")
+
+(defvar my/org-config-core-path (expand-file-name "core/" my/org-config-root-path)
+  "Path to foundational `core' configuration modules.")
+
+(defvar my/org-config-modules-path (expand-file-name "modules/" my/org-config-root-path)
+  "Path to user-facing feature `modules'.")
+
+(defvar my/org-config-lib-path (expand-file-name "lib/" my/org-config-root-path)
+  "Path to custom elisp library functions.")
+
+(defvar my/config-subdirectories '("core" "lib" "modules")
+  "A list of valid subdirectories for configuration modules.
+This variable powers the dynamic `my/new-config-module' helper.")
+
+;; --- 2. Tangled Paths (The Compiled Elisp Files) ---
+(defvar my/lisp-config-path (expand-file-name "lisp/" user-emacs-directory)
+  "The path to the directory for tangled elisp files.")
+
+;; Ensure the lisp directory exists and is on the load-path
+(make-directory my/lisp-config-path t)
+(add-to-list 'load-path my/lisp-config-path)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org67c9792" class="outline-2">
+<h2 id="org67c9792">Configuration Management</h2>
+<div class="outline-text-2" id="text-org67c9792">
+<p>
+These are the interactive helper functions for managing and verifying your configuration. They are defined before the module loader so they are available immediately.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(defun my/rebuild-config ()
+  "Tangle and byte-compile the ENTIRE literate configuration."
+  (interactive)
+  (message "--- Starting FULL configuration rebuild ---")
+  (require 'org)
+
+  ;; Ensure subdirectories exist in the lisp path
+  (dolist (dir my/config-subdirectories)
+    (make-directory (expand-file-name dir my/lisp-config-path) t))
+
+  ;; Helper function to tangle and compile a single Org file.
+  (cl-labels ((tangle-and-compile (org-file)
+                  (let* ((tangled-files (org-babel-tangle-file org-file))
+                         (el-file (car tangled-files)))
+                    (when el-file
+                      (message "Tangled %s -&gt; %s"
+                               (file-name-nondirectory org-file)
+                               (file-name-nondirectory el-file))
+                      (byte-compile-file el-file)
+                      (message "Compiled %s" (file-name-nondirectory el-file))))))
+
+    (condition-case err
+        (progn
+          ;; 1. Rebuild the main files
+          (tangle-and-compile (expand-file-name "initialization.org" my/org-config-root-path))
+          (tangle-and-compile (expand-file-name "configuration.org" my/org-config-root-path))
+
+          ;; 2. Rebuild all modules from all subdirectories
+          (dolist (dir my/config-subdirectories)
+            (let* ((dir-path (expand-file-name (concat dir "/") my/org-config-root-path))
+                   (org-files (directory-files dir-path t "\\.org$")))
+              (message "--- Processing directory: %s ---" dir)
+              (dolist (module-file org-files)
+                (tangle-and-compile module-file))))
+
+          (message "✅ Configuration rebuilt successfully! Please restart Emacs."))
+      (error
+       (message "❌ Configuration build failed!")
+       (error "Build Error: %s" (error-message-string err))))))
+
+(global-set-key (kbd "&lt;f5&gt;") #'my/rebuild-config)
+
+
+(defun my/verify-modules-status ()
+  "Verify module status by reading #+PROPERTY: PROVIDES from all .org files."
+  (interactive)
+  (require 'org)
+  (with-output-to-temp-buffer "*Module Status*"
+    (princ "Module Verification Status\n")
+    (princ "==========================\n\n")
+    (dolist (dir my/config-subdirectories)
+      (let* ((dir-path (expand-file-name (concat dir "/") my/org-config-root-path))
+             (org-files (directory-files dir-path t "\\.org$")))
+        (princ (format "--- %s ---\n" (capitalize dir)))
+        (if (null org-files)
+            (princ "No modules found.\n")
+          (dolist (file org-files)
+            (let* ((module-filename (file-name-nondirectory file))
+                   (feature-name
+                    (with-temp-buffer
+                      (insert-file-contents file)
+                      (goto-char (point-min))
+                      (when (re-search-forward "^#\\+PROPERTY: +PROVIDES +\\(.+\\)$" nil t)
+                        (string-trim (match-string 1)))))
+                   (feature-symbol (and feature-name (intern-soft feature-name))))
+              (cond
+               ((not feature-symbol)
+                (princ (format "⚠️  %-30s (no #+PROPERTY: PROVIDES found)\n" module-filename)))
+               ((featurep feature-symbol)
+                (princ (format "✅ %-30s (feature '%s loaded)\n" module-filename feature-symbol)))
+               (t
+                (princ (format "❌ %-30s (feature '%s NOT loaded)\n" module-filename feature-symbol)))))))
+        (princ "\n")))))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org5e1a42c" class="outline-2">
+<h2 id="org5e1a42c">Module Loading</h2>
+<div class="outline-text-2" id="text-org5e1a42c">
+<p>
+This section contains the code that runs during startup to load all configuration modules. It follows a strict, explicit order to ensure stability: <b><b>Core -&gt; Lib -&gt; Modules</b></b>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;; --- Primary Loader (Active) ---
+
+(defun my/load-modules-from-dir (subdir)
+  "Load all tangled/compiled modules from a subdirectory within the lisp path."
+  (let ((dir-path (expand-file-name subdir my/lisp-config-path)))
+    (when (file-directory-p dir-path)
+      (message "--- Loading from %s ---" subdir)
+      (let ((lisp-files (directory-files dir-path t "\\.elc?$")))
+        (mapc #'load (sort lisp-files #'string&lt;))))))
+
+(defun my/load-all-modules ()
+  "Load all modules in the correct, explicit order for stability."
+  (message "--- Loading all configuration modules ---")
+  ;; The order here is critical for a stable startup.
+  (my/load-modules-from-dir "core")
+  (my/load-modules-from-dir "lib")
+  (my/load-modules-from-dir "modules")
+  (message "--- All modules loaded successfully ---"))
+
+;; Ensure Org is available before any module needs it.
+(require 'org)
+
+;; Run the primary loader during startup.
+(my/load-all-modules)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3e77711" class="outline-2">
+<h2 id="org3e77711">Footer</h2>
+<div class="outline-text-2" id="text-org3e77711">
+<p>
+This block simply contains the closing boilerplate for the tangled `config.el` file.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(message "--- Finished loading config.el ---")
+;;; config.el ends here
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div class="footer-content">
+                 <p>Last modified: </p>
+                 <p>This site is built with Emacs and Org-mode.</p>
+                 <p><a href="https://github.com/calebc42">My GitHub</a></p>
+                 <p><a href="https://linkedin/in/calebc42">My Linkedin</a></p>
+               </div>
+</div>
+</body>
+</html>

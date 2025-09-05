@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2025-09-04 Thu 22:35 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Corfu Configuration</title>
+<meta name="author" content="Coppermind" />
+<meta name="generator" content="Org Mode" />
+</head>
+<body>
+<div id="content" class="content">
+<h1 class="title">Corfu Configuration</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orgd34cdd0">Header</a></li>
+<li><a href="#orgf8430ce">Configuration</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orgd34cdd0" class="outline-2">
+<h2 id="orgd34cdd0">Header</h2>
+<div class="outline-text-2" id="text-orgd34cdd0">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;;; corfu-setup.el --- Configuration for Corfu-Config -*- lexical-binding: t -*-
+
+;;; Commentary:
+;; This file is tangled from ~/coppermind/system/modules/corfu-setup.org.
+
+;;; Code:
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgf8430ce" class="outline-2">
+<h2 id="orgf8430ce">Configuration</h2>
+<div class="outline-text-2" id="text-orgf8430ce">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(use-package corfu
+  :ensure t
+  ;; Trigger completion automatically as you type.
+  :init
+  (global-corfu-mode)
+  ;; Start completion after a short delay.
+  (setq corfu-auto-delay 0.2)
+  ;; Customize the behavior.
+  :custom
+  (corfu-cycle t)                ; Allow cycling through candidates with TAB.
+  (corfu-auto t)                 ; Enable auto-completion.
+  (corfu-separator ?\s)          ; Use a space to separate preview from input.
+  (corfu-quit-at-boundary 'never); Let completion continue across word boundaries.
+  (corfu-preview-current 'insert) ; Show preview of current candidate
+  (corfu-preselect 'prompt)       ; Don't preselect first candidate
+  :bind
+  (:map corfu-map
+        ("TAB" . corfu-complete)
+          ("RET" . corfu-insert)))
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;;; corfu-setup.el ends here
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<div class="footer-content">
+                 <p>Last modified: </p>
+                 <p>This site is built with Emacs and Org-mode.</p>
+                 <p><a href="https://github.com/calebc42">My GitHub</a></p>
+                 <p><a href="https://linkedin/in/calebc42">My Linkedin</a></p>
+               </div>
+</div>
+</body>
+</html>
