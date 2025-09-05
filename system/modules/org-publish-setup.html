@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-09-04 Thu 23:49 -->
+<!-- 2025-09-05 Fri 00:00 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Org Publish Configuration</title>
@@ -47,10 +47,10 @@
 This section defines the entire publishing workflow, including the gatekeeper function for selective publishing and the project alist that specifies source and destination paths.
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">  ;; This makes all publishing functions and variables known to the compiler.
-  (require 'ox-publish)
+<pre class="src src-emacs-lisp">;; This makes all publishing functions and variables known to the compiler.
+(require 'ox-publish)
 
-  ;; --- 1. Define the "gatekeeper" function for selective publishing ---
+;; --- 1. Define the "gatekeeper" function for selective publishing ---
 (defun my/org-publish-if-publish-property (_plist filename _pub-dir)
   "Publish FILENAME if it has the property :publish: set to `t`, or if it's the sitemap."
   (let ((basename (file-name-nondirectory filename)))
@@ -62,84 +62,80 @@ This section defines the entire publishing workflow, including the gatekeeper fu
           (let ((publish-prop (org-entry-get (point-min) "publish")))
             (and publish-prop (string-equal publish-prop "t")))))))
 
+;; --- CORRECTED VARIABLE DEFINITION ---
+;; Use defvar to properly declare the variable and its documentation.
+(defvar my/yorha-html-preamble
+  (concat
+   "&lt;header class=\"container\"&gt;"
+   "&lt;h1&gt;Coppermind&lt;/h1&gt;"
+   "&lt;nav class=\"yorha-nav\"&gt;"
+   "  &lt;ul&gt;"
+   "    &lt;li&gt;&lt;a href=\"/index.html\"&gt;HOME&lt;/a&gt;&lt;/li&gt;"
+   "    &lt;li&gt;&lt;a href=\"/sitemap.html\"&gt;SITEMAP&lt;/a&gt;&lt;/li&gt;"
+   "    &lt;li&gt;&lt;a href=\"#\"&gt;SYSTEM&lt;/a&gt;&lt;/li&gt;"
+   "    &lt;li&gt;&lt;a href=\"#\"&gt;PROJECTS&lt;/a&gt;&lt;/li&gt;"
+   "    &lt;li&gt;&lt;a href=\"/sitemap.html\"&gt;RESOURCES&lt;/a&gt;&lt;/li&gt;"
+   "  &lt;/ul&gt;"
+   "&lt;/nav&gt;"
+   "&lt;/header&gt;"
+   "&lt;div class=\"pattern\"&gt;&lt;div class=\"pattern-inner\"&gt;&lt;/div&gt;&lt;/div&gt;")
+  "HTML preamble for the YoRHa-themed website header and navigation.")
+
+
 ;; --- 2. Define the publishing project ---
 (setq org-publish-project-alist
-  '(
-    ;; --- COMPONENT 1: Publishes the site's root files ---
-    ("coppermind-site-root"
-     :base-directory       "~/coppermind/resources/site/"
-     :publishing-directory "~/site/"
-     :base-extension       "org"
-     :recursive            t
-     :publishing-function  org-html-publish-to-html
-     :publish-p            my/org-publish-if-publish-property
-     :auto-sitemap         t
-     :sitemap-filename     "sitemap.org"
-     :sitemap-title        "Sitemap"
-     :exclude              "assets/"
-     :headline-levels      4
-     :html-head-include-default-style nil
-     :html-head-include-scripts nil
-     :html-head "&lt;link rel=\"stylesheet\" type=\"text/css\" href=\"/assets/style.css\"/&gt;"
-     ;; --- ADD THIS PREAMBLE ---
-     :html-preamble "&lt;header class=\"container\"&gt;
-                       &lt;h1&gt;Coppermind&lt;/h1&gt;
-                       &lt;nav class=\"yorha-nav\"&gt;
-                         &lt;ul&gt;
-                           &lt;li&gt;&lt;a href=\"/index.html\"&gt;HOME&lt;/a&gt;&lt;/li&gt;
-                           &lt;li&gt;&lt;a href=\"/sitemap.html\"&gt;SITEMAP&lt;/a&gt;&lt;/li&gt;
-                           &lt;li&gt;&lt;a href=\"#\"&gt;SYSTEM&lt;/a&gt;&lt;/li&gt;
-                           &lt;li&gt;&lt;a href=\"#\"&gt;PROJECTS&lt;/a&gt;&lt;/li&gt;
-                         &lt;/ul&gt;
-                       &lt;/nav&gt;
-                     &lt;/header&gt;
-                     &lt;div class=\"pattern\"&gt;&lt;div class=\"pattern-inner\"&gt;&lt;/div&gt;&lt;/div&gt;"
-     :section-numbers      nil
-     :with-toc             t
-     :toc-depth            2)
+      '(
+        ;; --- COMPONENT 1: Publishes the site's root files ---
+        ("coppermind-site-root"
+         :base-directory       "~/coppermind/resources/site/"
+         :publishing-directory "~/site/"
+         :base-extension       "org"
+         :recursive            t
+         :publishing-function  org-html-publish-to-html
+         :publish-p            my/org-publish-if-publish-property
+         :auto-sitemap         t
+         :sitemap-filename     "sitemap.org"
+         :sitemap-title        "Sitemap"
+         :exclude              "assets/"
+         :headline-levels      4
+         :html-head-include-default-style nil
+         :html-head-include-scripts nil
+         :html-head "&lt;link rel=\"stylesheet\" type=\"text/css\" href=\"/assets/style.css\"/&gt;"
+         :html-preamble my/yorha-html-preamble
+         :section-numbers      nil
+         :with-toc             t
+         :toc-depth            2)
 
-    ;; --- COMPONENT 2: Publishes the main Org Roam notes ---
-    ("coppermind-roam-notes"
-     :base-directory       "~/coppermind/"
-     :publishing-directory "~/site/"
-     :base-extension       "org"
-     :recursive            t
-     :publishing-function  org-html-publish-to-html
-     :publish-p            my/org-publish-if-publish-property
-     :exclude              "resources/"
-     :headline-levels      4
-     :html-head-include-default-style nil
-     :html-head-include-scripts nil
-     :html-head "&lt;link rel=\"stylesheet\" type=\"text/css\" href=\"/assets/style.css\"/&gt;"
-     ;; --- AND ADD THE SAME PREAMBLE HERE ---
-     :html-preamble "&lt;header class=\"container\"&gt;
-                       &lt;h1&gt;Coppermind&lt;/h1&gt;
-                       &lt;nav class=\"yorha-nav\"&gt;
-                         &lt;ul&gt;
-                           &lt;li&gt;&lt;a href=\"/index.html\"&gt;HOME&lt;/a&gt;&lt;/li&gt;
-                           &lt;li&gt;&lt;a href=\"/sitemap.html\"&gt;SITEMAP&lt;/a&gt;&lt;/li&gt;
-                           &lt;li&gt;&lt;a href=\"#\"&gt;SYSTEM&lt;/a&gt;&lt;/li&gt;
-                           &lt;li&gt;&lt;a href=\"#\"&gt;PROJECTS&lt;/a&gt;&lt;/li&gt;
-                         &lt;/ul&gt;
-                       &lt;/nav&gt;
-                     &lt;/header&gt;
-                     &lt;div class=\"pattern\"&gt;&lt;div class=\"pattern-inner\"&gt;&lt;/div&gt;&lt;/div&gt;"
-     :section-numbers      nil
-     :with-toc             t
-     :toc-depth            2)
+        ;; --- COMPONENT 2: Publishes the main Org Roam notes ---
+        ("coppermind-roam-notes"
+         :base-directory       "~/coppermind/"
+         :publishing-directory "~/site/"
+         :base-extension       "org"
+         :recursive            t
+         :publishing-function  org-html-publish-to-html
+         :publish-p            my/org-publish-if-publish-property
+         :exclude              "resources/"
+         :headline-levels      4
+         :html-head-include-default-style nil
+         :html-head-include-scripts nil
+         :html-head "&lt;link rel=\"stylesheet\" type=\"text/css\" href=\"/assets/style.css\"/&gt;"
+         :html-preamble my/yorha-html-preamble
+         :section-numbers      nil
+         :with-toc             t
+         :toc-depth            2)
 
-    ;; --- COMPONENT 3: Copies static assets (no change needed here) ---
-    ("coppermind-assets"
-     :base-directory       "~/coppermind/resources/site/assets/"
-     :publishing-directory "~/site/assets/"
-     :base-extension       "css\\|js\\|png\\|jpg\\|gif\\|svg"
-     :recursive            t
-     :publishing-function  org-publish-attachment)
+        ;; --- COMPONENT 3: Copies static assets ---
+        ("coppermind-assets"
+         :base-directory       "~/coppermind/resources/site/assets/"
+         :publishing-directory "~/site/assets/"
+         :base-extension       "css\\|js\\|png\\|jpg\\|gif\\|svg"
+         :recursive            t
+         :publishing-function  org-publish-attachment)
 
-    ;; --- META-PROJECT ---
-    ("coppermind"
-     :components ("coppermind-site-root" "coppermind-roam-notes" "coppermind-assets"))
-    ))
+        ;; --- META-PROJECT ---
+        ("coppermind"
+         :components ("coppermind-site-root" "coppermind-roam-notes" "coppermind-assets"))
+        ))
 </pre>
 </div>
 </div>
