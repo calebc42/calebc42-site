@@ -3,14 +3,14 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-09-05 Fri 11:01 -->
+<!-- 2025-09-05 Fri 11:26 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Org Publish Configuration</title>
 <meta name="author" content="Coppermind" />
 <meta name="description" content="Configuration for the org-publish package." />
 <meta name="generator" content="Org Mode" />
-<link rel="stylesheet" type="text/css" href="/assets/style.css"/>
+<link rel="stylesheet" type="text/css" href="assets/style.css"/>
 </head>
 <body>
 <div id="content" class="content">
@@ -21,7 +21,7 @@
 <ul>
 <li><a href="#org37256b6">Header</a></li>
 <li><a href="#org91dd75b">Configuration</a></li>
-<li><a href="#org2c3fc9b">YoHRa UI Custom Blocks</a></li>
+<li><a href="#org19bf272">YoRHa UI Custom Blocks</a></li>
 <li><a href="#orgf8ae1a2">Footer</a></li>
 </ul>
 </div>
@@ -48,190 +48,186 @@
 This section defines the entire publishing workflow, including the gatekeeper function for selective publishing and the project alist that specifies source and destination paths.
 </p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">          ;; This makes all publishing functions and variables known to the compiler.
-          (require 'ox-publish)
+<pre class="src src-emacs-lisp">;; This makes all publishing functions and variables known to the compiler.
+(require 'ox-publish)
 
-          ;; --- 1. Define the "gatekeeper" function for selective publishing ---
-          (defun my/org-publish-if-publish-property (_plist filename _pub-dir)
-            "Publish FILENAME if it has the property :publish: set to `t`, or if it's the sitemap."
-            (let ((basename (file-name-nondirectory filename)))
-              (or (string-equal basename "sitemap.org")  ; Always publish sitemap
-                  (with-temp-buffer
-                    (insert-file-contents filename)
-                    (goto-char (point-min))
-                    (org-mode)
-                    (let ((publish-prop (org-entry-get (point-min) "publish")))
-                      (and publish-prop (string-equal publish-prop "t")))))))
+;; --- 1. Define the "gatekeeper" functions for selective publishing ---
+(defun my/org-publish-if-publish-property (_plist filename _pub-dir)
+  "Publish FILENAME if it has the property :publish: set to `t`, or if it's the sitemap."
+  (let ((basename (file-name-nondirectory filename)))
+    (or (string-equal basename "sitemap.org")  ; Always publish sitemap
+        (with-temp-buffer
+          (insert-file-contents filename)
+          (goto-char (point-min))
+          (org-mode)
+          (let ((publish-prop (org-entry-get (point-min) "publish")))
+            (and publish-prop (string-equal publish-prop "t")))))))
 
-    ;; This new function will live alongside your existing my/org-publish-if-publish-property
-  (defun my/org-publish-if-tutorial-property (_plist filename _pub-dir)
-    "Publish FILENAME if it has the property :type: set to `tutorial`."
-    (with-temp-buffer
-      (insert-file-contents filename)
-      (goto-char (point-min))
-      (org-mode)
-      (let ((type-prop (org-entry-get (point-min) "type")))
-        (and type-prop (string-equal type-prop "tutorial")))))
+(defun my/org-publish-if-tutorial-property (_plist filename _pub-dir)
+  "Publish FILENAME if it has the property :type: set to `tutorial`."
+  (with-temp-buffer
+    (insert-file-contents filename)
+    (goto-char (point-min))
+    (org-mode)
+    (let ((type-prop (org-entry-get (point-min) "type")))
+      (and type-prop (string-equal type-prop "tutorial")))))
 
-          ;; --- CORRECTED VARIABLE DEFINITION ---
-          ;; Use defvar to properly declare the variable and its documentation.
-          (defvar my/yorha-html-preamble
-            (concat
-             "&lt;div class=\"yorha-status\"&gt;"
-             "  &lt;span class=\"status-indicator online\"&gt;&lt;/span&gt;"
-             "  &lt;span class=\"yorha-terminal\"&gt;SYSTEM STATUS: OPERATIONAL&lt;/span&gt;"
-             "&lt;/div&gt;"
-             "&lt;header class=\"container\"&gt;"
-             "  &lt;h1&gt;Coppermind&lt;/h1&gt;"
-             "  &lt;nav class=\"yorha-nav\"&gt;"
-             "    &lt;ul&gt;"
-             "      &lt;li&gt;&lt;a href=\"/index.html\"&gt;HOME&lt;/a&gt;&lt;/li&gt;"
-             "      &lt;li&gt;&lt;a href=\"/sitemap.html\"&gt;SITEMAP&lt;/a&gt;&lt;/li&gt;"
-             "      &lt;li&gt;&lt;a href=\"#\"&gt;SYSTEM&lt;/a&gt;&lt;/li&gt;"
-             "      &lt;li&gt;&lt;a href=\"#\"&gt;PROJECTS&lt;/a&gt;&lt;/li&gt;"
-             "      &lt;li&gt;&lt;a href=\"/sitemap.html\"&gt;RESOURCES&lt;/a&gt;&lt;/li&gt;"
-             "    &lt;/ul&gt;"
-             "  &lt;/nav&gt;"
-             "&lt;/header&gt;"
-             "&lt;div class=\"pattern\"&gt;&lt;div class=\"pattern-inner\"&gt;&lt;/div&gt;&lt;/div&gt;")
-            "HTML preamble for the YoRHa-themed website header and navigation.")
+;; --- 2. Define Preamble/Postamble Variables and Functions ---
+(defvar my/yorha-html-preamble
+  (concat
+   "&lt;div class=\"yorha-status\"&gt;"
+   "  &lt;span class=\"status-indicator online\"&gt;&lt;/span&gt;"
+   "  &lt;span class=\"yorha-terminal\"&gt;SYSTEM STATUS: OPERATIONAL&lt;/span&gt;"
+   "&lt;/div&gt;"
+   "&lt;header class=\"container\"&gt;"
+   "  &lt;h1&gt;Coppermind&lt;/h1&gt;"
+   "  &lt;nav class=\"yorha-nav\"&gt;"
+   "    &lt;ul&gt;"
+   "      &lt;li&gt;&lt;a href=\"index.html\"&gt;HOME&lt;/a&gt;&lt;/li&gt;"
+   "      &lt;li&gt;&lt;a href=\"sitemap.html\"&gt;SITEMAP&lt;/a&gt;&lt;/li&gt;"
+   "      &lt;li&gt;&lt;a href=\"#\"&gt;SYSTEM&lt;/a&gt;&lt;/li&gt;"
+   "      &lt;li&gt;&lt;a href=\"#\"&gt;PROJECTS&lt;/a&gt;&lt;/li&gt;"
+   "      &lt;li&gt;&lt;a href=\"sitemap.html\"&gt;RESOURCES&lt;/a&gt;&lt;/li&gt;"
+   "    &lt;/ul&gt;"
+   "  &lt;/nav&gt;"
+   "&lt;/header&gt;"
+   "&lt;div class=\"pattern\"&gt;&lt;div class=\"pattern-inner\"&gt;&lt;/div&gt;&lt;/div&gt;")
+  "HTML preamble for the YoRHa-themed website header and navigation.")
 
-        ;; --- 1. Define a NEW Preamble specifically for the portfolio ---
-    (defvar my/portfolio-html-preamble
-      (concat
-       "&lt;header class=\"main-header\"&gt;"
-       "    &lt;div class=\"header-left\"&gt;"
-       "         &lt;div class=\"logo\"&gt;LOG: CALEB CHRISTENSEN // REV_OPS_ENTITY&lt;/div&gt;"
-       "         &lt;nav class=\"main-nav\"&gt;"
-       "            &lt;ul&gt;"
-       "                &lt;li&gt;&lt;a href=\"/portfolio/\" class=\"active\"&gt;// HOME&lt;/a&gt;&lt;/li&gt;"
-       "                &lt;li&gt;&lt;a href=\"#\"&gt;// PROJECTS&lt;/a&gt;&lt;/li&gt;"
-       "                &lt;li&gt;&lt;a href=\"#\"&gt;// CONTACT&lt;/a&gt;&lt;/li&gt;"
-       "            &lt;/ul&gt;"
-       "        &lt;/nav&gt;"
-       "    &lt;/div&gt;"
-       "    &lt;button class=\"theme-toggle\" id=\"theme-toggle\" title=\"Toggle theme\"&gt;"
-       "         &lt;svg class=\"icon-sun\" xmlns=\"[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)\" viewBox=\"0 0 24 24\"&gt;&lt;path d=\"M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.106a.75.75 0 010 1.06l-1.591 1.59a.75.75 0 11-1.06-1.06l1.59-1.59a.75.75 0 011.06 0zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.803 17.803a.75.75 0 01-1.06 0l-1.59-1.591a.75.75 0 111.06-1.06l1.59 1.59a.75.75 0 010 1.06zM12 21a.75.75 0 01-.75-.75v-2.25a.75.75 0 011.5 0v2.25a.75.75 0 01-.75-.75zM5.106 17.803a.75.75 0 010-1.06l1.591-1.59a.75.75 0 111.06 1.06l-1.59 1.59a.75.75 0 01-1.06 0zM3 12a.75.75 0 01.75-.75h2.25a.75.75 0 010 1.5H3.75A.75.75 0 013 12zM6.106 6.106a.75.75 0 011.06 0l1.59 1.591a.75.75 0 11-1.06 1.06l-1.59-1.59a.75.75 0 010-1.06z\"/&gt;&lt;/svg&gt;"
-       "         &lt;svg class=\"icon-moon\" xmlns=\"[http://www.w3.org/2000/svg](http://www.w3.org/2000/svg)\" viewBox=\"0 0 24 24\"&gt;&lt;path fill-rule=\"evenodd\" d=\"M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-3.934 2.161-7.44 5.28-9.282a.75.75 0 01.818.162z\" clip-rule=\"evenodd\"/&gt;&lt;/svg&gt;"
-       "    &lt;/button&gt;"
-       "&lt;/header&gt;"
-       )
-      "HTML preamble for the YoRHa Portfolio page.")
+(defvar my/portfolio-html-preamble
+  (concat
+   "&lt;header class=\"main-header\"&gt;"
+   "  &lt;div class=\"header-left\"&gt;"
+   "    &lt;div class=\"logo\"&gt;LOG: CALEB CHRISTENSEN // REV_OPS_ENTITY&lt;/div&gt;"
+   "    &lt;nav class=\"main-nav\"&gt;"
+   "      &lt;ul&gt;"
+   "        &lt;li&gt;&lt;a href=\"index.html\" class=\"active\"&gt;// HOME&lt;/a&gt;&lt;/li&gt;"
+   "        &lt;li&gt;&lt;a href=\"#\"&gt;// PROJECTS&lt;/a&gt;&lt;/li&gt;"
+   "        &lt;li&gt;&lt;a href=\"#\"&gt;// CONTACT&lt;/a&gt;&lt;/li&gt;"
+   "      &lt;/ul&gt;"
+   "    &lt;/nav&gt;"
+   "  &lt;/div&gt;"
+   "  &lt;button class=\"theme-toggle\" id=\"theme-toggle\" title=\"Toggle theme\"&gt;"
+   "    &lt;svg class=\"icon-sun\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"&gt;&lt;path d=\"M12 2.25a.75.75 0 01.75.75v2.25a.75.75 0 01-1.5 0V3a.75.75 0 01.75-.75zM7.5 12a4.5 4.5 0 119 0 4.5 4.5 0 01-9 0zM18.894 6.106a.75.75 0 010 1.06l-1.591 1.59a.75.75 0 11-1.06-1.06l1.59-1.59a.75.75 0 011.06 0zM21.75 12a.75.75 0 01-.75.75h-2.25a.75.75 0 010-1.5H21a.75.75 0 01.75.75zM17.803 17.803a.75.75 0 01-1.06 0l-1.59-1.591a.75.75 0 111.06-1.06l1.59 1.59a.75.75 0 010 1.06zM12 21a.75.75 0 01-.75-.75v-2.25a.75.75 0 011.5 0v2.25a.75.75 0 01-.75-.75zM5.106 17.803a.75.75 0 010-1.06l1.591-1.59a.75.75 0 111.06 1.06l-1.59 1.59a.75.75 0 01-1.06 0zM3 12a.75.75 0 01.75-.75h2.25a.75.75 0 010 1.5H3.75A.75.75 0 013 12zM6.106 6.106a.75.75 0 011.06 0l1.59 1.591a.75.75 0 11-1.06 1.06l-1.59-1.59a.75.75 0 010-1.06z\"/&gt;&lt;/svg&gt;"
+   "    &lt;svg class=\"icon-moon\" xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 24 24\"&gt;&lt;path fill-rule=\"evenodd\" d=\"M9.528 1.718a.75.75 0 01.162.819A8.97 8.97 0 009 6a9 9 0 009 9 8.97 8.97 0 003.463-.69.75.75 0 01.981.98 10.503 10.503 0 01-9.694 6.46c-5.799 0-10.5-4.701-10.5-10.5 0-3.934 2.161-7.44 5.28-9.282a.75.75 0 01.818.162z\" clip-rule=\"evenodd\"/&gt;&lt;/svg&gt;"
+   "  &lt;/button&gt;"
+   "&lt;/header&gt;")
+  "HTML preamble for the YoRHa Portfolio page.")
 
-          ;; --- 2. Define a NEW Postamble for the portfolio to include the script ---
-    ;; This function will be called by org-publish to generate the footer dynamically.
-    (defun my/portfolio-html-postamble (plist)
-      "Portfolio postamble with dynamic file modification date and scripts."
-      (let* ((input-file (plist-get plist :input-file))
-             ;; Get the file's modification time.
-             (mod-time (nth 5 (file-attributes input-file)))
-             ;; Format the time into a string like "YYYY-MM-DD".
-             (date-str (format-time-string "%Y-%m-%d" mod-time)))
-        (concat
-         "&lt;footer class=\"main-footer\"&gt;"
-         (format "&lt;p&gt;Last Modified: %s&lt;/p&gt;" date-str)
-         "&lt;p&gt;This site is built with Emacs and Org-mode.&lt;/p&gt;"; Use the new portfolio-specific preamble
-         "&lt;p&gt;// SYSTEM_NORMAL // [C] 2025 CALEB CHRISTENSEN&lt;/p&gt;"
-         "&lt;/footer&gt;"
-         "&lt;script src=\"/assets/theme.js\"&gt;&lt;/script&gt;")))
+(defun my/portfolio-html-postamble (plist)
+  "Portfolio postamble with dynamic file modification date and scripts."
+  (let* ((input-file (plist-get plist :input-file))
+         (mod-time (nth 5 (file-attributes input-file)))
+         (date-str (format-time-string "%Y-%m-%d" mod-time)))
+    (concat
+     "&lt;footer class=\"main-footer\"&gt;"
+     (format "&lt;p&gt;Last Modified: %s&lt;/p&gt;" date-str)
+     "&lt;p&gt;This site is built with Emacs and Org-mode.&lt;/p&gt;"
+     "&lt;p&gt;// SYSTEM_NORMAL // [C] 2025 CALEB CHRISTENSEN&lt;/p&gt;"
+     "&lt;/footer&gt;"
+     "&lt;script src=\"../assets/theme.js\"&gt;&lt;/script&gt;")))
 
-          ;; --- 2. Define the publishing project ---
-          (setq org-publish-project-alist
-                '(
-                  ;; --- COMPONENT 1: Publishes the site's root files ---
-                  ("coppermind-site-root"
-                   :base-directory       "~/coppermind/resources/site/"
-                   :publishing-directory "~/site/"
-                   :base-extension       "org"
-                   :recursive            t
-                   :publishing-function  org-html-publish-to-html
-                   :publish-p            my/org-publish-if-publish-property
-                   :auto-sitemap         t
-                   :sitemap-filename     "sitemap.org"
-                   :sitemap-title        "System Directory"
-                   :sitemap-style        list
-                   :sitemap-sort-files   anti-chronologically
-                   :exclude              "assets/"
-                   :headline-levels      4
-                   :html-head-include-default-style nil
-                   :html-head-include-scripts nil
-                   :html-head "&lt;link rel=\"stylesheet\" type=\"text/css\" href=\"/assets/style.css\"/&gt;"
-                   :html-preamble my/yorha-html-preamble
-                   :html-postamble "&lt;footer class=\"container\"&gt;&lt;div class=\"yorha-terminal\"&gt;END OF TRANSMISSION&lt;/div&gt;&lt;/footer&gt;"
-                   :section-numbers      nil
-                   :with-toc             t
-                   :toc-depth            2
-                   :html-html5-fancy     t
-                   :html-doctype         "html5")
+;; --- 3. Define the Publishing Project ---
+(setq org-publish-project-alist
+      '(
+        ;; --- COMPONENT 1: Publishes the site's root files ---
+        ("coppermind-site-root"
+         :base-directory       "~/coppermind/resources/site/"
+         :publishing-directory "~/site/"
+         :base-extension       "org"
+         :recursive            t
+         :publishing-function  org-html-publish-to-html
+         :publish-p            my/org-publish-if-publish-property
+         :auto-sitemap         t
+         :sitemap-filename     "sitemap.org"
+         :sitemap-title        "System Directory"
+         :sitemap-style        list
+         ;; CORRECTED: Using 'chronologically' without a quote for compatibility.
+         :sitemap-sort-files   chronologically
+         :exclude              "assets/"
+         :headline-levels      4
+         :html-head-include-default-style nil
+         :html-head-include-scripts nil
+         ;; CORRECTED: Using relative paths and clean URLs.
+         :html-head            "&lt;link rel=\"stylesheet\" type=\"text/css\" href=\"assets/style.css\"/&gt;&lt;link rel=\"preconnect\" href=\"https://fonts.googleapis.com\"&gt;&lt;link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin&gt;&lt;link href=\"https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&amp;family=Inter:wght@400;500&amp;display=swap\" rel=\"stylesheet\"&gt;"
+         :html-preamble        my/yorha-html-preamble
+         :html-postamble       "&lt;footer class=\"container\"&gt;&lt;div class=\"yorha-terminal\"&gt;END OF TRANSMISSION&lt;/div&gt;&lt;/footer&gt;"
+         :section-numbers      nil
+         :with-toc             t
+         :toc-depth            2)
 
-                ;; --- ADD THIS NEW COMPONENT FOR THE PORTFOLIO ---
-            ("coppermind-portfolio"
-             :base-directory       "~/coppermind/resources/site/portfolio/"
-             :publishing-directory "~/site/portfolio/"
-             :base-extension       "org"
-             :recursive            t
-             :publishing-function  org-html-publish-to-html
-             :publish-p            my/org-publish-if-publish-property ; Reuse your gatekeeper
-             :html-head            "&lt;link rel=\"stylesheet\" type=\"text/css\" href=\"/assets/style.css\"/&gt; &lt;link rel=\"preconnect\" href=\"[https://fonts.googleapis.com](https://fonts.googleapis.com)\"&gt; &lt;link rel=\"preconnect\" href=\"[https://fonts.gstatic.com](https://fonts.gstatic.com)\" crossorigin&gt; &lt;link href=\"[https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&amp;family=Inter:wght@400;500&amp;display=swap](https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&amp;family=Inter:wght@400;500&amp;display=swap)\" rel=\"stylesheet\"&gt;"
-             :html-preamble        my/portfolio-html-preamble 
-             :html-postamble       my/portfolio-html-postamble 
-             :html-wrapper-class   "yorha-portfolio" ; Optional: add a class to the &lt;body&gt; for scoping
-             :with-toc             nil ; The portfolio design doesn't have a TOC
-            )
+        ;; --- COMPONENT 2: Publishes the Portfolio ---
+        ("coppermind-portfolio"
+         :base-directory       "~/coppermind/resources/site/portfolio/"
+         :publishing-directory "~/site/portfolio/"
+         :base-extension       "org"
+         :recursive            t
+         :publishing-function  org-html-publish-to-html
+         :publish-p            my/org-publish-if-publish-property
+         :html-head            (concat
+                                "&lt;link rel=\"stylesheet\" type=\"text/css\" href=\"../assets/style.css\"/&gt;"
+                                "&lt;link rel=\"preconnect\" href=\"https://fonts.googleapis.com\"&gt;"
+                                "&lt;link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin&gt;"
+                                "&lt;link href=\"https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&amp;family=Inter:wght@400;500&amp;display=swap\" rel=\"stylesheet\"&gt;")
+         :html-preamble        my/portfolio-html-preamble
+         :html-postamble       my/portfolio-html-postamble
+         :with-toc             nil)
 
-                  ;; --- COMPONENT 2: Publishes the main Org Roam notes ---
-                  ("coppermind-roam-notes"
-                   :base-directory       "~/coppermind/"
-                   :publishing-directory "~/site/"
-                   :base-extension       "org"
-                   :recursive            t
-                   :publishing-function  org-html-publish-to-html
-                   :publish-p            my/org-publish-if-publish-property
-                   :exclude              "resources/"
-                   :headline-levels      4
-                   :html-head-include-default-style nil
-                   :html-head-include-scripts nil
-                   :html-head "&lt;link rel=\"stylesheet\" type=\"text/css\" href=\"/assets/style.css\"/&gt;"
-                   :html-preamble my/yorha-html-preamble
-                   :section-numbers      nil
-                   :with-toc             t
-                   :toc-depth            2)
+        ;; --- COMPONENT 3: Publishes the main Org Roam notes ---
+        ("coppermind-roam-notes"
+         :base-directory       "~/coppermind/"
+         :publishing-directory "~/site/"
+         :base-extension       "org"
+         :recursive            t
+         :publishing-function  org-html-publish-to-html
+         :publish-p            my/org-publish-if-publish-property
+         :exclude              "resources/"
+         :headline-levels      4
+         :html-head-include-default-style nil
+         :html-head-include-scripts nil
+         :html-head            "&lt;link rel=\"stylesheet\" type=\"text/css\" href=\"assets/style.css\"/&gt;"
+         :html-preamble        my/yorha-html-preamble
+         :section-numbers      nil
+         :with-toc             t
+         :toc-depth            2)
 
-;; This is the new component to add to your org-publish-project-alist
-("coppermind-tutorials"
- :base-directory       "~/coppermind/resources/tutorials/"
- :publishing-directory "~/site/tutorials/"
- :base-extension       "org"
- :recursive            t
- :publishing-function  org-html-publish-to-html
- ;; Use the new gatekeeper function here
- :publish-p            'my/org-publish-if-tutorial-property
- ;; Re-use the same theme as the main portfolio site
- :html-head            "&lt;link rel=\"stylesheet\" type=\"text/css\" href=\"/assets/style.css\"/&gt; &lt;link rel=\"preconnect\" href=\"https://fonts.googleapis.com\"&gt; &lt;link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin&gt; &lt;link href=\"https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&amp;family=Inter:wght@400;500&amp;display=swap\" rel=\"stylesheet\"&gt;"
- :html-preamble        my/portfolio-html-preamble
- :html-postamble       'my/portfolio-html-postamble
- :with-toc             t
- :section-numbers      nil)
+        ;; --- COMPONENT 4: Publishes the tutorials ---
+        ("coppermind-tutorials"
+         :base-directory       "~/coppermind/resources/tutorials/"
+         :publishing-directory "~/site/tutorials/"
+         :base-extension       "org"
+         :recursive            t
+         :publishing-function  org-html-publish-to-html
+         :publish-p            my/org-publish-if-tutorial-property
+         :html-head            (concat
+                                "&lt;link rel=\"stylesheet\" type=\"text/css\" href=\"../assets/style.css\"/&gt;"
+                                "&lt;link rel=\"preconnect\" href=\"https://fonts.googleapis.com\"&gt;"
+                                "&lt;link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin&gt;"
+                                "&lt;link href=\"https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&amp;family=Inter:wght@400;500&amp;display=swap\" rel=\"stylesheet\"&gt;")
+         :html-preamble        my/portfolio-html-preamble
+         :html-postamble       my/portfolio-html-postamble
+         :with-toc             t
+         :section-numbers      nil)
 
-                  ;; --- COMPONENT 3: Copies static assets ---
-                  ("coppermind-assets"
-                   :base-directory       "~/coppermind/resources/site/assets/"
-                   :publishing-directory "~/site/assets/"
-                   :base-extension       "css\\|js\\|png\\|jpg\\|gif\\|svg"
-                   :recursive            t
-                   :publishing-function  org-publish-attachment)
+        ;; --- COMPONENT 5: Copies static assets ---
+        ("coppermind-assets"
+         :base-directory       "~/coppermind/resources/site/assets/"
+         :publishing-directory "~/site/assets/"
+         :base-extension       "css\\|js\\|png\\|jpg\\|gif\\|svg"
+         :recursive            t
+         :publishing-function  org-publish-attachment)
 
-                  ;; --- META-PROJECT ---
-                  ("coppermind"
-                   :components ("coppermind-site-root" "coppermind-tutorials" "coppermind-portfolio" "coppermind-roam-notes" "coppermind-assets"))
-                  ))
+        ;; --- META-PROJECT that combines all components ---
+        ("coppermind"
+         :components ("coppermind-site-root" "coppermind-portfolio" "coppermind-roam-notes" "coppermind-tutorials" "coppermind-assets"))
+        ))
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org2c3fc9b" class="outline-2">
-<h2 id="org2c3fc9b">YoHRa UI Custom Blocks</h2>
-<div class="outline-text-2" id="text-org2c3fc9b">
+<div id="outline-container-org19bf272" class="outline-2">
+<h2 id="org19bf272">YoRHa UI Custom Blocks</h2>
+<div class="outline-text-2" id="text-org19bf272">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">;; Custom export blocks for YoRHa elements
 (defun org-html-yorha-panel (panel contents info)
@@ -277,7 +273,6 @@ This section defines the entire publishing workflow, including the gatekeeper fu
 (defun org-html-grid-item (item contents info)
   "Export grid item with your styling."
   (format "&lt;div class=\"grid-item\"&gt;%s&lt;/div&gt;" contents))
-
 </pre>
 </div>
 </div>
@@ -285,18 +280,18 @@ This section defines the entire publishing workflow, including the gatekeeper fu
 <div id="outline-container-orgf8ae1a2" class="outline-2">
 <h2 id="orgf8ae1a2">Footer</h2>
 <div class="outline-text-2" id="text-orgf8ae1a2">
-<p>
-HTML and elisp footers
-</p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(setq org-html-postamble-format
+<pre class="src src-emacs-lisp">;; This sets a global postamble, but it is overridden by the specific
+;; :html-postamble properties in the project components defined above.
+(setq org-html-postamble-format
       '(("en" "&lt;div class=\"footer-content\"&gt;
-                 &lt;p&gt;Last modified: %d &lt;/p&gt;
-                 &lt;p&gt;This site is built with Emacs and Org-mode.&lt;/p&gt;
-                 &lt;p&gt;&lt;a href=\"https://github.com/calebc42\"&gt;My GitHub&lt;/a&gt;&lt;/p&gt;
-                 &lt;p&gt;&lt;a href=\"https://linkedin/in/calebc42\"&gt;My Linkedin&lt;/a&gt;&lt;/p&gt;
-               &lt;/div&gt;")))
+                &lt;p&gt;Last modified: %d &lt;/p&gt;
+                &lt;p&gt;This site is built with Emacs and Org-mode.&lt;/p&gt;
+                &lt;p&gt;&lt;a href=\"https://github.com/calebc42\"&gt;My GitHub&lt;/a&gt;&lt;/p&gt;
+                &lt;p&gt;&lt;a href=\"https://linkedin/in/calebc42\"&gt;My Linkedin&lt;/a&gt;&lt;/p&gt;
+              &lt;/div&gt;")))
 (setq org-html-postamble t)
+
 ;;; org-publish-setup.el ends here
 </pre>
 </div>
@@ -305,11 +300,11 @@ HTML and elisp footers
 </div>
 <div id="postamble" class="status">
 <div class="footer-content">
-                 <p>Last modified:  </p>
-                 <p>This site is built with Emacs and Org-mode.</p>
-                 <p><a href="https://github.com/calebc42">My GitHub</a></p>
-                 <p><a href="https://linkedin/in/calebc42">My Linkedin</a></p>
-               </div>
+                <p>Last modified:  </p>
+                <p>This site is built with Emacs and Org-mode.</p>
+                <p><a href="https://github.com/calebc42">My GitHub</a></p>
+                <p><a href="https://linkedin/in/calebc42">My Linkedin</a></p>
+              </div>
 </div>
 </body>
 </html>
