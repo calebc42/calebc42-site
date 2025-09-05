@@ -6,52 +6,56 @@
 <!-- 2025-09-05 Fri 10:16 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>%s Configuration</title>
+<title>Magit Configuration</title>
 <meta name="author" content="Coppermind" />
-<meta name="description" content="Configuration for the %s package." />
+<meta name="description" content="Configuration for the magit-setup package." />
 <meta name="generator" content="Org Mode" />
 <link rel="stylesheet" type="text/css" href="/assets/style.css"/>
 </head>
 <body>
 <div id="content" class="content">
-<h1 class="title">%s Configuration</h1>
+<h1 class="title">Magit Configuration</h1>
 <div id="table-of-contents" role="doc-toc">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org309b9bb">Header</a></li>
-<li><a href="#org729ebd0">Configuration</a></li>
+<li><a href="#org7dacbed">Header</a></li>
+<li><a href="#org92894eb">Configuration</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org309b9bb" class="outline-2">
-<h2 id="org309b9bb">Header</h2>
-<div class="outline-text-2" id="text-org309b9bb">
+<div id="outline-container-org7dacbed" class="outline-2">
+<h2 id="org7dacbed">Header</h2>
+<div class="outline-text-2" id="text-org7dacbed">
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">;;; %s.el --- Configuration for %s -*- lexical-binding: t -*-
+<pre class="src src-emacs-lisp">;;; magit-setup.el --- Configuration for Magit -*- lexical-binding: t -*-
 
 ;;; Commentary:
-;; This file is tangled from ~/coppermind/system/%s/%s.
+;; This file is tangled from ~/coppermind/system/modules/magit-setup.org.
 
 ;;; Code:
 </pre>
 </div>
 </div>
 </div>
-<div id="outline-container-org729ebd0" class="outline-2">
-<h2 id="org729ebd0">Configuration</h2>
-<div class="outline-text-2" id="text-org729ebd0">
+<div id="outline-container-org92894eb" class="outline-2">
+<h2 id="org92894eb">Configuration</h2>
+<div class="outline-text-2" id="text-org92894eb">
+<p>
+Version Control
+</p>
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">(use-package %s
-  :ensure t
-  ;; Add your configuration here
-  )
+<pre class="src src-emacs-lisp">(use-package magit
+  :bind (("C-x g" . magit-status)
+         :map magit-mode-map
+         ("R" . (lambda () (interactive)
+                  (magit-run-git-async "rad" "push")))))
 </pre>
 </div>
 
 
 <div class="org-src-container">
-<pre class="src src-emacs-lisp">;;; %s.el ends here
+<pre class="src src-emacs-lisp">;;; magit-setup.el ends here
 </pre>
 </div>
 </div>
