@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-09-05 Fri 00:00 -->
+<!-- 2025-09-05 Fri 08:19 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Org Publish Configuration</title>
@@ -21,6 +21,7 @@
 <ul>
 <li><a href="#org37256b6">Header</a></li>
 <li><a href="#org91dd75b">Configuration</a></li>
+<li><a href="#org2c3fc9b">YoHRa UI Custom Blocks</a></li>
 <li><a href="#orgf8ae1a2">Footer</a></li>
 </ul>
 </div>
@@ -66,17 +67,21 @@ This section defines the entire publishing workflow, including the gatekeeper fu
 ;; Use defvar to properly declare the variable and its documentation.
 (defvar my/yorha-html-preamble
   (concat
+   "&lt;div class=\"yorha-status\"&gt;"
+   "  &lt;span class=\"status-indicator online\"&gt;&lt;/span&gt;"
+   "  &lt;span class=\"yorha-terminal\"&gt;SYSTEM STATUS: OPERATIONAL&lt;/span&gt;"
+   "&lt;/div&gt;"
    "&lt;header class=\"container\"&gt;"
-   "&lt;h1&gt;Coppermind&lt;/h1&gt;"
-   "&lt;nav class=\"yorha-nav\"&gt;"
-   "  &lt;ul&gt;"
-   "    &lt;li&gt;&lt;a href=\"/index.html\"&gt;HOME&lt;/a&gt;&lt;/li&gt;"
-   "    &lt;li&gt;&lt;a href=\"/sitemap.html\"&gt;SITEMAP&lt;/a&gt;&lt;/li&gt;"
-   "    &lt;li&gt;&lt;a href=\"#\"&gt;SYSTEM&lt;/a&gt;&lt;/li&gt;"
-   "    &lt;li&gt;&lt;a href=\"#\"&gt;PROJECTS&lt;/a&gt;&lt;/li&gt;"
-   "    &lt;li&gt;&lt;a href=\"/sitemap.html\"&gt;RESOURCES&lt;/a&gt;&lt;/li&gt;"
-   "  &lt;/ul&gt;"
-   "&lt;/nav&gt;"
+   "  &lt;h1&gt;Coppermind&lt;/h1&gt;"
+   "  &lt;nav class=\"yorha-nav\"&gt;"
+   "    &lt;ul&gt;"
+   "      &lt;li&gt;&lt;a href=\"/index.html\"&gt;HOME&lt;/a&gt;&lt;/li&gt;"
+   "      &lt;li&gt;&lt;a href=\"/sitemap.html\"&gt;SITEMAP&lt;/a&gt;&lt;/li&gt;"
+   "      &lt;li&gt;&lt;a href=\"#\"&gt;SYSTEM&lt;/a&gt;&lt;/li&gt;"
+   "      &lt;li&gt;&lt;a href=\"#\"&gt;PROJECTS&lt;/a&gt;&lt;/li&gt;"
+   "      &lt;li&gt;&lt;a href=\"/sitemap.html\"&gt;RESOURCES&lt;/a&gt;&lt;/li&gt;"
+   "    &lt;/ul&gt;"
+   "  &lt;/nav&gt;"
    "&lt;/header&gt;"
    "&lt;div class=\"pattern\"&gt;&lt;div class=\"pattern-inner\"&gt;&lt;/div&gt;&lt;/div&gt;")
   "HTML preamble for the YoRHa-themed website header and navigation.")
@@ -95,16 +100,21 @@ This section defines the entire publishing workflow, including the gatekeeper fu
          :publish-p            my/org-publish-if-publish-property
          :auto-sitemap         t
          :sitemap-filename     "sitemap.org"
-         :sitemap-title        "Sitemap"
+         :sitemap-title        "System Directory"
+         :sitemap-style        list
+         :sitemap-sort-files   anti-chronologically
          :exclude              "assets/"
          :headline-levels      4
          :html-head-include-default-style nil
          :html-head-include-scripts nil
          :html-head "&lt;link rel=\"stylesheet\" type=\"text/css\" href=\"/assets/style.css\"/&gt;"
          :html-preamble my/yorha-html-preamble
+         :html-postamble "&lt;footer class=\"container\"&gt;&lt;div class=\"yorha-terminal\"&gt;END OF TRANSMISSION&lt;/div&gt;&lt;/footer&gt;"
          :section-numbers      nil
          :with-toc             t
-         :toc-depth            2)
+         :toc-depth            2
+         :html-html5-fancy     t
+         :html-doctype         "html5")
 
         ;; --- COMPONENT 2: Publishes the main Org Roam notes ---
         ("coppermind-roam-notes"
@@ -136,6 +146,59 @@ This section defines the entire publishing workflow, including the gatekeeper fu
         ("coppermind"
          :components ("coppermind-site-root" "coppermind-roam-notes" "coppermind-assets"))
         ))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org2c3fc9b" class="outline-2">
+<h2 id="org2c3fc9b">YoHRa UI Custom Blocks</h2>
+<div class="outline-text-2" id="text-org2c3fc9b">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;; Custom export blocks for YoRHa elements
+(defun org-html-yorha-panel (panel contents info)
+  "Export PANEL block to HTML with YoRHa styling."
+  (let ((title (or (plist-get (org-export-read-attribute :attr_html panel) :title) "DATA")))
+    (format "&lt;div class=\"yorha-panel\" data-title=\"%s\"&gt;%s&lt;/div&gt;" title contents)))
+
+(defun org-html-yorha-terminal (terminal contents info)
+  "Export TERMINAL block to HTML with terminal styling."
+  (format "&lt;div class=\"yorha-terminal\"&gt;%s&lt;/div&gt;" contents))
+
+(defun org-html-yorha-grid (grid contents info)
+  "Export GRID block to HTML with grid layout."
+  (format "&lt;div class=\"yorha-grid\"&gt;%s&lt;/div&gt;" contents))
+
+(defun org-html-yorha-grid-item (item contents info)
+  "Export GRID-ITEM block to HTML."
+  (format "&lt;div class=\"yorha-grid-item\"&gt;%s&lt;/div&gt;" contents))
+
+;; Register the custom blocks
+(org-export-define-derived-backend 'yorha-html 'html
+  :translate-alist '((special-block . org-html-special-block-yorha)))
+
+(defun org-html-special-block-yorha (special-block contents info)
+  "Handle custom YoRHa blocks."
+  (let ((block-type (org-element-property :type special-block)))
+    (cond
+     ((string= block-type "yorha-panel") (org-html-yorha-panel special-block contents info))
+     ((string= block-type "yorha-terminal") (org-html-yorha-terminal special-block contents info))
+     ((string= block-type "yorha-grid") (org-html-yorha-grid special-block contents info))
+     ((string= block-type "yorha-grid-item") (org-html-yorha-grid-item special-block contents info))
+     (t (org-html-special-block special-block contents info)))))
+
+(defun org-html-data-panel (panel contents info)
+  "Export data panel block with your aesthetic."
+  (let ((title (or (plist-get (org-export-read-attribute :attr_html panel) :title) "DATA")))
+    (format "&lt;div class=\"data-panel\" data-title=\"%s\"&gt;%s&lt;/div&gt;" title contents)))
+
+(defun org-html-content-grid (grid contents info)
+  "Export content grid using your spacing system."
+  (format "&lt;div class=\"content-grid\"&gt;%s&lt;/div&gt;" contents))
+
+(defun org-html-grid-item (item contents info)
+  "Export grid item with your styling."
+  (format "&lt;div class=\"grid-item\"&gt;%s&lt;/div&gt;" contents))
+
 </pre>
 </div>
 </div>

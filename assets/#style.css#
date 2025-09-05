@@ -1,0 +1,458 @@
+/* style.css */
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+:root {
+    --yorha-bg: #C8C2AA;
+    --yorha-text: #4D493E;
+    --letter-spacing: 0.1rem;
+}
+
+*:focus {
+  outline: none !important;
+}
+
+body {
+    background-color: var(--yorha-bg);
+    /* Subtle grid/scan-line effect */
+    background-size: 4px 4px;
+    background-image: linear-gradient(90deg, transparent, transparent 3px, rgba(0,0,0,.07) 4px),
+                      linear-gradient(transparent, transparent 3px, rgba(0,0,0,.07) 4px);
+    color: var(--yorha-text);
+    font-family: 'Share Tech Mono', "Noto Sans", sans-serif; /* Added Share Tech Mono as a priority */
+    margin: 0;
+    min-height: 100vh;
+    /* Inset shadow to give the screen a "vignette" feel */
+    box-shadow: inset 0 0 150px rgba(77, 73, 62, .4), inset 0 0 150px rgba(77, 73, 62, .3);
+    letter-spacing: var(--letter-spacing);
+}
+
+.container {
+    padding: 0 4rem;
+}
+
+h1 {
+    text-transform: uppercase;
+    font-weight: 300;
+    letter-spacing: .7rem;
+    text-shadow: .3rem .3rem 0 rgba(77, 73, 62,.3);
+}
+
+/* This is that awesome decorative border */
+.pattern {
+    border-top: 2px solid var(--yorha-text);
+    margin-bottom: 2rem; /* Added some spacing */
+}
+
+.pattern-inner {
+    height: 40px;
+    background-size: 50px 3px, 50px 1px, 50px 1px, 50px 1px, 50px 1px, 50px 1px, 50px 1px, 50px 1px, 50px 1px;
+    background-position: 0 0, 22px 4px, 22px 5px, 22px 6px, 22px 7px, 28px 12px, 28px 13px, 28px 14px, 28px 15px;
+    background-image: linear-gradient(90deg, var(--yorha-text), var(--yorha-text) 10px, transparent 10px),
+                      linear-gradient(90deg, rgba(77, 73, 62, .4), rgba(77, 73, 62, .4) 1px, rgba(77, 73, 62, .8) 1px, rgba(77, 73, 62, .8) 2px, rgba(77, 73, 62, .9) 2px, rgba(77, 73, 62, .9) 3px, rgba(77, 73, 62, .4) 3px, rgba(77, 73, 62, .4) 4px, transparent 4px, transparent 12px, rgba(77, 73, 62, .4) 12px, rgba(77, 73, 62, .4) 13px, rgba(77, 73, 62, .8) 13px, rgba(77, 73, 62, .8) 14px, rgba(77, 73, 62, .9) 14px, rgba(77, 73, 62, .9) 15px, rgba(77, 73, 62, .4) 15px, rgba(77, 73, 62, .4) 16px, transparent 16px),
+                      linear-gradient(90deg, rgba(77, 73, 62, .9), rgba(77, 73, 62, .9) 1px, rgb(77, 73, 62) 1px, rgb(77, 73, 62) 2px, rgb(77, 73, 62) 2px, rgb(77, 73, 62) 3px, rgba(77, 73, 62, .9) 3px, rgba(77, 73, 62, .9) 4px, transparent 4px, transparent 12px, rgba(77, 73, 62, .9) 12px, rgba(77, 73, 62, .9) 13px, rgb(77, 73, 62) 13px, rgb(77, 73, 62) 14px, rgb(77, 73, 62) 14px, rgb(77, 73, 62) 15px, rgba(77, 73, 62, .9) 15px, rgba(77, 73, 62, .9) 16px, transparent 16px),
+                      linear-gradient(90deg, rgba(77, 73, 62, .9), rgba(77, 73, 62, .9) 1px, rgb(77, 73, 62) 1px, rgb(77, 73, 62) 2px, rgb(77, 73, 62) 2px, rgb(77, 73, 62) 3px, rgba(77, 73, 62, .9) 3px, rgba(77, 73, 62, .9) 4px, transparent 4px, transparent 12px, rgba(77, 73, 62, .9) 12px, rgba(77, 73, 62, .9) 13px, rgb(77, 73, 62) 13px, rgb(77, 73, 62) 14px, rgb(77, 73, 62) 14px, rgb(77, 73, 62) 15px, rgba(77, 73, 62, .9) 15px, rgba(77, 73, 62, .9) 16px, transparent 16px),
+                      linear-gradient(90deg, rgba(77, 73, 62, .4), rgba(77, 73, 62, .4) 1px, rgba(77, 73, 62, .8) 1px, rgba(77, 73, 62, .8) 2px, rgba(77, 73, 62, .9) 2px, rgba(77, 73, 62, .9) 3px, rgba(77, 73, 62, .4) 3px, rgba(77, 73, 62, .4) 4px, transparent 4px, transparent 12px, rgba(77, 73, 62, .4) 12px, rgba(77, 73, 62, .4) 13px, rgba(77, 73, 62, .8) 13px, rgba(77, 73, 62, .8) 14px, rgba(77, 73, 62, .9) 14px, rgba(77, 73, 62, .9) 15px, rgba(77, 73, 62, .4) 15px, rgba(77, 73, 62, .4) 16px, transparent 16px),
+                      linear-gradient(90deg, rgba(77, 73, 62, .4), rgba(77, 73, 62, .4) 1px, rgba(77, 73, 62, .8) 1px, rgba(77, 73, 62, .8) 2px, rgba(77, 73, 62, .9) 2px, rgba(77, 73, 62, .9) 3px, rgba(77, 73, 62, .4) 3px, rgba(77, 73, 62, .4) 4px, transparent 4px),
+                      linear-gradient(90deg, rgba(77, 73, 62, .9), rgba(77, 73, 62, .9) 1px, rgb(77, 73, 62) 1px, rgb(77, 73, 62) 2px, rgb(77, 73, 62) 2px, rgb(77, 73, 62) 3px, rgba(77, 73, 62, .9) 3px, rgba(77, 73, 62, .9) 4px, transparent 4px),
+                      linear-gradient(90deg, rgba(77, 73, 62, .9), rgba(77, 73, 62, .9) 1px, rgb(77, 73, 62) 1px, rgb(77, 73, 62) 2px, rgb(77, 73, 62) 2px, rgb(77, 73, 62) 3px, rgba(77, 73, 62, .9) 3px, rgba(77, 73, 62, .9) 4px, transparent 4px),
+                      linear-gradient(90deg, rgba(77, 73, 62, .4), rgba(77, 73, 62, .4) 1px, rgba(77, 73, 62, .8) 1px, rgba(77, 73, 62, .8) 2px, rgba(77, 73, 62, .9) 2px, rgba(77, 73, 62, .9) 3px, rgba(77, 73, 62, .4) 3px, rgba(77, 73, 62, .4) 4px, transparent 4px);
+    background-repeat: repeat-x;
+}
+
+/* style.css */
+
+/* ... (add this to your existing styles) ... */
+
+.yorha-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0 0 0;
+    display: flex; /* Arrange tabs in a row */
+    position: relative;
+    border-bottom: 2px solid var(--yorha-text);
+}
+
+.yorha-nav li a {
+    display: block;
+    padding: 0.75em 1.5em;
+    text-decoration: none;
+    color: var(--yorha-text);
+    background-color: transparent;
+    border: 2px solid transparent;
+    border-bottom: none;
+    position: relative;
+    top: 2px; /* Aligns the bottom border with the container's border */
+    transition: background-color 0.2s, color 0.2s;
+}
+
+/* Style for hover and focus states */
+.yorha-nav li a:hover,
+.yorha-nav li a:focus {
+    background-color: rgba(77, 73, 62, 0.2); /* A semi-transparent dark beige */
+    color: var(--yorha-text);
+}
+
+/* Style for the ACTIVE tab */
+.yorha-nav li a.active {
+    background-color: var(--yorha-bg); /* Match the page background */
+    border-color: var(--yorha-text);
+    font-weight: bold;
+}
+
+/* style.css - Enhanced YoRHa UI */
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono:wght@400;700&display=swap');
+
+:root {
+    --yorha-bg: #C8C2AA;
+    --yorha-text: #4D493E;
+    --yorha-accent: #8B8672;
+    --yorha-border: #4D493E;
+    --yorha-hover: rgba(77, 73, 62, 0.1);
+    --yorha-active: rgba(77, 73, 62, 0.2);
+    --letter-spacing: 0.1rem;
+    --glow-color: rgba(139, 134, 114, 0.6);
+}
+
+*:focus {
+    outline: none !important;
+}
+
+body {
+    background-color: var(--yorha-bg);
+    background-size: 4px 4px;
+    background-image: 
+        linear-gradient(90deg, transparent, transparent 3px, rgba(0,0,0,.07) 4px),
+        linear-gradient(transparent, transparent 3px, rgba(0,0,0,.07) 4px);
+    color: var(--yorha-text);
+    font-family: 'Share Tech Mono', "Noto Sans", monospace;
+    margin: 0;
+    min-height: 100vh;
+    box-shadow: 
+        inset 0 0 150px rgba(77, 73, 62, .4), 
+        inset 0 0 150px rgba(77, 73, 62, .3);
+    letter-spacing: var(--letter-spacing);
+    overflow-x: hidden;
+}
+
+/* Add subtle animation */
+@keyframes scanline {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100vw); }
+}
+
+/* Animated scanline effect */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 100vh;
+    background: linear-gradient(to bottom, 
+        transparent, 
+        var(--glow-color) 50%, 
+        transparent);
+    animation: scanline 8s linear infinite;
+    z-index: 1000;
+    pointer-events: none;
+}
+
+.container {
+    padding: 0 4rem;
+    position: relative;
+}
+
+/* Enhanced headers with YoRHa styling */
+h1, h2, h3 {
+    text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: .7rem;
+    text-shadow: .3rem .3rem 0 rgba(77, 73, 62,.3);
+    position: relative;
+}
+
+h1::before {
+    content: '>>>';
+    position: absolute;
+    left: -3rem;
+    color: var(--yorha-accent);
+    font-size: 0.8em;
+}
+
+/* Enhanced decorative border with animation */
+.pattern {
+    border-top: 2px solid var(--yorha-text);
+    margin-bottom: 2rem;
+    position: relative;
+    overflow: hidden;
+}
+
+.pattern::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -100%;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, 
+        transparent, 
+        var(--glow-color), 
+        transparent);
+    animation: borderGlow 3s ease-in-out infinite;
+}
+
+@keyframes borderGlow {
+    0%, 100% { left: -100%; opacity: 0; }
+    50% { left: 100%; opacity: 1; }
+}
+
+.pattern-inner {
+    height: 40px;
+    background-size: 50px 3px, 50px 1px, 50px 1px, 50px 1px, 50px 1px, 50px 1px, 50px 1px, 50px 1px, 50px 1px;
+    background-position: 0 0, 22px 4px, 22px 5px, 22px 6px, 22px 7px, 28px 12px, 28px 13px, 28px 14px, 28px 15px;
+    background-image: 
+        linear-gradient(90deg, var(--yorha-text), var(--yorha-text) 10px, transparent 10px),
+        linear-gradient(90deg, rgba(77, 73, 62, .4), rgba(77, 73, 62, .4) 1px, rgba(77, 73, 62, .8) 1px, rgba(77, 73, 62, .8) 2px, rgba(77, 73, 62, .9) 2px, rgba(77, 73, 62, .9) 3px, rgba(77, 73, 62, .4) 3px, rgba(77, 73, 62, .4) 4px, transparent 4px, transparent 12px, rgba(77, 73, 62, .4) 12px, rgba(77, 73, 62, .4) 13px, rgba(77, 73, 62, .8) 13px, rgba(77, 73, 62, .8) 14px, rgba(77, 73, 62, .9) 14px, rgba(77, 73, 62, .9) 15px, rgba(77, 73, 62, .4) 15px, rgba(77, 73, 62, .4) 16px, transparent 16px),
+        linear-gradient(90deg, rgba(77, 73, 62, .9), rgba(77, 73, 62, .9) 1px, rgb(77, 73, 62) 1px, rgb(77, 73, 62) 2px, rgb(77, 73, 62) 2px, rgb(77, 73, 62) 3px, rgba(77, 73, 62, .9) 3px, rgba(77, 73, 62, .9) 4px, transparent 4px, transparent 12px, rgba(77, 73, 62, .9) 12px, rgba(77, 73, 62, .9) 13px, rgb(77, 73, 62) 13px, rgb(77, 73, 62) 14px, rgb(77, 73, 62) 14px, rgb(77, 73, 62) 15px, rgba(77, 73, 62, .9) 15px, rgba(77, 73, 62, .9) 16px, transparent 16px),
+        linear-gradient(90deg, rgba(77, 73, 62, .9), rgba(77, 73, 62, .9) 1px, rgb(77, 73, 62) 1px, rgb(77, 73, 62) 2px, rgb(77, 73, 62) 2px, rgb(77, 73, 62) 3px, rgba(77, 73, 62, .9) 3px, rgba(77, 73, 62, .9) 4px, transparent 4px, transparent 12px, rgba(77, 73, 62, .9) 12px, rgba(77, 73, 62, .9) 13px, rgb(77, 73, 62) 13px, rgb(77, 73, 62) 14px, rgb(77, 73, 62) 14px, rgb(77, 73, 62) 15px, rgba(77, 73, 62, .9) 15px, rgba(77, 73, 62, .9) 16px, transparent 16px),
+        linear-gradient(90deg, rgba(77, 73, 62, .4), rgba(77, 73, 62, .4) 1px, rgba(77, 73, 62, .8) 1px, rgba(77, 73, 62, .8) 2px, rgba(77, 73, 62, .9) 2px, rgba(77, 73, 62, .9) 3px, rgba(77, 73, 62, .4) 3px, rgba(77, 73, 62, .4) 4px, transparent 4px, transparent 12px, rgba(77, 73, 62, .4) 12px, rgba(77, 73, 62, .4) 13px, rgba(77, 73, 62, .8) 13px, rgba(77, 73, 62, .8) 14px, rgba(77, 73, 62, .9) 14px, rgba(77, 73, 62, .9) 15px, rgba(77, 73, 62, .4) 15px, rgba(77, 73, 62, .4) 16px, transparent 16px),
+        linear-gradient(90deg, rgba(77, 73, 62, .4), rgba(77, 73, 62, .4) 1px, rgba(77, 73, 62, .8) 1px, rgba(77, 73, 62, .8) 2px, rgba(77, 73, 62, .9) 2px, rgba(77, 73, 62, .9) 3px, rgba(77, 73, 62, .4) 3px, rgba(77, 73, 62, .4) 4px, transparent 4px),
+        linear-gradient(90deg, rgba(77, 73, 62, .9), rgba(77, 73, 62, .9) 1px, rgb(77, 73, 62) 1px, rgb(77, 73, 62) 2px, rgb(77, 73, 62) 2px, rgb(77, 73, 62) 3px, rgba(77, 73, 62, .9) 3px, rgba(77, 73, 62, .9) 4px, transparent 4px),
+        linear-gradient(90deg, rgba(77, 73, 62, .9), rgba(77, 73, 62, .9) 1px, rgb(77, 73, 62) 1px, rgb(77, 73, 62) 2px, rgb(77, 73, 62) 2px, rgb(77, 73, 62) 3px, rgba(77, 73, 62, .9) 3px, rgba(77, 73, 62, .9) 4px, transparent 4px),
+        linear-gradient(90deg, rgba(77, 73, 62, .4), rgba(77, 73, 62, .4) 1px, rgba(77, 73, 62, .8) 1px, rgba(77, 73, 62, .8) 2px, rgba(77, 73, 62, .9) 2px, rgba(77, 73, 62, .9) 3px, rgba(77, 73, 62, .4) 3px, rgba(77, 73, 62, .4) 4px, transparent 4px);
+    background-repeat: repeat-x;
+}
+
+/* Enhanced navigation with YoRHa styling */
+.yorha-nav ul {
+    list-style: none;
+    padding: 0;
+    margin: 2rem 0 0 0;
+    display: flex;
+    position: relative;
+    border-bottom: 2px solid var(--yorha-text);
+}
+
+.yorha-nav li {
+    position: relative;
+}
+
+.yorha-nav li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -2px;
+    width: 0;
+    height: 2px;
+    background: var(--yorha-accent);
+    transition: width 0.3s ease;
+}
+
+.yorha-nav li:hover::before {
+    width: 100%;
+}
+
+.yorha-nav li a {
+    display: block;
+    padding: 0.75em 1.5em;
+    text-decoration: none;
+    color: var(--yorha-text);
+    background-color: transparent;
+    border: 2px solid transparent;
+    border-bottom: none;
+    position: relative;
+    top: 2px;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+    font-weight: 400;
+    letter-spacing: 0.05rem;
+}
+
+.yorha-nav li a::before {
+    content: '[';
+    opacity: 0;
+    margin-right: 0.5rem;
+    transition: opacity 0.2s ease;
+}
+
+.yorha-nav li a::after {
+    content: ']';
+    opacity: 0;
+    margin-left: 0.5rem;
+    transition: opacity 0.2s ease;
+}
+
+.yorha-nav li a:hover,
+.yorha-nav li a:focus {
+    background-color: var(--yorha-hover);
+    color: var(--yorha-text);
+    transform: translateY(-1px);
+}
+
+.yorha-nav li a:hover::before,
+.yorha-nav li a:hover::after {
+    opacity: 1;
+}
+
+.yorha-nav li a.active {
+    background-color: var(--yorha-bg);
+    border-color: var(--yorha-text);
+    font-weight: 700;
+}
+
+.yorha-nav li a.active::before,
+.yorha-nav li a.active::after {
+    opacity: 1;
+}
+
+/* YoRHa Button Styles */
+.yorha-button {
+    background: transparent;
+    border: 2px solid var(--yorha-text);
+    color: var(--yorha-text);
+    padding: 0.75rem 1.5rem;
+    font-family: 'Share Tech Mono', monospace;
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.yorha-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent, 
+        rgba(77, 73, 62, 0.2), 
+        transparent);
+    transition: left 0.3s ease;
+}
+
+.yorha-button:hover {
+    background-color: var(--yorha-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(77, 73, 62, 0.2);
+}
+
+.yorha-button:hover::before {
+    left: 100%;
+}
+
+/* YoRHa Data Panel */
+.yorha-panel {
+    border: 2px solid var(--yorha-text);
+    background: rgba(200, 194, 170, 0.1);
+    padding: 1.5rem;
+    margin: 1rem 0;
+    position: relative;
+}
+
+.yorha-panel::before {
+    content: 'DATA';
+    position: absolute;
+    top: -0.6rem;
+    left: 1rem;
+    background: var(--yorha-bg);
+    padding: 0 0.5rem;
+    font-size: 0.8rem;
+    color: var(--yorha-accent);
+    font-weight: 700;
+}
+
+/* YoRHa Terminal Text Effect */
+.yorha-terminal {
+    font-family: 'Share Tech Mono', monospace;
+    color: var(--yorha-text);
+    background: transparent;
+    border: none;
+    font-size: 1rem;
+    letter-spacing: 0.05rem;
+    line-height: 1.4;
+}
+
+.yorha-terminal::before {
+    content: '> ';
+    color: var(--yorha-accent);
+}
+
+/* YoRHa Loading Animation */
+@keyframes loading {
+    0%, 20% { opacity: 0; }
+    50% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+.yorha-loading::after {
+    content: '...';
+    animation: loading 1.5s infinite;
+}
+
+/* YoRHa Grid System */
+.yorha-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.yorha-grid-item {
+    border: 1px solid var(--yorha-accent);
+    padding: 1rem;
+    background: rgba(139, 134, 114, 0.05);
+    transition: background-color 0.2s ease;
+}
+
+.yorha-grid-item:hover {
+    background: rgba(139, 134, 114, 0.1);
+}
+
+/* Status indicators */
+.status-indicator {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 0.5rem;
+    position: relative;
+}
+
+.status-indicator.online {
+    background: #5cb85c;
+    box-shadow: 0 0 10px rgba(92, 184, 92, 0.5);
+    animation: pulse 2s infinite;
+}
+
+.status-indicator.offline {
+    background: #d9534f;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 2rem;
+    }
+    
+    .yorha-nav ul {
+        flex-direction: column;
+    }
+    
+    .yorha-nav li a {
+        top: 0;
+        border-bottom: 1px solid var(--yorha-accent);
+    }
+    
+    h1::before {
+        display: none;
+    }
+}
