@@ -3,13 +3,14 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-09-04 Thu 22:35 -->
+<!-- 2025-09-04 Thu 23:23 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Emacs Initialization</title>
 <meta name="author" content="Coppermind" />
 <meta name="description" content="The bootstrap file for a literate Emacs configuration. This is the first file Emacs loads." />
 <meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="/assets/style.css"/>
 </head>
 <body>
 <div id="content" class="content">
@@ -18,15 +19,15 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgeb1e243">Header</a></li>
-<li><a href="#org3a7e949">Package System</a></li>
-<li><a href="#org371037a">Core Packages &amp; Configuration Loading</a></li>
+<li><a href="#orgf93e480">Header</a></li>
+<li><a href="#orge83007c">Package System</a></li>
+<li><a href="#orgd491cac">Core Packages &amp; Configuration Loading</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgeb1e243" class="outline-2">
-<h2 id="orgeb1e243">Header</h2>
-<div class="outline-text-2" id="text-orgeb1e243">
+<div id="outline-container-orgf93e480" class="outline-2">
+<h2 id="orgf93e480">Header</h2>
+<div class="outline-text-2" id="text-orgf93e480">
 <p>
 This file, `init.el`, is the starting point for Emacs. Its primary job is to set up the package management system and then load the main configuration file, `config.el`, which is tangled from `configuration.org`.
 </p>
@@ -44,9 +45,9 @@ This file, `init.el`, is the starting point for Emacs. Its primary job is to set
 </div>
 </div>
 </div>
-<div id="outline-container-org3a7e949" class="outline-2">
-<h2 id="org3a7e949">Package System</h2>
-<div class="outline-text-2" id="text-org3a7e949">
+<div id="outline-container-orge83007c" class="outline-2">
+<h2 id="orge83007c">Package System</h2>
+<div class="outline-text-2" id="text-orge83007c">
 <p>
 First, we define the location for `custom.el`, where Emacs stores settings from the `M-x customize` interface. Then, we configure `package.el` to use the MELPA, Org, and GNU ELPA archives, which provide access to thousands of packages.
 </p>
@@ -80,9 +81,9 @@ First, we define the location for `custom.el`, where Emacs stores settings from 
 </div>
 </div>
 </div>
-<div id="outline-container-org371037a" class="outline-2">
-<h2 id="org371037a">Core Packages &amp; Configuration Loading</h2>
-<div class="outline-text-2" id="text-org371037a">
+<div id="outline-container-orgd491cac" class="outline-2">
+<h2 id="orgd491cac">Core Packages &amp; Configuration Loading</h2>
+<div class="outline-text-2" id="text-orgd491cac">
 <p>
 Here, we install and configure `use-package`, a macro that dramatically simplifies package management. We also set some performance-related garbage collection thresholds.
 </p>
@@ -148,7 +149,7 @@ The most important part is the final line, which loads `config.el`. This is wher
 </div>
 <div id="postamble" class="status">
 <div class="footer-content">
-                 <p>Last modified: </p>
+                 <p>Last modified:  </p>
                  <p>This site is built with Emacs and Org-mode.</p>
                  <p><a href="https://github.com/calebc42">My GitHub</a></p>
                  <p><a href="https://linkedin/in/calebc42">My Linkedin</a></p>

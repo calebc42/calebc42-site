@@ -3,13 +3,14 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-09-04 Thu 22:35 -->
+<!-- 2025-09-04 Thu 23:23 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Main Emacs Configuration</title>
 <meta name="author" content="Coppermind" />
 <meta name="description" content="The central hub for the literate Emacs configuration. It defines the system's structure and loads all other modules." />
 <meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="/assets/style.css"/>
 </head>
 <body>
 <div id="content" class="content">
@@ -18,17 +19,17 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org65358d6">Header</a></li>
-<li><a href="#orgaa9d7f4">System Architecture &amp; Paths</a></li>
-<li><a href="#org67c9792">Configuration Management</a></li>
-<li><a href="#org5e1a42c">Module Loading</a></li>
-<li><a href="#org3e77711">Footer</a></li>
+<li><a href="#org5651236">Header</a></li>
+<li><a href="#orgcc217a2">System Architecture &amp; Paths</a></li>
+<li><a href="#org610dc25">Configuration Management</a></li>
+<li><a href="#org8c7d225">Module Loading</a></li>
+<li><a href="#org28cf66c">Footer</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org65358d6" class="outline-2">
-<h2 id="org65358d6">Header</h2>
-<div class="outline-text-2" id="text-org65358d6">
+<div id="outline-container-org5651236" class="outline-2">
+<h2 id="org5651236">Header</h2>
+<div class="outline-text-2" id="text-org5651236">
 <p>
 This file is the core of the configuration. It is responsible for defining the directory structure, providing helper functions to manage the configuration, and loading all modules in the correct, predictable order.
 </p>
@@ -47,9 +48,9 @@ This file is the core of the configuration. It is responsible for defining the d
 </div>
 </div>
 </div>
-<div id="outline-container-orgaa9d7f4" class="outline-2">
-<h2 id="orgaa9d7f4">System Architecture &amp; Paths</h2>
-<div class="outline-text-2" id="text-orgaa9d7f4">
+<div id="outline-container-orgcc217a2" class="outline-2">
+<h2 id="orgcc217a2">System Architecture &amp; Paths</h2>
+<div class="outline-text-2" id="text-orgcc217a2">
 <p>
 This section defines the directory structure for the entire configuration. It is the "single source of truth" for all paths. Helper functions will reference these variables, ensuring a DRY (Don't Repeat Yourself) and easily maintainable setup.
 </p>
@@ -83,9 +84,9 @@ This variable powers the dynamic `my/new-config-module' helper.")
 </div>
 </div>
 </div>
-<div id="outline-container-org67c9792" class="outline-2">
-<h2 id="org67c9792">Configuration Management</h2>
-<div class="outline-text-2" id="text-org67c9792">
+<div id="outline-container-org610dc25" class="outline-2">
+<h2 id="org610dc25">Configuration Management</h2>
+<div class="outline-text-2" id="text-org610dc25">
 <p>
 These are the interactive helper functions for managing and verifying your configuration. They are defined before the module loader so they are available immediately.
 </p>
@@ -168,9 +169,9 @@ These are the interactive helper functions for managing and verifying your confi
 </div>
 </div>
 </div>
-<div id="outline-container-org5e1a42c" class="outline-2">
-<h2 id="org5e1a42c">Module Loading</h2>
-<div class="outline-text-2" id="text-org5e1a42c">
+<div id="outline-container-org8c7d225" class="outline-2">
+<h2 id="org8c7d225">Module Loading</h2>
+<div class="outline-text-2" id="text-org8c7d225">
 <p>
 This section contains the code that runs during startup to load all configuration modules. It follows a strict, explicit order to ensure stability: <b><b>Core -&gt; Lib -&gt; Modules</b></b>.
 </p>
@@ -204,9 +205,9 @@ This section contains the code that runs during startup to load all configuratio
 </div>
 </div>
 </div>
-<div id="outline-container-org3e77711" class="outline-2">
-<h2 id="org3e77711">Footer</h2>
-<div class="outline-text-2" id="text-org3e77711">
+<div id="outline-container-org28cf66c" class="outline-2">
+<h2 id="org28cf66c">Footer</h2>
+<div class="outline-text-2" id="text-org28cf66c">
 <p>
 This block simply contains the closing boilerplate for the tangled `config.el` file.
 </p>
@@ -221,7 +222,7 @@ This block simply contains the closing boilerplate for the tangled `config.el` f
 </div>
 <div id="postamble" class="status">
 <div class="footer-content">
-                 <p>Last modified: </p>
+                 <p>Last modified:  </p>
                  <p>This site is built with Emacs and Org-mode.</p>
                  <p><a href="https://github.com/calebc42">My GitHub</a></p>
                  <p><a href="https://linkedin/in/calebc42">My Linkedin</a></p>

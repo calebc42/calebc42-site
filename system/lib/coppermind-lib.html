@@ -3,13 +3,14 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-09-04 Thu 22:35 -->
+<!-- 2025-09-04 Thu 23:23 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Coppermind Lib Configuration</title>
 <meta name="author" content="Coppermind" />
 <meta name="description" content="Core functions for the Coppermind PKM system." />
 <meta name="generator" content="Org Mode" />
+<link rel="stylesheet" type="text/css" href="/assets/style.css"/>
 </head>
 <body>
 <div id="content" class="content">
@@ -18,21 +19,21 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org2127b48">Header</a></li>
-<li><a href="#org6f24145">Schema &amp; Template Functions</a></li>
-<li><a href="#orgf8c9fba">Interactive Property Management</a></li>
-<li><a href="#orga05925a">Auto-update Functions</a></li>
-<li><a href="#org0570fe3">Verification Functions</a></li>
-<li><a href="#orgfa64e01">Template Linting Functions</a></li>
-<li><a href="#orgc8dd832">Template Linting Functions</a></li>
-<li><a href="#orgc0cc74d">Org-Roam Integration Functions</a></li>
-<li><a href="#org382d055">Footer</a></li>
+<li><a href="#orgf551d88">Header</a></li>
+<li><a href="#orgbe59291">Schema &amp; Template Functions</a></li>
+<li><a href="#org45db70b">Interactive Property Management</a></li>
+<li><a href="#orgfdf823f">Auto-update Functions</a></li>
+<li><a href="#org8e9c395">Verification Functions</a></li>
+<li><a href="#org4019a05">Template Linting Functions</a></li>
+<li><a href="#orga63069d">Template Linting Functions</a></li>
+<li><a href="#org77061e7">Org-Roam Integration Functions</a></li>
+<li><a href="#orga994eb1">Footer</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org2127b48" class="outline-2">
-<h2 id="org2127b48">Header</h2>
-<div class="outline-text-2" id="text-org2127b48">
+<div id="outline-container-orgf551d88" class="outline-2">
+<h2 id="orgf551d88">Header</h2>
+<div class="outline-text-2" id="text-orgf551d88">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">;;; coppermind-lib.el --- Core functions for the Coppermind PKM system -*- lexical-binding: t -*-
 
@@ -51,9 +52,9 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org6f24145" class="outline-2">
-<h2 id="org6f24145">Schema &amp; Template Functions</h2>
-<div class="outline-text-2" id="text-org6f24145">
+<div id="outline-container-orgbe59291" class="outline-2">
+<h2 id="orgbe59291">Schema &amp; Template Functions</h2>
+<div class="outline-text-2" id="text-orgbe59291">
 <p>
 These functions dynamically build the property drawers for new notes by scanning the filesystem.
 </p>
@@ -104,9 +105,9 @@ SUB-TYPE is an optional string for the specific subtype."
 </div>
 </div>
 </div>
-<div id="outline-container-orgf8c9fba" class="outline-2">
-<h2 id="orgf8c9fba">Interactive Property Management</h2>
-<div class="outline-text-2" id="text-orgf8c9fba">
+<div id="outline-container-org45db70b" class="outline-2">
+<h2 id="org45db70b">Interactive Property Management</h2>
+<div class="outline-text-2" id="text-org45db70b">
 <p>
 These functions allow you to interactively set property values based on the schema files.
 </p>
@@ -216,9 +217,9 @@ These functions allow you to interactively set property values based on the sche
 </div>
 </div>
 </div>
-<div id="outline-container-orga05925a" class="outline-2">
-<h2 id="orga05925a">Auto-update Functions</h2>
-<div class="outline-text-2" id="text-orga05925a">
+<div id="outline-container-orgfdf823f" class="outline-2">
+<h2 id="orgfdf823f">Auto-update Functions</h2>
+<div class="outline-text-2" id="text-orgfdf823f">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(defun coppermind/update-modified-property ()
   "Update the :modified: property with current timestamp."
@@ -234,9 +235,9 @@ These functions allow you to interactively set property values based on the sche
 </div>
 </div>
 </div>
-<div id="outline-container-org0570fe3" class="outline-2">
-<h2 id="org0570fe3">Verification Functions</h2>
-<div class="outline-text-2" id="text-org0570fe3">
+<div id="outline-container-org8e9c395" class="outline-2">
+<h2 id="org8e9c395">Verification Functions</h2>
+<div class="outline-text-2" id="text-org8e9c395">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(defun coppermind/verify-schema-structure ()
   "Verify that the schema directory structure exists."
@@ -264,9 +265,9 @@ These functions allow you to interactively set property values based on the sche
 </div>
 </div>
 </div>
-<div id="outline-container-orgfa64e01" class="outline-2">
-<h2 id="orgfa64e01">Template Linting Functions</h2>
-<div class="outline-text-2" id="text-orgfa64e01">
+<div id="outline-container-org4019a05" class="outline-2">
+<h2 id="org4019a05">Template Linting Functions</h2>
+<div class="outline-text-2" id="text-org4019a05">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(defun coppermind/parse-template-properties (template-file)
   "Parse the property drawer from a template file and return expected properties."
@@ -410,9 +411,9 @@ If TEMPLATE-FILE is not provided, uses the default template."
 </div>
 </div>
 </div>
-<div id="outline-container-orgc8dd832" class="outline-2">
-<h2 id="orgc8dd832">Template Linting Functions</h2>
-<div class="outline-text-2" id="text-orgc8dd832">
+<div id="outline-container-orga63069d" class="outline-2">
+<h2 id="orga63069d">Template Linting Functions</h2>
+<div class="outline-text-2" id="text-orga63069d">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(defun coppermind/parse-template-properties (template-file)
   "Parse the property drawer from a template file and return expected properties."
@@ -556,9 +557,9 @@ If TEMPLATE-FILE is not provided, uses the default template."
 </div>
 </div>
 </div>
-<div id="outline-container-orgc0cc74d" class="outline-2">
-<h2 id="orgc0cc74d">Org-Roam Integration Functions</h2>
-<div class="outline-text-2" id="text-orgc0cc74d">
+<div id="outline-container-org77061e7" class="outline-2">
+<h2 id="org77061e7">Org-Roam Integration Functions</h2>
+<div class="outline-text-2" id="text-org77061e7">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(defun coppermind/resource-template ()
   "Generate a resource template for org-roam capture."
@@ -571,9 +572,9 @@ If TEMPLATE-FILE is not provided, uses the default template."
 </div>
 </div>
 </div>
-<div id="outline-container-org382d055" class="outline-2">
-<h2 id="org382d055">Footer</h2>
-<div class="outline-text-2" id="text-org382d055">
+<div id="outline-container-orga994eb1" class="outline-2">
+<h2 id="orga994eb1">Footer</h2>
+<div class="outline-text-2" id="text-orga994eb1">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">;;; coppermind-lib.el ends here
 </pre>
@@ -583,7 +584,7 @@ If TEMPLATE-FILE is not provided, uses the default template."
 </div>
 <div id="postamble" class="status">
 <div class="footer-content">
-                 <p>Last modified: </p>
+                 <p>Last modified:  </p>
                  <p>This site is built with Emacs and Org-mode.</p>
                  <p><a href="https://github.com/calebc42">My GitHub</a></p>
                  <p><a href="https://linkedin/in/calebc42">My Linkedin</a></p>
