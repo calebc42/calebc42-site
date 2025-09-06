@@ -340,6 +340,23 @@ main {
 }
 
 /* --- Footer --- */
+
+/* Default state (light mode): show light badge, hide dark badge */
+.linkedin-badge-container .badge-dark {
+  display: none;
+}
+.linkedin-badge-container .badge-light {
+  display: block;
+}
+
+/* Dark mode state: hide light badge, show dark badge */
+body.dark-mode .linkedin-badge-container .badge-light {
+  display: none;
+}
+body.dark-mode .linkedin-badge-container .badge-dark {
+  display: block;
+}
+
 .main-footer {
     text-align: center;
     font-family: var(--font-mono);
