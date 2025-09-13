@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-09-12 Fri 22:29 -->
+<!-- 2025-09-12 Fri 22:35 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Org Publish Configuration</title>
@@ -260,6 +260,9 @@ This section defines the entire publishing workflow, including the gatekeeper fu
            :base-directory "~/coppermind/site/"
            :base-extension "org"
            :publishing-directory "~/site/"
+           :html-head ,site/homepages-html-head
+           :html-preamble ,site/html-preamble
+           :html-postamble site/html-postamble
            :publishing-function org-html-publish-to-html
            :recursive t)
 
