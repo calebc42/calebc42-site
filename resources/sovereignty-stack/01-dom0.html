@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-09-12 Fri 22:29 -->
+<!-- 2025-09-13 Sat 09:13 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Building and Securing a Host OS</title>
@@ -290,46 +290,64 @@ B. From the "Download mirrors" redirect, scroll up to select  <a href="https://c
 <li><p>
 Finally, we have reached the repository, review the <code>SHA512SUMS</code>, <code>SHA512SUMS.sign</code> and <code>debian-XX.X.X-amd64-netinst.iso</code> URLS, compare the URLS with the provided command:
 </p>
-   <script>
-   /* Debian net-install URL builder – keep ES-5 for compatibility */
-   function buildDownloadCmd() {
-      var iso = document.getElementById('isoURL').value ||
-          'https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-current-amd64-netinst.iso';
-var sum = document.getElementById('checksumURL').value ||
-          'https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/SHA512SUMS';
-var sig = document.getElementById('checksumsigURL').value ||
-          'https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/SHA512SUMS.sign';
+<script>
+/* Dynamic command builder */
+function updateCommand() {
+    // Get values from inputs or use defaults
+    var isoURL = document.getElementById('isoURL').value || 
+        'https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-current-amd64-netinst.iso';
+    var checksumURL = document.getElementById('checksumURL').value || 
+        'https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/SHA512SUMS';
+    var sigURL = document.getElementById('checksumsigURL').value || 
+        'https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/SHA512SUMS.sign';
 
-       var cmd = '# Static example (copy-paste safe)\n' +
-                 'curl -sSfL -O ' + iso + '\n' +
-                 'curl -sSfL -O ' + sum + '\n' +
-                 'curl -sSfL -O ' + sig;
+    // Build the command
+    var cmd = '# Download Debian installer and verification files\n' +
+              'curl -sSfL -O ' + isoURL + '\n' +
+              'curl -sSfL -O ' + checksumURL + '\n' +
+              'curl -sSfL -O ' + sigURL;
 
-       document.getElementById('finalCommand').textContent = cmd;
-   }
-   /* run once at page load so non-JS readers still see the working example */
-   buildDownloadCmd();
-   </script>
-   <p><b>Working command set (today):</b></p>
-   <pre id="finalCommand"></pre>
+    // Update the display
+    document.getElementById('finalCommand').textContent = cmd;
+}
+
+/* Update on input change */
+function attachListeners() {
+    var inputs = ['isoURL', 'checksumURL', 'checksumsigURL'];
+    inputs.forEach(function(id) {
+        var element = document.getElementById(id);
+        if (element) {
+            element.addEventListener('input', updateCommand);
+        }
+    });
+}
+
+/* Initialize on page load */
+document.addEventListener('DOMContentLoaded', function() {
+    updateCommand();
+    attachListeners();
+});
+</script>
    #+end_export html
    
    /Want to roll your own? Right-click > "Copy link address" and paste fresh URLs below and the command updates live.
      *Always* eyeball the result before you paste into a terminal./
    #+begin_export html
-   <p>
-     <label for="checksumURL"><b>SHA512SUMS URL:</b></label><br>
-     <input type="text" id="checksumURL" name="checksumURL" class="dynamic-input" data-placeholder="__CHECKSUMURL__" size="60" placeholder="Insert text to replace __CHECKSUMURL__">
-   </p>
-   <p>
-     <label for="checksumsigURL"><b>SHA512SUMS.sign URL:</b></label><br>
-     <input type="text" id="checksumsigURL" name="checksumsigURL" class="dynamic-input" data-placeholder="__CHECKSUMSIGURL__" size="60" placeholder="Insert text to replace __CHECKSUMSIGURL__">
-   </p>
-   <p>
-     <label for="isoURL"><b>debiannetinstURL:</b></label><br>
-     <input type="text" id="isoURL" name="isoURL" class="dynamic-input" data-placeholder="__ISOURL__" size="60" placeholder="Insert text to replace __ISOURL__">
-   </p>
-   <button onclick="buildDownloadCmd()">Regenerate</button>
+<p><b>Working command set (updates live as you type):</b></p>
+<pre id="finalCommand" class="command-output"></pre>
+
+<p>
+  <label for="isoURL"><b>Debian ISO URL:</b></label><br>
+  <input type="text" id="isoURL" class="dynamic-input" placeholder="Leave empty for current stable release">
+</p>
+<p>
+  <label for="checksumURL"><b>SHA512SUMS URL:</b></label><br>
+  <input type="text" id="checksumURL" class="dynamic-input" placeholder="Leave empty for current stable release">
+</p>
+<p>
+  <label for="checksumsigURL"><b>SHA512SUMS.sign URL:</b></label><br>
+  <input type="text" id="checksumsigURL" class="dynamic-input" placeholder="Leave empty for current stable release">
+</p>
    #+end_export html
    
    #+begin_export html
@@ -549,7 +567,7 @@ We’ll use the 3 CD release siging keys listed:
 <pre class="src src-powershell">gpg --keyserver keyserver.ubuntu.com --recv-keys 988021A964E6EA7D DA87E80D6294BE9B 42468F4009EA8AC3
 </pre>
 </div>
-<pre class="example" id="orgeb668dc">
+<pre class="example" id="orge0e2783">
 gpg: C:\\Users\\caleb\\AppData\\Roaming\\gnupg\\trustdb.gpg: trustdb created
 gpg: key 42468F4009EA8AC3: public key "Debian Testing CDs Automatic Signing Key &lt;debian-cd@lists.debian.org&gt;" imported
 gpg: key DA87E80D6294BE9B: public key "Debian CD signing key &lt;debian-cd@lists.debian.org&gt;" imported
@@ -568,7 +586,7 @@ After importing the keys, verify the signature:
 <p>
 The output will likely look like this:
 </p>
-<pre class="example" id="org39bd83d">
+<pre class="example" id="org95c0139">
 gpg: Signature made 09/06/25 15:54:29 Mountain Daylight Time
 gpg:                using RSA key DF9B9C49EAA9298432589D76DA87E80D6294BE9B
 gpg: Good signature from "Debian CD signing key &lt;debian-cd@lists.debian.org&gt;" [unknown]
@@ -593,7 +611,7 @@ Finally, check the key fingerprints:
 <p>
 You should see output like:
 </p>
-<pre class="example" id="org2df562a">
+<pre class="example" id="org1e0c504">
 pub   rsa4096 2009-10-03 [SC]
       1046 0DAD 7616 5AD8 1FBC  0CE9 9880 21A9 64E6 EA7D
 uid           [ unknown] Debian CD signing key &lt;debian-cd@lists.debian.org&gt;
@@ -663,7 +681,7 @@ From PowerShell (Admin):
 <p>
 You’ll see output like:
 </p>
-<pre class="example" id="orgb0dc7a3">
+<pre class="example" id="orgf8f974a">
 BUSID  DEVICE                                                        STATE
 1-2    USB Flash Disk (USB 3.0)                                      Not attached
 1-3    Logitech USB Receiver                                             Not attached
@@ -698,7 +716,7 @@ Open WSL2 Debian and run:
 You should see a new device like <code>/dev/sdb</code>.
 </p>
 
-<div class="tip" id="orge0fd445">
+<div class="tip" id="org5e68b41">
 <p>
 Double-check this is your USB as writing to the wrong device will erase it.
 </p>
@@ -1035,7 +1053,7 @@ Assign a static IP address. Replace 192.168.1.123/24 with a free IP address on y
 <pre class="src src-shell">ip addr add 192.168.1.123/24 dev enx00051bde17f2
 </pre>
 </div>
-<div class="note" id="orge3ddd34">
+<div class="note" id="org4df2dff">
 <p>
 The /24 is the subnet mask and is standard for home networks.
 </p>
@@ -1158,7 +1176,7 @@ Generate a key pair if you don't have one:
 <pre class="src src-nil">ssh-keygen -t ed25519 -C "your_email@example.com"
 </pre>
 </div>
-<div class="note" id="org8dd4e14">
+<div class="note" id="org5d82088">
 <p>
 The email is for pure convenience, SSH ignores it cryptographically. when you later open authorized<sub>keys</sub> on some server you can see whose key that line is without matching long fingerprints.
 </p>
@@ -1228,7 +1246,7 @@ You can see how to headlessly reboot a server using LVM encryption with an SSH c
 </div>
 </div>
 <div id="postamble" class="status">
-<footer class="main-footer"><p>Last Modified: 2025-09-12</p><p>This site is built with Emacs and Org-mode.</p><p>// SYSTEM_NORMAL // [C] 2025 CALEB CHRISTENSEN</p></footer><script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+<footer class="main-footer"><p>Last Modified: 2025-09-13</p><p>This site is built with Emacs and Org-mode.</p><p>// SYSTEM_NORMAL // [C] 2025 CALEB CHRISTENSEN</p></footer><script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
 </div>
 </body>
 </html>
