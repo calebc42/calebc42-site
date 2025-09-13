@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-09-12 Fri 21:26 -->
+<!-- 2025-09-12 Fri 22:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Coppermind Lib Configuration</title>
@@ -206,20 +206,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orgc299d8d">1. Header</a></li>
-<li><a href="#org1187160">2. Schema &amp; Template Functions</a></li>
-<li><a href="#org80cbbd5">3. Interactive Property Management</a></li>
-<li><a href="#orgdff870b">4. Auto-update Functions</a></li>
-<li><a href="#org6c43c01">5. Verification Functions</a></li>
-<li><a href="#org557aa6a">6. Template Linting Functions</a></li>
-<li><a href="#org0324442">7. Template Linting Functions</a></li>
-<li><a href="#orga572960">8. Org-Roam Integration Functions</a></li>
-<li><a href="#org74ec1b0">9. Footer</a></li>
+<li><a href="#orgfc8440e">1. Header</a></li>
+<li><a href="#org2f0a8d1">2. Schema &amp; Template Functions</a></li>
+<li><a href="#org90570c5">3. Interactive Property Management</a></li>
+<li><a href="#org8a72669">4. Auto-update Functions</a></li>
+<li><a href="#org4d8db4b">5. Verification Functions</a></li>
+<li><a href="#org33f8149">6. Template Linting Functions</a></li>
+<li><a href="#org89ac36b">7. Template Linting Functions</a></li>
+<li><a href="#org6ec7a35">8. Org-Roam Integration Functions</a></li>
+<li><a href="#org02c927a">9. Footer</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgc299d8d" class="outline-2">
-<h2 id="orgc299d8d"><span class="section-number-2">1.</span> Header</h2>
+<div id="outline-container-orgfc8440e" class="outline-2">
+<h2 id="orgfc8440e"><span class="section-number-2">1.</span> Header</h2>
 <div class="outline-text-2" id="text-1">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">;;; coppermind-lib.el --- Core functions for the Coppermind PKM system -*- lexical-binding: t -*-
@@ -239,8 +239,8 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org1187160" class="outline-2">
-<h2 id="org1187160"><span class="section-number-2">2.</span> Schema &amp; Template Functions</h2>
+<div id="outline-container-org2f0a8d1" class="outline-2">
+<h2 id="org2f0a8d1"><span class="section-number-2">2.</span> Schema &amp; Template Functions</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 These functions dynamically build the property drawers for new notes by scanning the filesystem.
@@ -293,8 +293,8 @@ These functions dynamically build the property drawers for new notes by scanning
 </div>
 </div>
 </div>
-<div id="outline-container-org80cbbd5" class="outline-2">
-<h2 id="org80cbbd5"><span class="section-number-2">3.</span> Interactive Property Management</h2>
+<div id="outline-container-org90570c5" class="outline-2">
+<h2 id="org90570c5"><span class="section-number-2">3.</span> Interactive Property Management</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 These functions allow you to interactively set property values based on the schema files.
@@ -412,8 +412,8 @@ These functions allow you to interactively set property values based on the sche
 </div>
 </div>
 </div>
-<div id="outline-container-orgdff870b" class="outline-2">
-<h2 id="orgdff870b"><span class="section-number-2">4.</span> Auto-update Functions</h2>
+<div id="outline-container-org8a72669" class="outline-2">
+<h2 id="org8a72669"><span class="section-number-2">4.</span> Auto-update Functions</h2>
 <div class="outline-text-2" id="text-4">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(defun coppermind/update-modified-property ()
@@ -430,8 +430,8 @@ These functions allow you to interactively set property values based on the sche
 </div>
 </div>
 </div>
-<div id="outline-container-org6c43c01" class="outline-2">
-<h2 id="org6c43c01"><span class="section-number-2">5.</span> Verification Functions</h2>
+<div id="outline-container-org4d8db4b" class="outline-2">
+<h2 id="org4d8db4b"><span class="section-number-2">5.</span> Verification Functions</h2>
 <div class="outline-text-2" id="text-5">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(defun coppermind/verify-schema-structure ()
@@ -460,8 +460,8 @@ These functions allow you to interactively set property values based on the sche
 </div>
 </div>
 </div>
-<div id="outline-container-org557aa6a" class="outline-2">
-<h2 id="org557aa6a"><span class="section-number-2">6.</span> Template Linting Functions</h2>
+<div id="outline-container-org33f8149" class="outline-2">
+<h2 id="org33f8149"><span class="section-number-2">6.</span> Template Linting Functions</h2>
 <div class="outline-text-2" id="text-6">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(defun coppermind/parse-template-properties (template-file)
@@ -606,8 +606,8 @@ If TEMPLATE-FILE is not provided, uses the default template."
 </div>
 </div>
 </div>
-<div id="outline-container-org0324442" class="outline-2">
-<h2 id="org0324442"><span class="section-number-2">7.</span> Template Linting Functions</h2>
+<div id="outline-container-org89ac36b" class="outline-2">
+<h2 id="org89ac36b"><span class="section-number-2">7.</span> Template Linting Functions</h2>
 <div class="outline-text-2" id="text-7">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(defun coppermind/parse-template-properties (template-file)
@@ -752,8 +752,8 @@ If TEMPLATE-FILE is not provided, uses the default template."
 </div>
 </div>
 </div>
-<div id="outline-container-orga572960" class="outline-2">
-<h2 id="orga572960"><span class="section-number-2">8.</span> Org-Roam Integration Functions</h2>
+<div id="outline-container-org6ec7a35" class="outline-2">
+<h2 id="org6ec7a35"><span class="section-number-2">8.</span> Org-Roam Integration Functions</h2>
 <div class="outline-text-2" id="text-8">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">  (defun coppermind/resource-template ()
@@ -772,8 +772,8 @@ If TEMPLATE-FILE is not provided, uses the default template."
 </div>
 </div>
 </div>
-<div id="outline-container-org74ec1b0" class="outline-2">
-<h2 id="org74ec1b0"><span class="section-number-2">9.</span> Footer</h2>
+<div id="outline-container-org02c927a" class="outline-2">
+<h2 id="org02c927a"><span class="section-number-2">9.</span> Footer</h2>
 <div class="outline-text-2" id="text-9">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">(provide 'coppermind-lib)

@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-09-12 Fri 21:26 -->
+<!-- 2025-09-12 Fri 22:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Emacs Initialization</title>
@@ -206,14 +206,14 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org0695c39">1. Header</a></li>
-<li><a href="#org2904dbd">2. Package System</a></li>
-<li><a href="#orgd005395">3. Core Packages &amp; Configuration Loading</a></li>
+<li><a href="#orgfb7d12e">1. Header</a></li>
+<li><a href="#org556323b">2. Package System</a></li>
+<li><a href="#orgd126f50">3. Core Packages &amp; Configuration Loading</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org0695c39" class="outline-2">
-<h2 id="org0695c39"><span class="section-number-2">1.</span> Header</h2>
+<div id="outline-container-orgfb7d12e" class="outline-2">
+<h2 id="orgfb7d12e"><span class="section-number-2">1.</span> Header</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 This file, `init.el`, is the starting point for Emacs. Its primary job is to set up the package management system and then load the main configuration file, `config.el`, which is tangled from `configuration.org`.
@@ -236,8 +236,8 @@ This file, `init.el`, is the starting point for Emacs. Its primary job is to set
 </div>
 </div>
 </div>
-<div id="outline-container-org2904dbd" class="outline-2">
-<h2 id="org2904dbd"><span class="section-number-2">2.</span> Package System</h2>
+<div id="outline-container-org556323b" class="outline-2">
+<h2 id="org556323b"><span class="section-number-2">2.</span> Package System</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 First, we define the location for `custom.el`, where Emacs stores settings from the `M-x customize` interface. Then, we configure `package.el` to use the MELPA, Org, and GNU ELPA archives, which provide access to thousands of packages.
@@ -272,8 +272,8 @@ First, we define the location for `custom.el`, where Emacs stores settings from 
 </div>
 </div>
 </div>
-<div id="outline-container-orgd005395" class="outline-2">
-<h2 id="orgd005395"><span class="section-number-2">3.</span> Core Packages &amp; Configuration Loading</h2>
+<div id="outline-container-orgd126f50" class="outline-2">
+<h2 id="orgd126f50"><span class="section-number-2">3.</span> Core Packages &amp; Configuration Loading</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Here, we install and configure `use-package`, a macro that dramatically simplifies package management. We also set some performance-related garbage collection thresholds.

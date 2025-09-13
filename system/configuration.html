@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-09-12 Fri 21:26 -->
+<!-- 2025-09-12 Fri 22:29 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Main Emacs Configuration</title>
@@ -206,20 +206,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org3c79e28">1. Header</a></li>
-<li><a href="#orgd3385e6">2. User Interface</a></li>
-<li><a href="#org569d93f">3. System Architecture &amp; Paths</a></li>
-<li><a href="#org404674b">4. Configuration Management</a></li>
-<li><a href="#org3eda3ce">5. Dependency-Aware Module Loader</a></li>
-<li><a href="#org54426a0">6. Configuration Linting and Validation</a></li>
-<li><a href="#org72e45a8">7. Configuration Auto-Fix Functions</a></li>
-<li><a href="#org45adb91">8. Configuration Keybindings</a></li>
-<li><a href="#org2d3b9f5">9. Footer</a></li>
+<li><a href="#orgda00062">1. Header</a></li>
+<li><a href="#orgaf7e677">2. User Interface</a></li>
+<li><a href="#org59a5674">3. System Architecture &amp; Paths</a></li>
+<li><a href="#orgfd8f842">4. Configuration Management</a></li>
+<li><a href="#org502f74d">5. Dependency-Aware Module Loader</a></li>
+<li><a href="#orgefb46f2">6. Configuration Linting and Validation</a></li>
+<li><a href="#org4c27542">7. Configuration Auto-Fix Functions</a></li>
+<li><a href="#orga6b286d">8. Configuration Keybindings</a></li>
+<li><a href="#orgb84106c">9. Footer</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org3c79e28" class="outline-2">
-<h2 id="org3c79e28"><span class="section-number-2">1.</span> Header</h2>
+<div id="outline-container-orgda00062" class="outline-2">
+<h2 id="orgda00062"><span class="section-number-2">1.</span> Header</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 This file is the core of the configuration. It is responsible for defining the directory structure, providing helper functions to manage the configuration, and loading all modules in the correct, predictable order.
@@ -239,8 +239,8 @@ This file is the core of the configuration. It is responsible for defining the d
 </div>
 </div>
 </div>
-<div id="outline-container-orgd3385e6" class="outline-2">
-<h2 id="orgd3385e6"><span class="section-number-2">2.</span> User Interface</h2>
+<div id="outline-container-orgaf7e677" class="outline-2">
+<h2 id="orgaf7e677"><span class="section-number-2">2.</span> User Interface</h2>
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 <pre class="src src-emacs-lisp">;; Disable startup splashscreen
@@ -309,8 +309,8 @@ This file is the core of the configuration. It is responsible for defining the d
 </div>
 </div>
 </div>
-<div id="outline-container-org569d93f" class="outline-2">
-<h2 id="org569d93f"><span class="section-number-2">3.</span> System Architecture &amp; Paths</h2>
+<div id="outline-container-org59a5674" class="outline-2">
+<h2 id="org59a5674"><span class="section-number-2">3.</span> System Architecture &amp; Paths</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 This section defines the directory structure for the entire configuration. It is the "single source of truth" for all paths. Helper functions will reference these variables, ensuring a DRY (Don't Repeat Yourself) and easily maintainable setup.
@@ -353,8 +353,8 @@ This variable powers the dynamic `my/new-config-module' helper.")
 </div>
 </div>
 </div>
-<div id="outline-container-org404674b" class="outline-2">
-<h2 id="org404674b"><span class="section-number-2">4.</span> Configuration Management</h2>
+<div id="outline-container-orgfd8f842" class="outline-2">
+<h2 id="orgfd8f842"><span class="section-number-2">4.</span> Configuration Management</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 These are the interactive helper functions for managing and verifying your configuration. They are defined before the module loader so they are available immediately.
@@ -437,8 +437,8 @@ These are the interactive helper functions for managing and verifying your confi
 </div>
 </div>
 </div>
-<div id="outline-container-org3eda3ce" class="outline-2">
-<h2 id="org3eda3ce"><span class="section-number-2">5.</span> Dependency-Aware Module Loader</h2>
+<div id="outline-container-org502f74d" class="outline-2">
+<h2 id="org502f74d"><span class="section-number-2">5.</span> Dependency-Aware Module Loader</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 This section provides a dependency-aware loader that builds a dependency graph and loads modules in the correct order.
@@ -569,8 +569,8 @@ Detects and reports circular dependencies."
 </div>
 </div>
 </div>
-<div id="outline-container-org54426a0" class="outline-2">
-<h2 id="org54426a0"><span class="section-number-2">6.</span> Configuration Linting and Validation</h2>
+<div id="outline-container-orgefb46f2" class="outline-2">
+<h2 id="orgefb46f2"><span class="section-number-2">6.</span> Configuration Linting and Validation</h2>
 <div class="outline-text-2" id="text-6">
 <p>
 Comprehensive linting and validation tools for the literate configuration.
@@ -724,8 +724,8 @@ Comprehensive linting and validation tools for the literate configuration.
 </div>
 </div>
 </div>
-<div id="outline-container-org72e45a8" class="outline-2">
-<h2 id="org72e45a8"><span class="section-number-2">7.</span> Configuration Auto-Fix Functions</h2>
+<div id="outline-container-org4c27542" class="outline-2">
+<h2 id="org4c27542"><span class="section-number-2">7.</span> Configuration Auto-Fix Functions</h2>
 <div class="outline-text-2" id="text-7">
 <p>
 Smart functions to automatically fix common configuration issues.
@@ -828,8 +828,8 @@ Smart functions to automatically fix common configuration issues.
 </div>
 </div>
 </div>
-<div id="outline-container-org45adb91" class="outline-2">
-<h2 id="org45adb91"><span class="section-number-2">8.</span> Configuration Keybindings</h2>
+<div id="outline-container-orga6b286d" class="outline-2">
+<h2 id="orga6b286d"><span class="section-number-2">8.</span> Configuration Keybindings</h2>
 <div class="outline-text-2" id="text-8">
 <p>
 Centralized keybindings for configuration management.
@@ -855,8 +855,8 @@ Centralized keybindings for configuration management.
 </div>
 </div>
 </div>
-<div id="outline-container-org2d3b9f5" class="outline-2">
-<h2 id="org2d3b9f5"><span class="section-number-2">9.</span> Footer</h2>
+<div id="outline-container-orgb84106c" class="outline-2">
+<h2 id="orgb84106c"><span class="section-number-2">9.</span> Footer</h2>
 <div class="outline-text-2" id="text-9">
 <p>
 This block contains the closing boilerplate for the tangled config.el file.

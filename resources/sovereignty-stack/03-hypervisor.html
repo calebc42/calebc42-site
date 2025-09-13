@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-09-12 Fri 21:26 -->
+<!-- 2025-09-12 Fri 22:28 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Installing and Configuring the Xen Hypervisor</title>
@@ -206,23 +206,23 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org1f47721">1. Introduction</a></li>
-<li><a href="#orgc3b4ecd">2. Xen Hypervisor Installation</a></li>
-<li><a href="#org29ac17e">3. GRUB Configuration</a></li>
-<li><a href="#org367c107">4. Xen Hypervisor Configuration</a></li>
+<li><a href="#org3b58bd8">1. Introduction</a></li>
+<li><a href="#org19cfcec">2. Xen Hypervisor Installation</a></li>
+<li><a href="#org6fa008c">3. GRUB Configuration</a></li>
+<li><a href="#orgd83bdef">4. Xen Hypervisor Configuration</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org1f47721" class="outline-2">
-<h2 id="org1f47721"><span class="section-number-2">1.</span> Introduction</h2>
+<div id="outline-container-org3b58bd8" class="outline-2">
+<h2 id="org3b58bd8"><span class="section-number-2">1.</span> Introduction</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 Virtualization is implemented through a software layer known as a hypervisor. Hypervisors are broadly categorized into two types. Type-2, or hosted, hypervisors (e.g., VirtualBox, VMware Workstation) run as applications atop a conventional host operating system. While convenient, they introduce performance overhead due to the additional OS layer. In contrast, Type-1, or bare-metal, hypervisors (e.g., Xen Project, VMware ESXi) run directly on the host's hardware, taking on the role of the operating system itself. This architecture grants them direct access to hardware resources, resulting in superior performance, security, and isolation—characteristics that make them the standard in enterprise and cloud computing environments.
 </p>
 </div>
 </div>
-<div id="outline-container-orgc3b4ecd" class="outline-2">
-<h2 id="orgc3b4ecd"><span class="section-number-2">2.</span> Xen Hypervisor Installation</h2>
+<div id="outline-container-org19cfcec" class="outline-2">
+<h2 id="org19cfcec"><span class="section-number-2">2.</span> Xen Hypervisor Installation</h2>
 <div class="outline-text-2" id="text-2">
 <div class="org-src-container">
 <pre class="src src-nil">ssh user@laptop-ip
@@ -238,8 +238,8 @@ Install the Xen hypervisor and the command-line tools.
 </div>
 </div>
 </div>
-<div id="outline-container-org29ac17e" class="outline-2">
-<h2 id="org29ac17e"><span class="section-number-2">3.</span> GRUB Configuration</h2>
+<div id="outline-container-org6fa008c" class="outline-2">
+<h2 id="org6fa008c"><span class="section-number-2">3.</span> GRUB Configuration</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 Find the Xen menu entry name as GRUB sees it. You can find this by searching the GRUB config file.
@@ -280,7 +280,7 @@ Once you log back into Debian, you can confirm that Xen is active and that the D
 <pre class="src src-shell">sudo xl info
 </pre>
 </div>
-<div class="important" id="org81688e8">
+<div class="important" id="org09b8967">
 <p>
 You may need to install the <code>sudo</code> utility.
 </p>
@@ -288,8 +288,8 @@ You may need to install the <code>sudo</code> utility.
 </div>
 </div>
 </div>
-<div id="outline-container-org367c107" class="outline-2">
-<h2 id="org367c107"><span class="section-number-2">4.</span> Xen Hypervisor Configuration</h2>
+<div id="outline-container-orgd83bdef" class="outline-2">
+<h2 id="orgd83bdef"><span class="section-number-2">4.</span> Xen Hypervisor Configuration</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 Modify the GRUB<sub>CMDLINE</sub><sub>XEN</sub><sub>DEFAULT</sub> and GRUB<sub>CMDLINE</sub><sub>LINUX</sub><sub>DEFAULT</sub> lines. These settings:

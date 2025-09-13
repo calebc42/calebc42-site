@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-09-12 Fri 21:26 -->
+<!-- 2025-09-12 Fri 22:28 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Project Overview</title>
@@ -209,43 +209,43 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#orge6e03db">1. Executive Summary</a></li>
-<li><a href="#org0f439b7">2. Introduction</a></li>
-<li><a href="#orgcb1e3ed">3. Project Goals</a>
+<li><a href="#orge5ca66c">1. Executive Summary</a></li>
+<li><a href="#orgf5cf830">2. Introduction</a></li>
+<li><a href="#org7543e12">3. Project Goals</a>
 <ul>
-<li><a href="#orge03a298">3.1. Properties of Sovereign Control</a>
+<li><a href="#org40773ae">3.1. Properties of Sovereign Control</a>
 <ul>
-<li><a href="#orgd6b3104">3.1.1. P1 — Confidentiality of User Data at Rest</a></li>
-<li><a href="#orga1c71d1">3.1.2. P2 — Integrity of the Boot Chain is Established</a></li>
-<li><a href="#org63bd430">3.1.3. P3 — Verifying No Outbound Traffic to Known OEM Telemetry Endpoints.</a></li>
-<li><a href="#org82d8d29">3.1.4. P4 — No Hidden Persistent Storage Writable by the OEM</a></li>
-<li><a href="#org57c5ec2">3.1.5. P5 — Device Isolation via IOMMU</a></li>
+<li><a href="#orgc80633e">3.1.1. P1 — Confidentiality of User Data at Rest</a></li>
+<li><a href="#org247adf3">3.1.2. P2 — Integrity of the Boot Chain is Established</a></li>
+<li><a href="#org36932ad">3.1.3. P3 — Verifying No Outbound Traffic to Known OEM Telemetry Endpoints.</a></li>
+<li><a href="#org63847db">3.1.4. P4 — No Hidden Persistent Storage Writable by the OEM</a></li>
+<li><a href="#org31c4d90">3.1.5. P5 — Device Isolation via IOMMU</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li><a href="#org8a43110">4. Next Steps</a></li>
-<li><a href="#org443db08">5. Index</a></li>
-<li><a href="#org5cd1f5b">6. Appendix</a>
+<li><a href="#orgce0bf88">4. Next Steps</a></li>
+<li><a href="#org5adc768">5. Index</a></li>
+<li><a href="#orgf418d58">6. Appendix</a>
 <ul>
-<li><a href="#orgabce0f4">6.1. Cryptography with Gnu Privacy Guard</a></li>
-<li><a href="#org7aa87af">6.2. Remote LUKS Unlock with Dropbear</a></li>
+<li><a href="#orgb633e12">6.1. Cryptography with Gnu Privacy Guard</a></li>
+<li><a href="#org28b736d">6.2. Remote LUKS Unlock with Dropbear</a></li>
 </ul>
 </li>
-<li><a href="#orgcdaf8b5">7. Reference</a></li>
+<li><a href="#org37e40a3">7. Reference</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orge6e03db" class="outline-2">
-<h2 id="orge6e03db"><span class="section-number-2">1.</span> Executive Summary</h2>
+<div id="outline-container-orge5ca66c" class="outline-2">
+<h2 id="orge5ca66c"><span class="section-number-2">1.</span> Executive Summary</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 This experiment explores increasing user control over a consumer laptop, through selecting a hypervisor, reconfiguring the boot chain, and establishing a minimal, inspectable security boundary between the vendor firmware and user-controlled code. Using an Open-Source Operating System, isolating the untrusted firmware from everything above the hypervisor to establish a verifiable root of control to be measured.
 </p>
 </div>
 </div>
-<div id="outline-container-org0f439b7" class="outline-2">
-<h2 id="org0f439b7"><span class="section-number-2">2.</span> Introduction</h2>
+<div id="outline-container-orgf5cf830" class="outline-2">
+<h2 id="orgf5cf830"><span class="section-number-2">2.</span> Introduction</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 This project addresses a specific technical challenge: reconciling platform security models designed for cryptographic integrity attestation with the user’s growing concern to mitigate risks such as telemetry, opaque update mechanisms, and vendor-imposed obsolescence through inspection, modification, and control of the physical hardware.
@@ -274,7 +274,7 @@ This is not a circumvention of security, but a reorientation to the locus of con
 <p>
 A successful Sovereignty Stack must be;
 </p>
-<pre class="example" id="org98dd552">
+<pre class="example" id="org43dbc8c">
 [ Hardware ]
 |
 [ Vendor Firmware ] ← Cryptographically attested, immutable, unauditable
@@ -290,8 +290,8 @@ A successful Sovereignty Stack must be;
 </pre>
 </div>
 </div>
-<div id="outline-container-orgcb1e3ed" class="outline-2">
-<h2 id="orgcb1e3ed"><span class="section-number-2">3.</span> Project Goals</h2>
+<div id="outline-container-org7543e12" class="outline-2">
+<h2 id="org7543e12"><span class="section-number-2">3.</span> Project Goals</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 The default configuration of modern laptops grants the OEM a degree of control that is inconsistent with traditional notions of hardware ownership. Even after payment, control remains with the Original Equipment Manufacturer (OEM). Firmware is cryptographically sealed. Telemetry is embedded. “End of support” means forced obsolescence — not for the hardware, but for the orginal transaction agreement and your right to use your property securely.
@@ -305,12 +305,12 @@ This project defines what true ownership looks like in technical terms. The Sove
 Each property answers a simple question: What must be true for me to trust this machine with my data, my work, and my autonomy?
 </p>
 </div>
-<div id="outline-container-orge03a298" class="outline-3">
-<h3 id="orge03a298"><span class="section-number-3">3.1.</span> Properties of Sovereign Control</h3>
+<div id="outline-container-org40773ae" class="outline-3">
+<h3 id="org40773ae"><span class="section-number-3">3.1.</span> Properties of Sovereign Control</h3>
 <div class="outline-text-3" id="text-3-1">
 </div>
-<div id="outline-container-orgd6b3104" class="outline-4">
-<h4 id="orgd6b3104"><span class="section-number-4">3.1.1.</span> P1 — Confidentiality of User Data at Rest</h4>
+<div id="outline-container-orgc80633e" class="outline-4">
+<h4 id="orgc80633e"><span class="section-number-4">3.1.1.</span> P1 — Confidentiality of User Data at Rest</h4>
 <div class="outline-text-4" id="text-3-1-1">
 <p>
 Your files must remain unreadable to anyone — including the OEM — without your explicit consent (via passphrase). OEMs routinely include recovery mechanisms, escrow keys, or backdoor partitions. These violate the principle that you — not the vendor — are the sole custodian of your data. If the OEM can bypass your encryption, it is not encryption — it is DRM.
@@ -325,8 +325,8 @@ This property is satisfied only when every LUKS keyslot is passphrase-derived an
 </p>
 </div>
 </div>
-<div id="outline-container-orga1c71d1" class="outline-4">
-<h4 id="orga1c71d1"><span class="section-number-4">3.1.2.</span> P2 — Integrity of the Boot Chain is Established</h4>
+<div id="outline-container-org247adf3" class="outline-4">
+<h4 id="org247adf3"><span class="section-number-4">3.1.2.</span> P2 — Integrity of the Boot Chain is Established</h4>
 <div class="outline-text-4" id="text-3-1-2">
 <p>
 The hypervisor — the first software layer you control — must be bit-for-bit reproducible from open-source sources and cryptographically verified before execution. If you cannot verify that the code running beneath your OS is what you intended to run, you inherit every vulnerability, backdoor, or telemetry hook embedded by the build system. Reproducible builds are the most direct method for a user to independently verify the integrity of a binary
@@ -341,8 +341,8 @@ The hash of the loaded hypervisor blob GRUB loads must match the some one that D
 </p>
 </div>
 </div>
-<div id="outline-container-org63bd430" class="outline-4">
-<h4 id="org63bd430"><span class="section-number-4">3.1.3.</span> P3 — Verifying No Outbound Traffic to Known OEM Telemetry Endpoints.</h4>
+<div id="outline-container-org36932ad" class="outline-4">
+<h4 id="org36932ad"><span class="section-number-4">3.1.3.</span> P3 — Verifying No Outbound Traffic to Known OEM Telemetry Endpoints.</h4>
 <div class="outline-text-4" id="text-3-1-3">
 <p>
 Once your OS takes control of the network interface, no packets may be sent to known OEM telemetry endpoints — not during boot, not during idle, not ever. Many OEMs embed persistent telemetry in firmware, drivers, or microcode (e.g., Intel ME, Lenovo Vantage services). These channels operate below the OS and often survive reinstalls. If your machine phones home without your knowledge, it is not yours — it is a remote sensor.
@@ -357,8 +357,8 @@ A 24-hour packet capture, taken from an external span port, must show zero frame
 </p>
 </div>
 </div>
-<div id="outline-container-org82d8d29" class="outline-4">
-<h4 id="org82d8d29"><span class="section-number-4">3.1.4.</span> P4 — No Hidden Persistent Storage Writable by the OEM</h4>
+<div id="outline-container-org63847db" class="outline-4">
+<h4 id="org63847db"><span class="section-number-4">3.1.4.</span> P4 — No Hidden Persistent Storage Writable by the OEM</h4>
 <div class="outline-text-4" id="text-3-1-4">
 <p>
 Every writable sector on the drive must be under user control — no hidden areas via Host Protected Area, Device Configuration Overlay, or vendor namespaces. OEMs routinely reserve hidden storage for “recovery,” diagnostics, or logging — areas that survive OS reinstalls and are invisible to the user. If the OEM can write to hidden sectors, they can store telemetry, backdoors, or persistence mechanisms. True ownership means every byte is visible and controlled.
@@ -373,8 +373,8 @@ HPA and DCO must be removed or verified inactive. Visible partitions must accoun
 </p>
 </div>
 </div>
-<div id="outline-container-org57c5ec2" class="outline-4">
-<h4 id="org57c5ec2"><span class="section-number-4">3.1.5.</span> P5 — Device Isolation via IOMMU</h4>
+<div id="outline-container-org31c4d90" class="outline-4">
+<h4 id="org31c4d90"><span class="section-number-4">3.1.5.</span> P5 — Device Isolation via IOMMU</h4>
 <div class="outline-text-4" id="text-3-1-5">
 <p>
 Every PCI device must be isolated in its own IOMMU group, preventing DMA-based attacks between peripherals. Without IOMMU isolation, a compromised USB controller, NIC, or GPU can read or write arbitrary memory — including hypervisor pages. This breaks the security model of virtualization entirely. Device passthrough is not a feature — it is a necessity for containment.
@@ -391,8 +391,8 @@ No IOMMU group may contain more than one endpoint device. High-risk devices (net
 </div>
 </div>
 </div>
-<div id="outline-container-org8a43110" class="outline-2">
-<h2 id="org8a43110"><span class="section-number-2">4.</span> Next Steps</h2>
+<div id="outline-container-orgce0bf88" class="outline-2">
+<h2 id="orgce0bf88"><span class="section-number-2">4.</span> Next Steps</h2>
 <div class="outline-text-2" id="text-4">
 <p>
 These are not arbitrary checkboxes. They are the minimum viable specification for a machine that respects its owner.
@@ -415,8 +415,8 @@ It is proven.
 </p>
 </div>
 </div>
-<div id="outline-container-org443db08" class="outline-2">
-<h2 id="org443db08"><span class="section-number-2">5.</span> Index</h2>
+<div id="outline-container-org5adc768" class="outline-2">
+<h2 id="org5adc768"><span class="section-number-2">5.</span> Index</h2>
 <div class="outline-text-2" id="text-5">
 <p>
 The articles in this series document the procedures required to build a system that satisfies the sovereignty properties defined above. Presented in logical sequence, they serve as a practical demonstration of achieving measurable control over consumer hardware, from establishing a verified host to configuring hardware isolation.
@@ -501,19 +501,19 @@ The articles in this series document the procedures required to build a system t
 </table>
 </div>
 </div>
-<div id="outline-container-org5cd1f5b" class="outline-2">
-<h2 id="org5cd1f5b"><span class="section-number-2">6.</span> Appendix</h2>
+<div id="outline-container-orgf418d58" class="outline-2">
+<h2 id="orgf418d58"><span class="section-number-2">6.</span> Appendix</h2>
 <div class="outline-text-2" id="text-6">
 </div>
-<div id="outline-container-orgabce0f4" class="outline-3">
-<h3 id="orgabce0f4"><span class="section-number-3">6.1.</span> <a href="resources/gpg.html">Cryptography with Gnu Privacy Guard</a></h3>
+<div id="outline-container-orgb633e12" class="outline-3">
+<h3 id="orgb633e12"><span class="section-number-3">6.1.</span> <a href="resources/gpg.html">Cryptography with Gnu Privacy Guard</a></h3>
 </div>
-<div id="outline-container-org7aa87af" class="outline-3">
-<h3 id="org7aa87af"><span class="section-number-3">6.2.</span> <a href="resources/dropbear-initramfs.html">Remote LUKS Unlock with Dropbear</a></h3>
+<div id="outline-container-org28b736d" class="outline-3">
+<h3 id="org28b736d"><span class="section-number-3">6.2.</span> <a href="resources/dropbear-initramfs.html">Remote LUKS Unlock with Dropbear</a></h3>
 </div>
 </div>
-<div id="outline-container-orgcdaf8b5" class="outline-2">
-<h2 id="orgcdaf8b5"><span class="section-number-2">7.</span> Reference</h2>
+<div id="outline-container-org37e40a3" class="outline-2">
+<h2 id="org37e40a3"><span class="section-number-2">7.</span> Reference</h2>
 <div class="outline-text-2" id="text-7">
 <ul class="org-ul">
 <li><a href="99-reference.html">Materials, Glossary, Command Cheatsheet</a></li>

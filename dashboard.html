@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-09-12 Fri 21:26 -->
+<!-- 2025-09-12 Fri 22:28 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Coppermind Dashboard</title>
@@ -205,37 +205,37 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org756463f">1. Processing Queue</a>
+<li><a href="#org990319f">1. Processing Queue</a>
 <ul>
-<li><a href="#org4262bf1">1.1. Inbox Items</a></li>
-<li><a href="#orgfbffd75">1.2. Reviews Due</a></li>
+<li><a href="#orgd79a2a5">1.1. Inbox Items</a></li>
+<li><a href="#orgc868578">1.2. Reviews Due</a></li>
 </ul>
 </li>
-<li><a href="#org38b8c47">2. Projects</a>
+<li><a href="#org817cd1d">2. Projects</a>
 <ul>
-<li><a href="#org36bfb20">2.1. Next Actions</a></li>
-<li><a href="#org8e8755d">2.2. Active Projects</a></li>
+<li><a href="#orge5452f8">2.1. Next Actions</a></li>
+<li><a href="#org3b2f138">2.2. Active Projects</a></li>
 </ul>
 </li>
-<li><a href="#org9ab1d55">3. Resources</a>
+<li><a href="#org731017d">3. Resources</a>
 <ul>
-<li><a href="#org9352efc">3.1. Recently Modified</a></li>
+<li><a href="#org05593a8">3.1. Recently Modified</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
-<div id="outline-container-org756463f" class="outline-2">
-<h2 id="org756463f"><span class="section-number-2">1.</span> Processing Queue</h2>
+<div id="outline-container-org990319f" class="outline-2">
+<h2 id="org990319f"><span class="section-number-2">1.</span> Processing Queue</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-org4262bf1" class="outline-3">
-<h3 id="org4262bf1"><span class="section-number-3">1.1.</span> Inbox Items</h3>
+<div id="outline-container-orgd79a2a5" class="outline-3">
+<h3 id="orgd79a2a5"><span class="section-number-3">1.1.</span> Inbox Items</h3>
 <div class="outline-text-3" id="text-1-1">
 </div>
 </div>
-<div id="outline-container-orgfbffd75" class="outline-3">
-<h3 id="orgfbffd75"><span class="section-number-3">1.2.</span> Reviews Due</h3>
+<div id="outline-container-orgc868578" class="outline-3">
+<h3 id="orgc868578"><span class="section-number-3">1.2.</span> Reviews Due</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 (and (todo "TODO") (pred&lt;(org-roam-node-prop ?n "REVIEW<sub>DUE</sub>") (org-read-date nil t "&lt;today&gt;")))
@@ -243,20 +243,20 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org38b8c47" class="outline-2">
-<h2 id="org38b8c47"><span class="section-number-2">2.</span> Projects</h2>
+<div id="outline-container-org817cd1d" class="outline-2">
+<h2 id="org817cd1d"><span class="section-number-2">2.</span> Projects</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org36bfb20" class="outline-3">
-<h3 id="org36bfb20"><span class="section-number-3">2.1.</span> Next Actions</h3>
+<div id="outline-container-orge5452f8" class="outline-3">
+<h3 id="orge5452f8"><span class="section-number-3">2.1.</span> Next Actions</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 (and (todo "TODO") (prop "STATUS" "next"))
 </p>
 </div>
 </div>
-<div id="outline-container-org8e8755d" class="outline-3">
-<h3 id="org8e8755d"><span class="section-number-3">2.2.</span> Active Projects</h3>
+<div id="outline-container-org3b2f138" class="outline-3">
+<h3 id="org3b2f138"><span class="section-number-3">2.2.</span> Active Projects</h3>
 <div class="outline-text-3" id="text-2-2">
 <p>
 (and (todo "TODO") (prop "STATUS" "active"))
@@ -264,12 +264,12 @@
 </div>
 </div>
 </div>
-<div id="outline-container-org9ab1d55" class="outline-2">
-<h2 id="org9ab1d55"><span class="section-number-2">3.</span> Resources</h2>
+<div id="outline-container-org731017d" class="outline-2">
+<h2 id="org731017d"><span class="section-number-2">3.</span> Resources</h2>
 <div class="outline-text-2" id="text-3">
 </div>
-<div id="outline-container-org9352efc" class="outline-3">
-<h3 id="org9352efc"><span class="section-number-3">3.1.</span> Recently Modified</h3>
+<div id="outline-container-org05593a8" class="outline-3">
+<h3 id="org05593a8"><span class="section-number-3">3.1.</span> Recently Modified</h3>
 <div class="outline-text-3" id="text-3-1">
 <p>
 (and (prop "TYPE" "resource") (sort-by 'mtime &gt;))

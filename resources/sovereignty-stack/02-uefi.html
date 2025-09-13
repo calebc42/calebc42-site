@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-09-12 Fri 21:26 -->
+<!-- 2025-09-12 Fri 22:28 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>A Guide to UEFI Firmware Analysis and Modification</title>
@@ -206,13 +206,13 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org5856ce9">1. Introduction</a>
+<li><a href="#org20eac3e">1. Introduction</a>
 <ul>
 <li>
 <ul>
-<li><a href="#org68677a1">1.0.1. Entering the Yoga 710-15IKB BIOS</a></li>
-<li><a href="#orga02e2cf">1.0.2. Virtualization (VT-x) Activation and disabling Secure Boot</a></li>
-<li><a href="#orga9484d4">1.0.3. VT-d Activation</a></li>
+<li><a href="#org0817d82">1.0.1. Entering the Yoga 710-15IKB BIOS</a></li>
+<li><a href="#orgfd52506">1.0.2. Virtualization (VT-x) Activation and disabling Secure Boot</a></li>
+<li><a href="#org0b10e57">1.0.3. VT-d Activation</a></li>
 </ul>
 </li>
 </ul>
@@ -220,8 +220,8 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org5856ce9" class="outline-2">
-<h2 id="org5856ce9"><span class="section-number-2">1.</span> Introduction</h2>
+<div id="outline-container-org20eac3e" class="outline-2">
+<h2 id="org20eac3e"><span class="section-number-2">1.</span> Introduction</h2>
 <div class="outline-text-2" id="text-1">
 <p>
 I will be using a Lenovo Yoga 710-15IKB with a 7th Generation Intel i5-7200U and 8GB of RAM. The 7th Generation Porcessor lacks the TPM needed to upgrade to Windows 11. It also employs Intel Boot Guard preventing me from using an open-source BIOS/UEFI such as Coreboot.
@@ -251,8 +251,8 @@ A thorough analysis of the official technical specifications for the SoC process
 <dt>Intel® VT-d</dt><dd>Extends hardware assistance beyond the CPU to the system's I/O pathways. It is an I/O memory management unit (IOMMU) technology that remaps I/O Direct Memory Access (DMA) transfers. In practical terms, VT-d allows a hypervisor to securely and directly assign physical hardware devices, such as a network interface card, a storage controller, or, most commonly, a discrete graphics processing unit, to a specific guest operating system. This process, known as "passthrough," gives the guest VM exclusive, near-native performance access to the hardware device.</dd>
 </dl>
 </div>
-<div id="outline-container-org68677a1" class="outline-4">
-<h4 id="org68677a1"><span class="section-number-4">1.0.1.</span> Entering the Yoga 710-15IKB BIOS</h4>
+<div id="outline-container-org0817d82" class="outline-4">
+<h4 id="org0817d82"><span class="section-number-4">1.0.1.</span> Entering the Yoga 710-15IKB BIOS</h4>
 <div class="outline-text-4" id="text-1-0-1">
 <p>
 Lenovo provides several distinct methods for entering the BIOS setup utility, accommodating different scenarios from a cold boot to a restart from within the operating system.
@@ -265,8 +265,8 @@ Lenovo provides several distinct methods for entering the BIOS setup utility, ac
 </ul>
 </div>
 </div>
-<div id="outline-container-orga02e2cf" class="outline-4">
-<h4 id="orga02e2cf"><span class="section-number-4">1.0.2.</span> Virtualization (VT-x) Activation and disabling Secure Boot</h4>
+<div id="outline-container-orgfd52506" class="outline-4">
+<h4 id="orgfd52506"><span class="section-number-4">1.0.2.</span> Virtualization (VT-x) Activation and disabling Secure Boot</h4>
 <div class="outline-text-4" id="text-1-0-2">
 <p>
 Once inside the BIOS setup utility, navigate the menus to find the available virtualization settings. For Lenovo IdeaPad and Yoga series laptops, this option is most commonly located under the Configuration tab. Regardless of manufacturer, the setting is typically labeled simply as <b>Intel Virtualization Technology</b>.
@@ -297,8 +297,8 @@ You can, and should, enable Secure Boot for your individual guest VMs (DomUs), p
 </p>
 </div>
 </div>
-<div id="outline-container-orga9484d4" class="outline-4">
-<h4 id="orga9484d4"><span class="section-number-4">1.0.3.</span> VT-d Activation</h4>
+<div id="outline-container-org0b10e57" class="outline-4">
+<h4 id="org0b10e57"><span class="section-number-4">1.0.3.</span> VT-d Activation</h4>
 <div class="outline-text-4" id="text-1-0-3">
 <p>
 To ensure no compatibility issues down the line, we will also need to enabled I/O passthrough so that the virtualization software can utilize all of our hardware beyond just the CPU.
@@ -309,7 +309,7 @@ On most consumer laptops, it's unlikely to be able to simply activate IOMMU from
 </p>
 </div>
 <ol class="org-ol">
-<li><a id="org3b2fc52"></a>Direct UEFI Variable Modification for VT-d Enablement<br />
+<li><a id="org283175c"></a>Direct UEFI Variable Modification for VT-d Enablement<br />
 <div class="outline-text-5" id="text-1-0-3-1">
 <p>
 This section provides a detailed protocol for enabling Intel® VT-d by directly modifying hidden configuration variables within the UEFI firmware.
@@ -332,9 +332,9 @@ Modern UEFI firmware architecture store configuration settings, both those visib
 </p>
 </div>
 <ol class="org-ol">
-<li><a id="org4f75c1a"></a>Toolkit Assembly<br />
+<li><a id="orga537f7d"></a>Toolkit Assembly<br />
 <div class="outline-text-6" id="text-1-0-3-1-1">
-<div class="warning" id="orgf7256bd">
+<div class="warning" id="org5428710">
 <p>
 The procedures described in this section are performed entirely at the user's own risk and are not supported by Lenovo. Modifying UEFI variables involves writing directly to the system's non-volatile firmware storage. An error in this process, such as specifying an incorrect variable offset, writing an incorrect value, or interrupting the process, can lead to irreversible firmware corruption. This can result in a "bricked" system, meaning the laptop will be permanently unable to power on or boot. There is also a risk of data loss. Before proceeding, ensure all critical data is backed up to an external device. Proceed only if the requirement for VT-d functionality is critical and outweighs the substantial risk of rendering the hardware permanently inoperable.
 </p>
@@ -358,7 +358,7 @@ The most critical part of this process is to identify the precise memory offset 
 </p>
 </div>
 </li>
-<li><a id="org1554402"></a>Download the BIOS Image:<br />
+<li><a id="orgeea3102"></a>Download the BIOS Image:<br />
 <div class="outline-text-6" id="text-1-0-3-1-2">
 <p>
 Navigate to the manufacturers product specific support page and ensure you download a copy of the most recent BIOS Image. The Lenovo Support Center download link will requre you enter the device serial number to ensure the downloaded image contains the right drivers for your exaxt system config.
@@ -378,7 +378,7 @@ Once you have been redirected, you can right click on the download button and se
 </p>
 </div>
 </li>
-<li><a id="orgee23861"></a>Verify the BIOS Integrity<br />
+<li><a id="org95718c0"></a>Verify the BIOS Integrity<br />
 <div class="outline-text-6" id="text-1-0-3-1-3">
 <p>
 In the BIOS Download page from Lenovo Support Center, there is a <code>View Checksum</code> hyperlink. It is a <b>digital fingerprint</b>, used to check whether errors have occurred in transmission or storage. We will compare this provided checksum with the checksum of our downloaded file.
@@ -396,7 +396,7 @@ bfbaf6e9d5ad060dab798101773d2d370f62a85ae323f7357c03c2ad08be17f5
 </pre>
 </div>
 </li>
-<li><a id="org205ef09"></a>Extract the Raw BIOS Image:<br />
+<li><a id="org9a2625a"></a>Extract the Raw BIOS Image:<br />
 <div class="outline-text-6" id="text-1-0-3-1-4">
 <p>
 We will use the archive extracting utility, <code>innoextract</code>, to extract the contents of the self-extracting installer.
@@ -490,7 +490,7 @@ We can now safely extract the installer to read the image.
 </div>
 </div>
 </li>
-<li><a id="orgead5981"></a>Load Firmware Image in UEFITool:<br />
+<li><a id="orgec7403c"></a>Load Firmware Image in UEFITool:<br />
 <div class="outline-text-6" id="text-1-0-3-1-5">
 <p>
 We need to download the GUI UEFITool from the official GitHub repository. The maintainer at time of writing is LongSoft.
@@ -524,7 +524,7 @@ The tool will parse the file and display its hierarchical structure.
 </p>
 </div>
 </li>
-<li><a id="org527335a"></a>Extract the Setup Utility Body:<br />
+<li><a id="org682c248"></a>Extract the Setup Utility Body:<br />
 <div class="outline-text-6" id="text-1-0-3-1-6">
 <p>
 Use the search function, <kbd>Ctrl+F</kbd> in the search dialog, switch to the "Text" tab and search for the Unicode text string "VT-d". The search results will likely point to a PE32 image section within a firmware volume. This section is the setup module that contains the definitions for the BIOS configuration screen.
@@ -535,7 +535,7 @@ In the UEFITool interface, double-click the search result to navigate to the PE3
 </p>
 </div>
 </li>
-<li><a id="org826fc9c"></a>Generate the IFR Text File:<br />
+<li><a id="org51c36e2"></a>Generate the IFR Text File:<br />
 <div class="outline-text-6" id="text-1-0-3-1-7">
 <p>
 We will need to download the Universal IFR Extactor utility, which is also currently maintained by the same LongSoft.
@@ -635,7 +635,7 @@ Run the full extraction
 </div>
 </div>
 </li>
-<li><a id="org5b39dcd"></a>Identify the VT-d Offset:<br />
+<li><a id="org3a86e89"></a>Identify the VT-d Offset:<br />
 <div class="outline-text-6" id="text-1-0-3-1-8">
 <p>
 Run the global search from within the 'ifr' directory.
@@ -681,7 +681,7 @@ The VarStore Name we are looking for is <code>SaSetup</code>.
 </li>
 </ol>
 </li>
-<li><a id="org95cf5bb"></a>Constructing a Bootable UEFI Shell Environment<br />
+<li><a id="orgc80a3d6"></a>Constructing a Bootable UEFI Shell Environment<br />
 <div class="outline-text-5" id="text-1-0-3-2">
 <p>
 The next phase involves preparing the USB flash drive to boot into the UEFI shell.
@@ -824,7 +824,7 @@ Rename the shell file to <code>BOOTX64.EFI</code>. This specific filename is par
 </p>
 </div>
 </li>
-<li><a id="orgeedd818"></a>Execution of the <code>setup_var.efi</code> Command to Enable VT-d<br />
+<li><a id="org53c435b"></a>Execution of the <code>setup_var.efi</code> Command to Enable VT-d<br />
 <div class="outline-text-5" id="text-1-0-3-3">
 <p>
 This section details the direct modification of the UEFI NVRAM variable. The steps are mechanically simple but carry significant risk. <b>Absolute precision is required.</b>
@@ -888,14 +888,14 @@ Perform a Hard Shutdown. Do not use a reboot command or press Ctrl+Alt+Del. Inst
 </p>
 </div>
 </li>
-<li><a id="orgf4d78cf"></a>Final Operating System Configuration and Verification<br />
+<li><a id="orgb171122"></a>Final Operating System Configuration and Verification<br />
 <div class="outline-text-5" id="text-1-0-3-4">
 <p>
 Successfully modifying the UEFI variable to enable VT-d is only the first part of the process. The host operating system must also be configured to recognize and utilize this newly available hardware feature. This final section covers the necessary steps within Windows to enable supporting services and to perform a definitive verification of VT-d activation.
 </p>
 </div>
 <ol class="org-ol">
-<li><a id="org6ed2c5f"></a>Mitigating Conflicts with Virtualization-Based Security (VBS) Features<br />
+<li><a id="orgb3412c1"></a>Mitigating Conflicts with Virtualization-Based Security (VBS) Features<br />
 <div class="outline-text-6" id="text-1-0-3-4-1">
 <p>
 Modern versions of Windows 10 and 11 leverage hardware virtualization to enhance system security. Features such as Core Isolation and its sub-component Memory Integrity (also known as Hypervisor-Protected Code Integrity, or HVCI) use the hypervisor layer to protect critical system processes from malware.
@@ -910,7 +910,7 @@ Therefore, if the primary goal of enabling VT-d is to use it with a third-party 
 </p>
 </div>
 </li>
-<li><a id="org89bf5ac"></a>System-Level Confirmation of VT-d (IOMMU) Activation<br />
+<li><a id="orgfaeb6a7"></a>System-Level Confirmation of VT-d (IOMMU) Activation<br />
 <div class="outline-text-6" id="text-1-0-3-4-2">
 <p>
 After the firmware modification and OS configuration, a final check is required to confirm that the IOMMU is active and recognized by the system. The Windows Task Manager is insufficient for this, as its "Virtualization" status only reflects the state of VT-x.
@@ -986,7 +986,7 @@ The menu option to enable VT-d exists in the firmware code, and we successfully 
 <p>
 The real control could be in a different VarStore or different offset, additionally, some BIOSes have “master enable” flags or prerequisite checks.
 </p>
-<pre class="example" id="org91c0a32">
+<pre class="example" id="org45ba603">
 VT-x might only be enabled if “Security &gt; TPM” or “Boot &gt; UEFI Only” is also set.
 </pre>
 
@@ -1032,7 +1032,7 @@ Unfortunately, this means that while our entire analysis and modification proces
 </p>
 </div>
 <ol class="org-ol">
-<li><a id="org73eaa81"></a>Manual Firmware Patching for <code>SupressIf</code> Neutralization<br />
+<li><a id="org60f6eb4"></a>Manual Firmware Patching for <code>SupressIf</code> Neutralization<br />
 <div class="outline-text-7" id="text-1-0-3-4-2-1">
 <p>
 The mechanism by which manufacturers like Lenovo hide specific settings within the InsydeH2O graphical interface is a standardized feature of the UEFI specification. The structure and content of the setup menus are defined by a data structure known as the Internal Forms Representation (IFR). Within the IFR, developers can use conditional opcodes to control the visibility of menus and individual options. The most common of these is the <code>SuppressIf</code> opcode. This instruction allows a developer to define a condition under which a specific UI element will be hidden from the user. For locked-down consumer devices, manufacturers often use a simple, unconditional suppression, such as <code>SuppressIf: {0A 03 00}</code>, which effectively translates to "Suppress if True". This allows them to use a single, comprehensive firmware codebase across multiple product lines, simply toggling the visibility of advanced features based on the target market. The VT-d option on the Yoga 710-15IKB is present within the firmware code but is hidden from the user by such a <code>SuppressIf</code> condition.

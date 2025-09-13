@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2025-09-12 Fri 21:26 -->
+<!-- 2025-09-12 Fri 22:28 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Cryptography with Gnu Privacy Guard</title>
@@ -205,20 +205,20 @@
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents" role="doc-toc">
 <ul>
-<li><a href="#org17f2364">1. OpenPGP's Web of Trust Model</a>
+<li><a href="#org8f24961">1. OpenPGP's Web of Trust Model</a>
 <ul>
-<li><a href="#orgc6d17c2">1.1. Local Trust Signature</a></li>
-<li><a href="#orgb8a9c18">1.2. Public Key Signing</a></li>
+<li><a href="#orgf9ed524">1.1. Local Trust Signature</a></li>
+<li><a href="#orge5c289a">1.2. Public Key Signing</a></li>
 </ul>
 </li>
-<li><a href="#org8945ac6">2. Remote Management with GnuPG</a>
+<li><a href="#org453a0db">2. Remote Management with GnuPG</a>
 <ul>
 <li>
 <ul>
-<li><a href="#orgdcd058e">2.0.1. 1. Import the Secret Key We Created Earlier</a></li>
-<li><a href="#org4607f2f">2.0.2. 2. Configuring the GPG Agent for SSH</a></li>
-<li><a href="#org00d4a8c">2.0.3. 3. Making Your Shell Aware of the Agent</a></li>
-<li><a href="#org4867c8c">2.0.4. 4. Verifying the Setup and Getting Your Public Key</a></li>
+<li><a href="#org3147790">2.0.1. 1. Import the Secret Key We Created Earlier</a></li>
+<li><a href="#org5bb52b1">2.0.2. 2. Configuring the GPG Agent for SSH</a></li>
+<li><a href="#orgd5e3d4a">2.0.3. 3. Making Your Shell Aware of the Agent</a></li>
+<li><a href="#orgdb47203">2.0.4. 4. Verifying the Setup and Getting Your Public Key</a></li>
 </ul>
 </li>
 </ul>
@@ -226,12 +226,12 @@
 </ul>
 </div>
 </div>
-<div id="outline-container-org17f2364" class="outline-2">
-<h2 id="org17f2364"><span class="section-number-2">1.</span> OpenPGP's Web of Trust Model</h2>
+<div id="outline-container-org8f24961" class="outline-2">
+<h2 id="org8f24961"><span class="section-number-2">1.</span> OpenPGP's Web of Trust Model</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orgc6d17c2" class="outline-3">
-<h3 id="orgc6d17c2"><span class="section-number-3">1.1.</span> Local Trust Signature</h3>
+<div id="outline-container-orgf9ed524" class="outline-3">
+<h3 id="orgf9ed524"><span class="section-number-3">1.1.</span> Local Trust Signature</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Once you’ve verified the fingerprint via Debian’s HTTPS-protected website, you can tell GPG: “I trust this key for verification purposes.” and by extension: "I trust this key's <b>owner</b> to correctly verify <i>other people's</i> keys."
@@ -256,7 +256,7 @@ At the <code>gpg&gt;</code> prompt, type:
 <p>
 You’ll see a menu:
 </p>
-<pre class="example" id="org0b8a36a">
+<pre class="example" id="orgab02724">
 Please decide how far you trust this user to correctly verify other users' keys
 (by looking at passports, checking fingerprints from different sources, etc.)
 
@@ -306,10 +306,10 @@ Now, when you run <code>gpg --verify</code> again, the warning will be gone beca
 </p>
 </div>
 </div>
-<div id="outline-container-orgb8a9c18" class="outline-3">
-<h3 id="orgb8a9c18"><span class="section-number-3">1.2.</span> Public Key Signing</h3>
+<div id="outline-container-orge5c289a" class="outline-3">
+<h3 id="orge5c289a"><span class="section-number-3">1.2.</span> Public Key Signing</h3>
 <div class="outline-text-3" id="text-1-2">
-<div class="important" id="orged7882c">
+<div class="important" id="orgf236e0c">
 <p>
 <b>This step is optional</b> but if you want to start building decentralized, privacy and security-oriented habits, while learning to understand how the Web of Trust works, here's how to publicly vouch for Debian’s key(s).
 </p>
@@ -333,7 +333,7 @@ In communities that rely on GPG (like open-source development), a person's histo
 </p>
 </div>
 <ol class="org-ol">
-<li><a id="org2af0ae1"></a>Generating Your Master Key<br />
+<li><a id="orga436b7d"></a>Generating Your Master Key<br />
 <div class="outline-text-8" id="text-1-2-0-0-0-0-1">
 <p>
 In order to publically sign a key, you must first have your own master key pair. This will be the root of your digital identity.
@@ -371,7 +371,7 @@ You will then be prompted to create a strong passphrase. This is the passphrase 
 </p>
 </div>
 </li>
-<li><a id="org12a7427"></a>Create and Back Up a Revocation Certificate<br />
+<li><a id="orgcd453f5"></a>Create and Back Up a Revocation Certificate<br />
 <div class="outline-text-8" id="text-1-2-0-0-0-0-2">
 <p>
 This is your "kill switch." If your key is ever compromised, you'll use this file to declare it invalid. You should create it now and store it somewhere safe and separate.
@@ -387,7 +387,7 @@ Confirm that you want to create the certificate and enter the passphrase for you
 </p>
 </div>
 </li>
-<li><a id="org3513e14"></a>Back Up Your Secret Key<br />
+<li><a id="org7e6aef1"></a>Back Up Your Secret Key<br />
 <div class="outline-text-8" id="text-1-2-0-0-0-0-3">
 <p>
 Now, back up the key itself. This file is your digital identity, so protect it carefully.
@@ -402,7 +402,7 @@ Copy the secret-key.asc file to a different, secure USB drive. For best security
 </p>
 </div>
 </li>
-<li><a id="org4fc404e"></a>Sign the Debian Key<br />
+<li><a id="org7a358bb"></a>Sign the Debian Key<br />
 <div class="outline-text-8" id="text-1-2-0-0-0-0-4">
 <p>
 Now, use your new identity to sign the Debian key you've already verified. This creates a public statement that you have checked and trust their key.
@@ -419,8 +419,8 @@ GPG will ask you to confirm. Type <code>y</code> and enter your passphrase to cr
 </ol>
 </div>
 </div>
-<div id="outline-container-org8945ac6" class="outline-2">
-<h2 id="org8945ac6"><span class="section-number-2">2.</span> Remote Management with GnuPG</h2>
+<div id="outline-container-org453a0db" class="outline-2">
+<h2 id="org453a0db"><span class="section-number-2">2.</span> Remote Management with GnuPG</h2>
 <div class="outline-text-2" id="text-2">
 <p>
 This project involves managing servers, which requires remote administration. To do so securely and efficiently, we will rely on Secure Shell (SSH) key pairs for authentication. Instead of managing these keys directly, we will use <code>gpg</code> to act as our key manager and authentication agent.
@@ -430,8 +430,8 @@ This project involves managing servers, which requires remote administration. To
 Continuously typing a passphrase to unlock your private key is inconvenient. An authentication agent (gpg-agent in our case) is a background service that securely holds your unlocked private key in memory for the duration of your session. You unlock it once with its passphrase, and the agent handles all subsequent authentication challenges automatically.
 </p>
 </div>
-<div id="outline-container-orgdcd058e" class="outline-4">
-<h4 id="orgdcd058e"><span class="section-number-4">2.0.1.</span> 1. Import the Secret Key We Created Earlier</h4>
+<div id="outline-container-org3147790" class="outline-4">
+<h4 id="org3147790"><span class="section-number-4">2.0.1.</span> 1. Import the Secret Key We Created Earlier</h4>
 <div class="outline-text-4" id="text-2-0-1">
 <p>
 Once the client system is running, plug in the USB drive containing your secret key and decrypt. Since WSL2 can't access the block storage, copy the key to an internal drive and run the import command.
@@ -443,8 +443,8 @@ Once the client system is running, plug in the USB drive containing your secret 
 </div>
 </div>
 </div>
-<div id="outline-container-org4607f2f" class="outline-4">
-<h4 id="org4607f2f"><span class="section-number-4">2.0.2.</span> 2. Configuring the GPG Agent for SSH</h4>
+<div id="outline-container-org5bb52b1" class="outline-4">
+<h4 id="org5bb52b1"><span class="section-number-4">2.0.2.</span> 2. Configuring the GPG Agent for SSH</h4>
 <div class="outline-text-4" id="text-2-0-2">
 <p>
 Now, we need to tell the GPG agent that it should also handle SSH authentication requests.
@@ -460,8 +460,8 @@ The <code>echo</code> command with the <code>&gt;&gt;</code> operator will appen
 </p>
 </div>
 </div>
-<div id="outline-container-org00d4a8c" class="outline-4">
-<h4 id="org00d4a8c"><span class="section-number-4">2.0.3.</span> 3. Making Your Shell Aware of the Agent</h4>
+<div id="outline-container-orgd5e3d4a" class="outline-4">
+<h4 id="orgd5e3d4a"><span class="section-number-4">2.0.3.</span> 3. Making Your Shell Aware of the Agent</h4>
 <div class="outline-text-4" id="text-2-0-3">
 <p>
 The final step is to tell your shell how to communicate with the gpg-agent. We do this by adding some logic to your shell's startup file, <code>~/.bashrc</code>.
@@ -496,8 +496,8 @@ To apply these changes to your current session, run:
 </div>
 </div>
 </div>
-<div id="outline-container-org4867c8c" class="outline-4">
-<h4 id="org4867c8c"><span class="section-number-4">2.0.4.</span> 4. Verifying the Setup and Getting Your Public Key</h4>
+<div id="outline-container-orgdb47203" class="outline-4">
+<h4 id="orgdb47203"><span class="section-number-4">2.0.4.</span> 4. Verifying the Setup and Getting Your Public Key</h4>
 <div class="outline-text-4" id="text-2-0-4">
 <p>
 You can now verify that the agent is running and ready for SSH.
