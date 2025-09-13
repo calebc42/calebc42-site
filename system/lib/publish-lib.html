@@ -1,0 +1,680 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2025-09-12 Fri 21:26 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Publishing Library</title>
+<meta name="author" content="Caleb Christensen" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="/assets/css/style.css"/><script src="/assets/js/theme.js"></script><script src="/assets/js/dynamic_var.js"></script><script src="/assets/js/site-nav.js"></script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&family=Roboto+Mono:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet"><meta name="referrer" content="no-referrer">
+</head>
+<body>
+<div id="preamble" class="status">
+<div class="yorha-status">  <span class="status-indicator online"></span>  <span class="yorha-terminal">STATUS: OPERATIONAL</span></div><header class="main-header">  <div class="header-content">    <div class="logo">LOG: CALEB_CHRISTENSEN</div>    <nav class="main-nav">      <ul>        <li><a href="/">// HOME</a></li>        <li><a href="/sitemap.html">// SITEMAP</a></li>        <li><a href="/contact.html">// CONTACT</a></li>      </ul>    </nav>    <button class="theme-toggle" id="theme-toggle" title="Toggle theme">      <span class="material-symbols-outlined icon-sun">light_mode</span>      <span class="material-symbols-outlined icon-moon">dark_mode</span>    </button>  </div></header><div class="pattern"><div class="pattern-inner"></div></div>
+</div>
+<div id="content" class="content">
+<h1 class="title">Publishing Library</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org3a91eb4">1. Header</a></li>
+<li><a href="#orgc4b75ee">2. Tag Management</a></li>
+<li><a href="#org62b1d9d">3. Publishing Configuration</a></li>
+<li><a href="#orga4cc0a7">4. Site Generation</a></li>
+<li><a href="#org51e7296">5. Publishing Helpers</a></li>
+<li><a href="#org5911651">6. Footer</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org3a91eb4" class="outline-2">
+<h2 id="org3a91eb4"><span class="section-number-2">1.</span> Header</h2>
+<div class="outline-text-2" id="text-1">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;;; publish-lib.el --- Publishing and web generation -*- lexical-binding: t -*-
+;;; Commentary:
+;; Publishing pipeline for Coppermind PKM to web
+
+;;; Code:
+(require 'ox-publish)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgc4b75ee" class="outline-2">
+<h2 id="orgc4b75ee"><span class="section-number-2">2.</span> Tag Management</h2>
+<div class="outline-text-2" id="text-2">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">    (defvar publish/standard-tags
+      '(("publish"     . ?p)   ; Publishing control
+        ("draft"       . ?d)   ; Work in progress
+        ("evergreen"   . ?e)   ; Mature notes
+        ("seedling"    . ?s)   ; Early thoughts
+        ("private"     . ?P))) ; Never publish
+
+  (defun publish/set-filetags ()
+    "Set #+FILETAGS: for the current buffer."
+    (interactive)
+    (let ((tags (completing-read-multiple 
+                 "Tags: " 
+                 (mapcar #'car publish/standard-tags))))
+      (save-excursion
+        (goto-char (point-min))
+        ;; Check if #+FILETAGS: already exists
+        (if (re-search-forward "^#\\+FILETAGS:" nil t)
+            ;; Replace existing line
+            (progn
+              (beginning-of-line)
+              (kill-line)
+              (insert "#+FILETAGS: :" 
+                      (mapconcat 'identity tags ":") 
+                      ":"))
+          ;; Find the right place to insert
+          (goto-char (point-min))
+          ;; Skip past PROPERTIES drawer if it exists
+          (when (re-search-forward "^:END:" nil t)
+            (forward-line 1))
+          ;; Look for existing #+ keywords
+          (if (re-search-forward "^#\\+" nil t)
+              (progn
+                ;; Insert before the first #+
+                (beginning-of-line)
+                (insert "#+FILETAGS: :" 
+                        (mapconcat 'identity tags ":") 
+                        ":\n"))
+            ;; No other keywords found, go back to after :END: or start
+            (if (re-search-backward "^:END:" nil t)
+                (progn
+                  (forward-line 1)
+                  ;; Skip any blank lines
+                  (while (looking-at "^$")
+                    (forward-line 1))
+                  (insert "#+FILETAGS: :" 
+                          (mapconcat 'identity tags ":") 
+                          ":\n"))
+              ;; No properties drawer, insert at beginning
+              (goto-char (point-min))
+              (insert "#+FILETAGS: :" 
+                      (mapconcat 'identity tags ":") 
+                      ":\n")))))))
+
+(defun publish/toggle-filetag (tag)
+  "Toggle a single TAG in the current buffer's #+FILETAGS:."
+  (interactive (list (completing-read "Toggle tag: " 
+                                      (mapcar #'car publish/standard-tags))))
+  (save-excursion
+    (goto-char (point-min))
+    (if (re-search-forward "^#\\+FILETAGS:\\s-*\\(.*\\)" nil t)
+        ;; FILETAGS exists - modify it
+        (let* ((current-tags-str (match-string 1))
+               (current-tags (when (and current-tags-str 
+                                       (not (string-empty-p current-tags-str)))
+                              (split-string current-tags-str ":" t)))
+               (new-tags (if (member tag current-tags)
+                            (delete tag current-tags)
+                          (append current-tags (list tag)))))
+          (beginning-of-line)
+          (kill-line)
+          (if new-tags
+              (insert "#+FILETAGS: :" (mapconcat 'identity new-tags ":") ":")
+            (insert "#+FILETAGS:")))
+      ;; FILETAGS doesn't exist - add it in the right place
+      (goto-char (point-min))
+      ;; Skip past PROPERTIES drawer if it exists
+      (when (re-search-forward "^:END:" nil t)
+        (forward-line 1)
+        ;; Skip blank lines
+        (while (looking-at "^$")
+          (forward-line 1)))
+      ;; Look for first #+ keyword
+      (if (re-search-forward "^#\\+" nil t)
+          (progn
+            (beginning-of-line)
+            (insert "#+FILETAGS: :" tag ":\n"))
+        ;; No keywords found, insert at current position
+        (insert "#+FILETAGS: :" tag ":\n")))))
+
+
+  (defun publish/mark-for-publishing ()
+    "Ensure current file has :publish: tag (won't remove if already present)."
+    (interactive)
+    (save-excursion
+      (goto-char (point-min))
+      (if (re-search-forward "^#\\+FILETAGS:.*:publish:" nil t)
+          (message "File already marked for publishing")
+        (publish/toggle-filetag "publish")
+        (message "Added :publish: tag"))))
+
+  (defun publish/mark-as-draft ()
+    "Remove :publish: tag and add :draft: tag."
+    (interactive)
+    (save-excursion
+      ;; First handle publish tag
+      (goto-char (point-min))
+      (when (re-search-forward "^#\\+FILETAGS:.*:publish:" nil t)
+        (goto-char (point-min))
+        (publish/toggle-filetag "publish"))
+      ;; Then handle draft tag
+      (goto-char (point-min))
+      (unless (re-search-forward "^#\\+FILETAGS:.*:draft:" nil t)
+        (goto-char (point-min))
+        (publish/toggle-filetag "draft")))
+    (message "Marked as draft"))
+
+  (defun publish/quick-publish-toggle ()
+    "Toggle publish tag with immediate feedback."
+    (interactive)
+    (save-excursion
+      (goto-char (point-min))
+      (if (re-search-forward "^#\\+FILETAGS:.*:publish:" nil t)
+          (progn
+            (goto-char (point-min))
+            (publish/toggle-filetag "publish")
+            (message "Removed from publishing"))
+        (goto-char (point-min))
+        (publish/toggle-filetag "publish")
+        (message "Marked for publishing"))))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org62b1d9d" class="outline-2">
+<h2 id="org62b1d9d"><span class="section-number-2">3.</span> Publishing Configuration</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+;; #+begin<sub>src</sub> emacs-lisp
+;;   (defun publish/should-publish-p (filepath)
+;;     "Check if FILEPATH should be published based on #+FILETAGS."
+;;     (when (file-exists-p filepath)
+;;      (with-temp-buffer
+;;         (insert-file-contents filepath)
+;;         (goto-char (point-min))
+;;         (re-search-forward "^#\\+FILETAGS:.*:publish:" nil t))))
+;; #+end<sub>src</sub>
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(defun publish/should-publish-p (filepath)
+  "Check if FILEPATH should be published based on #+FILETAGS."
+  (message "Predicate checking: %s" filepath) ; &lt;-- DEBUG MESSAGE
+  (let ((should-publish
+         (when (file-exists-p filepath)
+           (with-temp-buffer
+             (insert-file-contents filepath)
+             (goto-char (point-min))
+             (re-search-forward "^#\\+FILETAGS:.*:publish:" nil t)))))
+    (message "--&gt; Result: %s" (if should-publish "PUBLISH" "SKIP")) ; &lt;-- DEBUG MESSAGE
+    should-publish))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orga4cc0a7" class="outline-2">
+<h2 id="orga4cc0a7"><span class="section-number-2">4.</span> Site Generation</h2>
+<div class="outline-text-2" id="text-4">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">  (defun publish/generate-rss ()
+    "Generate RSS feed from posts with :blog: tag."
+    (let* ((posts (directory-files-recursively "~/coppermind/" "\\.org$"))
+           (blog-posts (seq-filter (lambda (file)
+                                     (with-temp-buffer
+                                       (insert-file-contents file)
+                                       (goto-char (point-min))
+                                       (re-search-forward "^#\\+FILETAGS:.*:publish:.*:blog:" nil t)))
+                                   posts))
+           (rss-content (concat "&lt;?xml version=\"1.0\" encoding=\"UTF-8\"?&gt;\n"
+                               "&lt;rss version=\"2.0\"&gt;\n"
+                               "&lt;channel&gt;\n"
+                               "&lt;title&gt;Caleb Christensen's Digital Garden&lt;/title&gt;\n"
+                               "&lt;link&gt;https://yoursite.com&lt;/link&gt;\n"
+                               "&lt;description&gt;Learning in public&lt;/description&gt;\n")))
+      ;; Add items for each blog post
+      ;; ... implementation
+      ))
+
+    (defun publish/lint-before-publish ()
+      "Check for common issues before publishing."
+      ;; Check for missing titles
+      ;; Validate internal links
+      ;; Ensure images exist
+      )
+
+    (defun publish/auto-generate-index ()
+      "Generate index.org files for any directory that doesn't have one."
+      (let ((base-dir "~/coppermind/")
+            (excluded-dirs '("~/coppermind/" "~/coppermind/resources/site/")))
+        (dolist (dir (directory-files-recursively base-dir ".*" t))
+          (when (and (file-directory-p dir)
+                     (not (member (file-name-as-directory (expand-file-name dir)) 
+                                  (mapcar #'expand-file-name excluded-dirs))))
+            (let ((index-file (expand-file-name "index.org" dir)))
+              (unless (file-exists-p index-file)
+                (with-temp-file index-file
+                  (insert (format "#+TITLE: %s\n" (capitalize (file-name-nondirectory dir)))
+                      "#+FILETAGS: :publish:\n\n"
+                          (format "* %s Directory\n\n" (capitalize (file-name-nondirectory dir)))
+                          "This directory contains:\n\n"
+                          ;; List org files in this directory
+                          (mapconcat
+                           (lambda (file)
+                             (when (string-suffix-p ".org" file)
+                               (format "- [[file:%s][%s]]" 
+                                       (file-name-nondirectory file)
+                                       (file-name-base file))))
+                           (directory-files dir nil "\\.org$") "\n")))))))))
+
+    ;; Add this to run before publishing
+    (add-hook 'org-publish-before-processing-hook #'publish/auto-generate-index)
+
+  (defun publish/generate-tag-indices ()
+  "Create an index page for each tag showing all tagged content."
+  (let ((tag-map (make-hash-table :test 'equal)))
+    ;; Collect all files by tag
+    ;; Generate index pages like /tags/emacs.html
+    ))
+
+(defun publish/auto-generate-sitemap ()
+  "Generate an enriched sitemap with metadata from source org files."
+  (let ((coppermind-dir "~/coppermind/")
+        (site-dir "~/site/")
+        (sitemap-content "#+TITLE: Site Map
+#+FILETAGS: :publish:
+#+DESCRIPTION: Complete directory of published content
+
+"))
+
+    (require 'cl-lib)
+    (cl-labels
+        ((get-org-metadata (html-file)
+           ;; Find corresponding org file and extract metadata
+           (let* ((relative-path (file-relative-name html-file site-dir))
+                  (org-path (expand-file-name 
+                            (concat (file-name-sans-extension relative-path) ".org")
+                            coppermind-dir)))
+             (when (file-exists-p org-path)
+               (with-temp-buffer
+                 (insert-file-contents org-path)
+                 (let ((title nil)
+                       (description nil)
+                       (tags nil)
+                       (modified nil))
+                   ;; Extract title
+                   (goto-char (point-min))
+                   (when (re-search-forward "^#\\+TITLE:\\s-*\\(.+\\)" nil t)
+                     (setq title (match-string 1)))
+                   ;; Extract description
+                   (goto-char (point-min))
+                   (when (re-search-forward "^#\\+DESCRIPTION:\\s-*\\(.+\\)" nil t)
+                     (setq description (match-string 1)))
+                   ;; Extract tags
+                   (goto-char (point-min))
+                   (when (re-search-forward "^#\\+FILETAGS:\\s-*\\(.+\\)" nil t)
+                     (setq tags (split-string (match-string 1) ":" t)))
+                   ;; Extract modified date
+                   (goto-char (point-min))
+                   (when (re-search-forward "^:modified:\\s-*\\(.+\\)" nil t)
+                     (setq modified (match-string 1)))
+                   (list :title (or title (file-name-base html-file))
+                         :description description
+                         :tags tags
+                         :modified modified))))))
+
+         (format-entry (file-path metadata level)
+           ;; Format a single entry with metadata
+           (let ((indent (make-string (* level 2) ? ))
+                 (title (plist-get metadata :title))
+                 (desc (plist-get metadata :description))
+                 (tags (plist-get metadata :tags))
+                 (modified (plist-get metadata :modified)))
+             (concat
+              indent
+              (format "- [[file:%s][%s]]" file-path title)
+              (when modified
+                (format " /%s/" modified))
+              "\n"
+              (when desc
+                (format "%s  %s\n" indent desc))
+              (when (and tags (not (equal tags '("publish"))))
+                (format "%s  Tags: %s\n" 
+                        indent 
+                        (mapconcat (lambda (tag) 
+                                    (format "=%s=" tag)) 
+                                  (remove "publish" tags) ", "))))))
+
+         (walk-directory (dir prefix level)
+           (let ((files '())
+                 (dirs '())
+                 (section-content ""))
+
+             ;; Separate files and directories
+             (dolist (item (directory-files dir nil "^[^.]"))
+               (let ((full-path (expand-file-name item dir)))
+                 (if (file-directory-p full-path)
+                     (unless (string= item "assets")
+                       (push item dirs))
+                   (when (string-suffix-p ".html" item)
+                     (push (cons item full-path) files)))))
+
+             ;; Add section header for this directory
+             (when (&gt; level 0)
+               (setq section-content
+                     (concat (make-string (+ level 1) ?*) " " 
+                            (capitalize (replace-regexp-in-string 
+                                       "-" " " 
+                                       (file-name-nondirectory 
+                                        (directory-file-name dir))))
+                            "\n\n")))
+
+             ;; Group files by type if there are many
+             (let ((blog-files '())
+                   (resource-files '())
+                   (other-files '()))
+               (dolist (file-pair files)
+                 (let* ((file (car file-pair))
+                        (full-path (cdr file-pair))
+                        (metadata (get-org-metadata full-path))
+                        (tags (plist-get metadata :tags)))
+                   (cond
+                    ((member "blog" tags) 
+                     (push (list file metadata) blog-files))
+                    ((member "resource" tags)
+                     (push (list file metadata) resource-files))
+                    (t (push (list file metadata) other-files)))))
+
+               ;; Add categorized files
+               (when blog-files
+                 (setq section-content 
+                       (concat section-content 
+                              (make-string (+ level 2) ?*) " Blog Posts\n\n"))
+                 (dolist (entry (sort blog-files (lambda (a b)
+                                                   (string&gt; (or (plist-get (cadr a) :modified) "")
+                                                           (or (plist-get (cadr b) :modified) "")))))
+                   (setq section-content
+                         (concat section-content
+                                (format-entry 
+                                 (if (string= prefix "") 
+                                     (car entry)
+                                   (concat prefix (car entry)))
+                                 (cadr entry)
+                                 level)))))
+
+               (when resource-files
+                 (setq section-content 
+                       (concat section-content
+                              (make-string (+ level 2) ?*) " Resources\n\n"))
+                 (dolist (entry (sort resource-files (lambda (a b)
+                                                       (string&lt; (car a) (car b)))))
+                   (setq section-content
+                         (concat section-content
+                                (format-entry 
+                                 (if (string= prefix "") 
+                                     (car entry)
+                                   (concat prefix (car entry)))
+                                 (cadr entry)
+                                 level)))))
+
+               (when other-files
+                 (unless (or blog-files resource-files)
+                   (setq section-content 
+                         (concat section-content "\n")))
+                 (dolist (entry (sort other-files (lambda (a b)
+                                                    (string&lt; (car a) (car b)))))
+                   (setq section-content
+                         (concat section-content
+                                (format-entry 
+                                 (if (string= prefix "") 
+                                     (car entry)
+                                   (concat prefix (car entry)))
+                                 (cadr entry)
+                                 level))))))
+
+             ;; Process subdirectories
+             (dolist (subdir (sort dirs #'string&lt;))
+               (let ((subdir-path (expand-file-name subdir dir))
+                     (new-prefix (if (string= prefix "") 
+                                    (concat subdir "/") 
+                                  (concat prefix subdir "/"))))
+                 (setq section-content
+                       (concat section-content
+                              (walk-directory subdir-path new-prefix (+ level 1))))))
+
+             section-content)))
+
+      ;; Generate the sitemap
+      (setq sitemap-content 
+            (concat sitemap-content
+                   (walk-directory site-dir "" 0)))
+
+      ;; Add a footer with generation timestamp
+      (setq sitemap-content
+            (concat sitemap-content
+                   "\n-----\n"
+                   (format "/Generated: %s/\n" 
+                          (format-time-string "[%Y-%m-%d %a %H:%M]"))))
+
+      ;; Write to sitemap.org
+      (with-temp-file "~/coppermind/site/sitemap.org"
+        (insert sitemap-content))
+
+      ;; Publish the sitemap
+      (org-publish-file "~/coppermind/site/sitemap.org"))))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org51e7296" class="outline-2">
+<h2 id="org51e7296"><span class="section-number-2">5.</span> Publishing Helpers</h2>
+<div class="outline-text-2" id="text-5">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(defun publish/add-backlinks ()
+  "Add backlinks section to published pages."
+  (let ((backlinks (org-roam-backlinks-get (org-roam-node-at-point))))
+    ;; Add a "Links to this page" section
+    ))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org5911651" class="outline-2">
+<h2 id="org5911651"><span class="section-number-2">6.</span> Footer</h2>
+<div class="outline-text-2" id="text-6">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(provide 'publish-lib)
+;;; publish-lib.el ends here
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<footer class="main-footer"><p>Last Modified: 2025-09-12</p><p>This site is built with Emacs and Org-mode.</p><p>// SYSTEM_NORMAL // [C] 2025 CALEB CHRISTENSEN</p></footer><script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+</div>
+</body>
+</html>

@@ -1,0 +1,1234 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2025-09-12 Fri 21:26 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Building and Securing a Host OS</title>
+<meta name="author" content="Caleb Christensen" />
+<meta name="description" content="My experience going from a blank slate to a secure, encrypted, remotely-accessible Debian host, ready for virtualization." />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="/assets/css/style.css"/><script src="/assets/js/theme.js"></script><script src="/assets/js/dynamic_var.js"></script><script src="/assets/js/site-nav.js"></script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&family=Roboto+Mono:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet"><meta name="referrer" content="no-referrer">
+</head>
+<body>
+<div id="preamble" class="status">
+<div class="yorha-status">  <span class="status-indicator online"></span>  <span class="yorha-terminal">STATUS: OPERATIONAL</span></div><header class="main-header">  <div class="header-content">    <div class="logo">LOG: CALEB_CHRISTENSEN</div>    <nav class="main-nav">      <ul>        <li><a href="/">// HOME</a></li>        <li><a href="/sitemap.html">// SITEMAP</a></li>        <li><a href="/contact.html">// CONTACT</a></li>      </ul>    </nav>    <button class="theme-toggle" id="theme-toggle" title="Toggle theme">      <span class="material-symbols-outlined icon-sun">light_mode</span>      <span class="material-symbols-outlined icon-moon">dark_mode</span>    </button>  </div></header><div class="pattern"><div class="pattern-inner"></div></div>
+</div>
+<div id="content" class="content">
+<h1 class="title">Building and Securing a Host OS</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org9fe2a1a">1. Introduction</a></li>
+<li><a href="#org639e1fe">2. Media Preparation</a>
+<ul>
+<li><a href="#org9473e67">2.1. Audit the Downloaded Image</a>
+<ul>
+<li><a href="#org4d5d4f9">2.1.1. Verify the Integrity</a></li>
+<li><a href="#org9848587">2.1.2. Verify the Authenticity (Recommended)</a></li>
+</ul>
+</li>
+<li><a href="#orgba1263f">2.2. Create the Bootable USB Drive</a></li>
+</ul>
+</li>
+<li><a href="#orgcfc617d">3. OS Installation</a></li>
+<li><a href="#orga7516e9">4. Server Configuration</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org9fe2a1a" class="outline-2">
+<h2 id="org9fe2a1a"><span class="section-number-2">1.</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+Before we confront the sealed firmware, we must first establish a foothold with a trusted environment we fully control. That begins with a bootable USB drive loaded with a stable, security-oriented, and —crucially— community-driven distribution: Debian. 
+</p>
+
+<p>
+This distribution choice is a deliberate declaration. You are choosing the software that runs on your hardware. You are replacing opaque vendor code with something inspectable, modifiable, and community-audited. This is the first brick in your fortress of sovereignty.
+</p>
+
+<p>
+Whether you create boot drive on your current laptop, a borrowed machine, or even a library computer — this USB is your single-factor, physical root-of-trust transfer token.
+</p>
+
+<p>
+To install Debian on the target laptop, we need to create a bootable USB drive from an installer image file (.iso). We will use the Debian "net-installer," a minimal image that downloads the necessary packages during installation.
+</p>
+
+<p>
+This Operating System will be our sovereign host, <code>Dom0</code>. In virtualization, <code>Dom0</code> (“Domain 0”) is the privileged control domain — the first and most trusted operating system started by the hypervisor. It has direct access to hardware and is responsible for managing all other virtual machines, these are called <code>DomU</code> (“Unprivileged Domain”).
+</p>
+
+<p>
+In our architecture, the Debian system we’re about to install will become <code>Dom0</code> — the sovereign host that controls, monitors, and isolates everything else. It is the new “root of trust” — not because the firmware beneath it is trustworthy, but because it is auditable, modifiable, and under our control.
+</p>
+
+<p>
+The <code>Dom0</code> is the seat of governance in our reclaimed machine. All other software from browsers, email clients, and even entire alternate operating systems, will run as guests, contained and observed.
+</p>
+
+<p>
+We begin by installing Debian not as an “OS replacement,” but as the first layer of the sovereignty stack — built on freedom where you, not the vendor, exercise control and ownership.
+</p>
+</div>
+</div>
+<div id="outline-container-org639e1fe" class="outline-2">
+<h2 id="org639e1fe"><span class="section-number-2">2.</span> Media Preparation</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+First, I need to collect the download link of not just the software installer image, but also proof of its integrity and proof of the proof’s authenticity.
+</p>
+
+<p>
+At time of writing, the most transparent method of locating is to;
+</p>
+<ol class="org-ol">
+<li>Use an internet browser and navigate to the official website, <a href="https://debian.org">https://debian.org</a>.</li>
+<li>Follow the <a href="https://www.debian.org/distrib">Other downloads</a>{:target=_"blank"} link.</li>
+<li><p>
+Here, you can select the first link, <a href="https://www.debian.org/CD/http-ftp/#mirrors">Download mirrors{:target=_"blank"}</a> or the <a href="https://www.debian.org/CD/">complete installation image</a>{:target=_"blank"} lower down the page.
+</p>
+
+<p>
+A. From the "complete installation image" redirect, choose the first link, <a href="https://www.debian.org/CD/http-ftp/">Download USB/CD/DVD images using HTTPS</a>
+</p>
+<ul class="org-ul">
+<li>If using an Intel or AMD Processor, select <a href="https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/">amd64</a> for standard 64-bit computers under the <b>CD/USB</b> header.</li>
+</ul>
+
+<p>
+B. From the "Download mirrors" redirect, scroll up to select  <a href="https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/">amd64</a> under the <b>CD/USB</b> header.
+</p></li>
+
+<li><p>
+Finally, we have reached the repository, review the <code>SHA512SUMS</code>, <code>SHA512SUMS.sign</code> and <code>debian-XX.X.X-amd64-netinst.iso</code> URLS, compare the URLS with the provided command:
+</p>
+   <script>
+   /* Debian net-install URL builder – keep ES-5 for compatibility */
+   function buildDownloadCmd() {
+      var iso = document.getElementById('isoURL').value ||
+          'https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/debian-current-amd64-netinst.iso';
+var sum = document.getElementById('checksumURL').value ||
+          'https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/SHA512SUMS';
+var sig = document.getElementById('checksumsigURL').value ||
+          'https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/SHA512SUMS.sign';
+
+       var cmd = '# Static example (copy-paste safe)\n' +
+                 'curl -sSfL -O ' + iso + '\n' +
+                 'curl -sSfL -O ' + sum + '\n' +
+                 'curl -sSfL -O ' + sig;
+
+       document.getElementById('finalCommand').textContent = cmd;
+   }
+   /* run once at page load so non-JS readers still see the working example */
+   buildDownloadCmd();
+   </script>
+   <p><b>Working command set (today):</b></p>
+   <pre id="finalCommand"></pre>
+   #+end_export html
+   
+   /Want to roll your own? Right-click > "Copy link address" and paste fresh URLs below and the command updates live.
+     *Always* eyeball the result before you paste into a terminal./
+   #+begin_export html
+   <p>
+     <label for="checksumURL"><b>SHA512SUMS URL:</b></label><br>
+     <input type="text" id="checksumURL" name="checksumURL" class="dynamic-input" data-placeholder="__CHECKSUMURL__" size="60" placeholder="Insert text to replace __CHECKSUMURL__">
+   </p>
+   <p>
+     <label for="checksumsigURL"><b>SHA512SUMS.sign URL:</b></label><br>
+     <input type="text" id="checksumsigURL" name="checksumsigURL" class="dynamic-input" data-placeholder="__CHECKSUMSIGURL__" size="60" placeholder="Insert text to replace __CHECKSUMSIGURL__">
+   </p>
+   <p>
+     <label for="isoURL"><b>debiannetinstURL:</b></label><br>
+     <input type="text" id="isoURL" name="isoURL" class="dynamic-input" data-placeholder="__ISOURL__" size="60" placeholder="Insert text to replace __ISOURL__">
+   </p>
+   <button onclick="buildDownloadCmd()">Regenerate</button>
+   #+end_export html
+   
+   #+begin_export html
+   <small>
+   <strong>Security note:</strong> These inputs are evaluated in your browser only.
+   A malicious extension could alter them. Verify the command visually before execution.
+   </small></li>
+</ol>
+</div>
+<div id="outline-container-org9473e67" class="outline-3">
+<h3 id="org9473e67"><span class="section-number-3">2.1.</span> Audit the Downloaded Image</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Before writing anything to USB, it's important to verify the image is genuinely from Debian and has not been tampered with or corrupted.
+</p>
+
+<p>
+This is layered verification: the ISO is checked against the checksum, and the checksum is checked against the signature. No single file is trusted in isolation. This is how sovereignty is built — brick by brick, hash by hash. 
+</p>
+<dl class="org-dl">
+<dt>Checksum</dt><dd>Cryptographically calculated hash from a block of data, such as a file, that acts like a digital fingerprint. If even a single bit of data is different, the checksum will not match.</dd>
+</dl>
+</div>
+<div id="outline-container-org4d5d4f9" class="outline-4">
+<h4 id="org4d5d4f9"><span class="section-number-4">2.1.1.</span> Verify the Integrity</h4>
+<div class="outline-text-4" id="text-2-1-1">
+<p>
+For minimal dependencies, we can use built-in the PowerShell CMDlet, <code>Get-FileHash</code>. However, this only verifies the hash matches what was downloaded, it does not ensure the orginal download is not malicious.
+Navigate to where the image was downloaded:
+</p>
+<div class="org-src-container">
+<pre class="src src-powershell">cd $Home\Downloads
+</pre>
+</div>
+
+<p>
+Then run the cryptographic algorithim:
+</p>
+<div class="org-src-container">
+<pre class="src src-nil">$IsoFile = Get-Item $Home\Downloads\debian-*-amd64-netinst.iso | Select-Object -ExpandProperty Name
+$Expected = (Get-Content SHA512SUMS | Where-Object { $_ -match $IsoFile }) -split '\s+' | Select-Object -First 1
+$Observed = (Get-FileHash -Algorithm SHA512 $IsoFile).Hash
+
+if ($Expected -eq $Observed) {
+    Write-Host "✅ SHA-512 MATCH" -ForegroundColor Green
+    Write-Host "ISO SHA-512: $Observed" -ForegroundColor Cyan
+
+    # --- single-shot manifest ----
+    @{
+        IsoFile      = $IsoFile
+        IsoSha512    = $Observed
+        ChecksumFile = "SHA512SUMS"
+        SigFile      = "SHA512SUMS.sign"
+        Timestamp    = (Get-Date -Format "yyyy-MM-ddTHH:mm:ssK")
+    } | ConvertTo-Json |
+        Out-File -Encoding utf8 "$Home\Downloads\debian-integrity.json"
+
+    Write-Host "Manifest saved to $Home\Downloads\debian-integrity.json" -ForegroundColor Cyan
+} else {
+    Write-Host "❌ SHA-512 MISMATCH" -ForegroundColor Red
+    exit 1}
+</pre>
+</div>
+
+<p>
+If they do not match; delete the file and re-download.
+</p>
+</div>
+</div>
+<div id="outline-container-org9848587" class="outline-4">
+<h4 id="org9848587"><span class="section-number-4">2.1.2.</span> Verify the Authenticity (Recommended)</h4>
+<div class="outline-text-4" id="text-2-1-2">
+<p>
+I began by using <b>Gnu Privacy Guard</b> (GPG) to verify the Developer of our tools, establishing a critical first act of trust. Later, we’ll transform GPG into our personal keychain, managing our digital identity across the entire stack.
+</p>
+<dl class="org-dl">
+<dt>Gnu Privacy Guard</dt><dd>A free and open-source implementation of the OpenPGP standard, which is based on the original PGP (Pretty Good Privacy) software. A foundational tool that enables the use of digital signatures and public-key cryptography to ensure the integrity and authenticity of files</dd>
+</dl>
+</div>
+<ol class="org-ol">
+<li><a id="orgd5c8b09"></a>Install GPG using Windows Package Manager, <code>winget</code>:<br />
+<div class="outline-text-6" id="text-2-1-2-0-1">
+<p>
+First, we want to ensure we are protecting ourselves against <b>Typo Squatting</b>, where a bad actor will use a common mis-spelling of a package to distribute malware.
+</p>
+<dl class="org-dl">
+<dt>Package Manager</dt><dd>Handles repository management and automatically resolves package dependencies. Think of it as an app store for your terminal; it handles finding, installing, and updating software.</dd>
+</dl>
+
+<p>
+We will search for the software by name;
+</p>
+<div class="org-src-container">
+<pre class="src src-powershell">winget search "Gnu Privacy Guard"
+</pre>
+</div>
+<p>
+It should return something similar to:
+</p>
+<pre class="example">
+Name              Id          Version Source
+---------------------------------------------
+GNU Privacy Guard GnuPG.GnuPG 2.4.8   winget
+</pre>
+
+
+<p>
+Any results cannot be blindly trusted and must be independently verified, we will <code>show</code> to get a detailed report of the search results.
+</p>
+<div class="org-src-container">
+<pre class="src src-powershell">winget show GnuPG.GnuPG
+</pre>
+</div>
+<p>
+This search will yield multiple results. Before installing <i>anything</i>, <strong>it is critical to vet the package to avoid security risks like <b>typo squatting</b></strong>, where malicious actors upload packages with names similar to legitimate ones. We can inspect the full details of a package using <code>winget show</code> to find the <code>Id</code>, <code>Publisher</code>, and <code>Homepage</code> fields.
+</p>
+
+<p>
+For each of the fields, these are <b>unverified claims</b> until independantly vetting using the following process:
+</p>
+
+<ol class="org-ol">
+<li><b>Corroborate</b>: Do not blindly trust and navigate to the Homepage URL listed in the manifest. Instead, use an independent search engine to find the software's official project website. This is the non-negotiable step to establish a ground truth.</li>
+<li><b>Verify</b>: Compare the Publisher name and package Id from the manifest against the official developer or organization name found on the official website. Any discrepancy, however minor, is a red flag that should halt the installation.</li>
+<li><b>Execute</b>: Only after you have independently verified that the manifest's claims align with the official source, proceed with the installation using the precise command: <code>winget install --id &lt;PackageId&gt; --exact</code>.</li>
+</ol>
+
+
+<p>
+Once verified, we can safely install;
+</p>
+<div class="org-src-container">
+<pre class="src src-powershell">winget install GnuPG.GnuPG
+</pre>
+</div>
+<p>
+After running the installer, <code>winget</code> hands control over to that installer. The installer itself is responsible for everything from where the program is placed on your hard drive to whether it adds shortcuts, registers file associations, and modifies the system's PATH environment variable. Some installers, especially for developer tools like GnuPG, assume you will handle this part yourself, as it can be a source of problems if not done correctly.
+</p>
+
+<p>
+To do this, we will need to open an additional PowerShell Terminal as an Administrator using: <kbd>Win+x</kbd> <kbd>a</kbd>
+Paste in this script,
+</p>
+<div class="org-src-container">
+<pre class="src src-PowerShell">$GpgExe = (Get-Command gpg.exe -ErrorAction Stop).Source
+$GpgDir = Split-Path -Parent $GpgExe
+[Environment]::SetEnvironmentVariable(
+    "PATH", $Env:PATH + ";" + $GpgDir, [EnvironmentVariableTarget]::Machine)
+</pre>
+</div>
+<p>
+Or;
+<i>Want to roll your own? Use these instructions.
+     <b>Always</b> eyeball the result before you paste into a terminal.</i>
+We need to locate where the installer downloaded the application to:
+</p>
+<div class="org-src-container">
+<pre class="src src-PowerShell">Get-ChildItem -Path "C:\Program Files (x86)\" -Filter "gpg.exe" -Recurse -ErrorAction SilentlyContinue
+</pre>
+</div>
+<p>
+The <code>-ErrorAction SilentlyContinue</code> part just tells PowerShell not to show you any "Access Denied" errors it might encounter when trying to look inside protected system folders.
+The result should list a Directory location, such as:
+</p>
+<pre class="example">
+Directory: C:\Program Files (x86)\gnupg\bin
+</pre>
+
+
+<p>
+Add the Directory to the system PATH:
+</p>
+<div class="org-src-container">
+<pre class="src src-nil">[System.Environment]::SetEnvironmentVariable(
+    "PATH", $env:PATH + ";" + "__GPGPATH__", [EnvironmentVariableTarget]::Machine)
+</pre>
+</div>
+<p>
+  <label for="gpgPath"><b>GPG Path:</b></label><br>
+  <input type="text" id="gpgPath" name="gpgPath" class="dynamic-input" data-placeholder="__GPGPATH__" size="60" placeholder="Insert text to replace __GPGPATH__">
+</p>
+
+<p>
+Close and re-open the terminal for it to take effect.
+</p>
+<div class="org-src-container">
+<pre class="src src-powershell">exit
+</pre>
+</div>
+<p>
+<kbd>Win+x</kbd> <kbd>i</kbd>
+</p>
+
+<p>
+Now, we can confirm the installation:
+</p>
+<div class="org-src-container">
+<pre class="src src-powershell">gpg --version
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org40f2e9a"></a>Verification Using GPG<br />
+<div class="outline-text-6" id="text-2-1-2-0-2">
+<p>
+Then, import Debian’s official signing keys. The provider key IDs we're importing are Debian’s official signing keys but you should never trust them just because a tutorial says so.
+</p>
+
+<p>
+→ <a href="https://www.debian.org/CD/verify">Verify them yourself on Debian’s official site</a>.
+</p>
+
+<p>
+We’ll use the 3 CD release siging keys listed:
+</p>
+<div class="org-src-container">
+<pre class="src src-powershell">gpg --keyserver keyserver.ubuntu.com --recv-keys 988021A964E6EA7D DA87E80D6294BE9B 42468F4009EA8AC3
+</pre>
+</div>
+<pre class="example" id="org60ff94d">
+gpg: C:\\Users\\caleb\\AppData\\Roaming\\gnupg\\trustdb.gpg: trustdb created
+gpg: key 42468F4009EA8AC3: public key "Debian Testing CDs Automatic Signing Key &lt;debian-cd@lists.debian.org&gt;" imported
+gpg: key DA87E80D6294BE9B: public key "Debian CD signing key &lt;debian-cd@lists.debian.org&gt;" imported
+gpg: key 988021A964E6EA7D: public key "Debian CD signing key &lt;debian-cd@lists.debian.org&gt;" imported
+gpg: Total number processed: 3
+gpg:               imported: 3
+</pre>
+
+<p>
+After importing the keys, verify the signature:
+</p>
+<div class="org-src-container">
+<pre class="src src-powershell">gpg --verify SHA512SUMS.sign SHA512SUMS
+</pre>
+</div>
+<p>
+The output will likely look like this:
+</p>
+<pre class="example" id="orga099bd8">
+gpg: Signature made 09/06/25 15:54:29 Mountain Daylight Time
+gpg:                using RSA key DF9B9C49EAA9298432589D76DA87E80D6294BE9B
+gpg: Good signature from "Debian CD signing key &lt;debian-cd@lists.debian.org&gt;" [unknown]
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+Primary key fingerprint: DF9B 9C49 EAA9 2984 3258  9D76 DA87 E80D 6294 BE9B
+</pre>
+<p>
+This is <b><b>not an error</b></b> — it’s GPG doing its job.
+This warning exists to protect you from “key substitution” attacks — where an attacker replaces a legitimate key on the keyserver with their own. By forcing you to verify the fingerprint against an official source (like debian.org over HTTPS), GPG ensures you’re not trusting a malicious imposter — even if their signature is mathematically valid.
+</p>
+
+<p>
+Finally, check the key fingerprints:
+</p>
+<div class="org-src-container">
+<pre class="src src-powershell">gpg --fingerprint 988021A964E6EA7D DA87E80D6294BE9B 42468F4009EA8AC3 |
+    findstr "Key fingerprint"
+</pre>
+</div>
+
+<p>
+You should see output like:
+</p>
+<pre class="example" id="orgf1f77d0">
+pub   rsa4096 2009-10-03 [SC]
+      1046 0DAD 7616 5AD8 1FBC  0CE9 9880 21A9 64E6 EA7D
+uid           [ unknown] Debian CD signing key &lt;debian-cd@lists.debian.org&gt;
+
+pub   rsa4096 2011-01-05 [SC]
+      DF9B 9C49 EAA9 2984 3258  9D76 DA87 E80D 6294 BE9B
+uid           [ unknown] Debian CD signing key &lt;debian-cd@lists.debian.org&gt;
+sub   rsa4096 2011-01-05 [E]
+
+pub   rsa4096 2014-04-15 [SC]
+      F41D 3034 2F35 4669 5F65  C669 4246 8F40 09EA 8AC3
+uid           [ unknown] Debian Testing CDs Automatic Signing Key &lt;debian-cd@lists.debian.org&gt;
+sub   rsa4096 2014-04-15 [E]
+</pre>
+
+<p>
+Cross-reference the fingerprints on:
+</p>
+<ul class="org-ul">
+<li><a href="https://www.debian.org/CD/verify">Debian CD Verification Guide</a></li>
+<li><a href="https://ftp-master.debian.org/keys.html">Debian FTP Master Keys</a></li>
+</ul>
+
+<p>
+If they match — you’ve cryptographically and visually confirmed the key’s authenticity. This is the gold standard of verification.
+</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgba1263f" class="outline-3">
+<h3 id="orgba1263f"><span class="section-number-3">2.2.</span> Create the Bootable USB Drive</h3>
+<div class="outline-text-3" id="text-2-2">
+</div>
+<ol class="org-ol">
+<li><a id="orgb7273a2"></a>Preparing WSL2 to Access Your USB Drive<br />
+<div class="outline-text-5" id="text-2-2-0-1">
+<p>
+To use <code>dd</code>, we need WSL2 to see your USB drive as a raw block device (like ~ /dev/sdb ~). By default, WSL2 only mounts Windows drives (C:, D:, etc.).
+</p>
+
+<p>
+We’ll use <code>usbipd-win</code>, a Microsoft-supported open-source tool, to expose your USB to WSL2.
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org16645d6"></a>Step 1: Install usbipd-win<br />
+<div class="outline-text-6" id="text-2-2-0-1-1">
+<p>
+From PowerShell (Admin):
+</p>
+
+<div class="org-src-container">
+<pre class="src src-powershell">winget install usbipd
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org1be168a"></a>Step 2: List USB Devices<br />
+<div class="outline-text-6" id="text-2-2-0-1-2">
+<div class="org-src-container">
+<pre class="src src-powershell">lsblk -d -o NAME,SIZE,MODEL | grep -E '^sdb|^sdc'
+</pre>
+</div>
+
+<p>
+You’ll see output like:
+</p>
+<pre class="example" id="orgb418045">
+BUSID  DEVICE                                                        STATE
+1-2    USB Flash Disk (USB 3.0)                                      Not attached
+1-3    Logitech USB Receiver                                             Not attached
+</pre>
+
+<p>
+Identify your USB drive by name and size.
+</p>
+</div>
+</li>
+<li><a id="orgc3cb4a7"></a>Step 3: Bind and Attach to WSL2<br />
+<div class="outline-text-6" id="text-2-2-0-1-3">
+<div class="org-src-container">
+<pre class="src src-powershell"># Replace 1-2 with your USB's BUSID
+usbipd bind --busid 1-2
+usbipd attach --wsl --busid 1-2
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org3692f1b"></a>Step 4: Verify in WSL2<br />
+<div class="outline-text-6" id="text-2-2-0-1-4">
+<p>
+Open WSL2 Debian and run:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-bash">lsblk -d -o NAME,SIZE,MODEL | grep -E '^sdb|^sdc'
+</pre>
+</div>
+<p>
+You should see a new device like <code>/dev/sdb</code>.
+</p>
+
+<div class="tip" id="orgafaf01d">
+<p>
+Double-check this is your USB as writing to the wrong device will erase it.
+</p>
+
+</div>
+
+<p>
+Now you’re ready to use <code>dd</code>.
+</p>
+</div>
+</li>
+</ol>
+</li>
+<li><a id="org8f3519f"></a>Write the Verified ISO to USB<br />
+<div class="outline-text-5" id="text-2-2-0-2">
+<p>
+Now that we’ve cryptographically verified our ISO, we must write it to USB — and then verify <b>that</b> the write was bit-for-bit perfect. A corrupted or miswritten USB will fail to boot — or worse, behave unpredictably during installation.
+</p>
+
+<p>
+First, plug in your USB drive. Then, from WSL2 Debian:
+Locate the device:
+</p>
+<div class="org-src-container">
+<pre class="src src-nil">lsblk -d -o NAME,SIZE,MODEL | grep -E "sdb|sdc"
+</pre>
+</div>
+<p>
+Output:
+</p>
+<pre class="example">
+
+</pre>
+
+
+<p>
+Assuming your USB is <i>dev/sdb and your ISO is in /mnt/c/Users/user/Downloads</i>
+</p>
+<div class="org-src-container">
+<pre class="src src-nil">ISO=/mnt/c/Users/${USER}/Downloads/${IsoFile}
+sudo dd if="$ISO" of=/dev/sdb bs=4M status=progress oflag=sync
+sudo sync
+</pre>
+</div>
+<p>
+<b>Command Explanations</b>:
+</p>
+<dl class="org-dl">
+<dt><code>dd</code></dt><dd>“data duplicator,” a low-level block copy tool.</dd>
+<dt><code>if=...</code></dt><dd>input file (your verified ISO).</dd>
+<dt><code>of=...</code></dt><dd>output file (your USB device).</dd>
+<dt><code>bs=4M</code></dt><dd>block size for faster writes.</dd>
+<dt><code>status=progress</code></dt><dd>show progress.</dd>
+<dt><code>oflag=sync</code></dt><dd>ensure all data is written before completion.</dd>
+</dl>
+
+<p>
+<i>Want to roll your own? Use these instructions.
+     <b>Always</b> eyeball the result before you paste into a terminal.</i>
+</p>
+<div class="org-src-container">
+<pre class="src src-nil">sudo dd if="$ISO" of=__USBDEV__ bs=4M status=progress oflag=sync
+sudo sync
+sudo head -c "$(stat -c%s "$ISO")" __USBDEV__ | sha512sum
+</pre>
+</div>
+<p>
+#+begin<sub>export</sub> html
+&lt;input type="text" id="usbDevice" class="dynamic-input" data-placeholder="<span class="underline"><span class="underline">USBDEV</span></span>" size="10" value="/dev/sdb"&gt;
+#+end<sub>export</sub> html
+</p>
+
+
+<p>
+Now we will verify the etching was completed successfully by performing a final checksum on the USB Drive.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell"># Calculate SHA512 of the USB device (replace /dev/sdb with your device)
+bytes=$(stat -c%s "$ISO")
+sudo head -c "$bytes" /dev/sdb | sha512sum
+</pre>
+</div>
+
+<p>
+The two hashes <b><b>must match exactly</b></b>.
+</p>
+
+<p>
+If they don’t:
+</p>
+<ul class="org-ul">
+<li>Try re-writing the USB.</li>
+<li>Try a different USB port or drive.</li>
+<li>Never proceed with a mismatched hash — your USB is corrupted.</li>
+</ul>
+
+<div class="org-src-container">
+<pre class="src src-nil">usb_hash=$(sudo head -c "$bytes" /dev/sdb | sha512sum | awk '{print $1}')
+echo "USB_SHA512=$usb_hash" &gt;&gt; /mnt/c/Users/$USER/Downloads/debian-integrity.txt
+</pre>
+</div>
+
+<p>
+This is the final checkpoint before booting. Sovereignty means verifying <b>every</b> link in the chain — download → signature → write → boot.
+</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-orgcfc617d" class="outline-2">
+<h2 id="orgcfc617d"><span class="section-number-2">3.</span> OS Installation</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+Boot the laptop from the USB stick, attach the USB-Ethernet adapter, plug into the router and begin the installation.
+</p>
+
+<p>
+Since the laptop has a built in Network adapter, the installer may ask to load non-free firmware for the built-in Wi-Fi. Declining keeps the installation 100 % open-source; accepting allows wireless use later.
+</p>
+
+<p>
+Using a USB-to-Ethernet adapter, I was presented with the following error:
+</p>
+<pre class="example">
+Network autoconfiguration failed
+
+Your network is probably not using the DHCP protocol. Alternatively, the DHCP server may be slow or some network hardware is not working properly.
+</pre>
+
+
+<p>
+Skip network autoconfiguration; we’ll set a static address from <code>Dom0</code> where we have better debugging tools.
+</p>
+
+<p>
+On the partition screen, we will select
+</p>
+<pre class="example">
+Guided - use entire disk and setup LVM with encryption.
+</pre>
+
+
+<p>
+The best option for a stable Xen hypervisor is the classic server setup
+</p>
+<pre class="example">
+Separate /home, /var, and /tmp partitions.
+</pre>
+
+
+<p>
+This scheme provides the isolation needed to run a stable hypervisor. When the installer asks you how to allocate the space, Allocate ~70 % of available space to <code>/var</code>; exact GiB numbers aren’t critical because LVM lets you resize later, as this is where your VMs will live. A good starting point might be 20% for <code>/</code>, 8% for <code>/home</code>, 2% for <code>/tmp</code>, and the rest for <code>/var</code>.
+</p>
+
+<p>
+This will seperate the core Debian operating system, protecting it from runaway processes. By default, the virtual disk images of your Xen VMs (<code>/var/lib/xen/images</code>). By giving <code>/var</code> its own large partition, you ensure that even if a VM's disk grows unexpectedly or a log file gets huge, it can only fill up the <code>/var</code> partition and will not crash the core OS.
+</p>
+
+<p>
+Since we are using LVM, these sizes aren't set in stone and can be adjusted later, but this layout provides the right structure from the start.
+</p>
+
+<p>
+For the package mangager, we will continue without a network mirror.
+</p>
+
+<p>
+On the Software Selection screen: Deselect everything except SSH server and standard system utilities.
+</p>
+
+<p>
+Finish the install. Before you reboot, capture the LUKS parameters shown below—needed for the sovereignty audit in <a href="04-crypto.html">P1</a>.
+</p>
+
+<p>
+⚠️  Sovereignty checkpoint – copy once, audit later
+On the partition summary screen, open a second virtual console:
+Alt-F2 → Enter → run:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-nil">cryptsetup luksDump /dev/nvme0n1p2 | grep -E 'Cipher|PBKDF|Iterations|Key:|UUID'
+</pre>
+</div>
+
+<p>
+Example output (yours will differ slightly):
+</p>
+<pre class="example">
+Cipher:      aes-xts-plain64
+Key Size:    512 bits
+PBKDF:       pbkdf2
+Iterations:  506481
+UUID:        12345678-1234-1234-1234-123456789abc
+</pre>
+
+
+<p>
+Write those lines into the installer’s “Go Back” → “Save Debug Logs” prompt,
+or snap a phone photo.
+</p>
+</div>
+</div>
+<div id="outline-container-orga7516e9" class="outline-2">
+<h2 id="orga7516e9"><span class="section-number-2">4.</span> Server Configuration</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+Now that we are officially booted into the minimal host OS, there are a few configuration steps before moving on to the Virtualization.
+First, you need to get your USB Ethernet adapter working and set up your package manager's sources.
+</p>
+
+<p>
+All of these commands require administrator privileges.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">su -
+</pre>
+</div>
+<dl class="org-dl">
+<dt><code>su</code></dt><dd>This stands for "substitute user." By default, it switches you to the root user if you don't specify another username.</dd>
+
+<dt><code>-</code></dt><dd>This is a flag that tells su to start a login shell. This means it simulates a full login as the new user.</dd>
+</dl>
+</div>
+<ol class="org-ol">
+<li><a id="orge187128"></a>Initial Network Bridge Configuration<br />
+<div class="outline-text-5" id="text-4-0-0-1">
+<p>
+For guest VMs (DomUs) to access the network, we must create a network bridge. The bridge acts like a virtual switch, sharing the physical network card with the VMs.
+</p>
+
+<p>
+First, identify your primary physical network interface:
+Find your network interface name.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">ip a
+</pre>
+</div>
+<p>
+Look for an interface that isn't `lo`. It will have a name like `enp3s0` or `enx&#x2026;` for a USB adapter.
+</p>
+
+<pre class="example">
+1: lo: &lt;LOOPBACK, UP, LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+...
+...
+...
+2: enx00051bde17f2: &lt;BROADCAST, MULTICAST, DOWN, LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000
+...
+...
+...
+3: wlp1se: &lt;BROADCAST, MULTICAST&gt; mtu 1500 qdisc noop state DOHN group default qlen 1000
+...
+...
+...
+</pre>
+
+
+<p>
+The USB Ethernet adapter (enx&#x2026;) is recognized by the system, but it's not active <code>state DOWN</code>. Because it's down, it never asked your router for an IP address, so you have no network connection and DNS lookups are failing.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">ip link set enx80051bde17f2 up
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-shell">ip a
+</pre>
+</div>
+
+<pre class="example">
+1: 10: &lt;LOOPBACK, UP, LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+inet 127.0.0.1/8 scope host lo
+valid_ift forever preferred_1ft forever
+inet6 /128 scope host noprefixroute
+valid_ift forever preferred_lft forever
+2: enx00051bde17f2: &lt;BROADCAST, MULTICAST, UP, LOWER_UP&gt; mtu 1500 qdisc fq_codel state UP group default qlen 1000
+link/ether 00:05:1b:de:17:12 brd ff:ff:ff:ff:ff:ff
+inet6
+/64 scope global dynamic mngtmpaddr proto kernel_ra
+valid_lft 85456sec preferred_1ft 63856sec
+inet6
+/64 scope link proto kernel_11
+valid_lft forever preferred_lft forever
+3: wlp1se: &lt;BROADCAST, MULTICAST&gt; mtu 1500 qdisc noop state DOHN group default qlen 1000
+link/ether 30:95:09:19:f9:cb brd ff:ff:ff:ff:ff:ff
+altname wlx3c9509f9f9cb
+</pre>
+
+
+<p>
+The <code>ip a</code> output shows the adapter and cable are working perfectly. The <code>inet6</code> addresses mean your laptop is already communicating with your router over IPv6. The problem is strictly with IPv4.
+</p>
+
+<p>
+We'll manually assign one temporarily. This will get us online so we can install the proper tools.
+</p>
+
+<p>
+We'll need to know two things from your local network:
+</p>
+
+<ul class="org-ul">
+<li>Your router's IP address (e.g., 192.168.1.1).</li>
+
+<li>A free IP address on that network (e.g., 192.168.1.123).</li>
+</ul>
+
+<p>
+From the Windows machine - discover your router's subnet
+</p>
+<div class="org-src-container">
+<pre class="src src-nil">$MyIP  = (Test-Connection 1.1.1.1 -Count 1 | Select -ExpandProperty IPV4Address).IPAddressToString
+$Mask  = (Get-NetIPConfiguration | Where {$_.NetAdapter.Status -eq "Up"}).IPv4Address.PrefixLength
+$GW    = (Get-NetRoute | Where {$_.DestinationPrefix -eq "0.0.0.0/0"}).NextHop
+Write-Host "Use these in the installer:"
+Write-Host "IP address : $MyIP/$Mask"
+Write-Host "Gateway    : $GW"
+</pre>
+</div>
+
+<p>
+Here are the steps to take as root:
+</p>
+
+<p>
+Assign a static IP address. Replace 192.168.1.123/24 with a free IP address on your network.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">ip addr add 192.168.1.123/24 dev enx00051bde17f2
+</pre>
+</div>
+<div class="note" id="org82bbb55">
+<p>
+The /24 is the subnet mask and is standard for home networks.
+</p>
+
+</div>
+
+<p>
+Set the default gateway. This tells your laptop how to reach the internet. Replace 192.168.1.1 with your router's IP address.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">ip route add default via 192.168.1.1
+</pre>
+</div>
+
+<p>
+Configure DNS. You need to tell the system where to look up domain names.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">cat &gt; /etc/systemd/network/10-usb0.network &lt;&lt;EOF
+[Match]
+Name=enx*
+
+[Network]
+DHCP=no
+Address=192.168.1.123/24     # &lt;-- reader replaces with own
+Gateway=192.168.1.1
+DNS=1.1.1.1
+EOF
+</pre>
+</div>
+
+<p>
+Unplug and replug your USB Ethernet adapter. You should now have a network connection. You can test it by running <code>ping 1.1.1.1</code>.
+You'll need to end the ping test with a keyboard interruption, <kbd>Ctrl+c</kbd>.
+</p>
+
+<p>
+By default, Debian has a network interface (like <code>enx...</code>) that connects directly to the internet. For future guest VMs (DomUs) to access the network, we need to create a network bridge.
+</p>
+
+<p>
+The bridge acts like a virtual network switch. Your physical network card will be attached to the bridge, and all your VMs will also connect their virtual network cards to this same bridge, allowing them to share the network connection seamlessly.
+</p>
+
+<p>
+I had to edit my network configuration file, this is typically located at <code>/etc/network/interfaces</code>.
+</p>
+<div class="org-src-container">
+<pre class="src src-conf"># Example /etc/network/interfaces for bridging
+
+# The loopback network interface
+auto lo
+iface lo inet loopback
+
+# The primary network interface
+# This line makes the physical NIC part of the bridge
+allow-hotplug enx00051bde17f2
+iface enx00051bde17f2 inet manual
+
+# The bridge setup
+auto br0
+iface br0 inet dhcp
+bridge_ports enx00051bde17f2
+bridge_stp off
+bridge_fd 0
+</pre>
+</div>
+
+<p>
+Configure the APT sources to ensure the package manager can find all necessary software.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">nano /etc/apt/sources.list
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-conf">#deb cdrom: [Debian GNU/Linux 13.1.0_Trixie_ - Official amd64 NETINST with firmware 20250906-10:22]/ trixie contrib main non-free-firmware
+
+# This system was installed using removable media other than
+# CD/DVD/BD (e.g. USB stick, SD card, ISO image file).
+# The matching "deb cdrom" entries were disabled at the end
+# of the Installation process.
+# For information about how to configure apt package sources.
+# see the sources.list (5) manual.
+deb http://deb.debian.org/debian/ trixie main non-free-firmware contrib
+deb-src http://deb.debian.org/debian/ trixie main non-free-firmware contrib
+
+deb http://security.debian.org/debian-security trixie-security main non-free-firmware contrib
+deb-src http://security.debian.org/debian-security trixie-security main non-free-firmware contrib
+
+deb http://deb.debian.org/debian/ trixie-updates main non-free-firmware contrib
+deb-src http://deb.debian.org/debian/ trixie-updates main non-free-firmware contrib
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-shell">apt update
+</pre>
+</div>
+<p>
+Now, you can install the remote access server, OpenSSH.
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">apt install openssh-server
+</pre>
+</div>
+
+<p>
+Back at the workstation, install the Secure Shell software.
+</p>
+<div class="org-src-container">
+<pre class="src src-nil">sudo apt install ssh
+</pre>
+</div>
+<p>
+Generate a key pair if you don't have one:
+</p>
+<div class="org-src-container">
+<pre class="src src-nil">ssh-keygen -t ed25519 -C "your_email@example.com"
+</pre>
+</div>
+<div class="note" id="org38c9d14">
+<p>
+The email is for pure convenience, SSH ignores it cryptographically. when you later open authorized<sub>keys</sub> on some server you can see whose key that line is without matching long fingerprints.
+</p>
+
+</div>
+
+<p>
+Copy the public key to your Xen laptop:
+</p>
+<div class="org-src-container">
+<pre class="src src-nil">ssh-copy-id user@laptop_ip
+</pre>
+</div>
+
+<p>
+Now, use the key-pair to access the laptop remotely:
+</p>
+<div class="org-src-container">
+<pre class="src src-nil">ssh user@laptop_ip
+</pre>
+</div>
+
+<p>
+This setting only allows log in using an SSH key, which is secure. 
+</p>
+<div class="org-src-container">
+<pre class="src src-nil">sudo mkdir -p /root/.ssh
+</pre>
+</div>
+<p>
+Set the permissions
+</p>
+<div class="org-src-container">
+<pre class="src src-nil">chmod 700 /root/.ssh
+</pre>
+</div>
+
+<p>
+Now, we will also add the key to the root:
+</p>
+<div class="org-src-container">
+<pre class="src src-nil">cat &gt;&gt; /etc/ssh/sshd_config &lt;&lt;EOF
+
+# Sovereignty stack hardening
+PermitRootLogin prohibit-password
+PasswordAuthentication no
+AuthenticationMethods publickey
+EOF
+systemctl restart ssh
+</pre>
+</div>
+
+<p>
+From your desktop, make sure you can SSH into the Xen host without a password. This is the ultimate test.
+</p>
+<div class="org-src-container">
+<pre class="src src-nil">ssh user@192.168.1.109
+</pre>
+</div>
+
+<p>
+You can see how to headlessly reboot a server using LVM encryption with an SSH connection here: <a href="./dropbear-initramfs-config.html">Headless LUKS unlock using SSH</a>
+</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="postamble" class="status">
+<footer class="main-footer"><p>Last Modified: 2025-09-12</p><p>This site is built with Emacs and Org-mode.</p><p>// SYSTEM_NORMAL // [C] 2025 CALEB CHRISTENSEN</p></footer><script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+</div>
+</body>
+</html>

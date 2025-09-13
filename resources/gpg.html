@@ -1,0 +1,553 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2025-09-12 Fri 21:26 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Cryptography with Gnu Privacy Guard</title>
+<meta name="author" content="Caleb Christensen" />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="/assets/css/style.css"/><script src="/assets/js/theme.js"></script><script src="/assets/js/dynamic_var.js"></script><script src="/assets/js/site-nav.js"></script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&family=Roboto+Mono:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet"><meta name="referrer" content="no-referrer">
+</head>
+<body>
+<div id="preamble" class="status">
+<div class="yorha-status">  <span class="status-indicator online"></span>  <span class="yorha-terminal">STATUS: OPERATIONAL</span></div><header class="main-header">  <div class="header-content">    <div class="logo">LOG: CALEB_CHRISTENSEN</div>    <nav class="main-nav">      <ul>        <li><a href="/">// HOME</a></li>        <li><a href="/sitemap.html">// SITEMAP</a></li>        <li><a href="/contact.html">// CONTACT</a></li>      </ul>    </nav>    <button class="theme-toggle" id="theme-toggle" title="Toggle theme">      <span class="material-symbols-outlined icon-sun">light_mode</span>      <span class="material-symbols-outlined icon-moon">dark_mode</span>    </button>  </div></header><div class="pattern"><div class="pattern-inner"></div></div>
+</div>
+<div id="content" class="content">
+<h1 class="title">Cryptography with Gnu Privacy Guard</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org17f2364">1. OpenPGP's Web of Trust Model</a>
+<ul>
+<li><a href="#orgc6d17c2">1.1. Local Trust Signature</a></li>
+<li><a href="#orgb8a9c18">1.2. Public Key Signing</a></li>
+</ul>
+</li>
+<li><a href="#org8945ac6">2. Remote Management with GnuPG</a>
+<ul>
+<li>
+<ul>
+<li><a href="#orgdcd058e">2.0.1. 1. Import the Secret Key We Created Earlier</a></li>
+<li><a href="#org4607f2f">2.0.2. 2. Configuring the GPG Agent for SSH</a></li>
+<li><a href="#org00d4a8c">2.0.3. 3. Making Your Shell Aware of the Agent</a></li>
+<li><a href="#org4867c8c">2.0.4. 4. Verifying the Setup and Getting Your Public Key</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org17f2364" class="outline-2">
+<h2 id="org17f2364"><span class="section-number-2">1.</span> OpenPGP's Web of Trust Model</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-orgc6d17c2" class="outline-3">
+<h3 id="orgc6d17c2"><span class="section-number-3">1.1.</span> Local Trust Signature</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Once you’ve verified the fingerprint via Debian’s HTTPS-protected website, you can tell GPG: “I trust this key for verification purposes.” and by extension: "I trust this key's <b>owner</b> to correctly verify <i>other people's</i> keys."
+</p>
+
+<p>
+To do this:
+</p>
+<div class="org-src-container">
+<pre class="src src-powershell">gpg --edit-key DA87E80D6294BE9B
+</pre>
+</div>
+
+<p>
+At the <code>gpg&gt;</code> prompt, type:
+</p>
+<div class="org-src-container">
+<pre class="src src-nil">trust
+</pre>
+</div>
+
+<p>
+You’ll see a menu:
+</p>
+<pre class="example" id="org0b8a36a">
+Please decide how far you trust this user to correctly verify other users' keys
+(by looking at passports, checking fingerprints from different sources, etc.)
+
+  1 = I don't know or won't say
+  2 = I do NOT trust
+  3 = I trust marginally
+  4 = I trust fully
+  5 = I trust ultimately
+  m = back to the main menu
+
+Your decision? 
+</pre>
+
+<p>
+→ Type <code>5</code> (ultimate trust — you’ve verified this key through official channels).
+</p>
+
+<p>
+Then:
+</p>
+<div class="org-src-container">
+<pre class="src src-nil">save
+</pre>
+</div>
+<p>
+You'll see a message;
+</p>
+<pre class="example">
+Key not changed so no update needed.
+</pre>
+
+<p>
+This only affects your local GPG trust database. You are not altering the key itself — just telling GPG you’ve done your due diligence.
+</p>
+
+<p>
+Repeat for the other keys if desired:
+</p>
+<div class="org-src-container">
+<pre class="src src-powershell">gpg --edit-key 0x0E98404D386FA1D9
+gpg --edit-key 0xDCC9EFBF77E11517
+</pre>
+</div>
+
+<p>
+Now, when you run <code>gpg --verify</code> again, the warning will be gone because you’ve explicitly established trust.
+</p>
+</div>
+</div>
+<div id="outline-container-orgb8a9c18" class="outline-3">
+<h3 id="orgb8a9c18"><span class="section-number-3">1.2.</span> Public Key Signing</h3>
+<div class="outline-text-3" id="text-1-2">
+<div class="important" id="orged7882c">
+<p>
+<b>This step is optional</b> but if you want to start building decentralized, privacy and security-oriented habits, while learning to understand how the Web of Trust works, here's how to publicly vouch for Debian’s key(s).
+</p>
+
+</div>
+
+<p>
+You can  publicly vouch for someone's identity and help strengthen the Web of Trust for everyone by signing the key.
+</p>
+
+<p>
+When you sign someone's key, you are putting your own reputation on the line to vouch for their identity.
+</p>
+
+<p>
+If you sign a malicious key, and that key is later exposed as fraudulent, anyone who sees your signature on it will conclude that your verification process is weak. They will likely lower their trust in you and, by extension, distrust all other keys you have signed.
+</p>
+
+<p>
+In communities that rely on GPG (like open-source development), a person's history of reliable key signing is a sign of trustworthiness and attention to detail. Carelessly signing a key is a serious misstep that can damage your standing in that community.
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org2af0ae1"></a>Generating Your Master Key<br />
+<div class="outline-text-8" id="text-1-2-0-0-0-0-1">
+<p>
+In order to publically sign a key, you must first have your own master key pair. This will be the root of your digital identity.
+</p>
+<div class="org-src-container">
+<pre class="src src-PowerShell">gpg --full-generate-key
+</pre>
+</div>
+
+<p>
+The program will guide you through a series of prompts:
+</p>
+
+<pre class="example">
+Please select what kind of key you want: (9) ECC (sign and encrypt)
+
+What keysize do you want? (1) Curve 25519
+
+Key is valid for? 0 (does not expire)
+
+Is this correct? y
+
+Real name: Enter your name or a pseudonym.
+
+Email address: Enter your email address.
+
+Comment: (Optional) You can leave this blank.
+
+Change (N)ame, (C)omment, (E)mail or (O)kay/(Q)uit? O
+</pre>
+
+
+<p>
+You will then be prompted to create a strong passphrase. This is the passphrase that protects your private key. Do not lose it.
+</p>
+</div>
+</li>
+<li><a id="org12a7427"></a>Create and Back Up a Revocation Certificate<br />
+<div class="outline-text-8" id="text-1-2-0-0-0-0-2">
+<p>
+This is your "kill switch." If your key is ever compromised, you'll use this file to declare it invalid. You should create it now and store it somewhere safe and separate.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-PowerShell">gpg --output revoke.asc --gen-revoke your-email@example.com
+</pre>
+</div>
+
+<p>
+Confirm that you want to create the certificate and enter the passphrase for your key. This will create a file named revoke.asc in your current directory. Copy this file to a separate, dedicated USB drive and store it in a safe place. Do not keep it with your secret key backup.
+</p>
+</div>
+</li>
+<li><a id="org3513e14"></a>Back Up Your Secret Key<br />
+<div class="outline-text-8" id="text-1-2-0-0-0-0-3">
+<p>
+Now, back up the key itself. This file is your digital identity, so protect it carefully.
+</p>
+<div class="org-src-container">
+<pre class="src src-powershell">gpg --export-secret-keys --armor your-email@example.com &gt; secret-key.asc
+</pre>
+</div>
+
+<p>
+Copy the secret-key.asc file to a different, secure USB drive. For best security, this drive should be encrypted.
+</p>
+</div>
+</li>
+<li><a id="org4fc404e"></a>Sign the Debian Key<br />
+<div class="outline-text-8" id="text-1-2-0-0-0-0-4">
+<p>
+Now, use your new identity to sign the Debian key you've already verified. This creates a public statement that you have checked and trust their key.
+</p>
+<div class="org-src-container">
+<pre class="src src-powershell">gpg --sign-key DA87E80D6294BE9B
+</pre>
+</div>
+<p>
+GPG will ask you to confirm. Type <code>y</code> and enter your passphrase to create the signature.
+</p>
+</div>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-org8945ac6" class="outline-2">
+<h2 id="org8945ac6"><span class="section-number-2">2.</span> Remote Management with GnuPG</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+This project involves managing servers, which requires remote administration. To do so securely and efficiently, we will rely on Secure Shell (SSH) key pairs for authentication. Instead of managing these keys directly, we will use <code>gpg</code> to act as our key manager and authentication agent.
+</p>
+
+<p>
+Continuously typing a passphrase to unlock your private key is inconvenient. An authentication agent (gpg-agent in our case) is a background service that securely holds your unlocked private key in memory for the duration of your session. You unlock it once with its passphrase, and the agent handles all subsequent authentication challenges automatically.
+</p>
+</div>
+<div id="outline-container-orgdcd058e" class="outline-4">
+<h4 id="orgdcd058e"><span class="section-number-4">2.0.1.</span> 1. Import the Secret Key We Created Earlier</h4>
+<div class="outline-text-4" id="text-2-0-1">
+<p>
+Once the client system is running, plug in the USB drive containing your secret key and decrypt. Since WSL2 can't access the block storage, copy the key to an internal drive and run the import command.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-powershell">gpg --import /path/to/your/key/secret-key.asc
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org4607f2f" class="outline-4">
+<h4 id="org4607f2f"><span class="section-number-4">2.0.2.</span> 2. Configuring the GPG Agent for SSH</h4>
+<div class="outline-text-4" id="text-2-0-2">
+<p>
+Now, we need to tell the GPG agent that it should also handle SSH authentication requests.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">echo "enable-ssh-support" &gt;&gt; ~/.gnupg/gpg-agent.conf
+</pre>
+</div>
+
+<p>
+The <code>echo</code> command with the <code>&gt;&gt;</code> operator will append the string <code>enable-ssh-support</code> to the agent's configuration file, creating the file if it doesn't exist.
+</p>
+</div>
+</div>
+<div id="outline-container-org00d4a8c" class="outline-4">
+<h4 id="org00d4a8c"><span class="section-number-4">2.0.3.</span> 3. Making Your Shell Aware of the Agent</h4>
+<div class="outline-text-4" id="text-2-0-3">
+<p>
+The final step is to tell your shell how to communicate with the gpg-agent. We do this by adding some logic to your shell's startup file, <code>~/.bashrc</code>.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">cat &lt;&lt; 'EOF' &gt;&gt; ~/.bashrc
+
+# GPG Agent Configuration
+export GPG_TTY=$(tty)
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+gpgconf --launch gpg-agent
+EOF
+</pre>
+</div>
+<p>
+<b>Command Explanations:</b>
+</p>
+<dl class="org-dl">
+<dt>cat &lt;&lt; 'EOF' &gt;&gt; ~/.bashrc</dt><dd>A method to append multiple lines of text to the ~/.bashrc file without needing a text editor.</dd>
+<dt>export GPG<sub>TTY</sub>=$(tty)</dt><dd>Informs GPG which terminal you are currently using, which is necessary for it to prompt you for your passphrase.</dd>
+<dt>export SSH<sub>AUTH</sub><sub>SOCK</sub>=&#x2026;</dt><dd>This is the crucial step. It tells SSH and other programs to send authentication requests to the socket controlled by gpg-agent instead of the default ssh-agent.</dd>
+<dt>gpgconf &#x2013;launch gpg-agent</dt><dd>Ensures the agent is running.</dd>
+</dl>
+
+<p>
+To apply these changes to your current session, run:
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">source ~/.bashrc
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org4867c8c" class="outline-4">
+<h4 id="org4867c8c"><span class="section-number-4">2.0.4.</span> 4. Verifying the Setup and Getting Your Public Key</h4>
+<div class="outline-text-4" id="text-2-0-4">
+<p>
+You can now verify that the agent is running and ready for SSH.
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">ssh-add -l
+</pre>
+</div>
+<p>
+<b>Command Explanations:*</b>
+</p>
+<dl class="org-dl">
+<dt>ssh-add</dt><dd>Command for adding new SSH Keypairs
+<dl class="org-dl">
+<dt><code>-l</code> / <code>--list</code></dt><dd>Modifies the command to print a list of the keys the agent is currently managing to the terminal instead of creating a new keypair.</dd>
+</dl></dd>
+</dl>
+
+<p>
+The first time you run this, it will likely prompt for your GPG passphrase. After entering it, you should see output like
+</p>
+<pre class="example">
+The agent has no identities.
+</pre>
+
+<p>
+This is a success! It means your shell is correctly talking to an empty agent.
+</p>
+
+<p>
+To add your SSH key to the agent and get your public key for sharing, run:
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">ssh-add -L
+</pre>
+</div>
+
+<p>
+The output will be your public SSH key, starting with ssh-ed25519, ecdsa-sha2-nistp256, or a similar identifier, followed by a string of characters.
+</p>
+
+<p>
+This is the "lock" I installed on the target laptop in a later step to grant access.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<footer class="main-footer"><p>Last Modified: 2025-09-12</p><p>This site is built with Emacs and Org-mode.</p><p>// SYSTEM_NORMAL // [C] 2025 CALEB CHRISTENSEN</p></footer><script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+</div>
+</body>
+</html>

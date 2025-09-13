@@ -1,0 +1,878 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2025-09-12 Fri 21:26 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Main Emacs Configuration</title>
+<meta name="author" content="Coppermind" />
+<meta name="description" content="The central hub for the literate Emacs configuration. It defines the system's structure and loads all other modules." />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="/assets/css/style.css"/><script src="/assets/js/theme.js"></script><script src="/assets/js/dynamic_var.js"></script><script src="/assets/js/site-nav.js"></script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&family=Roboto+Mono:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet"><meta name="referrer" content="no-referrer">
+</head>
+<body>
+<div id="preamble" class="status">
+<div class="yorha-status">  <span class="status-indicator online"></span>  <span class="yorha-terminal">STATUS: OPERATIONAL</span></div><header class="main-header">  <div class="header-content">    <div class="logo">LOG: CALEB_CHRISTENSEN</div>    <nav class="main-nav">      <ul>        <li><a href="/">// HOME</a></li>        <li><a href="/sitemap.html">// SITEMAP</a></li>        <li><a href="/contact.html">// CONTACT</a></li>      </ul>    </nav>    <button class="theme-toggle" id="theme-toggle" title="Toggle theme">      <span class="material-symbols-outlined icon-sun">light_mode</span>      <span class="material-symbols-outlined icon-moon">dark_mode</span>    </button>  </div></header><div class="pattern"><div class="pattern-inner"></div></div>
+</div>
+<div id="content" class="content">
+<h1 class="title">Main Emacs Configuration</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org3c79e28">1. Header</a></li>
+<li><a href="#orgd3385e6">2. User Interface</a></li>
+<li><a href="#org569d93f">3. System Architecture &amp; Paths</a></li>
+<li><a href="#org404674b">4. Configuration Management</a></li>
+<li><a href="#org3eda3ce">5. Dependency-Aware Module Loader</a></li>
+<li><a href="#org54426a0">6. Configuration Linting and Validation</a></li>
+<li><a href="#org72e45a8">7. Configuration Auto-Fix Functions</a></li>
+<li><a href="#org45adb91">8. Configuration Keybindings</a></li>
+<li><a href="#org2d3b9f5">9. Footer</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org3c79e28" class="outline-2">
+<h2 id="org3c79e28"><span class="section-number-2">1.</span> Header</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+This file is the core of the configuration. It is responsible for defining the directory structure, providing helper functions to manage the configuration, and loading all modules in the correct, predictable order.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;;; config.el --- Main configuration hub -*- lexical-binding: t -*-
+
+;;; Commentary:
+;; This file is tangled from ~/coppermind/system/configuration.org.
+;; It defines the configuration's structure, provides management functions,
+;; and loads all modules in the correct sequence (core -&gt; lib -&gt; modules).
+
+;;; Code:
+(message "--- Loading config.el ---")
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-orgd3385e6" class="outline-2">
+<h2 id="orgd3385e6"><span class="section-number-2">2.</span> User Interface</h2>
+<div class="outline-text-2" id="text-2">
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;; Disable startup splashscreen
+(setq inhibit-startup-screen t)
+
+(load-theme 'jazz t)
+
+(setq-default word-wrap t)
+(setq visual-line-fringe-indicators t)
+(global-display-line-numbers-mode 1)
+(global-visual-line-mode 1)
+
+;; Set margins only for org-mode buffers
+(defun set-org-margin-width ()
+  "Set margins for org-mode to constrain line width for readability."
+  (when (derived-mode-p 'org-mode)
+    (let* ((window-width (window-width))
+           (text-width 80)  
+           (left-margin 2)  
+           (right-margin (max 0 (- window-width text-width left-margin))))
+      (set-window-margins nil left-margin right-margin))))
+
+;; Clear margins for non-org modes
+(defun clear-non-org-margins ()
+  "Clear margins for buffers that aren't org-mode."
+  (unless (derived-mode-p 'org-mode)
+    (set-window-margins nil 0 0)))
+
+;; Hook into org-mode specifically
+(add-hook 'org-mode-hook #'set-org-margin-width)
+
+;; Handle window changes and buffer switches
+(add-hook 'window-configuration-change-hook 
+          (lambda ()
+            (if (derived-mode-p 'org-mode)
+                (set-org-margin-width)
+              (clear-non-org-margins))))
+
+;; Clear margins when switching away from org buffers
+(add-hook 'buffer-list-update-hook #'clear-non-org-margins)
+
+;; A better mode-line
+(use-package doom-modeline
+  :ensure t
+  :init (doom-modeline-mode 1))
+
+;; Icons everywhere
+(use-package all-the-icons
+  :ensure t)
+
+;; --- Frame Management ---
+;; Set parameters for the first frame Emacs creates
+(setq initial-frame-alist
+      '((top . 2)
+        (left . -640)
+        (width . 105)
+        (height . 70)))
+
+;; Set parameters for all subsequent frames
+(setq default-frame-alist
+      '((top . 2)
+        (left . -640)
+        (width . 105)
+        (height . 70)))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org569d93f" class="outline-2">
+<h2 id="org569d93f"><span class="section-number-2">3.</span> System Architecture &amp; Paths</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+This section defines the directory structure for the entire configuration. It is the "single source of truth" for all paths. Helper functions will reference these variables, ensuring a DRY (Don't Repeat Yourself) and easily maintainable setup.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;; --- 1. Source Paths (The Literate Org Files) ---
+(defvar my/org-config-root-path (expand-file-name "~/coppermind/system/")
+  "The root path of the literate configuration source.")
+
+(defvar my/org-config-core-path (expand-file-name "core/" my/org-config-root-path)
+  "Path to foundational `core' configuration modules.")
+
+(defvar my/org-config-modules-path (expand-file-name "modules/" my/org-config-root-path)
+  "Path to user-facing feature `modules'.")
+
+(defvar my/org-config-lib-path (expand-file-name "lib/" my/org-config-root-path)
+  "Path to custom elisp library functions.")
+
+(defvar my/config-subdirectories '("core" "lib" "modules")
+  "A list of valid subdirectories for configuration modules.
+This variable powers the dynamic `my/new-config-module' helper.")
+
+;; --- 2. Tangled Paths (The Compiled Elisp Files) ---
+(defvar my/lisp-config-path (expand-file-name "lisp/" user-emacs-directory)
+  "The path to the directory for tangled elisp files.")
+
+;; Ensure the lisp directory exists and is on the load-path
+(make-directory my/lisp-config-path t)
+(add-to-list 'load-path my/lisp-config-path)
+
+;; --- 3. Helper Functions ---
+(defun my/derive-el-path (org-source-file)
+  "Derive the tangled .el path from an org source file."
+  (let* ((relative-path (file-relative-name org-source-file my/org-config-root-path))
+         (base-name (file-name-sans-extension (file-name-nondirectory relative-path)))
+         (subdir (file-name-directory relative-path)))
+    (expand-file-name (concat subdir base-name ".el") my/lisp-config-path)))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org404674b" class="outline-2">
+<h2 id="org404674b"><span class="section-number-2">4.</span> Configuration Management</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+These are the interactive helper functions for managing and verifying your configuration. They are defined before the module loader so they are available immediately.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(eval-and-compile (require 'org))
+
+(defun my/rebuild-config ()
+  "Tangle and byte-compile the ENTIRE literate configuration."
+  (interactive)
+  (message "--- Starting FULL configuration rebuild ---")
+  (require 'org)
+
+  ;; Ensure subdirectories exist in the lisp path
+  (dolist (dir my/config-subdirectories)
+    (make-directory (expand-file-name dir my/lisp-config-path) t))
+
+  ;; Helper function to tangle and compile a single Org file.
+  (cl-labels ((tangle-and-compile (org-file)
+                (let* ((tangled-files (org-babel-tangle-file org-file))
+                       (el-file (car tangled-files)))
+                  (when el-file
+                    (message "Tangled %s -&gt; %s"
+                             (file-name-nondirectory org-file)
+                             (file-name-nondirectory el-file))
+                    (byte-compile-file el-file)
+                    (message "Compiled %s" (file-name-nondirectory el-file))))))
+
+    (condition-case err
+        (progn
+          ;; 1. Rebuild the main files
+          (tangle-and-compile (expand-file-name "initialization.org" my/org-config-root-path))
+          (tangle-and-compile (expand-file-name "configuration.org" my/org-config-root-path))
+
+          ;; 2. Rebuild all modules from all subdirectories
+          (dolist (dir my/config-subdirectories)
+            (let* ((dir-path (expand-file-name (concat dir "/") my/org-config-root-path))
+                   (org-files (directory-files dir-path t "\\.org$")))
+              (message "--- Processing directory: %s ---" dir)
+              (dolist (module-file org-files)
+                (tangle-and-compile module-file))))
+
+          (message "✅ Configuration rebuilt successfully! Please restart Emacs."))
+      (error
+       (message "❌ Configuration build failed!")
+       (error "Build Error: %s" (error-message-string err))))))
+
+(defun my/verify-modules-status ()
+  "Verify module status by reading #+PROPERTY: PROVIDES from all .org files."
+  (interactive)
+  (require 'org)
+  (with-output-to-temp-buffer "*Module Status*"
+    (princ "Module Verification Status\n")
+    (princ "==========================\n\n")
+    (dolist (dir my/config-subdirectories)
+      (let* ((dir-path (expand-file-name (concat dir "/") my/org-config-root-path))
+             (org-files (directory-files dir-path t "\\.org$")))
+        (princ (format "--- %s ---\n" (capitalize dir)))
+        (if (null org-files)
+            (princ "No modules found.\n")
+          (dolist (file org-files)
+            (let* ((module-filename (file-name-nondirectory file))
+                   (feature-name
+                    (with-temp-buffer
+                      (insert-file-contents file)
+                      (goto-char (point-min))
+                      (when (re-search-forward "^#\\+PROPERTY: +PROVIDES +\\(.+\\)$" nil t)
+                        (string-trim (match-string 1)))))
+                   (feature-symbol (and feature-name (intern-soft feature-name))))
+              (cond
+               ((not feature-symbol)
+                (princ (format "⚠️  %-30s (no #+PROPERTY: PROVIDES found)\n" module-filename)))
+               ((featurep feature-symbol)
+                (princ (format "✅ %-30s (feature '%s loaded)\n" module-filename feature-symbol)))
+               (t
+                (princ (format "❌ %-30s (feature '%s NOT loaded)\n" module-filename feature-symbol)))))))
+        (princ "\n")))))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org3eda3ce" class="outline-2">
+<h2 id="org3eda3ce"><span class="section-number-2">5.</span> Dependency-Aware Module Loader</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+This section provides a dependency-aware loader that builds a dependency graph and loads modules in the correct order.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(defun my/get-module-metadata (org-file)
+  "Parse an Org file and return its metadata as a plist.
+Metadata includes the feature it :provides, its :dependencies
+(from LOAD_AFTER), and the :source-file path."
+  (with-temp-buffer
+    (insert-file-contents-literally org-file)
+    (let (provides dependencies)
+      ;; Each search must start from the beginning of the buffer
+      (goto-char (point-min))
+      (when (re-search-forward "^#\\+PROPERTY: +PROVIDES +\\(.+\\)$" nil t)
+        (setq provides (intern (string-trim (match-string 1)))))
+
+      (goto-char (point-min))
+      (when (re-search-forward "^#\\+PROPERTY: +LOAD_AFTER +\\(.+\\)$" nil t)
+        (setq dependencies (mapcar #'intern (split-string (match-string 1) "[ \t,]+" t))))
+
+      (when provides
+        (list :provides provides
+              :dependencies dependencies
+              :source-file org-file)))))
+
+(defun my/build-dependency-graph ()
+  "Scan all config directories and build a dependency graph.
+Returns a hash table mapping each module symbol to its metadata."
+  (let ((graph (make-hash-table))
+        (all-org-files '()))
+    ;; Collect all .org files from all subdirectories
+    (dolist (dir my/config-subdirectories)
+      (let* ((dir-path (expand-file-name dir my/org-config-root-path))
+             (org-files (directory-files dir-path t "\\.org$")))
+        (setq all-org-files (append org-files all-org-files))))
+
+    ;; Parse metadata and populate the graph
+    (dolist (file all-org-files)
+      (let ((metadata (my/get-module-metadata file)))
+        (when metadata
+          (puthash (plist-get metadata :provides) metadata graph))))
+    graph))
+
+(defun my/topological-sort (graph)
+  "Topologically sort the modules in the dependency GRAPH.
+Returns a list of module symbols in the correct load order.
+Detects and reports circular dependencies."
+  (let ((sorted-list '())
+        (visiting (make-hash-table))
+        (visited (make-hash-table)))
+    (cl-labels ((visit (module-symbol)
+                  (when (gethash module-symbol visiting)
+                    (error "Circular dependency detected involving '%s" module-symbol))
+                  (unless (gethash module-symbol visited)
+                    (puthash module-symbol t visiting)
+                    (let* ((metadata (gethash module-symbol graph))
+                           (dependencies (plist-get metadata :dependencies)))
+                      (dolist (dep dependencies)
+                        (when (gethash dep graph)
+                          (visit dep))))
+                    (remhash module-symbol visiting)
+                    (puthash module-symbol t visited)
+                    (push module-symbol sorted-list))))
+      (maphash (lambda (module-symbol _)
+                 (visit module-symbol))
+               graph))
+    sorted-list))
+
+(defun my/load-all-modules-with-deps ()
+  "Load all modules in dependency-aware order with improved error handling."
+  (interactive)
+  (message "--- Building dependency graph and loading modules ---")
+
+  (condition-case err
+      (let* ((graph (my/build-dependency-graph))
+             (sorted-modules (my/topological-sort graph))
+             (successfully-loaded '())
+             (failed-modules '()))
+
+        (message "Detected %d modules" (hash-table-count graph))
+        (message "Load order: %s" sorted-modules)
+
+        (dolist (module sorted-modules)
+          (condition-case module-err
+              (progn
+                (message "--&gt; Loading %s" module)
+                (if (gethash module graph)
+                    ;; It's our module - load the file
+                    (let* ((metadata (gethash module graph))
+                           (source-file (plist-get metadata :source-file))
+                           (el-file (my/derive-el-path source-file)))
+                      (if (file-exists-p el-file)
+                          (progn
+                            (load el-file nil t)
+                            (push module successfully-loaded))
+                        (push module failed-modules)
+                        (message "   ⚠️ File not found: %s" el-file)))
+                  ;; It's an external dependency - try require
+                  (when (require module nil t)
+                    (push module successfully-loaded))))
+            (error
+             (push module failed-modules)
+             (message "   ❌ Failed to load %s: %s" 
+                     module (error-message-string module-err)))))
+
+        ;; Report results
+        (message "--- Module loading complete ---")
+        (message "Successfully loaded: %d/%d modules" 
+                (length successfully-loaded) 
+                (length sorted-modules))
+
+        (when failed-modules
+          (message "Failed modules: %s" failed-modules)
+          (warn "Some modules failed to load. Run M-x my/lint-config-modules for details."))
+
+        successfully-loaded)
+
+    (error
+     (message "❌ Critical failure in module loading: %s" 
+             (error-message-string err))
+     (error "Module system initialization failed"))))
+
+;; Run the primary loader during startup
+(my/load-all-modules-with-deps)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org54426a0" class="outline-2">
+<h2 id="org54426a0"><span class="section-number-2">6.</span> Configuration Linting and Validation</h2>
+<div class="outline-text-2" id="text-6">
+<p>
+Comprehensive linting and validation tools for the literate configuration.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(defun my/lint-config-modules ()
+  "Comprehensive lint check for all configuration modules."
+  (interactive)
+  (with-output-to-temp-buffer "*Config Lint Report*"
+    (princ "Configuration Linting Report\n")
+    (princ "============================\n")
+    (princ (format "Generated: %s\n\n" (current-time-string)))
+
+    (let ((total-issues 0)
+          (modules-checked 0)
+          (issue-details '()))
+
+      (dolist (dir my/config-subdirectories)
+        (princ (format "\n=== %s directory ===\n" (upcase dir)))
+
+        (let* ((org-path (expand-file-name dir my/org-config-root-path))
+               (org-files (directory-files org-path t "\\.org$")))
+
+          (dolist (org-file org-files)
+            (cl-incf modules-checked)
+            (let* ((base-name (file-name-sans-extension (file-name-nondirectory org-file)))
+                   (el-file (expand-file-name 
+                            (concat dir "/" base-name ".el")
+                            my/lisp-config-path))
+                   (issues '())
+                   (provides-in-org nil)
+                   (provides-in-el nil))
+
+              ;; Check Org file
+              (with-temp-buffer
+                (insert-file-contents org-file)
+                (goto-char (point-min))
+
+                ;; Check for PROVIDES property
+                (if (re-search-forward "^#\\+PROPERTY: +PROVIDES +\\(.+\\)$" nil t)
+                    (setq provides-in-org (string-trim (match-string 1)))
+                  (push "Missing #+PROPERTY: PROVIDES" issues))
+
+                ;; Check for tangle header
+                (goto-char (point-min))
+                (unless (re-search-forward "^#\\+PROPERTY: +header-args.*:tangle" nil t)
+                  (push "Missing :tangle in header-args" issues)))
+
+              ;; Check .el file
+              (if (file-exists-p el-file)
+                  (with-temp-buffer
+                    (insert-file-contents el-file)
+
+                    ;; Check lexical-binding
+                    (goto-char (point-min))
+                    (unless (looking-at ".*-\\*- lexical-binding: t -\\*-")
+                      (push "Missing lexical-binding declaration" issues))
+
+                    ;; Check provide statement
+                    (goto-char (point-max))
+                    (if (re-search-backward "(provide +'\\([^)]+\\))" nil t)
+                        (setq provides-in-el (match-string 1))
+                      (push "Missing (provide ...) statement" issues))
+
+                    ;; Check if provides match
+                    (when (and provides-in-org provides-in-el
+                               (not (string= provides-in-org provides-in-el)))
+                      (push (format "PROVIDES mismatch: org='%s' el='%s'" 
+                                    provides-in-org provides-in-el) issues)))
+                (push "Tangled .el file not found" issues))
+
+              ;; Update total issues
+              (setq total-issues (+ total-issues (length issues)))
+
+              ;; Report
+              (if issues
+                  (progn
+                    (push (cons base-name issues) issue-details)
+                    (princ (format "❌ %s:\n%s\n" 
+                                  base-name
+                                  (mapconcat (lambda (i) (concat "   - " i)) issues "\n"))))
+                (princ (format "✅ %s\n" base-name)))))))
+
+      ;; Summary
+      (princ (format "\n============================\n"))
+      (princ (format "Modules checked: %d\n" modules-checked))
+      (princ (format "Issues found: %d\n" total-issues))
+      (princ (format "Health: %s%%\n" 
+                    (if (&gt; modules-checked 0)
+                        (round (* 100 (/ (float (- modules-checked 
+                                                   (length issue-details)))
+                                        modules-checked)))
+                      100)))
+
+      (when (&gt; total-issues 0)
+        (princ "\n🔧 Run M-x my/smart-fix-config to auto-fix most issues."))
+
+      issue-details)))
+
+(defun my/show-all-provides-mapping ()
+  "Show what each org file PROVIDES and what the .el file actually provides."
+  (interactive)
+  (with-output-to-temp-buffer "*PROVIDES Mapping*"
+    (princ "PROVIDES Property Mapping\n")
+    (princ "=========================\n\n")
+
+    (dolist (dir my/config-subdirectories)
+      (princ (format "\n--- %s ---\n" (upcase dir)))
+      (let* ((org-path (expand-file-name dir my/org-config-root-path))
+             (org-files (directory-files org-path t "\\.org$")))
+
+        (dolist (org-file org-files)
+          (let ((provides-in-org nil)
+                (provides-in-el nil)
+                (base-name (file-name-sans-extension (file-name-nondirectory org-file))))
+
+            ;; Get PROVIDES from org
+            (with-temp-buffer
+              (insert-file-contents org-file)
+              (goto-char (point-min))
+              (when (re-search-forward "^#\\+PROPERTY: +PROVIDES +\\(.+\\)$" nil t)
+                (setq provides-in-org (string-trim (match-string 1)))))
+
+            ;; Get provide from .el
+            (let ((el-file (expand-file-name 
+                           (concat dir "/" base-name ".el")
+                           my/lisp-config-path)))
+              (when (file-exists-p el-file)
+                (with-temp-buffer
+                  (insert-file-contents el-file)
+                  (goto-char (point-max))
+                  (when (re-search-backward "(provide +'\\([^)]+\\))" nil t)
+                    (setq provides-in-el (match-string 1))))))
+
+            (princ (format "%-30s: ORG='%-20s' EL='%-20s' %s\n"
+                          base-name
+                          (or provides-in-org "MISSING")
+                          (or provides-in-el "MISSING")
+                          (cond
+                           ((and provides-in-org provides-in-el 
+                                 (string= provides-in-org provides-in-el))
+                            "✅")
+                           ((and provides-in-org provides-in-el)
+                            "⚠️ MISMATCH")
+                           (provides-in-org
+                            "❌ No EL provide")
+                           (t
+                            "❌ No ORG property"))))))))))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org72e45a8" class="outline-2">
+<h2 id="org72e45a8"><span class="section-number-2">7.</span> Configuration Auto-Fix Functions</h2>
+<div class="outline-text-2" id="text-7">
+<p>
+Smart functions to automatically fix common configuration issues.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(defun my/smart-fix-config ()
+  "Intelligently fix configuration issues based on lint results."
+  (interactive)
+  (let ((issues (my/lint-config-modules)))
+    (when (yes-or-no-p "Auto-fix detected issues? ")
+      ;; Fix PROVIDES properties
+      (my/ensure-all-provides-properties)
+
+      ;; Retangle if needed
+      (when (cl-some (lambda (issue) 
+                       (cl-find "Tangled .el file not found" (cdr issue) 
+                               :test #'string-match-p))
+                     issues)
+        (message "Retangling configuration...")
+        (my/rebuild-config))
+
+      ;; Fix provide statements
+      (my/fix-all-provide-statements)
+
+      ;; Final verification
+      (my/lint-config-modules)
+      (message "✅ Auto-fix complete! Restart Emacs to apply changes."))))
+
+(defun my/ensure-all-provides-properties ()
+  "Ensure all org files have PROVIDES properties."
+  (dolist (dir my/config-subdirectories)
+    (let* ((org-path (expand-file-name dir my/org-config-root-path))
+           (org-files (directory-files org-path t "\\.org$")))
+      (dolist (org-file org-files)
+        (my/ensure-provides-property org-file)))))
+
+(defun my/ensure-provides-property (org-file)
+  "Ensure a single org file has a PROVIDES property."
+  (with-temp-buffer
+    (insert-file-contents org-file)
+    (goto-char (point-min))
+    (unless (re-search-forward "^#\\+PROPERTY: +PROVIDES" nil t)
+      (let* ((base-name (file-name-sans-extension 
+                        (file-name-nondirectory org-file)))
+             ;; Smart naming: remove -setup suffix if present
+             (provides-name (replace-regexp-in-string 
+                           "-setup$" "" base-name)))
+        (goto-char (point-min))
+        (if (re-search-forward "^#\\+TITLE:" nil t)
+            (progn (end-of-line) (insert "\n"))
+          (goto-char (point-min)))
+        (insert (format "#+PROPERTY: PROVIDES %s\n" provides-name))
+        (write-region (point-min) (point-max) org-file)
+        (message "Added PROVIDES to %s" (file-name-nondirectory org-file))))))
+
+(defun my/fix-all-provide-statements ()
+  "Fix all provide statements to match PROVIDES properties."
+  (dolist (dir my/config-subdirectories)
+    (let* ((org-path (expand-file-name dir my/org-config-root-path))
+           (org-files (directory-files org-path t "\\.org$")))
+      (dolist (org-file org-files)
+        (my/fix-provide-statement org-file)))))
+
+(defun my/fix-provide-statement (org-file)
+  "Fix provide statement for a single module."
+  (let ((provides-symbol nil))
+
+    ;; Get PROVIDES from org
+    (with-temp-buffer
+      (insert-file-contents org-file)
+      (goto-char (point-min))
+      (when (re-search-forward "^#\\+PROPERTY: +PROVIDES +\\(.+\\)$" nil t)
+        (setq provides-symbol (string-trim (match-string 1)))))
+
+    (when provides-symbol
+      (let ((el-file (my/derive-el-path org-file)))
+        (when (file-exists-p el-file)
+          (with-temp-buffer
+            (insert-file-contents el-file)
+
+            ;; Ensure lexical-binding
+            (goto-char (point-min))
+            (unless (looking-at ".*-\\*- lexical-binding: t -\\*-")
+              (insert ";;; -*- lexical-binding: t -*-\n"))
+
+            ;; Fix or add provide
+            (goto-char (point-max))
+            (if (re-search-backward "(provide +'\\([^)]+\\))" nil t)
+                (unless (string= (match-string 1) provides-symbol)
+                  (replace-match (format "(provide '%s)" provides-symbol)))
+              ;; Add provide
+              (goto-char (point-max))
+              (skip-syntax-backward " ")
+              (insert (format "\n(provide '%s)\n" provides-symbol)))
+
+            (write-region (point-min) (point-max) el-file)
+            (message "Fixed provide in %s" (file-name-nondirectory el-file))))))))
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org45adb91" class="outline-2">
+<h2 id="org45adb91"><span class="section-number-2">8.</span> Configuration Keybindings</h2>
+<div class="outline-text-2" id="text-8">
+<p>
+Centralized keybindings for configuration management.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">;; Define the prefix command first
+(define-prefix-command 'my/config-map)
+
+;; Then set the global binding
+(global-set-key (kbd "C-c c") 'my/config-map)
+
+;; Now we can safely add keys to the map
+(define-key my/config-map (kbd "r") #'my/rebuild-config)        ; Rebuild
+(define-key my/config-map (kbd "l") #'my/lint-config-modules)    ; Lint
+(define-key my/config-map (kbd "f") #'my/smart-fix-config)       ; Fix
+(define-key my/config-map (kbd "v") #'my/verify-modules-status)  ; Verify
+(define-key my/config-map (kbd "m") #'my/show-all-provides-mapping) ; Mapping
+
+;; Keep F5 for quick rebuild
+(global-set-key (kbd "&lt;f5&gt;") #'my/rebuild-config)
+</pre>
+</div>
+</div>
+</div>
+<div id="outline-container-org2d3b9f5" class="outline-2">
+<h2 id="org2d3b9f5"><span class="section-number-2">9.</span> Footer</h2>
+<div class="outline-text-2" id="text-9">
+<p>
+This block contains the closing boilerplate for the tangled config.el file.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-emacs-lisp">(message "--- Finished loading config.el ---")
+(provide 'config)
+;;; config.el ends here
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<footer class="main-footer"><p>Last Modified: 2025-09-12</p><p>This site is built with Emacs and Org-mode.</p><p>// SYSTEM_NORMAL // [C] 2025 CALEB CHRISTENSEN</p></footer><script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+</div>
+</body>
+</html>

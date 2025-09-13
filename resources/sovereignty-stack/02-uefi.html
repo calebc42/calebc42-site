@@ -1,0 +1,1072 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2025-09-12 Fri 21:26 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>A Guide to UEFI Firmware Analysis and Modification</title>
+<meta name="author" content="Caleb Christensen" />
+<meta name="description" content="Hardware-level reverse engineering and risk assessment." />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="/assets/css/style.css"/><script src="/assets/js/theme.js"></script><script src="/assets/js/dynamic_var.js"></script><script src="/assets/js/site-nav.js"></script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&family=Roboto+Mono:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet"><meta name="referrer" content="no-referrer">
+</head>
+<body>
+<div id="preamble" class="status">
+<div class="yorha-status">  <span class="status-indicator online"></span>  <span class="yorha-terminal">STATUS: OPERATIONAL</span></div><header class="main-header">  <div class="header-content">    <div class="logo">LOG: CALEB_CHRISTENSEN</div>    <nav class="main-nav">      <ul>        <li><a href="/">// HOME</a></li>        <li><a href="/sitemap.html">// SITEMAP</a></li>        <li><a href="/contact.html">// CONTACT</a></li>      </ul>    </nav>    <button class="theme-toggle" id="theme-toggle" title="Toggle theme">      <span class="material-symbols-outlined icon-sun">light_mode</span>      <span class="material-symbols-outlined icon-moon">dark_mode</span>    </button>  </div></header><div class="pattern"><div class="pattern-inner"></div></div>
+</div>
+<div id="content" class="content">
+<h1 class="title">A Guide to UEFI Firmware Analysis and Modification</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org5856ce9">1. Introduction</a>
+<ul>
+<li>
+<ul>
+<li><a href="#org68677a1">1.0.1. Entering the Yoga 710-15IKB BIOS</a></li>
+<li><a href="#orga02e2cf">1.0.2. Virtualization (VT-x) Activation and disabling Secure Boot</a></li>
+<li><a href="#orga9484d4">1.0.3. VT-d Activation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org5856ce9" class="outline-2">
+<h2 id="org5856ce9"><span class="section-number-2">1.</span> Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+I will be using a Lenovo Yoga 710-15IKB with a 7th Generation Intel i5-7200U and 8GB of RAM. The 7th Generation Porcessor lacks the TPM needed to upgrade to Windows 11. It also employs Intel Boot Guard preventing me from using an open-source BIOS/UEFI such as Coreboot.
+</p>
+
+<p>
+Since I cannot override the proprietary BIOS/UEFI, I will prepare it for virtualization use with a Type 1 Hypervisor. Modern virtualization relies on a suite of hardware-assisted features built into the processor and supporting platform components. A quick and dirty confirmation is to check from the <i>Task Manager</i>.
+</p>
+
+<p>
+<kbd>Ctrl+Shift+Esc</kbd> to open <i>Windows Task Manager</i>, and navigate to the <i>Performance</i> tab, select the CPU monitor and in the bottom left you should see "Virtualization:".
+</p>
+
+<p>
+I had to dig a bit deeper into the spec sheets of my specific hardware configuration. This confirmation is critical, as it eliminates the processor as a potential point of failure and definitively proves that the hardware is, at its core, capable of performing the desired function.
+</p>
+
+<p>
+A thorough analysis of the official technical specifications for the SoC processor models reveals that all late-2016 Yoga Hardware configurations provide full, unequivocal support for the entire suite of relevant Intel® Virtualization Technologies. This includes not only the baseline VT-x but also with Extended Page Tables (EPT) and VT-d.
+</p>
+
+<dl class="org-dl">
+<dt>Intel® VT-x</dt><dd>This is the foundational instruction set extension that allows the hypervisor to create and manage secure, hardware-isolated virtual machines by providing hardware hooks that allow a hypervisor, or Virtual Machine Monitor (VMM), to efficiently manage and isolate multiple guest operating systems on a single physical processor. VT-x accelerates the execution of privileged instructions within a virtual machine (VM), significantly reducing the performance overhead that would otherwise be incurred by pure software emulation. The presence and activation of VT-x are prerequisites for running nearly all modern 64-bit virtual machines.
+<dl class="org-dl">
+<dt>Extended Page Tables (EPT)</dt><dd>A hardware feature that dramatically accelerates memory virtualization by adding a second layer of address translation, allowing the CPU to convert a VM's memory addresses to the actual physical RAM in silicon without constantly interrupting the hypervisor. This substantial reduction in overhead leads to faster memory access, more efficient CPU usage, and stronger, hardware-enforced memory isolation between virtual machines.</dd>
+</dl></dd>
+<dt>Intel® VT-d</dt><dd>Extends hardware assistance beyond the CPU to the system's I/O pathways. It is an I/O memory management unit (IOMMU) technology that remaps I/O Direct Memory Access (DMA) transfers. In practical terms, VT-d allows a hypervisor to securely and directly assign physical hardware devices, such as a network interface card, a storage controller, or, most commonly, a discrete graphics processing unit, to a specific guest operating system. This process, known as "passthrough," gives the guest VM exclusive, near-native performance access to the hardware device.</dd>
+</dl>
+</div>
+<div id="outline-container-org68677a1" class="outline-4">
+<h4 id="org68677a1"><span class="section-number-4">1.0.1.</span> Entering the Yoga 710-15IKB BIOS</h4>
+<div class="outline-text-4" id="text-1-0-1">
+<p>
+Lenovo provides several distinct methods for entering the BIOS setup utility, accommodating different scenarios from a cold boot to a restart from within the operating system.
+</p>
+
+<ul class="org-ul">
+<li><b>Function Key Method</b>: This is the most traditional method. Power on the laptop from a fully off state. As soon as the Lenovo logo appears on the screen, immediately and repeatedly press the <code>F2</code> key. On some models, it may be necessary to hold down the <kbd>Fn</kbd> key simultaneously while pressing <kbd>F2</kbd> (i.e., <kbd>Fn</kbd> + <kbd>F2</kbd>). This action must be performed within a very short time window before the operating system begins to load, and it may take several attempts to succeed.</li>
+<li><b>Novo Button Method</b>: A feature specific to many Lenovo consumer laptops is the Novo button. This is a small, recessed button typically located within a pinhole on the left or right side of the laptop's chassis, often marked with a small U-shaped arrow icon. To use this method, the laptop must be completely shut down. Then, using a straightened paperclip or a SIM card ejector tool, gently press and release the Novo button. The laptop will power on and display the "Novo Button Menu," which provides options to enter the normal startup sequence, the BIOS Setup, the Boot Menu, or the System Recovery environment. Selecting "BIOS Setup" from this menu will directly enter the configuration utility.</li>
+<li><b>Windows Advanced Startup Method</b>: If the system boots too quickly to reliably press the function key, the BIOS can be accessed from within a running Windows 10 or Windows 11 operating system. Navigate to <code>Settings &gt; Update &amp; Security &gt; Recovery</code>. Under the <b>"Advanced Startup"</b> section, click the <code>Restart now</code> button. The system will reboot into a blue options menu. From here, select <code>Troubleshoot</code> &gt; <code>Advanced options</code> &gt; <code>UEFI Firmware Settings</code>. Clicking this final option will prompt one more restart, after which the system will boot directly into the BIOS setup utility.</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orga02e2cf" class="outline-4">
+<h4 id="orga02e2cf"><span class="section-number-4">1.0.2.</span> Virtualization (VT-x) Activation and disabling Secure Boot</h4>
+<div class="outline-text-4" id="text-1-0-2">
+<p>
+Once inside the BIOS setup utility, navigate the menus to find the available virtualization settings. For Lenovo IdeaPad and Yoga series laptops, this option is most commonly located under the Configuration tab. Regardless of manufacturer, the setting is typically labeled simply as <b>Intel Virtualization Technology</b>.
+</p>
+
+<p>
+Next, turn off secure boot as this feature will prevent an unsigned UEFI shell from loading. Navigate to the "Security" tab and ensure that the "Secure Boot" option is set to Disabled.
+</p>
+
+<dl class="org-dl">
+<dt>Secure Boot</dt><dd>Security standard designed to ensure that a device boots using only software that is trusted by the Original Equipment Manufacturer (OEM). By default, many systems are configured to only trust bootloaders signed by Microsoft, potentially hindering the installation and use of a Hypervisor.</dd>
+</dl>
+
+<p>
+While disabling Secure Boot does remove a valuable security layer, it only protects the moments before the main operating system takes over. Since all other security measures are still fully active, the setup can still be considered safe by focusing on other security principles, especially in a controlled server environment. The safety comes from mitigating the specific risks that Secure Boot protects against.
+</p>
+
+<p>
+Secure Boot is most effective at stopping threats that require physical access, if your server is in a physically secure location (like a locked server closet or a data center), this risk is already heavily mitigated.
+</p>
+
+<p>
+We will be installing Xen and Debian from the official, cryptographically verified Debian repositories. This ensures you aren't installing a pre-compromised hypervisor. The Debian host (Dom0) will be a minimal installation with functions limited to only managing VMs. As long as you won't be browsing the web, checking email, or plugging in untrusted devices to the host OS, you drastically reduce the chances of malware ever reaching it in the first place.
+</p>
+
+<p>
+You can, and should, enable Secure Boot for your individual guest VMs (DomUs), provided their operating systems support it. This means that even if the host hypervisor booted without Secure Boot, your guest operating systems can still benefit from that layer of protection within their own virtualized environment.
+</p>
+</div>
+</div>
+<div id="outline-container-orga9484d4" class="outline-4">
+<h4 id="orga9484d4"><span class="section-number-4">1.0.3.</span> VT-d Activation</h4>
+<div class="outline-text-4" id="text-1-0-3">
+<p>
+To ensure no compatibility issues down the line, we will also need to enabled I/O passthrough so that the virtualization software can utilize all of our hardware beyond just the CPU.
+</p>
+
+<p>
+On most consumer laptops, it's unlikely to be able to simply activate IOMMU from the standard UEFI. This is a standard practice for delinneating consumer from professional product-lines laptops, where manufacturers often create artificial restrictions to advanced features like VT-d, which are frequently reserved for more expensive, enterprise-oriented product lines such as the ThinkPad series.
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org3b2fc52"></a>Direct UEFI Variable Modification for VT-d Enablement<br />
+<div class="outline-text-5" id="text-1-0-3-1">
+<p>
+This section provides a detailed protocol for enabling Intel® VT-d by directly modifying hidden configuration variables within the UEFI firmware.
+</p>
+
+<p>
+Attempting high-risk firmware patching without first acquiring a CH341A programmer and creating a valid backup is an act of extreme recklessness. The hardware programmer is the safety net that makes advanced firmware exploration possible.
+</p>
+
+<p>
+A CH341A programmer is an inexpensive, widely available USB device designed to interface at a hardware-level directly with the 8-pin Small Outline Package (SOP) inregrated circuit. Also known as an SPI (Serial Peripheral Interface) flash memory chip. With a SOP8 Test Clip, it allows a user to read the chip's entire contents to a file (creating a perfect backup), erase the chip, and write a new file (a new firmware image) back to it.
+</p>
+
+<p>
+This tool operates completely independent of the laptop's CPU, operating system, and all software-based security mechanisms. It bypasses digital signature verification, checksum validation, and any restrictions imposed by the manufacturer's flashing utilities. For this reason, it is the ultimate tool for both advanced firmware modification and, more importantly, for recovering a system from any form of firmware corruption. The physical accessibility of the SPI flash chip represents a "hardware backdoor" that provides total control to anyone with the right tools and physical access to the device. We will be continuing without one for now as we will be focusing on Non-Persistent Modification using variable manipulation.
+</p>
+
+<p>
+Modern UEFI firmware architecture store configuration settings, both those visible in the UEFI and those that are hidden, in protected data blocks called "VarStores". The graphical UEFI is merely a front-end for modifying a subset of these variables. However, it is possible to bypass this limited interface by booting the system into a command-line environment known as a <code>UEFI Shell</code>. From within this shell, specialized tools can be executed to directly read from and write to these underlying configuration variables, allowing for the modification of settings that the manufacturer has chosen to hide from the user. The principal tool for this task is a command-line utility named <code>setup_var.efi</code>.
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org4f75c1a"></a>Toolkit Assembly<br />
+<div class="outline-text-6" id="text-1-0-3-1-1">
+<div class="warning" id="orgf7256bd">
+<p>
+The procedures described in this section are performed entirely at the user's own risk and are not supported by Lenovo. Modifying UEFI variables involves writing directly to the system's non-volatile firmware storage. An error in this process, such as specifying an incorrect variable offset, writing an incorrect value, or interrupting the process, can lead to irreversible firmware corruption. This can result in a "bricked" system, meaning the laptop will be permanently unable to power on or boot. There is also a risk of data loss. Before proceeding, ensure all critical data is backed up to an external device. Proceed only if the requirement for VT-d functionality is critical and outweighs the substantial risk of rendering the hardware permanently inoperable.
+</p>
+
+</div>
+
+<p>
+To perform the firmware modification, the following software and hardware components are required:
+</p>
+<dl class="org-dl">
+<dt>The Official BIOS Update File</dt><dd>The <code>2xcn38ww.exe</code> file for the Yoga 710-15IKB, which contains the raw firmware image to be analyzed.</dd>
+<dt><code>UEFITool</code></dt><dd>A utility for parsing and navigating the structure of UEFI firmware images. This is used to locate the specific module containing the setup variables.</dd>
+<dt><code>Universal IFR Extractor</code></dt><dd>A tool that can decompile a UEFI setup module into a human-readable text file, revealing the names, options, and memory offsets of all configuration variables.</dd>
+<dt><code>Bootable UEFI Shell</code></dt><dd>A pre-compiled UEFI Shell environment (e.g., from the open-source project <code>pbatard/UEFI-Shell</code>) that provides the command-line interface.</dd>
+<dt><code>setup_var.efi</code> Utility</dt><dd>The command-line tool used to read and write UEFI variables from within the shell.</dd>
+<dt>USB Flash Drive</dt><dd>A spare USB drive of any common capacity (e.g., 8 GB), which will be formatted to create the bootable UEFI environment.</dd>
+</dl>
+
+<p>
+The most critical part of this process is to identify the precise memory offset of the hidden VT-d setting within the UEFI variable store. This offset is specific to the hardware model and BIOS version. Using an incorrect offset will corrupt the firmware. Therefore, it is essential to perform this analysis on the specific firmware file. The following steps outline this analytical process.
+</p>
+</div>
+</li>
+<li><a id="org1554402"></a>Download the BIOS Image:<br />
+<div class="outline-text-6" id="text-1-0-3-1-2">
+<p>
+Navigate to the manufacturers product specific support page and ensure you download a copy of the most recent BIOS Image. The Lenovo Support Center download link will requre you enter the device serial number to ensure the downloaded image contains the right drivers for your exaxt system config.
+</p>
+
+<p>
+Once you have been redirected, you can right click on the download button and select <code>Copy Link Address</code>. Paste the link into the text box here to create a curl command for collecting the download.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-nil">curl -Lo "__BIOS_URL__"
+</pre>
+</div>
+<p>
+  <label for="BIOS_URL"><b>BIOS URL:</b></label><br>
+  <input type="text" id="BIOS_URL" name="BIOS_URL" class="dynamic-input" data-placeholder="__BIOS_URL__" size="60" placeholder="Insert text to replace __BIOS_URL__">
+</p>
+</div>
+</li>
+<li><a id="orgee23861"></a>Verify the BIOS Integrity<br />
+<div class="outline-text-6" id="text-1-0-3-1-3">
+<p>
+In the BIOS Download page from Lenovo Support Center, there is a <code>View Checksum</code> hyperlink. It is a <b>digital fingerprint</b>, used to check whether errors have occurred in transmission or storage. We will compare this provided checksum with the checksum of our downloaded file.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">sha256sum 2xcn38ww.exe
+</pre>
+</div>
+<p>
+For our specific BIOS, it should be:
+</p>
+<pre class="example">
+bfbaf6e9d5ad060dab798101773d2d370f62a85ae323f7357c03c2ad08be17f5 
+</pre>
+</div>
+</li>
+<li><a id="org205ef09"></a>Extract the Raw BIOS Image:<br />
+<div class="outline-text-6" id="text-1-0-3-1-4">
+<p>
+We will use the archive extracting utility, <code>innoextract</code>, to extract the contents of the self-extracting installer.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">innoextract -l 2xcn38ww.exe
+</pre>
+</div>
+<p>
+It should return the following;
+</p>
+<pre class="example">
+Listing "Lenovo BIOS Update Utility" - setup data version 5.5.7
+ - "app/2XCN38WW.exe" (5.99 MiB) - overwritten
+ - "app/2XCN38WW.exe" (5.99 MiB)
+Done.
+</pre>
+
+
+<div class="org-src-container">
+<pre class="src src-sh">innoextract -e 2xcn38ww.exe
+</pre>
+</div>
+<pre class="example">
+Extracting "Lenovo BIOS Update Utility" - setup data version 5.5.7
+ - "app/2XCN38WW.exe" - overwritten
+ - "app/2XCN38WW.exe"
+Done.
+</pre>
+
+
+<p>
+Next, we will navigate to the extracted directory, <code>app/</code>, and attempt to continue to extract the contents until a single, raw firmware image file is located.
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">innoextract -l 2XCN38WW.exe
+</pre>
+</div>
+<p>
+However, it gives the following stderr
+</p>
+<pre class="example">
+Not a supported Inno Setup installer!
+Done with 1 error.
+</pre>
+
+
+<p>
+We can officially move to extracting with 7Zip.
+First, we need to examine the executable before extracting:
+</p>
+<div class="org-src-container">
+<pre class="src src-nil">7z l 2XCN38WW.exe
+</pre>
+</div>
+<p>
+You should find the following:
+</p>
+<pre class="example">
+   Date      Time    Attr         Size   Compressed  Name
+------------------- ----- ------------ ------------  ------------------------
+2008-01-15 00:25:00 ....A       105886        72290  Ding.wav
+2015-12-16 02:28:45 ....A          526               Microsoft.VC90.CRT.manifest
+2015-12-16 02:28:45 ....A          550               Microsoft.VC90.MFC.manifest
+2018-07-09 01:29:50 ....A      9152488      4455993  CIUY7212.bin
+2018-07-09 02:24:47 ....A        50432         9912  platform.ini
+2015-12-17 03:49:06 ....A        42440      1252052  FlsHook.exe
+2012-07-02 04:50:48 ....A       225560               FWUpdLcl.exe
+2016-09-23 01:20:13 ....A       891904               H2OFFT-Wx64.exe
+2015-12-16 05:42:22 ....A       286664               BiosImageProcx64.dll
+2015-12-16 02:28:45 ....A      1679864               mfc90u.dll
+2015-12-16 02:28:45 ....A       851456               msvcp90.dll
+2015-12-16 02:28:45 ....A       627200               msvcr90.dll
+2015-08-26 04:49:24 ....A        67240               iscflashx64.sys
+------------------- ----- ------------ ------------  ------------------------
+2018-07-09 02:24:47           13982210      5790247  13 files
+</pre>
+
+<p>
+The firmware image will typically have an extension such as .bin, .fd, or .rom.
+For us, we can verify it is <code>CIUY7212.bin</code> based on the extension, the file size and the modified date.
+</p>
+
+<p>
+We can now safely extract the installer to read the image.
+</p>
+<div class="org-src-container">
+<pre class="src src-nil">7z e 2XCN38WW.exe
+</pre>
+</div>
+</div>
+</li>
+<li><a id="orgead5981"></a>Load Firmware Image in UEFITool:<br />
+<div class="outline-text-6" id="text-1-0-3-1-5">
+<p>
+We need to download the GUI UEFITool from the official GitHub repository. The maintainer at time of writing is LongSoft.
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">curl -Lo uefitool "__UEFI_URL__"
+</pre>
+</div>
+<p>
+  <label for="UEFI_URL"><b>UEFITool URL:</b></label><br>
+  <input type="text" id="UEFI_URL" name="UEFI_URL" class="dynamic-input" data-placeholder="__UEFI_URL__" size="60" placeholder="Insert text to replace __UEFI_URL__">
+</p>
+
+<p>
+Make it executable;
+</p>
+<div class="org-src-container">
+<pre class="src src-nil">chmod +x uefitool
+</pre>
+</div>
+
+<p>
+Execute and open the raw firmware image file extracted in the previous step.
+</p>
+<div class="org-src-container">
+<pre class="src src-nil">./uefitool CIUY7212.bin
+</pre>
+</div>
+<p>
+The tool will parse the file and display its hierarchical structure.
+</p>
+</div>
+</li>
+<li><a id="org527335a"></a>Extract the Setup Utility Body:<br />
+<div class="outline-text-6" id="text-1-0-3-1-6">
+<p>
+Use the search function, <kbd>Ctrl+F</kbd> in the search dialog, switch to the "Text" tab and search for the Unicode text string "VT-d". The search results will likely point to a PE32 image section within a firmware volume. This section is the setup module that contains the definitions for the BIOS configuration screen.
+</p>
+
+<p>
+In the UEFITool interface, double-click the search result to navigate to the PE32 image section in the main window. Right-click on this highlighted section and choose the option <code>Extract body...</code>. Save the resulting file with a .bin extension (e.g., SetupUtility.bin).
+</p>
+</div>
+</li>
+<li><a id="org826fc9c"></a>Generate the IFR Text File:<br />
+<div class="outline-text-6" id="text-1-0-3-1-7">
+<p>
+We will need to download the Universal IFR Extactor utility, which is also currently maintained by the same LongSoft.
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">curl -LO ifrextractor "__IFRE_URL__"
+</pre>
+</div>
+<p>
+  <label for="IFRE_URL"><b>IFR Extractor URL:</b></label><br>
+  <input type="text" id="IFRE_URL" name="IFRE_URL" class="dynamic-input" data-placeholder="__IFRE_URL__" size="60" placeholder="Insert text to replace __IFRE_URL__">
+</p>
+
+<p>
+Extract the download:
+</p>
+<div class="org-src-container">
+<pre class="src src-nil">7z e ifrextractor
+</pre>
+</div>
+
+<p>
+Make it executable;
+</p>
+<div class="org-src-container">
+<pre class="src src-nil">chmod +x ifrextractor
+</pre>
+</div>
+
+<p>
+Now, we need to verify the contents of the SetupUtility.bin using the new tool to read the file and print the output to the terminal:
+</p>
+<div class="org-src-container">
+<pre class="src src-shell">./ifrextractor SetupUtility.bin list
+</pre>
+</div>
+<p>
+You should see various UEFI HII String Packages and UEFI HII Form Packages.
+</p>
+<pre class="example">
+UEFI HII form packages:
+Index: 0, Offset: 0x91894, Length: 0x163, Used strings: 28, Min StringId: 0x0, Max StringId: 0x157E
+Index: 1, Offset: 0x92B84, Length: 0x48E, Used strings: 36, Min StringId: 0x0, Max StringId: 0x1477
+Index: 2, Offset: 0x94044, Length: 0x1EB, Used strings: 42, Min StringId: 0x0, Max StringId: 0x143A
+Index: 3, Offset: 0x98804, Length: 0x1FFA4, Used strings: 5038, Min StringId: 0x0, Max StringId: 0x157C
+Index: 4, Offset: 0xB9844, Length: 0x281, Used strings: 22, Min StringId: 0x0, Max StringId: 0x1576
+Index: 5, Offset: 0xC8A74, Length: 0x24C, Used strings: 11, Min StringId: 0x0, Max StringId: 0x66
+Index: 6, Offset: 0xC9D64, Length: 0xA66, Used strings: 89, Min StringId: 0x0, Max StringId: 0x141
+Index: 7, Offset: 0xCB8A4, Length: 0xA04, Used strings: 77, Min StringId: 0x0, Max StringId: 0xEF
+Index: 8, Offset: 0xCD2D4, Length: 0x201, Used strings: 17, Min StringId: 0x0, Max StringId: 0xE1
+UEFI HII string packages:
+Index: 0, Offset: 0x3E5D4, Length: 0x4AEA5, Language: en-US, Total strings: 5503
+Index: 1, Offset: 0x89479, Length: 0x31EA, Language: fr-FR, Total strings: 194
+Index: 2, Offset: 0x8C663, Length: 0x1C7A, Language: zh-TW, Total strings: 180
+Index: 3, Offset: 0x8E2DD, Length: 0x1966, Language: ja-JP, Total strings: 114
+Index: 4, Offset: 0xBBD84, Length: 0x5BDE, Language: en-US, Total strings: 322
+Index: 5, Offset: 0xC1962, Length: 0x2C4C, Language: fr-FR, Total strings: 177
+Index: 6, Offset: 0xC45AE, Length: 0x159B, Language: zh-TW, Total strings: 170
+Index: 7, Offset: 0xC5B49, Length: 0x1E47, Language: ja-JP, Total strings: 170
+Framework HII form packages: none
+Framework HII string packages: none
+</pre>
+
+
+<p>
+If it appears the correct PE32 Image body was extracted, we will create a new directory to extract every possible combination of the forms and strings.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-shell">mkdir ifr
+</pre>
+</div>
+
+<p>
+Copy the necessary files into the new directory
+</p>
+<div class="org-src-container">
+<pre class="src src-nil">cp SetupUtility.bin ifr/
+cp ifrextractor ifr/
+</pre>
+</div>
+
+<p>
+Navigate into the new directory
+</p>
+<div class="org-src-container">
+<pre class="src src-nil">cd ifr
+</pre>
+</div>
+
+<p>
+Run the full extraction
+</p>
+<div class="org-src-container">
+<pre class="src src-nil">./ifrextractor SetupUtility.bin all
+</pre>
+</div>
+</div>
+</li>
+<li><a id="org5b39dcd"></a>Identify the VT-d Offset:<br />
+<div class="outline-text-6" id="text-1-0-3-1-8">
+<p>
+Run the global search from within the 'ifr' directory.
+</p>
+<div class="org-src-container">
+<pre class="src src-nil">grep -iE 'VT-d' *.txt
+</pre>
+</div>
+<p>
+You should get a similar output.
+</p>
+<pre class="example">
+setupUtility.bin.3.0.en-US.uefi.ifr.txt:                Text Prompt: "VT-d", Help: "VT-d capability", Text: "N/A"
+setupUtility.bin.3.0.en-US.uefi.ifr.txt:                        OneOf Prompt: "VT-d", Help: "VT-d capability", QuestionFlags: 0x10, QuestionId: 0x19F, VarStoreId: 0x2, VarOffset: 0xE3, Flags: 0x10, Size: 8, Min: 0x0, Max: 0x1, Step: 0x0
+</pre>
+
+
+<p>
+From this output, three critical pieces of information must be recorded:
+</p>
+<dl class="org-dl">
+<dt>VarStoreId</dt><dd>In this example, it is "0x2".</dd>
+<dt>Variable Offset</dt><dd>This is the hex value listed after "VarOffset:". In this example, it is 0xE3. This is the most critical value.</dd>
+<dt>Enabled Value</dt><dd>The hex value corresponding to the "Enabled" option. In this example, it is 0x1.</dd>
+</dl>
+
+<p>
+Next, we need to determine the VarStore Name. The grep command listed the ID, we need to open the <code>setupUtility.bin.3.0.en-US.uefi.ifr.txt</code> in a text editor and locate the name.
+</p>
+
+<p>
+It should look like:
+</p>
+<pre class="example">
+VarStore Guid: 72C5E28C-7783-43A1-8767-FAD73FCCAFA4, VarStoreId: 0x2, Size: 0x1D7, Name: "SaSetup"
+</pre>
+
+
+<p>
+The VarStore Name we are looking for is <code>SaSetup</code>.
+</p>
+</div>
+</li>
+</ol>
+</li>
+<li><a id="org95cf5bb"></a>Constructing a Bootable UEFI Shell Environment<br />
+<div class="outline-text-5" id="text-1-0-3-2">
+<p>
+The next phase involves preparing the USB flash drive to boot into the UEFI shell.
+</p>
+
+<p>
+Format the USB flash drive using the FAT32 file system. Ensure it is using a GUID Partition Table (GPT) partition scheme for maximum compatibility with UEFI systems.
+</p>
+
+<ul class="org-ul">
+<li>Open PowerShell as an Administrator:
+<kbd>Win+x</kbd> + <kbd>a</kbd></li>
+
+<li><p>
+Start the DiskPart utility:
+</p>
+<div class="org-src-container">
+<pre class="src src-PowerShell">diskpart
+</pre>
+</div>
+<ul class="org-ul">
+<li><p>
+List all disks to find your USB drive
+</p>
+<div class="org-src-container">
+<pre class="src src-PowerShell">list disk
+</pre>
+</div></li>
+<li><p>
+Select your USB drive (replace 'X' with the correct number)
+</p>
+<div class="org-src-container">
+<pre class="src src-PowerShell">select disk X
+</pre>
+</div></li>
+<li><p>
+Erase all data on the drive
+</p>
+<div class="org-src-container">
+<pre class="src src-PowerShell">clean
+</pre>
+</div></li>
+<li><p>
+Convert the disk to the GPT partition scheme
+</p>
+<div class="org-src-container">
+<pre class="src src-nil">convert gpt
+</pre>
+</div></li>
+<li><p>
+Create a new primary partition
+</p>
+<div class="org-src-container">
+<pre class="src src-PowerShell">create partition primary
+</pre>
+</div></li>
+<li><p>
+Format the partition as FAT32
+</p>
+<div class="org-src-container">
+<pre class="src src-PowerShell">format fs=fat32 quick
+</pre>
+</div></li>
+<li><p>
+Assign a drive letter
+</p>
+<div class="org-src-container">
+<pre class="src src-PowerShell">assign
+</pre>
+</div></li>
+<li><p>
+Verify the file system
+</p>
+<div class="org-src-container">
+<pre class="src src-nil">detail disk
+</pre>
+</div></li>
+<li><p>
+Verify the GUID Partition Table
+</p>
+<div class="org-src-container">
+<pre class="src src-nil">list disk
+</pre>
+</div></li>
+<li><p>
+Exit diskpart
+</p>
+<div class="org-src-container">
+<pre class="src src-PowerShell">exit
+</pre>
+</div></li>
+</ul></li>
+</ul>
+
+<p>
+On the newly formatted USB drive, create a folder named "EFI\". Inside the new directory, create another direcory named "BOOT\".
+</p>
+
+<div class="org-src-container">
+<pre class="src src-nil">New-Item -ItemType Directory -Path "__DRIVE_LETTER__:\EFI\BOOT\"
+</pre>
+</div>
+<p>
+  <label for="DRIVE_LETTER"><b>USB Drive:</b></label><br>
+  <input type="text" id="DRIVE_LETTER" name="DRIVE_LETTER" class="dynamic-input" data-placeholder="__DRIVE_LETTER__" size="60" placeholder="Insert text to replace __DRIVE_LETTER__">
+</p>
+
+<p>
+The final path will be <code>E:\EFI\BOOT\</code> (assuming E: is the USB drive letter).
+</p>
+
+<p>
+Download the <code>setup_var.efi</code> utility into the root directory of the USB flash drive.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-PowerShell">Invoke-WebRequest -Uri "__SETUPVARURL__" -OutFile "__DRIVE_LETTER__:\setup_var.efi"
+</pre>
+</div>
+<p>
+  <label for="SetupVarURL"><b>setup_var URL:</b></label><br>
+  <input type="text" id="SetupVarURL" name="SetupVarURL" class="dynamic-input" data-placeholder="__SETUPVARURL__" size="60" placeholder="Insert text to replace __SETUPVARURL__">
+</p>
+
+<p>
+Download a pre-compiled 64-bit UEFI Shell file (typically named Shell.efi or UefiShell.efi) into the <code>E:\EFI\BOOT\</code> directory.
+</p>
+
+<p>
+Rename the shell file to <code>BOOTX64.EFI</code>. This specific filename is part of the UEFI specification and designates the file as the default bootable application, ensuring the system will automatically load it.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-nil">Invoke-WebRequest -Uri "__UEFIURL__" -OutFile "__DRIVE_LETTER__:\EFI\BOOT\BOOTX64.efi"
+</pre>
+</div>
+<p>
+  <label for="UEFIURL"><b>UEFI Shell URL:</b></label><br>
+  <input type="text" id="UEFIURL" name="UEFIURL" class="dynamic-input" data-placeholder="__UEFIURL__" size="60" placeholder="Insert text to replace __UEFIURL__">
+</p>
+</div>
+</li>
+<li><a id="orgeedd818"></a>Execution of the <code>setup_var.efi</code> Command to Enable VT-d<br />
+<div class="outline-text-5" id="text-1-0-3-3">
+<p>
+This section details the direct modification of the UEFI NVRAM variable. The steps are mechanically simple but carry significant risk. <b>Absolute precision is required.</b>
+</p>
+
+<p>
+Insert the prepared USB drive into the Yoga 710-15IKB. Power on the machine and enter the BIOS setup utility. Navigate to the "Boot" tab and change the boot order to place the USB drive as the first priority.
+</p>
+
+<p>
+If the previous steps were performed correctly, the system will bypass the normal operating system bootloader and instead load the UEFI Shell, presenting a command prompt.
+</p>
+
+<p>
+The UEFI shell will map your USB drive to a filesystem, typically fs0:. To confirm, type fs0: and press Enter.
+</p>
+<pre class="example">
+Shell&gt; fs0:
+</pre>
+
+<p>
+<kbd>RET</kbd>
+</p>
+<pre class="example">
+fs0:\&gt; ls
+</pre>
+
+<p>
+Then type ls to list the contents; you should see the setup<sub>var.efi</sub> file.
+</p>
+<pre class="example">
+Directory of: FS0:\
+09/06/2025  20:33 &lt;DIR&gt;       16,384  EFI
+09/06/2025  20:36            101,376  setup_var.efi
+          1 File(s)    101,376 bytes
+          1 Dir(s)
+</pre>
+
+
+<p>
+Now, carefully type the command using the precise offset and value identified in the firmware. The command syntax is
+</p>
+<pre class="example">
+setup_var.efi &lt;OFFSET&gt; &lt;VALUE&gt;
+</pre>
+
+
+<p>
+Using the VarOffset and Value from earlier,
+</p>
+<div class="org-src-container">
+<pre class="src src-nil">setup_var.efi SaSetup:0xE3=0x1
+</pre>
+</div>
+<p>
+Press Enter to execute the command. There may be no output if the command is successful.
+</p>
+
+<p>
+Perform a Hard Shutdown. Do not use a reboot command or press Ctrl+Alt+Del. Instead, press and hold the physical power button on the laptop until the machine shuts down completely. This forces a cold boot, which helps ensure the firmware correctly commits the NVRAM change on the next startup.
+</p>
+</div>
+</li>
+<li><a id="orgf4d78cf"></a>Final Operating System Configuration and Verification<br />
+<div class="outline-text-5" id="text-1-0-3-4">
+<p>
+Successfully modifying the UEFI variable to enable VT-d is only the first part of the process. The host operating system must also be configured to recognize and utilize this newly available hardware feature. This final section covers the necessary steps within Windows to enable supporting services and to perform a definitive verification of VT-d activation.
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org6ed2c5f"></a>Mitigating Conflicts with Virtualization-Based Security (VBS) Features<br />
+<div class="outline-text-6" id="text-1-0-3-4-1">
+<p>
+Modern versions of Windows 10 and 11 leverage hardware virtualization to enhance system security. Features such as Core Isolation and its sub-component Memory Integrity (also known as Hypervisor-Protected Code Integrity, or HVCI) use the hypervisor layer to protect critical system processes from malware.
+</p>
+
+<p>
+When these features are enabled, the Windows hypervisor takes exclusive control of the system's virtualization hardware (both VT-x and VT-d). This can create a conflict with third-party virtualization applications like VMware Workstation or Oracle VirtualBox, which also require access to this hardware. If such an application is launched while Memory Integrity is active, it will fail with an error message stating that VT-x is not available or disabled, even though it is enabled in the BIOS.
+</p>
+
+<p>
+Therefore, if the primary goal of enabling VT-d is to use it with a third-party hypervisor (for example, to perform GPU passthrough in a QEMU/KVM environment on a Linux host or within VMware), it may be necessary to disable these Windows security features. To do so, navigate to Windows Security &gt; Device security &gt; Core isolation details and turn the toggle for "Memory Integrity" to Off. A reboot will be required. This releases the hardware for use by other applications but comes at the cost of reduced system security against certain advanced threats.
+</p>
+</div>
+</li>
+<li><a id="org89bf5ac"></a>System-Level Confirmation of VT-d (IOMMU) Activation<br />
+<div class="outline-text-6" id="text-1-0-3-4-2">
+<p>
+After the firmware modification and OS configuration, a final check is required to confirm that the IOMMU is active and recognized by the system. The Windows Task Manager is insufficient for this, as its "Virtualization" status only reflects the state of VT-x.
+The most reliable method within Windows is to use the Device Manager.
+</p>
+
+<p>
+Open <i>Device Manager</i>, <kbd>Win+x</kbd> +  <kbd>m</kbd>
+</p>
+
+<p>
+From the menu bar, click "View" and select "Devices by connection."
+Expand the device tree, starting from the ACPI PC entry. Look for the PCI Express Root Complex.
+</p>
+
+<p>
+If VT-d is successfully enabled and initialized by the system, an entry named Intel(R) Virtualization Technology for Directed I/O or a similar IOMMU device will be visible as a child of the root complex. Its presence is a definitive confirmation of success.
+In the device mangager, I have found:
+</p>
+
+<ul class="org-ul">
+<li>PCI Express Root Complex
+<ul class="org-ul">
+<li>ELAN SMBus Driver</li>
+<li>High Definition Audio Controller</li>
+<li>Intel(R) 6th generation core processor family platform I/O SATA AHCI Controller</li>
+<li>Intel(R) 7th Generation Processor Family Host Bridge/DRAM Registers - 5904</li>
+<li>Intel(R) HD Graphics 620</li>
+<li>Intel(R) Management Engine Interface</li>
+<li>Intel(R) Serial IO GPIO Host Controller - INT344B</li>
+<li>Intel(R) Serial IO I2C Host Controller - 9D60</li>
+<li>Intel(R) Serial IO I2C Host Controller - 9D61</li>
+<li>Intel(R) Serial IO UART Host Controller - 9D27</li>
+<li>Intel(R) USB eXtensible Host Controller - 1.0 (Microsoft)</li>
+<li>Mobile 6th/7th Generation Intel(R) Processor Family I/O Express Root Port #6 - 9D15</li>
+<li>Mobile 6th/7th Generation Intel(R) Processor Family I/O PMC - 9D21</li>
+<li>Mobile 6th/7th Generation Intel(R) Processor Family I/O Thermal subsystem - 9D31</li>
+<li>Mobile 7th Generation Intel(R) Processor Family I/O LPC Controller (U Premium)- 9D58.</li>
+</ul></li>
+</ul>
+
+<p>
+Unfortunately, for me, this means it did not work. The "Intel(R) I/O Memory Management Unit" is not present, which is the key indicator that VT-d is inactive. We will boot back into the UEFI Shell to verify if the firmware has a security or integrity check that reverted the unauthorized change when the device was rebooted.
+</p>
+
+<p>
+Once back into the UEFI Shell, we will <i>read</i> the VarOffset;
+</p>
+<div class="org-src-container">
+<pre class="src src-nil">fs0:\&gt; setup_var.efi SaSetup:0xE3
+</pre>
+</div>
+<p>
+There are two possibilities:
+</p>
+
+<p>
+If the output is <code>0x0</code>: The command worked temporarily, but the firmware detected the change upon reboot and reset it to the default "Disabled" value. This indicates a security feature that is very difficult to bypass.
+</p>
+
+<p>
+If the output is <code>0x1</code>: It would mean the setting was successfully changed, but some other mechanism is preventing VT-d from being activated.
+</p>
+
+<p>
+My output was 0x01, this points to a much more thorough method of disabling the feature by the manufacturer. The most likely reason is that the setting is a "disconnected switch."
+</p>
+
+<p>
+The menu option to enable VT-d exists in the firmware code, and we successfully flipped it ON. However, Lenovo has likely removed the underlying code that connects that switch to the actual hardware function.
+</p>
+
+<p>
+The real control could be in a different VarStore or different offset, additionally, some BIOSes have “master enable” flags or prerequisite checks.
+</p>
+<pre class="example" id="org91c0a32">
+VT-x might only be enabled if “Security &gt; TPM” or “Boot &gt; UEFI Only” is also set.
+</pre>
+
+<p>
+When doing additional digging in the IFR for "virtualization" I found this:
+</p>
+
+<pre class="example">
+OneOf Prompt: "Intel (VMX) Virtualization Technology", Help: "When enabled, a VMM can utilize the additional hardware capabilities provided by Vanderpool Technology.", QuestionFlags: 0x10, QuestionId: 0x60, VarStoreId: 0x3, VarOffset: 0xCD, Flags: 0x10, Size: 8, Min: 0x0, Max: 0x1, Step: 0x0
+
+OneOfOption Option: "Disabled" Value: 0, Default, MfgDefault
+
+OneOfOption Option: "Enabled" Value: 1
+
+End
+</pre>
+
+
+<p>
+The VarOffset 0xCD (Intel VT-x) showing as 0x0 in setup<sub>var.efi</sub> read, even though: 
+</p>
+
+<ul class="org-ul">
+<li>BIOS menu says ‘Intel Virtualization Technology’ is Enabled</li>
+<li>Windows Task Manager shows ‘Virtualization: Enabled’</li>
+</ul>
+
+<p>
+The real VT-x enable bit is controlled by a CPU Model-Specific Register (MSR) — specifically IA32<sub>FEATURE</sub><sub>CONTROL</sub> (MSR 0x3A) — and is typically set by the BIOS firmware during early boot, before the OS loads.
+</p>
+
+<p>
+What we’re seeing in setup<sub>var.efi</sub> is a UEFI Setup Variable — which may or may not directly map to the actual hardware control. UEFI variables (like SaSetup) are configuration storage used by the BIOS setup UI. They are read by the BIOS firmware during boot, and then the firmware programs the actual CPU MSRs or chipset registers accordingly.
+</p>
+
+<p>
+The BIOS is likely “Faking” the Variable, where it exposes the settings in the UI but don’t actually use the associated UEFI variable — they hardcode behavior or use internal flags.
+This is why you found VT-d at 0xE3 but it doesn’t work — same principle.
+</p>
+
+<p>
+Unfortunately, this means that while our entire analysis and modification process was technically successful, the setting itself is a non-functional remnant. Lenovo's method of disabling VT-d on this machine is more complex than just hiding the option, making it impossible to enable with this technique.
+</p>
+</div>
+<ol class="org-ol">
+<li><a id="org73eaa81"></a>Manual Firmware Patching for <code>SupressIf</code> Neutralization<br />
+<div class="outline-text-7" id="text-1-0-3-4-2-1">
+<p>
+The mechanism by which manufacturers like Lenovo hide specific settings within the InsydeH2O graphical interface is a standardized feature of the UEFI specification. The structure and content of the setup menus are defined by a data structure known as the Internal Forms Representation (IFR). Within the IFR, developers can use conditional opcodes to control the visibility of menus and individual options. The most common of these is the <code>SuppressIf</code> opcode. This instruction allows a developer to define a condition under which a specific UI element will be hidden from the user. For locked-down consumer devices, manufacturers often use a simple, unconditional suppression, such as <code>SuppressIf: {0A 03 00}</code>, which effectively translates to "Suppress if True". This allows them to use a single, comprehensive firmware codebase across multiple product lines, simply toggling the visibility of advanced features based on the target market. The VT-d option on the Yoga 710-15IKB is present within the firmware code but is hidden from the user by such a <code>SuppressIf</code> condition.
+</p>
+
+<p>
+While direct UEFI variable manipulation is the recommended approach, an alternative method exists that aims to make the VT-d option permanently visible within the BIOS setup menu. This technique involves directly patching the firmware image file itself to remove the SuppressIf condition that hides the setting.
+</p>
+
+<p>
+This can be accomplished in a couple ways:
+</p>
+
+<ul class="org-ul">
+<li>Using a hex editor, one can locate the byte sequence corresponding to the SuppressIf instruction and alter its condition. For example, a condition that always evaluates to true (SuppressIf True) could be changed to a condition that always evaluates to false (e.g., "suppress if 1 equals 0"), thereby forcing the UI element to always be displayed.</li>
+
+<li>A more direct approach is to overwrite the entire SuppressIf instruction with NOP (No Operation) opcodes. These are null instructions that tell the processor to do nothing and simply move to the next instruction, effectively deleting the suppression logic from the code flow.</li>
+</ul>
+
+<p>
+Since I lack the SOP8 clip or CH341A programmer needed to explore this further, I will return to enabling VT-d if I run into significant performance issues down the road.
+</p>
+</div>
+</li>
+</ol>
+</li>
+</ol>
+</li>
+</ol>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<footer class="main-footer"><p>Last Modified: 2025-09-11</p><p>This site is built with Emacs and Org-mode.</p><p>// SYSTEM_NORMAL // [C] 2025 CALEB CHRISTENSEN</p></footer><script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+</div>
+</body>
+</html>

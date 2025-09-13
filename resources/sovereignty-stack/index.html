@@ -1,0 +1,529 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2025-09-12 Fri 21:26 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Project Overview</title>
+<meta name="author" content="Caleb Christensen" />
+<meta name="description" content="the project's philosophy, goals, and roadmap. This is for the reader who wants the 30,000-foot view." />
+<meta name="generator" content="Org Mode" />
+<style type="text/css">
+  #content { max-width: 60em; margin: auto; }
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #e6e6e6;
+    border-radius: 3px;
+    background-color: #f2f2f2;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: auto;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    top: -8px;
+    right: 12px;
+    padding: 3px;
+    color: #555;
+    background-color: #f2f2f299;
+  }
+  pre.src:hover:before { display: inline; margin-top: 14px;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-authinfo::before { content: 'Authinfo'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .equation-container {
+    display: table;
+    text-align: center;
+    width: 100%;
+  }
+  .equation {
+    vertical-align: middle;
+  }
+  .equation-label {
+    display: table-cell;
+    text-align: right;
+    vertical-align: middle;
+  }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { }
+</style>
+<link rel="stylesheet" type="text/css" href="/assets/css/style.css"/><script src="/assets/js/theme.js"></script><script src="/assets/js/dynamic_var.js"></script><script src="/assets/js/site-nav.js"></script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&family=Roboto+Mono:wght@400;700&family=Inter:wght@400;500&display=swap" rel="stylesheet"><meta name="referrer" content="no-referrer">
+</head>
+<body>
+<div id="preamble" class="status">
+<div class="yorha-status">  <span class="status-indicator online"></span>  <span class="yorha-terminal">STATUS: OPERATIONAL</span></div><header class="main-header">  <div class="header-content">    <div class="logo">LOG: CALEB_CHRISTENSEN</div>    <nav class="main-nav">      <ul>        <li><a href="/">// HOME</a></li>        <li><a href="/sitemap.html">// SITEMAP</a></li>        <li><a href="/contact.html">// CONTACT</a></li>      </ul>    </nav>    <button class="theme-toggle" id="theme-toggle" title="Toggle theme">      <span class="material-symbols-outlined icon-sun">light_mode</span>      <span class="material-symbols-outlined icon-moon">dark_mode</span>    </button>  </div></header><div class="pattern"><div class="pattern-inner"></div></div>
+</div>
+<div id="content" class="content">
+<h1 class="title">Project Overview
+<br />
+<span class="subtitle">Reclaiming Control in a Vendor-Locked Ecosystem</span>
+</h1>
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#orge6e03db">1. Executive Summary</a></li>
+<li><a href="#org0f439b7">2. Introduction</a></li>
+<li><a href="#orgcb1e3ed">3. Project Goals</a>
+<ul>
+<li><a href="#orge03a298">3.1. Properties of Sovereign Control</a>
+<ul>
+<li><a href="#orgd6b3104">3.1.1. P1 — Confidentiality of User Data at Rest</a></li>
+<li><a href="#orga1c71d1">3.1.2. P2 — Integrity of the Boot Chain is Established</a></li>
+<li><a href="#org63bd430">3.1.3. P3 — Verifying No Outbound Traffic to Known OEM Telemetry Endpoints.</a></li>
+<li><a href="#org82d8d29">3.1.4. P4 — No Hidden Persistent Storage Writable by the OEM</a></li>
+<li><a href="#org57c5ec2">3.1.5. P5 — Device Isolation via IOMMU</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#org8a43110">4. Next Steps</a></li>
+<li><a href="#org443db08">5. Index</a></li>
+<li><a href="#org5cd1f5b">6. Appendix</a>
+<ul>
+<li><a href="#orgabce0f4">6.1. Cryptography with Gnu Privacy Guard</a></li>
+<li><a href="#org7aa87af">6.2. Remote LUKS Unlock with Dropbear</a></li>
+</ul>
+</li>
+<li><a href="#orgcdaf8b5">7. Reference</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-orge6e03db" class="outline-2">
+<h2 id="orge6e03db"><span class="section-number-2">1.</span> Executive Summary</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+This experiment explores increasing user control over a consumer laptop, through selecting a hypervisor, reconfiguring the boot chain, and establishing a minimal, inspectable security boundary between the vendor firmware and user-controlled code. Using an Open-Source Operating System, isolating the untrusted firmware from everything above the hypervisor to establish a verifiable root of control to be measured.
+</p>
+</div>
+</div>
+<div id="outline-container-org0f439b7" class="outline-2">
+<h2 id="org0f439b7"><span class="section-number-2">2.</span> Introduction</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+This project addresses a specific technical challenge: reconciling platform security models designed for cryptographic integrity attestation with the user’s growing concern to mitigate risks such as telemetry, opaque update mechanisms, and vendor-imposed obsolescence through inspection, modification, and control of the physical hardware.
+</p>
+
+<p>
+Consider a modern vehicle’s Engine Control Unit (ECU) where the firmware is cryptographically signed by the manufacturer and verified at ignition. While the owner can perform mechanical maintenance—replacing fluids, filters, or spark plugs—the ECU’s operational logic remains sealed. Unauthorized firmware modifications trigger failsafes or disable core functionality. This design prioritizes system integrity over user modification.
+</p>
+
+<p>
+A laptop operates under a similar, but more consequential, constraint. Like the ECU, its firmware is often locked by mechanisms such as Intel Boot Guard, which uses physical fuses to verify cryptographic signatures before execution. However, unlike the ECU, a general-purpose computer has a much greater attack surface and impact of compromise from processing and storing a vastly wider range of sensitive user data; credentials, communications, financial records, creative work. In modern computing, the integrity and inspectability of the hardware's foundational code is a growing critical security concern. When the firmware layer is immutable and unauditable, the entire software stack inherits its trust boundary, regardless of the operating system’s openness or patch status.
+</p>
+
+<p>
+This isn't just a philosophical problem; the practical consequence is in exclusion. The user cannot replace or audit the firmware, even when the vendor ceases support. This creates a persistent attack surface. A compromised or outdated firmware image can subvert the OS, survive reinstalls, and evade userspace detection. Any attempt to install an open, auditable alternative like Coreboot would brick the machine, turning a functional laptop into an inert slab of silicon and plastic.
+</p>
+
+<p>
+This log is an exploration of my process for engineering an intervention: after the untrusted vendor firmware completes hardware initialization, we load a Type-1 hypervisor that orchestrates direct control of the CPU, memory, and I/O. Now, trust is not assumed, it is established at the moment of successful handoff. The hypervisor’s integrity depends entirely on its ability to preempt and isolate the firmware before it can influence higher layers. A claim I will falsify by checking whether the IOMMU actually remaps DMA after the hand-off. Once the hardware control is demonstrated, the hypervisor becomes the new root of enforcement through a minimal, user-controlled layer where policies for isolation, measurement, and access can be defined and monitored for verification.
+</p>
+
+<p>
+This is not a circumvention of security, but a reorientation to the locus of control. We accept the firmware’s role as an untrusted loader and architect a verified transition to a transparent execution environment. The goal is measurable control: when you cannot replace the foundation, you build a verified checkpoint at its boundary — reclaiming sovereignty one abstraction layer at a time.
+</p>
+
+<p>
+A successful Sovereignty Stack must be;
+</p>
+<pre class="example" id="org98dd552">
+[ Hardware ]
+|
+[ Vendor Firmware ] ← Cryptographically attested, immutable, unauditable
+| (Untrusted loader; executes first)
+|
+[ Type-1 Hypervisor ] ← Seizes control; establishes verified execution boundary
+| (Trust established upon successful hardware takeover)
+|
+[ Dom0: Debian ] ← Sovereign host, fully managed, minimal attack surface
+|_________________
+|                 |
+[ DomU: Browser ] [ DomU: Work VM ] ← Contained, monitored, policy-enforced
+</pre>
+</div>
+</div>
+<div id="outline-container-orgcb1e3ed" class="outline-2">
+<h2 id="orgcb1e3ed"><span class="section-number-2">3.</span> Project Goals</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+The default configuration of modern laptops grants the OEM a degree of control that is inconsistent with traditional notions of hardware ownership. Even after payment, control remains with the Original Equipment Manufacturer (OEM). Firmware is cryptographically sealed. Telemetry is embedded. “End of support” means forced obsolescence — not for the hardware, but for the orginal transaction agreement and your right to use your property securely.
+</p>
+
+<p>
+This project defines what true ownership looks like in technical terms. The Sovereignty Stack is proven with six measurable properties that, when satisfied, transform a consumer laptop from a black-box appliance into a sovereign computing platform.
+</p>
+
+<p>
+Each property answers a simple question: What must be true for me to trust this machine with my data, my work, and my autonomy?
+</p>
+</div>
+<div id="outline-container-orge03a298" class="outline-3">
+<h3 id="orge03a298"><span class="section-number-3">3.1.</span> Properties of Sovereign Control</h3>
+<div class="outline-text-3" id="text-3-1">
+</div>
+<div id="outline-container-orgd6b3104" class="outline-4">
+<h4 id="orgd6b3104"><span class="section-number-4">3.1.1.</span> P1 — Confidentiality of User Data at Rest</h4>
+<div class="outline-text-4" id="text-3-1-1">
+<p>
+Your files must remain unreadable to anyone — including the OEM — without your explicit consent (via passphrase). OEMs routinely include recovery mechanisms, escrow keys, or backdoor partitions. These violate the principle that you — not the vendor — are the sole custodian of your data. If the OEM can bypass your encryption, it is not encryption — it is DRM.
+</p>
+
+<p>
+This property is satisfied only when every LUKS keyslot is passphrase-derived and no OEM recovery mechanism exists in the storage hierarchy.
+</p>
+
+<p>
+→ Verification: <a href="04-crypto.html">Storage Confidentiality</a> (draft)
+</p>
+</div>
+</div>
+<div id="outline-container-orga1c71d1" class="outline-4">
+<h4 id="orga1c71d1"><span class="section-number-4">3.1.2.</span> P2 — Integrity of the Boot Chain is Established</h4>
+<div class="outline-text-4" id="text-3-1-2">
+<p>
+The hypervisor — the first software layer you control — must be bit-for-bit reproducible from open-source sources and cryptographically verified before execution. If you cannot verify that the code running beneath your OS is what you intended to run, you inherit every vulnerability, backdoor, or telemetry hook embedded by the build system. Reproducible builds are the most direct method for a user to independently verify the integrity of a binary
+</p>
+
+<p>
+The hash of the loaded hypervisor blob GRUB loads must match the some one that Debian signed.
+</p>
+
+<p>
+→ Verification: <a href="05-boot-integrity.html">Boot-Chain Integrity</a> (draft)
+</p>
+</div>
+</div>
+<div id="outline-container-org63bd430" class="outline-4">
+<h4 id="org63bd430"><span class="section-number-4">3.1.3.</span> P3 — Verifying No Outbound Traffic to Known OEM Telemetry Endpoints.</h4>
+<div class="outline-text-4" id="text-3-1-3">
+<p>
+Once your OS takes control of the network interface, no packets may be sent to known OEM telemetry endpoints — not during boot, not during idle, not ever. Many OEMs embed persistent telemetry in firmware, drivers, or microcode (e.g., Intel ME, Lenovo Vantage services). These channels operate below the OS and often survive reinstalls. If your machine phones home without your knowledge, it is not yours — it is a remote sensor.
+</p>
+
+<p>
+A 24-hour packet capture, taken from an external span port, must show zero frames destined for known OEM telemetry IP ranges.
+</p>
+
+<p>
+→ Verification: <a href="06-telemetry.html">Telemetry Measurement</a> (draft)
+</p>
+</div>
+</div>
+<div id="outline-container-org82d8d29" class="outline-4">
+<h4 id="org82d8d29"><span class="section-number-4">3.1.4.</span> P4 — No Hidden Persistent Storage Writable by the OEM</h4>
+<div class="outline-text-4" id="text-3-1-4">
+<p>
+Every writable sector on the drive must be under user control — no hidden areas via Host Protected Area, Device Configuration Overlay, or vendor namespaces. OEMs routinely reserve hidden storage for “recovery,” diagnostics, or logging — areas that survive OS reinstalls and are invisible to the user. If the OEM can write to hidden sectors, they can store telemetry, backdoors, or persistence mechanisms. True ownership means every byte is visible and controlled.
+</p>
+
+<p>
+HPA and DCO must be removed or verified inactive. Visible partitions must account for ≥99% of the native drive capacity. On NVMe, all namespaces must be user-visible and accounted for. 
+</p>
+
+<p>
+→ Verification:  <a href="07-disk-audit.html">Disk-Map Audit</a> (draft)
+</p>
+</div>
+</div>
+<div id="outline-container-org57c5ec2" class="outline-4">
+<h4 id="org57c5ec2"><span class="section-number-4">3.1.5.</span> P5 — Device Isolation via IOMMU</h4>
+<div class="outline-text-4" id="text-3-1-5">
+<p>
+Every PCI device must be isolated in its own IOMMU group, preventing DMA-based attacks between peripherals. Without IOMMU isolation, a compromised USB controller, NIC, or GPU can read or write arbitrary memory — including hypervisor pages. This breaks the security model of virtualization entirely. Device passthrough is not a feature — it is a necessity for containment.
+</p>
+
+<p>
+No IOMMU group may contain more than one endpoint device. High-risk devices (network, storage, USB) must be individually isolated.
+</p>
+
+<p>
+→ Verification: <a href="09-iommu.html">PCIe Isolation</a> (draft)
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-org8a43110" class="outline-2">
+<h2 id="org8a43110"><span class="section-number-2">4.</span> Next Steps</h2>
+<div class="outline-text-2" id="text-4">
+<p>
+These are not arbitrary checkboxes. They are the minimum viable specification for a machine that respects its owner.
+</p>
+
+<p>
+Each property is a line in the sand. Cross one, and ownership is compromised.
+</p>
+
+<p>
+Each property will be tested, documented, and — where possible — automated. Failures will be analyzed. Workarounds will be published. Successes will be reproducible.
+</p>
+
+<p>
+Because in 2025, ownership is not assumed.
+</p>
+
+<p>
+It is proven.
+</p>
+</div>
+</div>
+<div id="outline-container-org443db08" class="outline-2">
+<h2 id="org443db08"><span class="section-number-2">5.</span> Index</h2>
+<div class="outline-text-2" id="text-5">
+<p>
+The articles in this series document the procedures required to build a system that satisfies the sovereignty properties defined above. Presented in logical sequence, they serve as a practical demonstration of achieving measurable control over consumer hardware, from establishing a verified host to configuring hardware isolation.
+</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-right" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Step</th>
+<th scope="col" class="org-left">Note</th>
+<th scope="col" class="org-left">Status</th>
+<th scope="col" class="org-left">Last Modified</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">01</td>
+<td class="org-left"><a href="01-dom0.html">Building and Securing a Host OS</a></td>
+<td class="org-left">published</td>
+<td class="org-left">2025-09-11</td>
+</tr>
+
+<tr>
+<td class="org-right">02</td>
+<td class="org-left"><a href="02-uefi.html">Analyzing and Modifying the Firmware</a></td>
+<td class="org-left">published</td>
+<td class="org-left">2025-09-11</td>
+</tr>
+
+<tr>
+<td class="org-right">03</td>
+<td class="org-left"><a href="./03-hypervisor.html">Installing and Configuring the Xen Hypervisor</a></td>
+<td class="org-left">published</td>
+<td class="org-left">—</td>
+</tr>
+
+<tr>
+<td class="org-right">04</td>
+<td class="org-left"><a href="04-crypto.html">Storage Confidentiality</a></td>
+<td class="org-left"><b>draft</b></td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">05</td>
+<td class="org-left"><a href="05-boot-integrity.html">Boot-Chain Integrity</a></td>
+<td class="org-left"><b>draft</b></td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">06</td>
+<td class="org-left"><a href="06-telemetry.html">Telemetry Measurement</a></td>
+<td class="org-left"><b>draft</b></td>
+<td class="org-left">—</td>
+</tr>
+
+<tr>
+<td class="org-right">07</td>
+<td class="org-left"><a href="07-disk-audit.html">Disk-Map Audit</a></td>
+<td class="org-left"><b>draft</b></td>
+<td class="org-left">&#xa0;</td>
+</tr>
+
+<tr>
+<td class="org-right">09</td>
+<td class="org-left"><a href="09-iommu.html">PCIe Isolation</a></td>
+<td class="org-left">published</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="outline-container-org5cd1f5b" class="outline-2">
+<h2 id="org5cd1f5b"><span class="section-number-2">6.</span> Appendix</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-orgabce0f4" class="outline-3">
+<h3 id="orgabce0f4"><span class="section-number-3">6.1.</span> <a href="resources/gpg.html">Cryptography with Gnu Privacy Guard</a></h3>
+</div>
+<div id="outline-container-org7aa87af" class="outline-3">
+<h3 id="org7aa87af"><span class="section-number-3">6.2.</span> <a href="resources/dropbear-initramfs.html">Remote LUKS Unlock with Dropbear</a></h3>
+</div>
+</div>
+<div id="outline-container-orgcdaf8b5" class="outline-2">
+<h2 id="orgcdaf8b5"><span class="section-number-2">7.</span> Reference</h2>
+<div class="outline-text-2" id="text-7">
+<ul class="org-ul">
+<li><a href="99-reference.html">Materials, Glossary, Command Cheatsheet</a></li>
+<li>Source repo: <a href="https://github.com/calebc42/sovereignty-stack">https://github.com/calebc42/sovereignty-stack</a></li>
+</ul>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<footer class="main-footer"><p>Last Modified: 2025-09-12</p><p>This site is built with Emacs and Org-mode.</p><p>// SYSTEM_NORMAL // [C] 2025 CALEB CHRISTENSEN</p></footer><script src="https://platform.linkedin.com/badges/js/profile.js" async defer type="text/javascript"></script>
+</div>
+</body>
+</html>
