@@ -1314,6 +1314,12 @@ pre.example::after,
   margin-top: var(--spacing-md);
 }
 
+.collapsible-section.h3-section {
+  /* Example: Reduce top margin for h3 compared to h2 if needed */
+  /* margin-top: var(--spacing-lg); */
+  /* Add other specific styles for h3 if desired */
+}
+
 /* --- Definition Lists --- */
 .org-dl {
   margin: var(--spacing-xl) 0;
@@ -1633,6 +1639,179 @@ body.dark-mode .linkedin-badge-container .badge-dark { display: block; }
 }
 
 @media (max-width: 768px) {
+  /* --- Global Overflow Control --- */
+  /* Prevent any horizontal scrolling or overflow peeking */
+  html, body {
+    overflow-x: hidden !important;
+    max-width: 100vw !important;
+    width: 100vw !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Ensure containers don't cause overflow */
+  .container,
+  .main-content,
+  .content {
+    max-width: 100% !important;
+    overflow-x: hidden !important; /* Crucial: prevent container overflow */
+    box-sizing: border-box !important;
+    width: 100% !important;
+  }
+
+  /* --- Force Aggressive Wrapping Globally --- */
+  /* Target the problematic elements causing horizontal overflow */
+  /* Apply to general content elements */
+  :where(.content p,
+         .content li,
+         .content blockquote,
+         .content dd,  /* Definition list descriptions */
+         .content dt,  /* Definition list terms */
+         .intro-panel p,
+         .ui-panel p,
+         .status-list span, /* Status items */
+         .table-of-contents, /* TOC container */
+         #table-of-contents, /* TOC container */
+         .org-dl, /* Definition list container */
+         .warning,
+         .tip,
+         .note,
+         .important,
+         .success) {
+    /* Allow words to break anywhere if necessary */
+    word-break: break-word !important; /* Modern, preferred */
+    /* Fallbacks */
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    /* Allow wrapping at any character */
+    hyphens: none !important; /* Disable hyphenation */
+    white-space: normal !important; /* Override pre/nowrap */
+    /* Ensure width is constrained */
+    max-width: 100% !important;
+    width: 100% !important; /* Can be 100% if parent is constrained */
+    box-sizing: border-box !important;
+    text-align: left !important; /* Ensure text alignment is consistent */
+  }
+
+  /* --- Specific Fixes for Known Problematic Elements --- */
+
+  /* 1. TABLE OF CONTENTS (<ul>, <li>, <a> elements) */
+  /* Target the TOC content structure */
+  .content :where(#table-of-contents, .table-of-contents) :is(ul, li, a) {
+    /* Force wrapping */
+    white-space: normal !important; /* Crucial: override 'pre' if applied */
+    word-break: break-word !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    hyphens: none !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    /* Ensure list items and links behave */
+    display: block !important; /* or inline-block */
+    text-align: left !important;
+  }
+  /* Ensure TOC links wrap and don't inherit problematic styles */
+  .content :where(#table-of-contents, .table-of-contents) a {
+    display: inline-block !important; /* Helps wrapping */
+    width: auto !important; /* Let it shrink-wrap text */
+    max-width: 100% !important;
+    text-decoration: none; /* Ensure link style doesn't interfere */
+    padding: 0.1rem 0; /* Minimal padding */
+  }
+
+
+  /* 2. TABLES */
+  /* Make tables wrap/stack to prevent horizontal overflow */
+  .org-table {
+    display: block !important;
+    overflow-x: hidden !important; /* Prevent table container scroll */
+    white-space: normal !important; /* Allow text inside cells to wrap */
+    max-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    /* Use table stacking approach */
+    border-collapse: collapse !important; /* Reset if needed */
+    margin: var(--spacing-lg) 0 !important;
+  }
+  .org-table,
+  .org-table thead,
+  .org-table tbody,
+  .org-table th,
+  .org-table td,
+  .org-table tr {
+    display: block !important; /* Stack table elements */
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  .org-table thead {
+     display: none !important; /* Hide headers or find alternative */
+  }
+  .org-table tr {
+    border: 1px solid var(--border-color) !important;
+    margin-bottom: var(--spacing-sm) !important;
+    padding: var(--spacing-sm) !important;
+    position: relative !important; /* For pseudo-elements if needed */
+  }
+  .org-table td {
+    border: none !important;
+    position: relative !important;
+    padding: var(--spacing-xs) var(--spacing-sm) var(--spacing-xs) calc(40% + var(--spacing-sm)) !important; /* Space for label */
+    display: block !important;
+    text-align: left !important; /* Align content left */
+    word-break: break-word !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+  /* Create labels for stacked table cells (requires data-label attribute on <td>) */
+  .org-table td::before {
+    content: attr(data-label) ": "; /* Assumes <td data-label="Step">1</td> */
+    font-weight: bold;
+    position: absolute;
+    left: var(--spacing-sm);
+    top: var(--spacing-xs);
+    width: 35%; /* Adjust label width */
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+
+  /* 3. CODE BLOCKS (General Content - Inline or <pre> outside .org-src-container) */
+  /* Allow wrapping in inline code or <pre> outside .org-src-container */
+  .content :where(pre, code):not(.org-src-container pre, .org-src-container code) {
+    white-space: pre-wrap !important; /* Allow wrapping for general pre/code */
+    word-break: break-word !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    hyphens: none !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important; /* Prevent scroll on these */
+    box-sizing: border-box !important;
+  }
+
+  /* 4. EXAMPLE BLOCKS */
+  pre.example,
+  .example {
+    /* Already has white-space: pre-wrap, reinforce it */
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    hyphens: none !important;
+    max-width: 100% !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    /* Adjust padding if needed */
+    padding-left: var(--spacing-md) !important;
+    padding-right: var(--spacing-md) !important;
+    margin: var(--spacing-lg) 0 !important;
+  }
+
+  /* --- Keep Other Existing Mobile Adjustments --- */
+  /* (Like grid layout changes, font sizes, padding adjustments etc.) */
   body {
     padding: var(--spacing-md);
   }
@@ -1697,10 +1876,8 @@ body.dark-mode .linkedin-badge-container .badge-dark { display: block; }
     max-width: 60%;
   }
 
-  .status-list span {
-    word-break: break-all;
-    overflow-wrap: break-word;
-  }
+  /* Removed specific word-break rule from .status-list span as it's covered globally */
+
 
   .main-nav ul {
     justify-content: flex-end;
@@ -1711,39 +1888,37 @@ body.dark-mode .linkedin-badge-container .badge-dark { display: block; }
     font-size: var(--font-size-xs);
   }
 
+  /* --- Adjustments for Source Blocks --- */
+  /* Keep source blocks as they are - scrolling horizontally within container */
   .org-src-container {
     width: 100%;
     max-width: 100%;
     margin-left: 0;
     margin-right: 0;
-    /* Keep the border-radius if desired, or remove it if you want no rounded corners */
-    /* border-radius: 0; */ /* Optional: You can keep this if you prefer square corners */
+    box-sizing: border-box;
+    overflow-x: hidden !important; /* Contain the scroll */
+    margin: var(--spacing-xl) 0 !important; /* Reinforce margin */
   }
 
   pre.src {
     padding-left: var(--spacing-md);
     padding-right: var(--spacing-md);
-    max-width: 100vw;
+    max-width: 100%;
     box-sizing: border-box;
+    /* Keep the nowrap for src blocks, they will scroll within their container */
+    white-space: pre !important; /* Keep code blocks scrolling */
+    overflow-x: auto !important; /* Ensure scroll */
+    /* Constrain width to prevent forcing parent wider */
+    width: 100% !important;
+    padding-top: calc(32px + var(--spacing-md)) !important; /* Ensure padding includes header */
+    padding-bottom: var(--spacing-xl) !important;
   }
 
   pre.src::-webkit-scrollbar {
     height: 6px;
   }
 
-  pre.example,
-  .example {
-    margin: var(--spacing-lg) 0;
-    padding: calc(var(--spacing-lg) + 20px) var(--spacing-md) var(--spacing-lg) var(--spacing-md);
-    font-size: var(--font-size-sm);
-  }
-
-  pre.example::before,
-  .example::before {
-    font-size: 10px;
-    padding: var(--spacing-xs) var(--spacing-sm);
-  }
-
+  /* --- Adjust max-width for general content elements (reinforce) --- */
   :where(.content p,
   .content li,
   .content blockquote,
@@ -1752,7 +1927,7 @@ body.dark-mode .linkedin-badge-container .badge-dark { display: block; }
   .table-of-contents,
   #table-of-contents,
   .org-dl,
-  .org-src-container,
+  .org-src-container, /* Source blocks scroll */
   pre.example,
   .example,
   .warning,
@@ -1760,114 +1935,14 @@ body.dark-mode .linkedin-badge-container .badge-dark { display: block; }
   .note,
   .important,
   .success) {
-    max-width: 95%;
-    text-align: left;
-    hyphens: none;
-  }
-
-  .org-table {
-    display: block;
-    overflow-x: auto;
-    white-space: nowrap;
-    max-width: 100%;
-  }
-
-  /* Alternative: make tables stack */
-  .org-table,
-  .org-table thead,
-  .org-table tbody,
-  .org-table th,
-  .org-table td,
-  .org-table tr {
-    display: block;
-  }
-
-  .org-table td {
-    border: none;
-    position: relative;
-    padding-left: 50%;
-  }
-
-
-  /* --- ADD THE NEW FIXES BELOW THIS LINE --- */
-  /* 1. Allow wrapping for general pre/code within .content on mobile */
-  /*    This overrides the 'white-space: pre' from the main CSS rules */
-  .content :where(pre, code):not(.org-src-container pre.src):not(.org-src-container pre.src code) {
-    white-space: pre-wrap !important; /* Allow wrapping */
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
-    max-width: 100% !important; /* Constrain width */
-  }
-
-  /* 2. Ensure the main content area handles overflow */
-  .content {
-    overflow-x: hidden !important; /* Contain any unexpected overflow */
-    max-width: 100% !important;
-    width: 100% !important;
+    max-width: 100% !important; /* Ensure constrained */
+    text-align: left !important;
+    hyphens: none !important;
     box-sizing: border-box !important;
-  }
-
-  /* 3. Specifically target the ToC if it uses <pre> or is inside .content */
-  /*    Adjust selectors based on your actual HTML structure for #table-of-contents */
-  .content #table-of-contents,
-  .content .table-of-contents,
-  .content #table-of-contents *,
-  .content .table-of-contents * {
-    white-space: normal !important; /* Allow wrapping */
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
-    max-width: 100% !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-  }
-  /* If the ToC itself is a <pre>, this rule is crucial */
-  .content :where(#table-of-contents, .table-of-contents) :is(pre, code) {
-    white-space: pre-wrap !important;
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
-    max-width: 100% !important;
+    width: 100% !important; /* Ensure fills constrained parent */
   }
 
 
-  /* 4. Ensure definition lists and example blocks also wrap correctly on mobile */
-  .org-dl dd,
-  pre.example,
-  .example {
-    white-space: normal !important; /* Or pre-wrap if needed for specific formatting */
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
-    max-width: 100% !important;
-    box-sizing: border-box !important;
-  }
-  /* Ensure their internal code also wraps */
-  .org-dl dd :is(pre, code),
-  pre.example :is(pre, code),
-  .example :is(pre, code) {
-    white-space: pre-wrap !important;
-    word-wrap: break-word !important;
-    overflow-wrap: break-word !important;
-    max-width: 100% !important;
-  }
-
-
-  /* 5. Re-assert global overflow control within the media query */
-  html, body {
-    overflow-x: hidden !important;
-    max-width: 100vw !important;
-    width: 100vw !important; /* Or 100% */
-    box-sizing: border-box !important;
-  }
-
-  /* Ensure main containers also don't overflow */
-  .container,
-  .main-content,
-  .content,
-  .ui-panel { /* Add other relevant container classes */
-    max-width: 100% !important;
-    overflow-x: hidden !important;
-    box-sizing: border-box !important;
-    width: 100% !important; /* Ensure they fill the constrained parent */
-  }
 }
 
 @media (max-width: 480px) {

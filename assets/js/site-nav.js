@@ -77,104 +77,121 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // --- Collapsible Headers ---
+     // --- Collapsible Headers ---
     function makeHeadersCollapsible(headerSelectors) {
         headerSelectors.forEach(selector => {
             const headers = Array.from(document.querySelectorAll(selector));
-            
+
             headers.forEach(header => {
                 // Skip headers in table of contents
                 if (header.closest('#table-of-contents, .table-of-contents')) {
                     return;
                 }
-                
+
                 header.classList.add('collapsible-section');
+                // Add specific class based on header level
                 if (selector === 'h2') {
                     header.classList.add('h2-section');
+                } else if (selector === 'h3') {
+                    header.classList.add('h3-section'); // Add this line
                 }
-                
+
                 // Create wrapper for content
                 const contentWrapper = document.createElement('div');
                 contentWrapper.className = 'section-content-wrapper collapsed';
-                
+
                 // Find all elements until next header of same or higher level
                 const elementsToWrap = [];
                 let currentElement = header.nextElementSibling;
                 const headerLevel = parseInt(header.tagName.charAt(1));
-                
+
                 while (currentElement) {
                     const tagName = currentElement.tagName;
-                    
+
                     if (tagName && tagName.startsWith('H')) {
                         const currentLevel = parseInt(tagName.charAt(1));
                         if (currentLevel <= headerLevel) {
                             break;
                         }
                     }
-                    
+
                     if (currentElement.id === 'postamble' || currentElement.classList.contains('main-footer')) {
                         break;
                     }
-                    
+
                     elementsToWrap.push(currentElement);
                     currentElement = currentElement.nextElementSibling;
                 }
-                
+
                 // Wrap elements
                 elementsToWrap.forEach(element => {
                     contentWrapper.appendChild(element);
                 });
-                
+
                 if (contentWrapper.hasChildNodes()) {
                     header.parentNode.insertBefore(contentWrapper, header.nextElementSibling);
-                    
+
                     // Start collapsed
                     header.classList.add('collapsed');
                     contentWrapper.style.maxHeight = '0px';
-                    
+
                     // Add click handler
                     header.addEventListener('click', (e) => {
-                        if (e.target.tagName === 'A') return;
-                        
+                        if (e.target.tagName === 'A') return; // Ignore clicks on anchor links within the header
+
                         header.classList.toggle('collapsed');
                         contentWrapper.classList.toggle('collapsed');
-                        
+
                         const isCollapsed = header.classList.contains('collapsed');
-                        
+
                         if (isCollapsed) {
                             contentWrapper.style.maxHeight = '0px';
                         } else {
+                            // Temporarily set to 'auto' or specific height to measure
                             contentWrapper.style.maxHeight = contentWrapper.scrollHeight + 'px';
-                            
+
+                            // After transition, set to 'none' to allow natural height
                             setTimeout(() => {
+                                // Check if it's still expanded before setting to 'none'
                                 if (!header.classList.contains('collapsed')) {
                                     contentWrapper.style.maxHeight = 'none';
                                 }
-                            }, 400);
+                            }, 400); // Match the CSS transition duration
                         }
                     });
-                    
+
                     // Update max-height when window resizes
-                    window.addEventListener('resize', () => {
-                        if (!header.classList.contains('collapsed')) {
-                            contentWrapper.style.maxHeight = 'none';
-                            setTimeout(() => {
-                                if (!header.classList.contains('collapsed')) {
-                                    contentWrapper.style.maxHeight = contentWrapper.scrollHeight + 'px';
-                                    setTimeout(() => {
+                    // Use a debounce function for better performance
+                    let resizeTimeout;
+                    const handleResize = () => {
+                        clearTimeout(resizeTimeout);
+                        resizeTimeout = setTimeout(() => {
+                            if (!header.classList.contains('collapsed')) {
+                                // Force recalculation
+                                contentWrapper.style.maxHeight = 'none';
+                                // Re-trigger layout
+                                const scrollHeight = contentWrapper.scrollHeight;
+                                contentWrapper.style.maxHeight = scrollHeight + 'px';
+                                // Allow natural height again after a short delay
+                                 setTimeout(() => {
+                                    if (!header.classList.contains('collapsed')) {
                                         contentWrapper.style.maxHeight = 'none';
-                                    }, 50);
-                                }
-                            }, 50);
-                        }
-                    });
+                                    }
+                                }, 50);
+                            }
+                        }, 100); // Adjust debounce delay as needed
+                    };
+
+                    window.addEventListener('resize', handleResize);
+                    // Store the handler for potential cleanup if needed
+                    header._resizeHandler = handleResize;
                 }
             });
         });
     }
-    
-    // Make headers collapsible
-    makeHeadersCollapsible(['h2', 'h3']);
+
+    // Make headers collapsible (Include h3)
+    makeHeadersCollapsible(['h2', 'h3']); // This part was already correct
     
     // --- Reading Progress & Breadcrumb Navigation ---
     const content = document.getElementById('content') || document.querySelector('.content');
