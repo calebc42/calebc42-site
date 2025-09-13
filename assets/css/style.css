@@ -1711,14 +1711,15 @@ body.dark-mode .linkedin-badge-container .badge-dark { display: block; }
     font-size: var(--font-size-xs);
   }
 
-   .org-src-container {
-    width: 100vw;
-    max-width: 100vw;
-    margin-left: calc(-1 * var(--spacing-md));
-    margin-right: calc(-1 * var(--spacing-md));
-    border-radius: 0;
+  .org-src-container {
+    width: 100%;
+    max-width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    /* Keep the border-radius if desired, or remove it if you want no rounded corners */
+    /* border-radius: 0; */ /* Optional: You can keep this if you prefer square corners */
   }
-  
+
   pre.src {
     padding-left: var(--spacing-md);
     padding-right: var(--spacing-md);
