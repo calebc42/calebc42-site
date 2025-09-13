@@ -125,6 +125,27 @@ main {
   flex: 1;
 }
 
+/* Add this global overflow control */
+html {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+
+body {
+  overflow-x: hidden;
+  max-width: 100vw;
+  /* Remove or adjust the fixed padding */
+  padding: var(--spacing-md); /* Instead of var(--spacing-xl) */
+}
+
+/* Ensure containers don't overflow */
+.container,
+.main-content,
+.content {
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
 /* --- Accessibility --- */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -1620,10 +1641,16 @@ body.dark-mode .linkedin-badge-container .badge-dark { display: block; }
     top: 45px;
   }
 
+    .progress-bar {
+    width: 100%;
+    max-width: 100%;
+  }
+
   .breadcrumb {
-    padding: var(--spacing-sm) var(--spacing-md);
-    font-size: var(--font-size-xs);
-    height: 41px;
+    width: 100%;
+    left: 0;
+    right: 0;
+    box-sizing: border-box;
   }
 
   .breadcrumb a {
@@ -1653,31 +1680,50 @@ body.dark-mode .linkedin-badge-container .badge-dark { display: block; }
     gap: var(--spacing-lg);
   }
 
+  .main-header {
+    padding: var(--spacing-sm);
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .header-left {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+  
+  .logo {
+    font-size: var(--font-size-sm);
+    max-width: 60%;
+  }
+  
   .status-list span {
     word-break: break-all;
     overflow-wrap: break-word;
   }
 
   .main-nav ul {
-    flex-wrap: wrap;
-    gap: var(--spacing-sm);
+    justify-content: flex-end;
+    font-size: var(--font-size-xs);
   }
 
   .main-nav a {
     font-size: var(--font-size-xs);
   }
 
-  .org-src-container {
-    width: 100%;
-    max-width: 100%;
-    margin-left: 0;
-    margin-right: 0;
+   .org-src-container {
+    width: 100vw;
+    max-width: 100vw;
+    margin-left: calc(-1 * var(--spacing-md));
+    margin-right: calc(-1 * var(--spacing-md));
+    border-radius: 0;
   }
   
   pre.src {
-    -webkit-overflow-scrolling: touch;
-    touch-action: pan-x pan-y;
-    scrollbar-width: thin;
+    padding-left: var(--spacing-md);
+    padding-right: var(--spacing-md);
+    max-width: 100vw;
+    box-sizing: border-box;
   }
   
   pre.src::-webkit-scrollbar {
@@ -1716,6 +1762,29 @@ body.dark-mode .linkedin-badge-container .badge-dark { display: block; }
     max-width: 95%;
     text-align: left;
     hyphens: none;
+  }
+
+    .org-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    max-width: 100%;
+  }
+  
+  /* Alternative: make tables stack */
+  .org-table,
+  .org-table thead,
+  .org-table tbody,
+  .org-table th,
+  .org-table td,
+  .org-table tr {
+    display: block;
+  }
+  
+  .org-table td {
+    border: none;
+    position: relative;
+    padding-left: 50%;
   }
 }
 
