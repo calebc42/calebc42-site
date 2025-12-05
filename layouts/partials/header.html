@@ -1,0 +1,49 @@
+{{ $currentPage := . }}
+<header class="site-header">
+  <div class="header-left">
+    <a href="/" class="logo">
+      {{ .Site.Title }}
+      <br> >> Revenue Operations
+    </a>
+    
+    <nav class="site-nav">
+      <ul>
+        {{ range .Site.Menus.main }}
+          {{ $isPosts := eq .Identifier "posts" }}
+          
+          <li class="{{ if or .HasChildren $isPosts }}has-dropdown{{ end }}">
+            <a href="{{ .URL }}" class="{{ if or ($currentPage.IsMenuCurrent "main" .) ($currentPage.HasMenuCurrent "main" .) }}active{{ end }}">
+              {{ .Name }}
+            </a>
+
+            {{ if $isPosts }}
+              <ul class="dropdown-menu">
+                {{ range $name, $taxonomy := site.Taxonomies.categories }}
+                  <li>
+                    <a href="{{ "/categories/" | relLangURL }}{{ $name | urlize }}">
+                      {{ $name | humanize | title }} ({{ $taxonomy.Count }})
+                    </a>
+                  </li>
+                {{ end }}
+              </ul>
+
+            {{ else if .HasChildren }}
+              <ul class="dropdown-menu">
+                {{ range .Children }}
+                  <li>
+                    <a href="{{ .URL }}">{{ .Name }}</a>
+                  </li>
+                {{ end }}
+              </ul>
+            {{ end }}
+          </li>
+        {{ end }}
+      </ul>
+    </nav>
+  </div>
+
+  <button class="theme-toggle" aria-label="Toggle Theme">
+    <span class="material-symbols-outlined icon-sun">light_mode</span>
+    <span class="material-symbols-outlined icon-moon">dark_mode</span>
+  </button>
+</header>

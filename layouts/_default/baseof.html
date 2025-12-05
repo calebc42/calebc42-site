@@ -1,67 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
-    {{ with .Description }}<meta name="description" content="{{ . }}">{{ end }}
-    
-    {{ range .AlternativeOutputFormats -}}
-    {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
-    {{ end -}}
-
-    <meta property="og:title" content="{{ .Title }}" />
-    <meta property="og:description" content="{{ .Description | default .Summary }}" />
-    <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}" />
-    <meta property="og:url" content="{{ .Permalink }}" />
-    <meta property="og:site_name" content="{{ .Site.Title }}" />
-    
-    {{ $css := resources.Get "css/main.scss" | toCSS | minify | fingerprint }}
-    <link rel="stylesheet" href="{{ $css.RelPermalink }}">
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-  </head>
+<html lang="{{ .Site.LanguageCode | default "en-us" }}">
+  {{ partial "head.html" . }}
   
   <body>
-
     <div class="layout-wrapper">
-      <header class="site-header">
-        <div class="header-left">
-          <div class="logo">
-            {{ .Site.Title }}
-            <br> >> Revenue Operations</div>
-          <nav class="site-nav">
-            <ul>
-              <li><a href="/">[Home]</a></li>
-              <li><a href="/pages/about">[About]</a></li>
-              <li><a href="/posts">[Posts]</a></li>
-              <li><a href="/projects">[Projects]</a></li>
-            </ul>
-          </nav>
-        </div>
-
-        <button class="theme-toggle" aria-label="Toggle Theme">
-          <span class="material-symbols-outlined icon-sun">light_mode</span>
-          <span class="material-symbols-outlined icon-moon">dark_mode</span>
-        </button>
-      </header>
+      {{ partial "header.html" . }}
 
       <main class="site-main {{ if .IsHome }}full-width{{ end }}">
         {{ block "main" . }}{{ end }}
       </main>
 
-      <footer class="site-footer">
-        <p> // NOTICE: [END_OF_TRANSMISSION] // </p>
-        <br>
-        <p>&copy; {{ now.Year }} {{ .Site.Params.author }}.</p>
-        <p>Written in Emacs Org Mode and built with Hugo.</p>
-      </footer>
+      {{ partial "footer.html" . }}
     </div>
 
     <div class="progress-bar"><div class="progress-bar-fill"></div></div>
 
-    <script src="/js/main.js"></script>
+    {{ $js := resources.Get "js/main.js" | resources.Minify | fingerprint }}
+    <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
   </body>
 </html>

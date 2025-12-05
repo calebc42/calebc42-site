@@ -1,14 +1,14 @@
 +++
 title = "Experience"
 author = ["desktop"]
-lastmod = 2025-12-05T10:09:03-07:00
+lastmod = 2025-12-05T12:09:17-07:00
 draft = false
 +++
 
 ## Go-to-Market Team Lead (Founding Sales Team) {#go-to-market-team-lead--founding-sales-team}
 
 _Lendio_
-[2023]
+[2023 - 2024]
 
 I was recruited by the Director of Operations to act as the "Founding Operator" for a new tax credit division. My mandate was to build a sales engine from scratch—hiring the team, defining the process, and implementing the technology.
 

@@ -22,3 +22,26 @@ theme = []
 [params]
   description = "My Knowledge Base"
   author = "Caleb Christensen"
+
+[menu]
+  # 1. About
+  [[menu.main]]
+    identifier = "about"
+    name = "[About]"
+    url = "/pages/about/"
+    weight = 10
+
+  # 2. Contact
+    [[menu.main]]
+    identifier = "contact"
+    name = "[Contact]"
+    url = "/pages/contact/" # Ensure you create content/pages/contact.md
+    weight = 20
+
+  # 3. Posts (Parent Item)
+  # The URL points to the Category Index, serving as the mobile fallback
+  [[menu.main]]
+    identifier = "posts"
+    name = "[Posts]"
+    url = "/categories/"
+    weight = 30

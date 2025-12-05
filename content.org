@@ -7,7 +7,7 @@
 :EXPORT_FILE_NAME: about
 :END:
 
-** Hello, I'm Caleb Christensen.
+** Caleb Christensen.
 
 I am a *Revenue Operations professional* who bridges the gap between sales strategy and technical execution.
 
@@ -53,7 +53,7 @@ I am currently seeking a Revenue Operations role where I can apply systems think
 
 ** Go-to-Market Team Lead (Founding Sales Team)
 /Lendio/
-[2023]
+[2023 - 2024]
 
 I was recruited by the Director of Operations to act as the "Founding Operator" for a new tax credit division. My mandate was to build a sales engine from scratch—hiring the team, defining the process, and implementing the technology.
 
@@ -87,10 +87,10 @@ Welcome to my personal digital space.
 
 * Sales Funnel Efficiency & Rep Performance Analysis :sales:strategy:python:data:analysis:pipeline:optimization:tableau:
 :PROPERTIES:
-:EXPORT_HUGO_SECTION: portfolio
+:EXPORT_HUGO_SECTION: posts
 :EXPORT_FILE_NAME: sales-funnel-efficiency
 :EXPORT_DATE: 2025-12-01
-:EXPORT_HUGO_CATEGORIES: "Case Study"
+:EXPORT_HUGO_CATEGORIES: "Portfolio"
 :END:
 
 ** Overview
@@ -501,13 +501,12 @@ By implementing territory-aware lead routing, peer-led coaching focused on the h
 # <p><strong>Strong data analysis provides the <em>what</em>—but organizational context determines the <em>how</em> and <em>when</em>.</strong> The metrics point to opportunities; leadership judgment determines which opportunities to pursue first.</p>
 # #+END_EXPORT
 
-* Solving the "Blurry Line" Problem: Engineering a Python CLI for E-Ink Devices
+* Solving the "Blurry Line" Problem: Engineering a Python CLI for E-Ink Devices :python:open_source:tooling:automation:ci_cd:
 :PROPERTIES:
-:EXPORT_HUGO_SECTION: projects
+:EXPORT_HUGO_SECTION: posts
 :EXPORT_FILE_NAME: eink-template-gen
 :EXPORT_DATE: 2025-12-04
-:EXPORT_HUGO_CATEGORIES: "Engineering"
-:EXPORT_HUGO_TAGS: "Python" "Open Source" "Tooling" "Automation" "CI/CD"
+:EXPORT_HUGO_CATEGORIES: "Project"
 :END:
 ** Introduction
 
@@ -777,13 +776,12 @@ You can check out the code or install the tool yourself:
 "The details are not the details. They make the design." – Charles Eames
 #+END_QUOTE
 
-* Philosophy
+* Philosophy :cybersecurity:hardware:sovereignty:philosophy:
 :PROPERTIES:
-:EXPORT_HUGO_SECTION: essays
+:EXPORT_HUGO_SECTION: posts
 :EXPORT_FILE_NAME: digital-sovereignty
 :EXPORT_DATE: 2025-11-20
-:EXPORT_HUGO_CATEGORIES: "Deep Dive"
-:EXPORT_HUGO_TAGS: "Cybersecurity" "Hardware" "Systems Thinking" "Philosophy"
+:EXPORT_HUGO_CATEGORIES: "Tutorial"
 :END:
 ** The Reality of Modern Hardware Ownership
 

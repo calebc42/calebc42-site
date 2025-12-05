@@ -31,59 +31,73 @@
   background-color: var(--bg-primary);
 }
 
-/* --- WARNING --- */
-.admonition.warning {
+/* --- DEFINITIONS (Placeholders) --- */
+/* We define the styles in %placeholders so we can safely extend them */
+
+%warning-style {
   border-left-color: var(--error-color);
   background-color: rgba(166, 107, 90, 0.08);
-}
-.admonition.warning::before {
-  content: 'WARNING';
-  color: var(--error-color);
+  &::before { content: 'WARNING'; color: var(--error-color); }
 }
 
-/* --- TIP / SUCCESS --- */
-.admonition.tip,
-.admonition.success {
-  border-left-color: var(--success-color);
-  background-color: rgba(107, 122, 90, 0.08);
-}
-.admonition.tip::before {
-  content: 'TIP';
-  color: var(--success-color);
-}
-.admonition.success::before {
-  content: 'SUCCESS';
-  color: var(--success-color);
-}
-
-/* --- NOTE --- */
-.admonition.note {
+%note-style {
   border-left-color: var(--color-accent);
   background-color: var(--bg-secondary-trans);
-}
-.admonition.note::before {
-  content: 'NOTE';
-  color: var(--color-accent);
+  &::before { content: 'NOTE'; color: var(--color-accent); }
 }
 
-/* --- IMPORTANT --- */
-.admonition.important {
+%tip-style {
+  border-left-color: var(--success-color);
+  background-color: rgba(107, 122, 90, 0.08);
+  &::before { content: 'TIP'; color: var(--success-color); }
+}
+
+%important-style {
   border-left-color: var(--warning-color);
   background-color: rgba(184, 144, 90, 0.08);
+  &::before { content: 'IMPORTANT'; color: var(--warning-color); }
 }
-.admonition.important::before {
-  content: 'IMPORTANT';
-  color: var(--warning-color);
+
+%success-style {
+  border-left-color: var(--success-color);
+  background-color: rgba(107, 122, 90, 0.08);
+  &::before { content: 'SUCCESS'; color: var(--success-color); }
 }
+
+
+/* --- APPLY STYLES TO ADMONITIONS --- */
+
+.admonition.warning   { @extend %warning-style; }
+.admonition.note      { @extend %note-style; }
+.admonition.tip       { @extend %tip-style; }
+.admonition.important { @extend %important-style; }
+.admonition.success   { @extend %success-style; }
+
 
 /* --- FALLBACK FOR STANDARD ORG EXPORT --- */
 /* If ox-hugo exports <div class="warning"> instead of a shortcode */
-.warning, .note, .tip, .important, .success {
-  @extend .admonition; /* Inherit the base box styles */
+
+.warning { 
+  @extend .admonition; 
+  @extend %warning-style; 
 }
 
-.warning { @extend .admonition.warning; }
-.note { @extend .admonition.note; }
-.tip { @extend .admonition.tip; }
-.important { @extend .admonition.important; }
-.success { @extend .admonition.success; }
+.note { 
+  @extend .admonition; 
+  @extend %note-style; 
+}
+
+.tip { 
+  @extend .admonition; 
+  @extend %tip-style; 
+}
+
+.important { 
+  @extend .admonition; 
+  @extend %important-style; 
+}
+
+.success { 
+  @extend .admonition; 
+  @extend %success-style; 
+}

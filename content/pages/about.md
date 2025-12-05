@@ -1,11 +1,11 @@
 +++
 title = "About Me"
 author = ["desktop"]
-lastmod = 2025-12-05T10:09:03-07:00
+lastmod = 2025-12-05T12:09:17-07:00
 draft = false
 +++
 
-## Hello, I'm Caleb Christensen. {#hello-i-m-caleb-christensen-dot}
+## Caleb Christensen. {#caleb-christensen-dot}
 
 I am a **Revenue Operations professional** who bridges the gap between sales strategy and technical execution.
 

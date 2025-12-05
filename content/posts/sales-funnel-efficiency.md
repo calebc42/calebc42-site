@@ -1,8 +1,10 @@
 +++
-title = "Case Study: Sales Funnel Efficiency & Rep Performance Analysis"
+title = "Sales Funnel Efficiency & Rep Performance Analysis"
 author = ["desktop"]
 date = 2025-12-01
-lastmod = 2025-12-04T16:35:40-07:00
+lastmod = 2025-12-05T12:09:17-07:00
+tags = ["sales", "strategy", "python", "data", "analysis", "pipeline", "optimization", "tableau"]
+categories = ["Portfolio"]
 draft = false
 +++
 
@@ -24,9 +26,7 @@ Analyze raw sales performance data to identify revenue leakage, optimize lead di
 <div class="note">
 
 **About This Case Study:**
-This analysis was completed as a take-home exercise during an interview for a Revenue Operations role. I was provided raw sales data and given 48 hours to identify optimization opportunities and present actionable recommendations.
-
-**Relevant Experience:** As a former funding manager, I observed similar lead distribution patterns firsthand—watching reps monitor pipeline dashboards and strategically claim leads during optimal windows. This operational context informs my analysis of behavioral patterns that purely quantitative analysis might miss.
+This analysis was completed in the course of my GTM Team Lead role, this is an restroactive refinement of the process I used to identify optimization opportunities and present actionable recommendations.
 
 </div>
 
@@ -463,14 +463,3 @@ By implementing territory-aware lead routing, peer-led coaching focused on the h
 -   Michael's lead-to-app: 36% → 45%+
 -   Emily's attempt rate: 67% → 85%+
 -   Team total deals: 837/quarter → 930+/quarter (+11%)
-
-<strong>Implementation Note:</strong>
-<p>These recommendations reflect analysis of trailing quarter data in isolation. Before implementation, I would:</p>
-<ol>
-  <li>Present findings to sales leadership to surface any territory/product/seasonal factors not visible in the data</li>
-  <li>Shadow 2-3 reps (David, Emily, Michael) to validate behavioral hypotheses through direct observation</li>
-  <li>Collaborate with Sales Operations and Enablement teams to ensure alignment with existing initiatives and avoid conflicting priorities</li>
-  <li>Prioritize based on organizational capacity, change management bandwidth, and strategic focus areas</li>
-</ol>
-<p><strong>Strong data analysis provides the <em>what</em>—but organizational context determines the <em>how</em> and <em>when</em>.</strong> The metrics point to opportunities; leadership judgment determines which opportunities to pursue first.</p>
-</div>
