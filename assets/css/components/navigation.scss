@@ -178,6 +178,8 @@ body.has-breadcrumb .progress-bar {
   gap: 0.5rem;
   overflow: hidden;
   white-space: nowrap;
+  flex: 1;
+  min-width: 0;
 }
 
 .breadcrumb-link {
@@ -318,4 +320,235 @@ a.logo {
 }
 a.logo:hover {
   color: var(--color-accent);
+}
+
+/* ===================================================================
+   FLOATING TABLE OF CONTENTS (FAB)
+   =================================================================== */
+
+.toc-fab-wrapper {
+  /* Positioning */
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 1000;
+  
+  /* Flexbox prevents "push to left" issues */
+  display: flex; 
+  flex-direction: column;
+  align-items: flex-end; /* Strictly pin items to the right */
+  gap: 1rem;
+  
+  /* Interaction: Click-through for the wrapper area */
+  pointer-events: none; 
+  width: max-content;
+}
+
+/* DESKTOP HIDE: Strictly hide on large screens */
+@media (min-width: 769px) {
+  .toc-fab-wrapper {
+    display: none !important;
+  }
+}
+
+/* The Button */
+.toc-fab-btn {
+  pointer-events: auto;
+  background-color: var(--bg-primary);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  width: 60px;
+  height: 60px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  border-radius: 50% !important; 
+  border: 1px solid var(--border-color);
+  transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  
+  /* Mobile Highlight Fixes */
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-touch-callout: none !important;
+  user-select: none !important;
+  outline: none !important;
+}
+
+/* Kill the rectangular background animation */
+.toc-fab-btn::before,
+.toc-fab-btn::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* Active State (Pressed) */
+.toc-fab-btn:active {
+  transform: scale(0.9);
+  background-color: var(--bg-secondary-trans);
+  border-color: var(--color-accent);
+  border-radius: 50% !important;
+}
+
+/* Focus State (After tapping/closing) */
+.toc-fab-btn:focus, 
+.toc-fab-btn:focus-visible {
+  outline: none !important;
+  border-color: var(--color-accent);
+  
+  /* CRITICAL FIX: Keep the icon visible! */
+  color: var(--color-accent) !important;
+  background-color: var(--bg-primary); 
+}
+
+/* The Popup Menu */
+.toc-popup {
+  pointer-events: auto;
+  display: none;
+  width: 85vw;
+  max-width: 350px;
+  max-height: 60vh;
+  overflow-y: auto;
+  
+  background-color: var(--bg-primary);
+  box-shadow: 0 -10px 40px rgba(0,0,0,0.3);
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+  padding: var(--spacing-md);
+  
+  transform-origin: bottom right;
+  animation: tocPopIn 0.2s ease-out forwards;
+}
+
+.toc-popup.visible {
+  display: block;
+}
+
+@keyframes tocPopIn {
+  from { opacity: 0; transform: scale(0.95) translateY(10px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* --- Menu Links Styling --- */
+.toc-popup #TableOfContents ul {
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.toc-popup #TableOfContents li {
+  list-style: none;
+  margin: 0;
+}
+
+.toc-popup #TableOfContents a {
+  display: block;
+  text-decoration: none;
+  color: var(--text-primary);
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  padding: 1rem;
+  background-color: var(--bg-secondary-trans);
+  border: 1px solid transparent; 
+  border-radius: 4px;
+  
+  /* Remove highlight on links too */
+  -webkit-tap-highlight-color: transparent; 
+}
+
+.toc-popup #TableOfContents a:active {
+  background-color: var(--color-accent);
+  color: var(--bg-primary);
+  transform: scale(0.98);
+}
+
+/* Nested Items */
+.toc-popup #TableOfContents ul ul {
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+  padding-left: 0.5rem;
+  border-left: 2px solid var(--border-color);
+}
+
+.toc-popup #TableOfContents ul ul a {
+  font-size: 0.9rem;
+  padding: 0.75rem;
+  background-color: transparent;
+  border-bottom: 1px dashed var(--border-color);
+}
+
+/* ===================================================================
+   DESKTOP SIDEBAR COLLAPSIBLE TOC
+   =================================================================== */
+
+.sidebar-toc-card {
+  padding: 0; /* Remove padding so the header touches the edges */
+  overflow: hidden; /* Ensure content stays inside rounded corners */
+}
+
+.sidebar-toc-details {
+  width: 100%;
+}
+
+.sidebar-toc-summary {
+  background-color: var(--color-accent);
+  color: var(--bg-primary);
+  font-family: var(--font-mono);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  padding: var(--spacing-md);
+  cursor: pointer;
+  list-style: none; /* Remove default triangle */
+  position: relative;
+  text-align: center;
+  transition: background-color 0.2s ease;
+}
+
+.sidebar-toc-summary:hover {
+  background-color: var(--text-primary);
+}
+
+/* Remove default marker for Webkit */
+.sidebar-toc-summary::-webkit-details-marker {
+  display: none;
+}
+
+/* Custom Arrow Indicator (Optional - text based arrow in HTML is often safer) */
+/* If you want the arrow to rotate, we can use CSS: */
+.sidebar-toc-details[open] .sidebar-toc-summary::after {
+  /* content: '▲'; code handled in HTML or CSS if desired */
+}
+
+.sidebar-toc-content {
+  padding: var(--spacing-md);
+  background-color: var(--bg-secondary-trans);
+  border-top: 1px solid var(--border-color);
+  
+  /* Typography for the links */
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.sidebar-toc-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar-toc-content li {
+  margin-bottom: 0.5rem;
+}
+
+.sidebar-toc-content a {
+  text-decoration: none;
+  color: var(--text-secondary);
+  transition: color 0.2s;
+}
+
+.sidebar-toc-content a:hover,
+.sidebar-toc-content a.active {
+  color: var(--color-accent);
+  font-weight: bold;
 }

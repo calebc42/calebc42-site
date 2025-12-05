@@ -130,3 +130,42 @@ document.addEventListener('DOMContentLoaded', () => {
         container.appendChild(button);
     });
 });
+
+    // =================================================================
+    // 5. FLOATING TOC TOGGLE
+    // =================================================================
+    const tocBtn = document.getElementById('toc-toggle-btn');
+    const tocPopup = document.getElementById('toc-popup');
+
+    if (tocBtn && tocPopup) {
+        tocBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            tocPopup.classList.toggle('visible');
+            
+            // Icon Swap Logic
+            const icon = tocBtn.querySelector('.material-symbols-outlined');
+            if (tocPopup.classList.contains('visible')) {
+                icon.innerText = 'close'; // Changes hamburger to X
+                // Optional: Make the button "active" colored while open
+                tocBtn.style.borderColor = 'var(--color-accent)'; 
+                tocBtn.style.color = 'var(--color-accent)';
+            } else {
+                icon.innerText = 'toc';   // Changes X back to hamburger
+                tocBtn.style.borderColor = '';
+                tocBtn.style.color = '';
+            }
+        });
+
+        // Close on outside click
+        document.addEventListener('click', (e) => {
+            if (tocPopup.classList.contains('visible') && !tocPopup.contains(e.target) && !tocBtn.contains(e.target)) {
+                tocPopup.classList.remove('visible');
+                
+                // Reset Icon
+                const icon = tocBtn.querySelector('.material-symbols-outlined');
+                icon.innerText = 'toc';
+                tocBtn.style.borderColor = '';
+                tocBtn.style.color = '';
+            }
+        });
+    }

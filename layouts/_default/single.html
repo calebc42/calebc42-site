@@ -1,28 +1,4 @@
 {{ define "main" }}
-    
-    <div class="mobile-controls hidden-desktop">
-        
-        <nav class="mobile-breadcrumb">
-            <span class="path">root</span>
-            {{ range .Ancestors.Reverse }}
-                <span class="separator">/</span>
-                <a href="{{ .Permalink }}">{{ .Title | lower }}</a>
-            {{ end }}
-            <span class="separator">/</span>
-            <span class="current">current</span>
-        </nav>
-
-        {{ if .TableOfContents }}
-        <details class="mobile-toc-toggle">
-            <summary class="btn">CONTENTS ▼</summary>
-            <div class="mobile-toc-content">
-                <div class="card-label">NAVIGATION</div>
-                {{ .TableOfContents }}
-            </div>
-        </details>
-        {{ end }}
-    </div>
-
     <article class="content card">
         <div class="card-label">Entry: {{ .Date.Format "2006-01-02" }}</div>
         <h1>{{ .Title }}</h1>
@@ -42,14 +18,31 @@
         </div>
 
         {{ if .TableOfContents }}
-        <div class="card card-toc sticky-element">
-            <div class="card-label">Navigation</div>
-            <nav id="TableOfContents">
-                {{ .TableOfContents }}
-            </nav>
+        <div class="card sidebar-toc-card">
+            <details class="sidebar-toc-details" open>
+                <summary class="sidebar-toc-summary">CONTENTS</summary>
+                <div class="sidebar-toc-content">
+                    <div class="card-label" style="margin-top: 1rem;">NAVIGATION</div>
+                    {{ .TableOfContents }}
+                </div>
+            </details>
         </div>
         {{ end }}
 
     </aside>
+
+    {{ if .TableOfContents }}
+    <div class="toc-fab-wrapper">
+        <div id="toc-popup" class="toc-popup card">
+            <div class="card-label">NAVIGATION //</div>
+            {{ .TableOfContents }}
+        </div>
+        
+        <button id="toc-toggle-btn" class="btn toc-fab-btn" aria-label="Toggle Table of Contents">
+            <span class="material-symbols-outlined">toc</span>
+        </button>
+    </div>
+    {{ end }}
+    
     {{ end }}
 {{ end }}
