@@ -189,3 +189,79 @@
   .hidden-mobile { display: block !important; }
   .hidden-desktop { display: none !important; }
 }
+
+/* ===================================================================
+   MOBILE HUD & CONTROLS
+   =================================================================== */
+
+.mobile-controls {
+  margin-bottom: var(--spacing-lg);
+  border: 1px solid var(--border-color);
+  background: var(--bg-secondary-trans);
+  padding: var(--spacing-sm);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+/* Breadcrumbs styling */
+.mobile-breadcrumb {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  overflow-x: auto;
+  white-space: nowrap;
+  padding-bottom: 4px;
+}
+
+.mobile-breadcrumb a {
+  color: var(--text-primary);
+  text-decoration: none;
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.mobile-breadcrumb .separator {
+  margin: 0 4px;
+  color: var(--color-accent);
+}
+
+/* ToC Toggle (Styled as a button) */
+.mobile-toc-toggle summary {
+  list-style: none; /* Remove default triangle */
+  width: 100%;
+  text-align: center;
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+  padding: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.mobile-toc-toggle[open] summary {
+  background: var(--color-accent);
+  color: var(--bg-primary);
+  border-color: var(--color-accent);
+}
+
+/* The actual ToC dropdown content */
+.mobile-toc-content {
+  margin-top: var(--spacing-sm);
+  padding: var(--spacing-md);
+  border: 1px solid var(--border-color);
+  background: var(--bg-primary);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+}
+
+.mobile-toc-content ul {
+  list-style: none;
+  padding: 0;
+}
+
+.mobile-toc-content li {
+  margin-bottom: 0.5rem;
+}
+
+.mobile-toc-content a {
+  text-decoration: none;
+  color: var(--text-primary);
+}

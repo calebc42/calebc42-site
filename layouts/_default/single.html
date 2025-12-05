@@ -1,4 +1,28 @@
 {{ define "main" }}
+    
+    <div class="mobile-controls hidden-desktop">
+        
+        <nav class="mobile-breadcrumb">
+            <span class="path">root</span>
+            {{ range .Ancestors.Reverse }}
+                <span class="separator">/</span>
+                <a href="{{ .Permalink }}">{{ .Title | lower }}</a>
+            {{ end }}
+            <span class="separator">/</span>
+            <span class="current">current</span>
+        </nav>
+
+        {{ if .TableOfContents }}
+        <details class="mobile-toc-toggle">
+            <summary class="btn">CONTENTS ▼</summary>
+            <div class="mobile-toc-content">
+                <div class="card-label">NAVIGATION</div>
+                {{ .TableOfContents }}
+            </div>
+        </details>
+        {{ end }}
+    </div>
+
     <article class="content card">
         <div class="card-label">Entry: {{ .Date.Format "2006-01-02" }}</div>
         <h1>{{ .Title }}</h1>
@@ -6,7 +30,7 @@
     </article>
 
     {{ if eq .Type "posts" }}
-    <aside class="sidebar">
+    <aside class="sidebar hidden-mobile">
         
         <div class="card">
             <div class="card-label">Meta Data</div>
