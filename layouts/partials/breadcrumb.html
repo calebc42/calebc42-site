@@ -1,0 +1,26 @@
+<nav class="breadcrumb hidden-mobile">
+  <div class="breadcrumb-trail">
+    <a href="/" class="breadcrumb-link">HOME</a>
+    
+    {{ range .Ancestors.Reverse }}
+      {{ if not .IsHome }}
+        <span class="breadcrumb-separator">//</span>
+        <a href="{{ .Permalink }}" class="breadcrumb-link">{{ .Title | upper }}</a>
+      {{ end }}
+    {{ end }}
+    
+    <span class="breadcrumb-separator">//</span>
+    <span class="breadcrumb-current">{{ .Title | upper }}</span>
+
+    <span class="breadcrumb-dynamic-container" style="opacity: 0; transition: opacity 0.3s ease;">
+        <span class="breadcrumb-separator">>></span>
+        <span id="breadcrumb-current-section" class="breadcrumb-section"></span>
+    </span>
+  </div>
+
+  {{ if .ReadingTime }}
+  <div class="reading-time">
+    {{ .ReadingTime }} MIN READ
+  </div>
+  {{ end }}
+</nav>

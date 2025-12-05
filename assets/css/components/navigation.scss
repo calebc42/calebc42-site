@@ -129,46 +129,41 @@
    BREADCRUMB & PROGRESS BAR
    =================================================================== */
 
-/* --- Global Reading Progress Bar --- */
-.progress-bar {
+/* Push Progress Bar down when breadcrumb is visible */
+body.has-breadcrumb .progress-bar {
+  top: 45px;
+}
+
+/* Main Bar Container */
+.breadcrumb {
   position: fixed;
   top: 0;
   left: 0;
-  width: 0%;
-  height: 4px;
-  background: linear-gradient(90deg, var(--progress-gradient-start), var(--progress-gradient-end));
-  z-index: 1001;
-  transition: width 0.1s ease-out;
-  box-shadow: 0 0 8px var(--progress-glow);
-}
-
-body.has-breadcrumb .progress-bar {
-  top: 49px;
-}
-
-/* --- Breadcrumb Navigation --- */
-.breadcrumb {
-  position: fixed;
-  top: 4px;
-  left: 0;
   right: 0;
-  background: rgba(var(--text-primary-rgb), 0.95);
-  backdrop-filter: blur(10px);
-  padding: var(--spacing-md) var(--spacing-xl);
-  font-family: var(--font-mono);
-  font-size: var(--font-size-xs);
-  border-bottom: 1px solid var(--border-color);
+  height: 45px;
   z-index: 999;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  
+  /* GLASSMORPHISM STYLE (Neutral, No Orange) */
+  background: rgba(var(--bg-primary), 0.85); /* Uses theme background */
+  backdrop-filter: blur(8px);                 /* The "Glass" blur */
+  border-bottom: 1px solid var(--border-color);
+  
+  /* LAYOUT: Pushes Left Group and Right Group apart */
   display: flex;
   align-items: center;
-  gap: var(--spacing-sm);
+  justify-content: space-between; 
+  padding: 0 var(--spacing-lg);
+  
+  /* Typography */
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 0.05em;
+  
+  /* Animation */
   opacity: 0;
   transform: translateY(-100%);
   transition: all 0.3s ease;
-  height: 45px;
 }
 
 .breadcrumb.visible {
@@ -176,75 +171,66 @@ body.has-breadcrumb .progress-bar {
   transform: translateY(0);
 }
 
-.breadcrumb a {
-  color: var(--bg-primary);
-  text-decoration: none;
-  transition: color 0.2s ease;
-  white-space: nowrap;
+/* Left Group */
+.breadcrumb-trail {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   overflow: hidden;
-  text-overflow: ellipsis;
-  max-width: 200px;
-  padding: var(--spacing-xs) 0;
+  white-space: nowrap;
 }
 
-.breadcrumb a:hover {
-  color: var(--breadcrumb-accent);
-  text-shadow: 0 0 4px var(--breadcrumb-accent-glow);
+.breadcrumb-link {
+  text-decoration: none;
+  color: var(--text-secondary);
+  opacity: 0.7;
+  transition: opacity 0.2s, color 0.2s;
+}
+
+.breadcrumb-link:hover {
+  opacity: 1;
+  color: var(--color-accent);
 }
 
 .breadcrumb-separator {
-  color: rgba(var(--text-primary-rgb), 0.6);
-  font-size: var(--font-size-sm);
+  color: var(--border-color); /* Neutral separator */
   font-weight: bold;
-  margin: 0 var(--spacing-xs);
-  user-select: none;
 }
 
-.breadcrumb-separator::before {
-  content: '›';
-  font-size: 14px;
-  line-height: 1;
+.breadcrumb-current {
+  font-weight: 700;
+  color: var(--text-primary);
+  /* Truncate long titles */
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
+.breadcrumb-section {
+    color: var(--color-accent); /* Highlight the section in accent color */
+}
+
+/* Right Group */
 .reading-time {
-  font-size: var(--font-size-xs);
-  color: var(--bg-primary);
-  margin-left: auto;
-  padding: var(--spacing-xs) var(--spacing-sm);
-  background: var(--breadcrumb-bg-tint);
-  border-radius: var(--border-radius);
-  border: 1px solid var(--breadcrumb-border);
-  white-space: nowrap;
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xs);
+  /* Flexbox safety: Ensure it doesn't shrink */
+  flex-shrink: 0;
+  margin-left: var(--spacing-md);
+  opacity: 0.6;
 }
 
-.reading-time::before {
-  content: '⏱';
-  font-size: var(--font-size-xs);
-  opacity: 0.8;
-}
-
-body.has-breadcrumb {
-  padding-top: 53px;
-}
-
-body.has-breadcrumb .site-header {
-  margin-top: var(--spacing-md);
-}
-
-/* --- Site Footer --- */
+/* ===================================================================
+   SITE FOOTER
+   =================================================================== */
 .site-footer {
   text-align: center;
   font-family: var(--font-mono);
   font-size: 0.85rem;
   color: var(--text-secondary);
-  border-top: 1px solid var(--border-color);
+  border-top: 1px solid var(--border-color); /* This is the missing line */
   padding: var(--spacing-md) 0;
   
-  /* Layout Fixes */
-  margin-top: auto; /* Sticks to bottom */
+  /* Layout Fixes: Sticks to bottom */
+  margin-top: auto; 
   width: 100%;
   padding-top: var(--spacing-lg);
 }
@@ -252,7 +238,6 @@ body.has-breadcrumb .site-header {
 .site-footer p {
   margin-bottom: var(--spacing-sm);
 }
-
 
 /* ===================================================================
    DROPDOWN MENU STYLES
