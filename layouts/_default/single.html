@@ -8,10 +8,12 @@
     <aside>
         <div class="card">
             <div class="card-label">Meta Data</div>
-            <ul style="list-style: none; font-family: var(--font-mono); font-size: 0.85rem;">
+            <ul class="meta-data-list" style="list-style: none; font-family: var(--font-mono); font-size: 0.85rem; margin-bottom: 1rem;">
                 <li><strong>Words:</strong> {{ .WordCount }}</li>
                 <li><strong>Read Time:</strong> {{ .ReadingTime }} min</li>
-            </ul>
+            </ul> 
+            
+            {{ partial "tags.html" . }}
         </div>
     </aside>
 {{ end }}

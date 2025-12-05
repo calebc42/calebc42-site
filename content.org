@@ -85,14 +85,12 @@ Success in this role required rapid synthesis of changing guidelines and the abi
 :END:
 Welcome to my personal digital space.
 
-* Case Study: Sales Funnel Efficiency & Rep Performance Analysis
+* Sales Funnel Efficiency & Rep Performance Analysis :sales:strategy:python:data:analysis:pipeline:optimization:tableau:
 :PROPERTIES:
-:EXPORT_HUGO_SECTION: case-studies
+:EXPORT_HUGO_SECTION: portfolio
 :EXPORT_FILE_NAME: sales-funnel-efficiency
 :EXPORT_DATE: 2025-12-01
-:EXPORT_HUGO_CATEGORIES: "Revenue Operations"
-:EXPORT_HUGO_TAGS: "Sales Strategy" "Python" "Data Analysis" "Pipeline Optimization" "Tableau/Plotly"
-:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :featured true
+:EXPORT_HUGO_CATEGORIES: "Case Study"
 :END:
 
 ** Overview
@@ -491,18 +489,17 @@ By implementing territory-aware lead routing, peer-led coaching focused on the h
 - Emily's attempt rate: 67% → 85%+
 - Team total deals: 837/quarter → 930+/quarter (+11%)
 
-#+BEGIN_EXPORT html
-<strong>Implementation Note:</strong>
-<p>These recommendations reflect analysis of trailing quarter data in isolation. Before implementation, I would:</p>
-<ol>
-  <li>Present findings to sales leadership to surface any territory/product/seasonal factors not visible in the data</li>
-  <li>Shadow 2-3 reps (David, Emily, Michael) to validate behavioral hypotheses through direct observation</li>
-  <li>Collaborate with Sales Operations and Enablement teams to ensure alignment with existing initiatives and avoid conflicting priorities</li>
-  <li>Prioritize based on organizational capacity, change management bandwidth, and strategic focus areas</li>
-</ol>
-<p><strong>Strong data analysis provides the <em>what</em>—but organizational context determines the <em>how</em> and <em>when</em>.</strong> The metrics point to opportunities; leadership judgment determines which opportunities to pursue first.</p>
-</div>
-#+END_EXPORT
+# #+BEGIN_EXPORT html
+# <strong>Implementation Note:</strong>
+# <p>These recommendations reflect analysis of trailing quarter data in isolation. Before implementation, I would:</p>
+# <ol>
+#   <li>Present findings to sales leadership to surface any territory/product/seasonal factors not visible in the data</li>
+#   <li>Shadow 2-3 reps (David, Emily, Michael) to validate behavioral hypotheses through direct observation</li>
+#   <li>Collaborate with Sales Operations and Enablement teams to ensure alignment with existing initiatives and avoid conflicting priorities</li>
+#   <li>Prioritize based on organizational capacity, change management bandwidth, and strategic focus areas</li>
+# </ol>
+# <p><strong>Strong data analysis provides the <em>what</em>—but organizational context determines the <em>how</em> and <em>when</em>.</strong> The metrics point to opportunities; leadership judgment determines which opportunities to pursue first.</p>
+# #+END_EXPORT
 
 * Solving the "Blurry Line" Problem: Engineering a Python CLI for E-Ink Devices
 :PROPERTIES:
@@ -675,7 +672,7 @@ TEMPLATE_REGISTRY = {
     },
     # Adding a new template only requires adding an entry here
 }
-#+END_SRC
+#+end_src
 
 I used this same pattern for the implementation of Cover pages and Divider lines.
 
@@ -906,7 +903,7 @@ When "end of support" means "forced obsolescence," the ability to verify and con
 ** *In 2025, ownership is not assumed. It is proven.*
 The FILE demonstrates this principle in practice. The following sections document how each property translates into measurable verification.
 
-* CSS Stress Test
+* CSS Stress Test :css:tag:test:
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: posts
 :EXPORT_FILE_NAME: css-stress-test

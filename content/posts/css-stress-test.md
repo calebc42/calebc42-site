@@ -2,11 +2,12 @@
 title = "CSS Stress Test"
 author = ["desktop"]
 date = 2025-11-20
-lastmod = 2025-12-04T23:37:04-07:00
+lastmod = 2025-12-05T10:09:03-07:00
+tags = ["css", "tag", "test"]
 draft = false
 +++
 
-This post serves as a "unit test" for the YoRHa design system. It contains examples of common Org Mode elements to ensure the Hugo CSS handles them correctly.
+This post serves as a "unit test" for my design language, inspired by the Nier: Automata YoHRa UI. It contains examples of common Org Mode elements to ensure the Hugo CSS handles them correctly.
 
 
 ## Typography and Inline Styles {#typography-and-inline-styles}

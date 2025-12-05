@@ -3,6 +3,10 @@ languageCode = 'en-us'
 title = 'Caleb Christensen'
 theme = []
 
+[taxonomies]
+  tag = "tags"
+  category = "categories"
+
 # Render hooks for cleaner HTML
 [markup]
   [markup.goldmark]

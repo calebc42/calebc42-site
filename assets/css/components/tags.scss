@@ -1,0 +1,54 @@
+/* assets/css/components/tags.scss */
+
+.meta-tags {
+  /* The dashed divider line */
+  border-top: 1px dashed var(--border-color);
+  padding-top: var(--spacing-sm);
+  margin-top: var(--spacing-md);
+
+  .meta-tags-label {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    color: var(--text-secondary);
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .tag-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem; /* Space between chips */
+
+    li {
+      margin: 0; /* specific reset for li inside this list */
+    }
+  }
+
+  /* The "Data Chip" Styling */
+  a {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-decoration: none;
+    padding: 2px 8px;
+    
+    /* Industrial Look */
+    color: var(--color-accent);
+    border: 1px solid var(--border-color);
+    background-color: rgba(0,0,0,0.05); /* Slight tint */
+    border-radius: 2px; /* Sharp corners (Nier style) */
+    
+    transition: all 0.2s ease;
+
+    &:hover {
+      background-color: var(--color-accent);
+      color: var(--bg-primary); 
+      border-color: var(--color-accent);
+      cursor: pointer;
+    }
+  }
+}

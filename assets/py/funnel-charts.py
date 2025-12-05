@@ -25,7 +25,7 @@ fig_scatter = px.scatter(
     color="Win_Rate",    # Color = Deal Quality (Red = low close rate)
     color_continuous_scale="RdYlGn",
     title="Sales Efficiency: Volume vs. Conversion",
-    labels={"Conversion_Rate": "Lead-to-Deal Conversion %", "Win_Rate": "Close Rate (Qual -> Deal)"},
+    labels={"Conversion_Rate": "Lead-to-Deal Conversion %", "Win_Rate": "Close Rate"},
     template="plotly_white"
 )
 

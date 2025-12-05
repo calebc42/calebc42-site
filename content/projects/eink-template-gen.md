@@ -4,7 +4,7 @@ title = """
   """
 author = ["desktop"]
 date = 2025-12-04
-lastmod = 2025-12-04T23:37:04-07:00
+lastmod = 2025-12-05T10:09:03-07:00
 tags = ["Python", "Open Source", "Tooling", "Automation", "CI/CD"]
 categories = ["Engineering"]
 draft = false
