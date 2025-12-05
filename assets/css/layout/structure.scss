@@ -132,3 +132,23 @@
   box-shadow: 0 0 10px var(--progress-glow);
   transition: width 0.1s linear;
 }
+
+/* ===================================================================
+   STICKY SIDEBAR LOGIC
+   =================================================================== */
+
+/* Ensure the parent container allows for sticky positioning */
+.site-main aside {
+  height: 100%; /* Needed for sticky to know its track */
+}
+
+.sticky-element {
+  position: -webkit-sticky; /* Safari */
+  position: sticky;
+  top: 2rem; /* Gap from the top of the browser window */
+  z-index: 10;
+  
+  /* Optional: Max height with scrollbar if ToC is massive */
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+}
