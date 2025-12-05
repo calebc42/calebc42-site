@@ -1,0 +1,68 @@
+{{ define "main" }}
+<div class="resume-wrapper" style="max-width: 850px; margin: 0 auto;">
+
+  <div class="card card-header" style="text-align: center; margin-bottom: 3rem;">
+    <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">{{ .Site.Title }}</h1>
+    <div style="font-family: var(--font-mono); color: var(--color-accent);">
+      REVENUE OPERATIONS
+    </div>
+    <div style="margin-top: 1.5rem; display: flex; justify-content: center; gap: 1rem;">
+      <a href="mailto:connect@calebc42.com" class="btn">Email</a>
+      <a href="javascript:window.print()" class="btn">Print / PDF</a>
+    </div>
+  </div>
+
+  <div class="resume-timeline">
+    {{ range .Site.Data.experience }}
+    <div class="resume-entry card" style="margin-bottom: 2rem; position: relative;">
+      
+      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1rem; flex-wrap: wrap;">
+        <h2 style="margin: 0; font-size: 1.5rem;">{{ .role }}</h2>
+        <span style="font-family: var(--font-mono); font-size: 0.9rem; opacity: 0.8;">{{ .dates }}</span>
+      </div>
+      
+      <div style="margin-bottom: 1.5rem; font-family: var(--font-mono); color: var(--color-accent); font-weight: bold;">
+        {{ .company }} <span style="color: var(--text-secondary); font-weight: normal;">| {{ .location }}</span>
+      </div>
+
+      <p style="font-style: italic; opacity: 0.9; margin-bottom: 1.5rem;">
+        {{ .summary }}
+      </p>
+
+      <ul style="list-style: none; padding: 0;">
+        {{ range .highlights }}
+        <li style="margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">
+          <span style="position: absolute; left: 0; top: 6px; color: var(--color-accent);">►</span>
+          
+          <div style="display: inline;">
+            {{ .text }}
+            
+            {{ if .related_link }}
+              <a href="{{ .related_link }}" class="tag" style="margin-left: 0.5rem; text-decoration: none; border-bottom: none; display: inline-flex; align-items: center; gap: 4px;">
+                <span class="material-symbols-outlined" style="font-size: 12px;">link</span>
+                {{ .related_label | default "EVIDENCE" }}
+              </a>
+            {{ end }}
+          </div>
+
+          {{ if .skills }}
+          <div style="margin-top: 0.4rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            {{ range .skills }}
+              <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" 
+                 style="font-size: 0.7rem; padding: 1px 6px; border: 1px solid var(--border-color); border-radius: 4px; color: var(--text-secondary); text-decoration: none; opacity: 0.7;">
+                 {{ . }}
+              </a>
+            {{ end }}
+          </div>
+          {{ end }}
+
+        </li>
+        {{ end }}
+      </ul>
+
+    </div>
+    {{ end }}
+  </div>
+
+</div>
+{{ end }}

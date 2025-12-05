@@ -1,14 +1,18 @@
 {{ define "main" }}
-<div class="tag-list">
-  <h1>Tags</h1>
-  <ul>
+<div style="grid-column: 1 / -1;">
+  
+  <div class="card card-header">
+    <h1>// {{ .Title }} //</h1>
+    <p>Index of all {{ .Title | lower }} available.</p>
+  </div>
+
+  <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
     {{ range .Data.Terms.ByCount }}
-      <li>
-        <a href="{{ .Page.Permalink }}">
-          {{ .Page.Title }} ({{ .Count }})
-        </a>
-      </li>
+      <a href="{{ .Page.Permalink }}" class="btn">
+        {{ .Page.Title }} <span style="opacity: 0.6;">[{{ .Count }}]</span>
+      </a>
     {{ end }}
-  </ul>
+  </div>
+
 </div>
 {{ end }}

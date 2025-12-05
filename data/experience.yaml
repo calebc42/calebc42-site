@@ -1,0 +1,42 @@
+# data/experience.yaml
+
+- company: "Lendio"
+  role: "GTM Team Lead (Founding Sales Team)"
+  dates: "May 2023 – Oct 2023"
+  location: "Lehi, UT"
+  summary: "Recruited to architect the operational framework for a new tax credit division. Scaled monthly revenue from $100k to $350k in 5 months."
+  highlights:
+    - text: "Architected the end-to-end sales process and performance management system."
+      # This links DIRECTLY to your case study
+      related_link: "/case-studies/sales-funnel-efficiency/"
+      related_label: "READ CASE STUDY"
+      
+    - text: "Automated lead distribution workflows using Kixie and Salesforce for equitable routing."
+      skills: ["Salesforce", "Kixie", "Automation"]
+      
+    - text: "Launched company's first offshore unit in Jamaica, reducing cost-per-rep by 50%."
+      skills: ["Leadership", "Cost Analysis"]
+
+- company: "Lendio"
+  role: "Traditional Lending SME"
+  dates: "Nov 2021 – Feb 2023"
+  location: "Lehi, UT"
+  summary: "Designed a data-driven enablement program to solve high-value borrower leakage."
+  highlights:
+    - text: "Increased conversion rates on traditional products by 144% (+$700k revenue)."
+      related_link: "/case-studies/sales-funnel-efficiency/#2-dot-the-analytical-framework-right-to-left-prioritization"
+      related_label: "SEE ANALYSIS"
+
+    - text: "Leveraged Gong.io for call analysis and targeted coaching."
+      skills: ["Gong.io", "Coaching"]
+
+- company: "Dynatronics"
+  role: "Operations & Supply Chain Intern"
+  dates: "May 2018 – Aug 2018"
+  location: "Cottonwood Heights, UT"
+  summary: "Solved critical supply chain production delays using Lean principles."
+  highlights:
+    - text: "Designed a physical Kanban system reducing stock-outs by 57%."
+      # If you write a post about this later, you just add the link here
+      related_link: "" 
+      skills: ["Kanban", "Lean Six Sigma"]

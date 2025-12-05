@@ -1,13 +1,33 @@
 {{ define "main" }}
-<div class="tag-posts">
-  <h1>Posts tagged with "{{ .Title }}"</h1>
-  <ul>
+<div style="grid-column: 1 / -1;">
+  
+  <div class="card card-header">
+    <div class="card-label">FILTER: {{ .Data.Singular | upper }}</div>
+    <h1>{{ .Title }}</h1>
+    <p>Showing {{ len .Pages }} entries tagged with "{{ .Title }}".</p>
+  </div>
+
+  <div class="card-grid">
     {{ range .Pages }}
-      <li>
-        <a href="{{ .Permalink }}">{{ .Title }}</a>
-        <time>{{ .Date.Format "Jan 2, 2006" }}</time>
-      </li>
+      <div class="card card-interactive">
+        <div class="card-label">
+            {{ if eq .Kind "section" }}DIRECTORY{{ else }}FILE{{ end }}
+        </div>
+
+        <h3>
+            <a href="{{ .RelPermalink }}" class="stretched-link" style="color: var(--text-primary); text-decoration: none;">
+                {{ .Title }}
+            </a>
+        </h3>
+
+        <p>{{ .Summary | truncate 120 }}</p>
+
+        <div style="margin-top: 1rem; font-size: 0.75rem; font-family: var(--font-mono); opacity: 0.7;">
+            {{ .Date.Format "2006-01-02" }}
+        </div>
+      </div>
     {{ end }}
-  </ul>
+  </div>
+
 </div>
 {{ end }}

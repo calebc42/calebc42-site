@@ -1,0 +1,52 @@
+# data/skills.yaml
+
+- category: "Revenue Infrastructure"
+  items:
+    - label: "CRM & Automation"
+      value: "Salesforce (Admin & Experience Cloud), Slack Workflow Builder."
+      proficiency: "Intermediate"
+      tags: ["Salesforce", "Lead Flow", "Connector", "Implementation"]
+
+    - label: "Sales Engagement"
+      value: "Kixie (Routing & Automation), AirCall, FileInvite, ZoomInfo."
+      proficiency: "Master"
+      tags: ["Kixie", "AirCall", "FileInvite", "ZoomInfo", "D&B Hoovers"]
+
+    - label: "Intelligence"
+      value: "Gong.io (Conversation Analytics), ZenDesk."
+      proficiency: "Master"
+      tags: ["Gong.io", "Call Analysis", "Keyword Analysis", "Best Practice Identification"]
+
+- category: "Data & Engineering"
+  items:
+    - label: "Languages"
+      value: "Python (Pandas, Plotly, Automation), SQL, HTML/CSS."
+      proficiency: "Proficient"
+      tags: ["Python", "SQL", "RAG", "LLM Integration", "API"]
+
+    - label: "Analysis"
+      value: "Advanced Google Sheets (Query, VLOOKUP), Excel Financial Modeling."
+      proficiency: "Master"
+      tags: ["Spreadsheets", "Pivot Tables", "Financial Modeling", "Forecasting"]
+
+    - label: "BI Tools"
+      value: "DOMO, Tableau, Power BI."
+      proficiency: "Intermediate"
+      tags: ["Dashboard Creation", "KPI Reporting", "Data Visualization"]
+
+- category: "Strategy & Frameworks"
+  items:
+    - label: "Sales Methodology"
+      value: "Sandler Consultative Selling (Formally Trained), SPIN Selling."
+      proficiency: "Master"
+      tags: ["Consultative Selling", "Solution Selling", "Value Selling"]
+
+    - label: "Operations"
+      value: "Lean Six Sigma / Kanban (Inventory Design), 5-Why Root Cause."
+      proficiency: "Intermediate"
+      tags: ["Process Optimization", "Root Cause Analysis", "Kaizen", "Agile"]
+
+    - label: "Growth"
+      value: "GTM Architecture, Full-Cycle Pipeline Management."
+      proficiency: "Proficient"
+      tags: ["Product Launch", "Market Entry", "Sales Motion", "Value Proposition"]

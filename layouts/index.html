@@ -25,32 +25,18 @@
   </div>
 
   <div class="skills-grid">
-      <div class="skill-card">
-        <h3>> Revenue Infrastructure</h3>
-        <ul class="skill-list">
-          <li><strong>CRM & Automation:</strong> Salesforce (Admin & Experience Cloud), Slack Workflow Builder.</li>
-          <li><strong>Sales Engagement:</strong> Kixie (Routing & Automation), AirCall, FileInvite, ZoomInfo.</li>
-          <li><strong>Intelligence:</strong> Gong.io (Conversation Analytics), ZenDesk.</li>
-        </ul>
-      </div>
-
-      <div class="skill-card">
-        <h3>> Data & Engineering</h3>
-        <ul class="skill-list">
-          <li><strong>Languages:</strong> Python (Pandas, Plotly, Automation), SQL, HTML/CSS.</li>
-          <li><strong>Analysis:</strong> Advanced Google Sheets (Query, VLOOKUP), Excel Modeling.</li>
-          <li><strong>BI Tools:</strong> DOMO, Tableau.</li>
-        </ul>
-      </div>
-
-      <div class="skill-card">
-        <h3>> Strategy & Frameworks</h3>
-        <ul class="skill-list">
-          <li><strong>Sales Methodology:</strong> Sandler Consultative Selling, SPIN Selling.</li>
-          <li><strong>Operations:</strong> Lean Six Sigma / Kanban (Inventory Design), 5-Why Root Cause Analysis.</li>
-          <li><strong>Growth:</strong> GTM Architecture, Full-Cycle Pipeline Management.</li>
-        </ul>
-      </div>
+    {{ range .Site.Data.skills }}
+    <div class="skill-card">
+      <h3>> {{ .category }}</h3>
+      <ul class="skill-list">
+        {{ range .items }}
+        <li>
+          <strong>{{ .label }}:</strong> {{ .value }}
+        </li>
+        {{ end }}
+      </ul>
+    </div>
+    {{ end }}
   </div>
   
 <div class="content" id="experience">

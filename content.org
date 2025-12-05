@@ -17,34 +17,12 @@ Unlike traditional analysts, I bring an engineer's toolkit to revenue problems. 
 
 I am currently seeking a Revenue Operations role where I can apply systems thinking to build the infrastructure of trust and efficiency.
 
-* Technical & Strategic Skills
+* Interactive Resume
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: pages
-:EXPORT_FILE_NAME: skills
+:EXPORT_FILE_NAME: resume
+:EXPORT_HUGO_LAYOUT: resume
 :END:
-
-#+BEGIN_EXPORT html
-<div class="skills-grid">
-#+END_EXPORT
-
-** Revenue Infrastructure
-- **CRM & Automation:** Salesforce (Admin & Experience Cloud), Slack Workflow Builder.
-- **Sales Engagement:** Kixie (Routing & Automation), AirCall, FileInvite, ZoomInfo/D&B Hoovers.
-- **Intelligence:** Gong.io (Conversation Analytics), ZenDesk.
-
-** Data & Engineering
-- **Languages:** Python (Pandas, Plotly, automation scripts), SQL, HTML/CSS.
-- **Analysis:** Advanced Google Sheets (Query, VLOOKUP, Dashboarding), Microsoft Excel (Financial Modeling).
-- **BI Tools:** DOMO, Tableau.
-
-** Strategy & Frameworks
-- **Sales Methodology:** Sandler Consultative Selling (Formally Trained), SPIN Selling.
-- **Operations:** Lean Six Sigma / Kanban (Inventory Design), 5-Why Root Cause Analysis.
-- **Growth:** Go-to-Market (GTM) Architecture, Full-Cycle Pipeline Management.
-
-#+BEGIN_EXPORT html
-</div>
-#+END_EXPORT
 * Experience
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: pages
@@ -85,7 +63,7 @@ Success in this role required rapid synthesis of changing guidelines and the abi
 :END:
 Welcome to my personal digital space.
 
-* Sales Funnel Efficiency & Rep Performance Analysis :sales:strategy:python:data:analysis:pipeline:optimization:tableau:
+* Sales Funnel Efficiency & Rep Performance Analysis :sales:strategy:python:data_analysis:pipeline_optimization:tableau:
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: posts
 :EXPORT_FILE_NAME: sales-funnel-efficiency

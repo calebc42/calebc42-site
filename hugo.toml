@@ -24,6 +24,12 @@ theme = []
   author = "Caleb Christensen"
 
 [menu]
+  [[menu.main]]
+    identifier = "home"
+    name = "[Home]"
+    url = "/"
+    weight = 1
+
   # 1. About
   [[menu.main]]
     identifier = "about"
@@ -45,3 +51,10 @@ theme = []
     name = "[Posts]"
     url = "/categories/"
     weight = 30
+
+ # 4. Tags
+ [[menu.main]]
+   identifier = "tags"
+   name = "[Tags]"
+   url = "/tags/"
+   weight = 40
