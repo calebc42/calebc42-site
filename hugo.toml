@@ -1,0 +1,20 @@
+baseURL = 'https://calebc42.com/'
+languageCode = 'en-us'
+title = 'Caleb Christensen'
+theme = []
+
+# Render hooks for cleaner HTML
+[markup]
+  [markup.goldmark]
+    [markup.goldmark.renderer]
+      unsafe = true # Allows raw HTML if absolutely necessary
+
+  [markup.highlight]
+    noClasses = true  # Generates standard classes for syntax highlighting
+    style = 'monokai'  # Matches the dark aesthetic of your CSS
+    lineNos = false    # We can enable this later if desired
+    guessSyntax = false
+
+[params]
+  description = "My Knowledge Base"
+  author = "Caleb Christensen"

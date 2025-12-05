@@ -1,0 +1,134 @@
+/* ===================================================================
+   LAYOUT STRUCTURE (Containers & Grids)
+   =================================================================== */
+
+/* --- Main Page Wrapper --- */
+.layout-wrapper {
+  max-width: var(--layout-max-width);
+  margin: 0 auto;
+  
+  /* Flex Magic for Sticky Footer */
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  width: 100%;
+  
+  gap: var(--spacing-xl);
+  min-height: auto;
+
+  opacity: 0; 
+  /* We use the keyframes defined in reset.scss */
+  animation: fadeIn 1s ease-out forwards;
+}
+
+/* --- Main Content Columns --- */
+.site-main {
+  display: grid;
+  // Default: 2 columns (Content + Sidebar)
+  grid-template-columns: minmax(0, 2fr) minmax(280px, 1fr);
+  // grid-template-columns: minmax(0, 1fr);
+  gap: var(--spacing-xl);
+  align-items: start;
+  min-height: auto;
+
+  /* 👇 ADD THIS BLOCK: Override for Full Width Pages */
+  &.full-width {
+    grid-template-columns: minmax(0, 1fr); /* Single column spanning full width */
+  }
+}
+
+/* Mobile Stack remains the same */
+@media (max-width: 768px) {
+  .site-main {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- Card Grid (Merged from grids.css) --- */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-xl);
+}
+
+/* ===================================================================
+   LAYOUT DECORATION & TYPOGRAPHY
+   =================================================================== */
+
+/* --- Header Card Typography --- */
+/* Specific override for the big H1 in the top card */
+.card-header h1 {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xxl);
+  line-height: 1.2;
+  margin-bottom: var(--spacing-lg);
+  font-weight: 400;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wider);
+  text-shadow: 0.3rem 0.3rem 0 rgba(var(--text-primary-rgb), 0.1);
+}
+
+.card-header p {
+  max-width: 65ch;
+}
+
+/* --- Decorative Pattern Divider --- */
+.pattern {
+  border-top: 2px solid var(--text-primary);
+  margin-bottom: var(--spacing-xl);
+}
+
+.pattern-inner {
+  height: 40px;
+  background-image:
+    repeating-linear-gradient(
+      90deg,
+      var(--text-primary) 0px,
+      var(--text-primary) 8px,
+      transparent 8px,
+      transparent 20px,
+      rgba(var(--text-primary-rgb), 0.6) 20px,
+      rgba(var(--text-primary-rgb), 0.6) 22px,
+      transparent 22px,
+      transparent 25px,
+      rgba(var(--text-primary-rgb), 0.8) 25px,
+      rgba(var(--text-primary-rgb), 0.8) 26px,
+      transparent 26px,
+      transparent 50px
+    );
+  background-repeat: repeat-x;
+}
+
+/* --- Construction Notice --- */
+.construction-notice {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  text-align: center;
+  color: var(--color-accent);
+  margin-bottom: var(--spacing-xl);
+  padding: var(--spacing-sm);
+  border: 1px dashed var(--border-color);
+}
+
+/* ===================================================================
+   PROGRESS BAR
+   =================================================================== */
+.progress-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 6px;
+  z-index: 9999;
+  background: transparent;
+  pointer-events: none;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--progress-gradient-start), var(--progress-gradient-end));
+  box-shadow: 0 0 10px var(--progress-glow);
+  transition: width 0.1s linear;
+}

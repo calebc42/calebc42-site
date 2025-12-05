@@ -1,0 +1,386 @@
+/* ===================================================================
+   TYPOGRAPHY
+   =================================================================== */
+
+/* --- Content Width Control --- */
+.content p,
+.content li,
+.intro-panel p,
+.card p,
+.content h1, .content h2, .content h3, .content h4, .content h5, .content h6,
+.content > ul, .content > ol {
+  max-width: 98%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: none;
+}
+
+.content p,
+.intro-panel p,
+.card p {
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+.content code,
+.content pre {
+  word-wrap: normal;
+  overflow-wrap: normal;
+  white-space: pre;
+  max-width: none;
+}
+
+/* --- List General Styling --- */
+.content ul,
+.content ol {
+  /* This restores the space needed for bullets/numbers */
+  padding-left: var(--spacing-xl); 
+  margin-bottom: var(--spacing-md);
+}
+
+/* Ensure markers sit outside the text flow (Hanging Indent) */
+.content ul, .content ol {
+  list-style-position: outside;
+}
+
+/* --- List Item Typography --- */
+.content li {
+  margin-bottom: var(--spacing-xs);
+  text-align: left; /* Ensures spacing isn't weird on short lines */
+  padding-left: var(--spacing-xs); /* Slight gap between number and text */
+}
+
+/* Fix for Hugo/Org treating list items as paragraphs */
+.content li > p {
+  margin-bottom: var(--spacing-xs);
+  text-align: left;
+}
+
+.content li > p:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Nested list styling --- */
+.content ul ul, 
+.content ol ol, 
+.content ul ol, 
+.content ol ul {
+  /* Reset top/bottom margins for nested lists to keep them tight */
+  margin-top: var(--spacing-xs);
+  margin-bottom: var(--spacing-xs);
+}
+
+/* --- Blockquotes (YoRHa Style) --- */
+.content blockquote {
+  max-width: var(--content-max-width);
+  margin: var(--spacing-xl) 0;
+  padding: var(--spacing-lg);
+  
+  /* Darken the background slightly in Light Mode */
+  background-color: rgba(0, 0, 0, 0.05); 
+  border-left: 4px solid var(--color-accent);
+  border-radius: var(--border-radius);
+  
+  font-style: italic;
+  color: var(--text-primary);
+  position: relative;
+}
+
+/* Dark Mode Specific: Use the light transparency to "lift" the box off the dark background */
+[data-theme="dark"] .content blockquote {
+  background-color: var(--bg-secondary-trans);
+}
+
+/* Decorative "Quote" mark */
+.content blockquote::before {
+  content: '“';
+  position: absolute;
+  top: -0.5rem;
+  right: 1rem;
+  font-family: var(--font-mono);
+  font-size: 4rem;
+  line-height: 1;
+  color: var(--color-accent);
+  opacity: 0.15;
+  pointer-events: none;
+}
+
+.content blockquote p {
+  margin-bottom: 0;
+  text-align: left;
+}
+
+
+/* --- Content Typography --- */
+.content h1, .content h2, .content h3 {
+  font-family: var(--font-mono);
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing);
+  margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing-md);
+}
+
+.content h2 {
+  font-size: var(--font-size-xl);
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: var(--spacing-sm);
+  max-width: var(--content-max-width);
+  width: fit-content;
+}
+
+.content h3 {
+  font-size: var(--font-size-lg);
+  color: var(--color-accent);
+  margin-top: var(--spacing-lg);
+  margin-bottom: var(--spacing-sm);
+  padding-bottom: var(--spacing-xs);
+  border-bottom: 1px dashed var(--border-color);
+}
+
+.content h3 + p, .content h3 + ul, .content h3 + ol, .content h3 + pre {
+   margin-top: var(--spacing-sm);
+}
+
+.content p {
+  margin-bottom: var(--spacing-md);
+  line-height: 1.7;
+}
+
+.content code {
+  background-color: var(--bg-secondary-trans);
+  padding: 0.2rem 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius);
+}
+
+/* --- Hyperlinks (.btn excluded) --- */
+.content a:not(.btn) {
+  color: var(--text-secondary);
+  text-decoration: underline;
+  text-decoration-color: var(--color-accent);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  position: relative;
+  font-family: var(--font-mono);
+  font-weight: 600;
+  letter-spacing: var(--letter-spacing);
+  transition: all 0.3s ease;
+  padding: 0.1rem 0.2rem;
+  border-radius: var(--border-radius);
+  background: var(--bg-secondary-trans);
+  border: 1px solid transparent;
+}
+
+.content a:not(.btn):hover,
+.content a:not(.btn):focus {
+  color: var(--bg-primary);
+  background-color: var(--color-accent);
+  text-decoration: none;
+  border-color: var(--color-accent);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(var(--text-primary-rgb), 0.2);
+}
+
+.content a[href^="http"]:not(.btn)::before {
+  content: '↗';
+  font-size: var(--font-size-xs);
+  opacity: 0.8;
+  margin-right: 0.2rem;
+  color: var(--color-accent);
+  font-weight: bold;
+}
+
+.content a[href^="http"]:not(.btn):hover::before {
+  opacity: 1;
+  color: var(--bg-primary);
+}
+
+.content a:not(.btn):visited {
+  color: var(--border-color);
+  text-decoration-color: var(--border-color);
+}
+
+.content a:not(.btn):visited:hover {
+  color: var(--bg-primary);
+  background-color: var(--color-accent);
+}
+
+/* --- Keyboard Element --- */
+kbd {
+  display: inline-block;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+  background: var(--bg-primary);
+  border: 1px solid var(--border-color);
+  border-bottom: 2px solid var(--color-accent);
+  border-radius: var(--border-radius);
+  margin: 0 var(--spacing-xs);
+  box-shadow: 0 1px 3px rgba(var(--text-primary-rgb), 0.2);
+  letter-spacing: 0.5px;
+}
+
+/* --- Table of Contents --- */
+.table-of-contents, #table-of-contents {
+  margin: var(--spacing-xl) 0;
+  max-width: var(--content-max-width);
+}
+
+.table-of-contents h2, #table-of-contents h2 {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: var(--font-size-sm);
+  letter-spacing: 1px;
+  color: var(--color-accent);
+  margin-bottom: var(--spacing-md);
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border-color);
+  padding-bottom: var(--spacing-sm);
+}
+
+.table-of-contents ul, #table-of-contents ul {
+  list-style: none;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.table-of-contents li, #table-of-contents li {
+  margin-bottom: 0.3rem;
+  border-left: 2px solid var(--border-color);
+  padding-left: var(--spacing-md);
+  position: relative;
+  transition: border-left-color 0.2s ease;
+}
+
+.table-of-contents li:hover, #table-of-contents li:hover {
+  border-left-color: var(--color-accent);
+}
+
+.table-of-contents li::before, #table-of-contents li::before {
+  content: '▸';
+  position: absolute;
+  left: -8px;
+  top: 0;
+  color: var(--color-accent);
+  font-size: var(--font-size-xs);
+  opacity: 0.6;
+  transition: opacity 0.2s ease;
+}
+
+.table-of-contents li:hover::before, #table-of-contents li::before {
+  opacity: 1;
+}
+
+.table-of-contents a, #table-of-contents a {
+  color: var(--text-primary);
+  text-decoration: none;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  transition: all 0.2s ease;
+  display: block;
+  padding: 0.1rem 0.4rem;
+  margin-left: -0.4rem;
+  border-radius: var(--border-radius);
+}
+
+.table-of-contents a:hover, #table-of-contents a:hover {
+  color: var(--bg-primary);
+  background-color: var(--color-accent);
+  text-shadow: none;
+  transform: translateX(3px);
+}
+
+/* ===================================================================
+   INTERACTIVE ELEMENTS (Details/Summary)
+   =================================================================== */
+
+details {
+  background-color: var(--bg-secondary-trans);
+  border: 1px solid var(--border-color);
+  padding: var(--spacing-md);
+  margin: var(--spacing-lg) 0;
+  border-radius: var(--border-radius);
+  transition: all 0.3s ease;
+}
+
+summary {
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  list-style: none; /* Hide default triangle in some browsers */
+  position: relative;
+  padding-left: 1.5rem;
+}
+
+/* Custom Triangle Indicator */
+summary::before {
+  content: '▸';
+  position: absolute;
+  left: 0;
+  color: var(--text-primary);
+  transition: transform 0.2s ease;
+}
+
+/* Rotate triangle when open */
+details[open] summary::before {
+  transform: rotate(90deg);
+  color: var(--color-accent);
+}
+
+details[open] summary {
+  margin-bottom: var(--spacing-md);
+  border-bottom: 1px dashed var(--border-color);
+  padding-bottom: var(--spacing-sm);
+}
+
+/* Remove default marker for Webkit (Chrome/Safari) */
+summary::-webkit-details-marker {
+  display: none;
+}
+
+/* ===================================================================
+   FOOTNOTES & DIVIDERS
+   =================================================================== */
+
+/* --- Horizontal Rules (The line separating content) --- */
+hr {
+  border: 0;
+  height: 1px;
+  background: transparent;
+  border-top: 1px dashed var(--color-accent); /* Dashed YoRHa style */
+  margin: var(--spacing-xl) 0;
+  opacity: 0.6;
+}
+
+/* --- Footnotes Container --- */
+.footnotes {
+  /* 3. Extra Padding: Push it away from the main text */
+  margin-top: 4rem; 
+  padding-top: var(--spacing-lg);
+  
+  /* Typography: Make it distinct/smaller */
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+/* Specific styling for the HR inside footnotes if needed */
+.footnotes hr {
+  border-top-style: solid; /* Make the footnote separator solid/grounded */
+  opacity: 1;
+  margin-bottom: var(--spacing-md);
+}
+
+/* Style the return link arrows */
+.footnote-return {
+  color: var(--color-accent);
+  text-decoration: none;
+  margin-left: 0.2rem;
+}

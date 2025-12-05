@@ -1,0 +1,17 @@
+{{ define "main" }}
+    <article class="content card">
+        <div class="card-label">Entry: {{ .Date.Format "2006-01-02" }}</div>
+        <h1>{{ .Title }}</h1>
+        {{ .Content }}
+    </article>
+
+    <aside>
+        <div class="card">
+            <div class="card-label">Meta Data</div>
+            <ul style="list-style: none; font-family: var(--font-mono); font-size: 0.85rem;">
+                <li><strong>Words:</strong> {{ .WordCount }}</li>
+                <li><strong>Read Time:</strong> {{ .ReadingTime }} min</li>
+            </ul>
+        </div>
+    </aside>
+{{ end }}

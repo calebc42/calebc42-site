@@ -1,0 +1,89 @@
+/* ===================================================================
+   ALERT BLOCKS & ADMONITIONS
+   =================================================================== */
+
+.admonition {
+  border: 1px solid var(--border-color);
+  padding: var(--spacing-md);
+  margin: var(--spacing-lg) 0;
+  position: relative;
+  max-width: var(--content-max-width);
+  font-family: var(--font-sans);
+  border-radius: var(--border-radius);
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  hyphens: none;
+  border-left-width: 3px;
+  background-color: var(--bg-secondary-trans);
+}
+
+/* Decorative Label Tag */
+.admonition::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: var(--spacing-md);
+  padding: 0.2rem var(--spacing-sm);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  background-color: var(--bg-primary);
+}
+
+/* --- WARNING --- */
+.admonition.warning {
+  border-left-color: var(--error-color);
+  background-color: rgba(166, 107, 90, 0.08);
+}
+.admonition.warning::before {
+  content: 'WARNING';
+  color: var(--error-color);
+}
+
+/* --- TIP / SUCCESS --- */
+.admonition.tip,
+.admonition.success {
+  border-left-color: var(--success-color);
+  background-color: rgba(107, 122, 90, 0.08);
+}
+.admonition.tip::before {
+  content: 'TIP';
+  color: var(--success-color);
+}
+.admonition.success::before {
+  content: 'SUCCESS';
+  color: var(--success-color);
+}
+
+/* --- NOTE --- */
+.admonition.note {
+  border-left-color: var(--color-accent);
+  background-color: var(--bg-secondary-trans);
+}
+.admonition.note::before {
+  content: 'NOTE';
+  color: var(--color-accent);
+}
+
+/* --- IMPORTANT --- */
+.admonition.important {
+  border-left-color: var(--warning-color);
+  background-color: rgba(184, 144, 90, 0.08);
+}
+.admonition.important::before {
+  content: 'IMPORTANT';
+  color: var(--warning-color);
+}
+
+/* --- FALLBACK FOR STANDARD ORG EXPORT --- */
+/* If ox-hugo exports <div class="warning"> instead of a shortcode */
+.warning, .note, .tip, .important, .success {
+  @extend .admonition; /* Inherit the base box styles */
+}
+
+.warning { @extend .admonition.warning; }
+.note { @extend .admonition.note; }
+.tip { @extend .admonition.tip; }
+.important { @extend .admonition.important; }
+.success { @extend .admonition.success; }

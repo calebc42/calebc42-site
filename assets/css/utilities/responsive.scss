@@ -1,0 +1,191 @@
+/* ===================================================================
+   RESPONSIVE DESIGN & UTILITIES
+   =================================================================== */
+
+/* --- Breakpoint: Large Screens (max-width: 1200px) --- */
+@media (max-width: 1200px) {
+  :where(.content p,
+  .content li,
+  .content blockquote,
+  .card-header p,
+  .card p,
+  .table-of-contents,
+  #table-of-contents,
+  .content dl,
+  pre.example,
+  .example,
+  .admonition) {
+    max-width: var(--content-max-width-narrow);
+  }
+}
+
+/* --- Breakpoint: Mobile (max-width: 768px) --- */
+@media (max-width: 768px) {
+  
+  /* --- Global Overflow Control --- */
+  html, body {
+    max-width: 100vw !important;
+    width: 100vw !important;
+    box-sizing: border-box !important;
+    overflow-x: hidden;
+  }
+
+  /* --- Containers --- */
+  .layout-wrapper,
+  .site-main,
+  .content {
+    max-width: 100% !important;
+    box-sizing: border-box !important;
+    width: 100% !important;
+  }
+
+  /* --- Force Aggressive Wrapping --- */
+  /* Ensures long URLs or tech terms don't break layout */
+  :where(.content p,
+         .content li,
+         .content blockquote,
+         .content dd,
+         .content dt,
+         .card-header p,
+         .card p,
+         .status-list span,
+         .table-of-contents,
+         #table-of-contents,
+         .content dl,
+         .admonition) {
+    word-break: break-word !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    hyphens: none !important;
+    white-space: normal !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    text-align: left !important;
+  }
+
+  /* --- Layout Adjustments --- */
+  body {
+    padding: var(--spacing-sm);
+  }
+
+  /* Stack the Grid */
+  .site-main {
+    grid-template-columns: minmax(0, 1fr) !important;
+    gap: var(--spacing-lg);
+  }
+
+  /* Header Adjustments */
+  .site-header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--spacing-sm);
+    gap: var(--spacing-md);
+  }
+
+  .header-left {
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .logo {
+    font-size: var(--font-size-sm);
+    max-width: 60%;
+  }
+
+  .site-nav ul {
+    justify-content: flex-end;
+    font-size: var(--font-size-base);
+    gap: var(--spacing-md);
+  }
+
+  .site-nav a {
+  padding: 0.5rem; 
+  display: inline-block;
+  }
+  
+  /* --- Tables (Horizontal Scroll) --- */
+  /* We use scrolling instead of stacking because Markdown tables lack data-labels */
+  .content table {
+    display: block !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    white-space: nowrap; /* Keeps cells aligned */
+  }
+  
+  /* --- Code Blocks --- */
+  .highlight {
+    width: 100%;
+    max-width: 100%;
+    margin: var(--spacing-xl) 0 !important;
+    border-radius: 0; /* Full bleed looks better on small screens */
+  }
+
+  .highlight pre {
+    padding-left: var(--spacing-md);
+    padding-right: var(--spacing-md);
+    white-space: pre !important; /* Code must scroll, not wrap */
+    overflow-x: auto !important;
+  }
+  
+  /* Adjust Scrollbar size for touch */
+  .highlight pre::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  /* --- Breadcrumbs & Progress --- */
+  body.has-breadcrumb {
+    padding-top: 49px;
+  }
+  
+  body.has-breadcrumb .progress-bar {
+    top: 45px;
+  }
+  
+  .reading-time {
+    padding: 2px var(--spacing-xs);
+    font-size: 10px;
+  }
+}
+
+/* --- Breakpoint: Small Mobile (max-width: 480px) --- */
+@media (max-width: 480px) {
+  /* Further Header collapsing */
+  .header-left {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--spacing-md);
+  }
+  
+  .site-nav {
+    width: 100%;
+    overflow-x: auto; /* Allow menu to scroll if needed */
+    padding-bottom: 5px;
+  }
+
+  /* Typography Scaling */
+  :where(.content p, .content li, .card p) {
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+  
+  .card-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  /* Hide optional metadata */
+  .reading-time {
+    display: none;
+  }
+}
+
+/* --- Utility Classes --- */
+.hidden-mobile { display: none !important; }
+.hidden-desktop { display: block !important; }
+
+@media (min-width: 769px) {
+  .hidden-mobile { display: block !important; }
+  .hidden-desktop { display: none !important; }
+}

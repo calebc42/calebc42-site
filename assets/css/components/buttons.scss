@@ -1,0 +1,61 @@
+/* ===================================================================
+   UI BUTTON COMPONENT
+   =================================================================== */
+
+.btn {
+  font: inherit;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing);
+  cursor: pointer;
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-left: none;
+  border-right: none;
+  padding: 0.6rem var(--spacing-lg);
+  position: relative;
+  z-index: 1;
+  transition: color 0.2s ease-out;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 0.8rem;
+}
+
+.btn::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  bottom: 2px;
+  left: 0;
+  width: 0;
+  background-color: var(--color-accent);
+  z-index: -1;
+  transition: width 0.2s ease-out;
+  will-change: width;
+}
+
+.btn:hover,
+.btn:focus {
+  color: var(--bg-primary);
+  border-color: var(--color-accent);
+}
+
+.btn:hover::before,
+.btn:focus::before {
+  width: 100%;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Button Variants */
+.btn.success {
+  border-color: var(--success-color);
+}
+.btn.success::before {
+  background-color: var(--success-color);
+}

@@ -1,0 +1,179 @@
+/* ===================================================================
+   HOMEPAGE SPECIFIC STYLES
+   =================================================================== */
+
+/* 1. HERO SECTION 
+   Usage: <section class="hero-section"> ... </section> */
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 60vh; /* Takes up 60% of the screen height */
+  margin-bottom: var(--spacing-xxl);
+  padding: var(--spacing-xl) 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+  font-size: var(--font-size-sm);
+  margin-bottom: var(--spacing-md);
+  display: block;
+}
+
+.hero-title {
+  font-family: var(--font-sans);
+  font-size: clamp(2rem, 5vw, 3.5rem); /* Responsive font scaling */
+  line-height: 1.1;
+  font-weight: 800;
+  color: var(--text-secondary);
+  max-width: 25ch; /* Keeps the headline punchy */
+  margin-bottom: var(--spacing-lg);
+}
+
+.hero-subtitle {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-lg);
+  color: var(--text-primary);
+  max-width: 55ch;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+/* 2. SKILLS GRID */
+/* Default Desktop Grid */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); /* Force 3 columns on desktop */
+  gap: var(--spacing-xl);
+}
+
+/* Mobile Horizontal Scroll */
+@media (max-width: 768px) {
+  .skills-grid {
+    display: flex;             /* Switch to Flexbox */
+    overflow-x: auto;          /* Enable horizontal scrolling */
+    scroll-snap-type: x mandatory; /* Makes cards "snap" into place */
+    padding-bottom: 1rem;      /* Space for the scrollbar */
+    gap: 1rem;
+    
+    /* Hide scrollbar for cleaner look (optional) */
+    -webkit-overflow-scrolling: touch; 
+  }
+
+  .skills-grid > * {
+    flex: 0 0 85%;             /* Card takes up 85% of screen width */
+    scroll-snap-align: center; /* Snap to center of screen */
+  }
+}
+
+.skill-card {
+  background: var(--bg-secondary-trans);
+  border: 1px solid var(--border-color);
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius-lg);
+  // transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+}
+
+// .skill-card:hover {
+//   transform: translateY(-4px);
+//   box-shadow: 0 10px 20px -5px rgba(0,0,0,0.1);
+//   border-color: var(--color-accent);
+// }
+
+.skill-card h3 {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-base);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-accent); /* Make the header pop */
+  margin-bottom: var(--spacing-lg);
+  border-bottom: 1px dashed var(--border-color);
+  padding-bottom: var(--spacing-sm);
+}
+
+.skill-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.skill-list li {
+  margin-bottom: var(--spacing-lg); /* More breathing room between items */
+  font-size: var(--font-size-sm);
+  line-height: 1.6;
+  position: relative;
+}
+
+/* THE FIX: Stack the label above the value */
+.skill-list strong {
+  display: block; /* Forces the label to its own line */
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  margin-bottom: 0.25rem; /* Space between label and value */
+  letter-spacing: 0.5px;
+}
+
+/* Optional: Add a subtle decorative line on the left */
+.skill-list li {
+  border-left: 2px solid var(--border-color);
+  padding-left: var(--spacing-md);
+  margin-left: var(--spacing-xs);
+}
+
+/* 3. CTA / FOOTER BLOCK */
+.cta-section {
+  text-align: center;
+  padding: var(--spacing-xxl) var(--spacing-lg);
+  background: var(--bg-secondary-trans);
+  border: 1px solid var(--border-color);
+  margin-top: var(--spacing-xxl);
+}
+
+.cta-section h2 {
+  font-size: var(--font-size-xl);
+  margin-bottom: var(--spacing-md);
+}
+
+/* ===================================================================
+   FIX FOR CLICKABLE EXPERIENCE CARDS
+   =================================================================== */
+
+/* 1. Reset the standard "Text Link" styles so the card doesn't turn solid */
+.content a.card-interactive {
+  background-color: var(--bg-secondary-trans) !important; 
+  color: var(--text-primary) !important;
+  text-decoration: none !important;
+  display: block; 
+}
+
+/* 2. Define the subtle "Lift & Border" hover effect */
+.content a.card-interactive:hover {
+  /* Ensure the background stays transparent/tan, NOT solid accent color */
+  background-color: var(--bg-secondary-trans) !important; 
+  
+  /* Only highlight the border */
+  border-color: var(--color-accent) !important;
+  
+  /* Keep the text dark and readable */
+  color: var(--text-primary) !important; 
+  
+  /* Restore the subtle shadow and lift */
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  transform: translateY(-2px);
+}
+
+/* 3. Ensure inner text elements don't try to change color either */
+.content a.card-interactive:hover h3,
+.content a.card-interactive:hover h4,
+.content a.card-interactive:hover p {
+  color: inherit !important;
+  background-color: transparent !important;
+}

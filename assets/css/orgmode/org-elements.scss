@@ -1,0 +1,155 @@
+/* ===================================================================
+   ORG-MODE SPECIFIC ELEMENTS & HELPERS
+   =================================================================== */
+
+/* --- Meta Data (Timestamps & Tags) --- */
+.timestamp {
+  color: var(--text-secondary);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+}
+
+.tag {
+  background: var(--color-accent); /* Updated Var */
+  color: var(--bg-primary);
+  padding: 0.1em 0.3em;
+  border-radius: var(--border-radius);
+  font-size: var(--font-size-xs);
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  margin-left: var(--spacing-xs);
+}
+
+/* --- Todo States (If exposed in output) --- */
+.todo, .done {
+  font-weight: bold;
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  font-size: var(--font-size-xs);
+}
+
+.todo { color: var(--warning-color); }
+.done { color: var(--success-color); }
+
+/* --- Example Blocks (Stylized PRE) --- */
+pre.example,
+.example {
+  background: var(--bg-secondary-trans);
+  border: 1px solid var(--border-color);
+  border-left: 4px solid var(--color-accent); /* Updated Var */
+  border-radius: var(--border-radius);
+  padding: var(--spacing-xl);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-sm);
+  color: var(--text-primary);
+  margin: var(--spacing-xl) 0;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  position: relative;
+  overflow: hidden;
+  max-width: var(--content-max-width);
+  line-height: 1.6;
+  box-shadow: 0 2px 8px rgba(var(--text-primary-rgb), 0.1);
+  hyphens: none;
+  padding-top: calc(var(--spacing-xl) + 24px);
+}
+
+pre.example::before,
+.example::before {
+  content: 'EXAMPLE';
+  position: absolute;
+  top: -1px;
+  left: -1px;
+  background: var(--color-accent); /* Updated Var */
+  color: var(--bg-primary);
+  padding: var(--spacing-xs) var(--spacing-md);
+  font-family: var(--font-mono);
+  font-size: var(--font-size-xs);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border-bottom-right-radius: var(--border-radius);
+  z-index: 2;
+}
+
+pre.example::after,
+.example::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--color-accent), var(--text-secondary)); /* Updated Var */
+  z-index: 1;
+}
+
+/* Example Variants */
+.example.output {
+  border-left-color: var(--success-color);
+}
+.example.output::before {
+  content: 'OUTPUT';
+  background: var(--success-color);
+}
+.example.output::after {
+  background: linear-gradient(180deg, var(--success-color), var(--text-secondary));
+}
+
+.example.error {
+  border-left-color: var(--error-color);
+  background: rgba(166, 107, 90, 0.05);
+}
+.example.error::before {
+  content: 'ERROR';
+  background: var(--error-color);
+}
+.example.error::after {
+  background: linear-gradient(180deg, var(--error-color), var(--text-secondary));
+}
+
+/* --- Definition Lists (Definition Terms & Descriptions) --- */
+.org-dl,
+.content dl {
+  margin: var(--spacing-xl) 0;
+  max-width: var(--content-max-width);
+  border: 1px dashed var(--border-color);
+  background-color: transparent;
+  padding: var(--spacing-lg);
+  border-radius: var(--border-radius);
+}
+
+.org-dl dt,
+.content dl dt {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+  margin-bottom: var(--spacing-xs);
+  float: left;          /* Float so they sit next to DD if desired, or remove for stack */
+  clear: left;
+  min-width: 120px;     /* Optional: align definitions */
+}
+
+/* Reset float for stacking on mobile (handled in responsive.css usually) 
+   but for now let's stick to your stacked look */
+.org-dl dt,
+.content dl dt {
+  float: none;
+  clear: none;
+  width: 100%;
+}
+
+.org-dl dd,
+.content dl dd {
+  padding: 0;
+  margin: 0 0 var(--spacing-lg) var(--spacing-lg);
+  font-size: var(--font-size-base);
+  line-height: 1.7;
+  color: var(--text-primary);
+}
+
+.org-dl dd:last-of-type,
+.content dl dd:last-of-type {
+  margin-bottom: 0;
+}

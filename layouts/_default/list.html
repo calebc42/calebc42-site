@@ -1,0 +1,33 @@
+{{ define "main" }}
+    <div style="grid-column: 1 / -1;">
+        
+        <div class="card card-header">
+            <h1>{{ .Title }}</h1>
+            <p>{{ .Content }}</p>
+        </div>
+
+        <div class="card-grid">
+            {{ range .Pages }}
+            
+            <div class="card card-interactive">
+                
+                <div class="card-label">
+                    {{ if eq .Kind "section" }}
+                        DIRECTORY
+                    {{ else }}
+                        FILE
+                    {{ end }}
+                </div>
+
+                <h3>
+                    <a href="{{ .RelPermalink }}" class="stretched-link" style="color: var(--text-primary); text-decoration: none;">
+                        {{ .Title }}
+                    </a>
+                </h3>
+
+                <p>{{ .Summary | truncate 120 }}</p>
+            </div>
+            {{ end }}
+        </div>
+    </div>
+{{ end }}

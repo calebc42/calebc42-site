@@ -1,0 +1,1021 @@
+#+hugo_base_dir: .
+#+hugo_section: posts
+#+hugo_auto_set_lastmod: t
+* About Me
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: pages
+:EXPORT_FILE_NAME: about
+:END:
+
+** Hello, I'm Caleb Christensen.
+
+I am a *Revenue Operations professional* who bridges the gap between sales strategy and technical execution.
+
+My approach to operations is rooted in a simple philosophy: *systems should empower the individual, not hinder them.* I spent years on the front lines—from closing deals as a Commercial Loan Officer to architecting Go-to-Market divisions that scaled monthly revenue from $100k to over $350k. I know firsthand that a "perfect" process fails if it ignores the human reality of the seller.
+
+Unlike traditional analysts, I bring an engineer's toolkit to revenue problems. Whether I’m automating lead distribution workflows or designing rigorous performance management frameworks in spreadsheets, I build transparent, scalable engines that drive growth.
+
+I am currently seeking a Revenue Operations role where I can apply systems thinking to build the infrastructure of trust and efficiency.
+
+* Technical & Strategic Skills
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: pages
+:EXPORT_FILE_NAME: skills
+:END:
+
+#+BEGIN_EXPORT html
+<div class="skills-grid">
+#+END_EXPORT
+
+** Revenue Infrastructure
+- **CRM & Automation:** Salesforce (Admin & Experience Cloud), Slack Workflow Builder.
+- **Sales Engagement:** Kixie (Routing & Automation), AirCall, FileInvite, ZoomInfo/D&B Hoovers.
+- **Intelligence:** Gong.io (Conversation Analytics), ZenDesk.
+
+** Data & Engineering
+- **Languages:** Python (Pandas, Plotly, automation scripts), SQL, HTML/CSS.
+- **Analysis:** Advanced Google Sheets (Query, VLOOKUP, Dashboarding), Microsoft Excel (Financial Modeling).
+- **BI Tools:** DOMO, Tableau.
+
+** Strategy & Frameworks
+- **Sales Methodology:** Sandler Consultative Selling (Formally Trained), SPIN Selling.
+- **Operations:** Lean Six Sigma / Kanban (Inventory Design), 5-Why Root Cause Analysis.
+- **Growth:** Go-to-Market (GTM) Architecture, Full-Cycle Pipeline Management.
+
+#+BEGIN_EXPORT html
+</div>
+#+END_EXPORT
+* Experience
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: pages
+:EXPORT_FILE_NAME: experience
+:END:
+
+** Go-to-Market Team Lead (Founding Sales Team)
+/Lendio/
+[2023]
+
+I was recruited by the Director of Operations to act as the "Founding Operator" for a new tax credit division. My mandate was to build a sales engine from scratch—hiring the team, defining the process, and implementing the technology.
+
+Rather than just managing headcount, I focused on *engineering reliability*. I architected the end-to-end sales process and built a performance management system in Google Sheets that served as our "command center," providing real-time visibility directly from Salesforce. I also automated our lead distribution using Kixie and Salesforce to ensure equitable "speed-to-lead" routing.
+
+Within five months, I scaled the team from 0 to 15 representatives (including the company's first successful offshore unit) and drove monthly revenue from $100k to over $350k.
+
+** Traditional Lending Subject-Matter Expert
+/Lendio/
+[2021 – 2023]
+
+I was promoted into this newly created role to solve a specific leakage problem: high-value borrowers were being lost to high-interest products because the sales team wasn't equipped to sell complex traditional loans.
+
+I acted as a one-man enablement function. I designed a data-driven coaching program that included standardized process checklists, rep performance scorecards, and targeted call analysis using Gong.io. To proactively identify opportunities, I built a segmentation workflow in DOMO and Google Sheets that surfaced high-potential leads from the general pipeline.
+
+This operational intervention increased conversion rates on traditional products by 144%, recovering an additional $700k in annual revenue that would have otherwise been lost.
+
+** SBA PPP Loan Forgiveness Agent
+/Lendio/
+[2021]
+
+Entering the Fintech space during the chaotic rollout of the Paycheck Protection Program, I managed a high-volume portfolio of business owners navigating complex, shifting federal regulations.
+
+Success in this role required rapid synthesis of changing guidelines and the ability to explain complex financial requirements to stressed business owners. I consistently ranked in the top 3 of 24 agents by submitting 70-120 compliant applications per month. This performance led to my promotion to the Subject-Matter Expert role.
+
+* Posts
+:PROPERTIES:
+:EXPORT_FILE_NAME: _index
+:END:
+Welcome to my personal digital space.
+
+* Case Study: Sales Funnel Efficiency & Rep Performance Analysis
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: case-studies
+:EXPORT_FILE_NAME: sales-funnel-efficiency
+:EXPORT_DATE: 2025-12-01
+:EXPORT_HUGO_CATEGORIES: "Revenue Operations"
+:EXPORT_HUGO_TAGS: "Sales Strategy" "Python" "Data Analysis" "Pipeline Optimization" "Tableau/Plotly"
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :featured true
+:END:
+
+** Overview
+*** Role
+Revenue Operations Analyst / Sales Strategy Lead
+
+*** Objective
+Analyze raw sales performance data to identify revenue leakage, optimize lead distribution, and define enablement strategies.
+
+*** Context
+#+begin_note
+*About This Case Study:*
+This analysis was completed in the course of my GTM Team Lead role, this is an restroactive refinement of the process I used to identify optimization opportunities and present actionable recommendations.
+#+end_note
+
+#+CAPTION: Sales Efficiency Heatmap Data
+#+ATTR_HTML: :width 100%
+[[file:/images/heatmap-screenshot.png]]
+
+** 1. The Data Source
+
+Before applying any strategic frameworks, I aggregated the raw performance metrics for the trailing quarter. This dataset tracks the full lifecycle from lead assignment to signed deal.
+
+*** Raw Data Summary
+#+CAPTION: Sales Rep Performance Data (Raw Counts)
+#+ATTR_HTML: :class table table-striped :width 100%
+| Rep Name         | Assigned | Attempted | Contacted | App Completes | App Qualified | Signed Deals |
+|------------------+----------+-----------+-----------+---------------+---------------+--------------|
+| Emily Jones      |      300 |       200 |       150 |           140 |           123 |          106 |
+| Kevin Lee        |      150 |       145 |       108 |            68 |            60 |           55 |
+| Jasmine Patel    |      128 |       122 |       112 |            75 |            62 |           59 |
+| Oliver Kim       |      220 |       218 |       150 |           102 |            87 |           80 |
+| Samantha Johnson |      180 |       173 |        98 |            91 |            79 |           73 |
+| Daniel Wong      |      193 |       185 |       150 |           108 |            92 |           90 |
+| Sarah Davis      |      212 |       210 |       138 |            97 |            87 |           85 |
+| Michael Chen     |      282 |       281 |       223 |           102 |            93 |           91 |
+| Rachel Garcia    |      198 |       179 |       150 |           132 |           105 |           98 |
+| David Rodriguez  |      272 |       218 |       203 |           198 |           173 |          100 |
+|------------------+----------+-----------+-----------+---------------+---------------+--------------|
+| **TOTAL**        | **2135** |  **1931** |  **1482** |      **1113** |       **961** |      **837** |
+#+TBLFM: @>$2=vsum(@2..@-1)::@>$3=vsum(@2..@-1)::@>$4=vsum(@2..@-1)::@>$5=vsum(@2..@-1)::@>$6=vsum(@2..@-1)::@>$7=vsum(@2..@-1)
+
+** 2. The Analytical Framework: "Right-to-Left" Prioritization
+
+My approach to analyzing sales data prioritizes **Revenue Velocity**. I analyze the funnel from **Right to Left** (Deal Signed $\rightarrow$ Top of Funnel).
+
+1. **Bottom of Funnel:** Fix leakage closest to the revenue first (High immediate impact).
+2. **Top of Funnel:** Optimize lead utilization and activity efficiency (Long-term scalability).
+
+#+begin_important
+*Philosophy on Controllable Metrics:*
+
+When coaching reps, I prioritize metrics they can directly control. "App Completed" is more controllable than "App Qualified" because it measures persuasion and persistence—skills that can be coached. "App Qualified" depends heavily on factors outside the rep's control: the prospect's credit score, business financials, time in business, and market conditions.
+
+By focusing coaching on controllable behaviors (outreach quality, objection handling, urgency creation), we increase activity and let the qualification rate settle naturally based on lead quality. Marketing and lead sourcing should optimize for qualification rates; Sales should optimize for conversion rates.
+
+/Qualification is a filtering function; completion is a persuasion function./ Sales reps should be measured primarily on what they can influence through skill.
+#+end_important
+
+** 3. Key Data Observations & Performance Archetypes
+
+Upon reviewing the rep performance heatmap, four distinct performance archetypes emerged that require different operational interventions.
+
+#+BEGIN_EXPORT html
+<iframe src="/charts/scatter_plot.html" width="100%" height="650" style="border:none; margin-bottom: 20px;"></iframe>
+
+<details>
+<summary>
+  Click to view the Python generation script
+</summary>
+<div>
+  <p>I wrote this script to automate the generation of these insights using <strong>Pandas</strong> and <strong>Plotly</strong>, ensuring the analysis is repeatable as data scales.</p>
+  </p>
+#+END_EXPORT
+
+#+BEGIN_SRC python
+import pandas as pd
+import plotly.express as px
+import plotly.graph_objects as go
+
+# 1. THE DATA
+data = {
+    'Rep Name': ['Emily Jones', 'Kevin Lee', 'Jasmine Patel', 'Oliver Kim', 'Samantha Johnson', 'Daniel Wong', 'Sarah Davis', 'Michael Chen', 'Rachel Garcia', 'David Rodriguez'],
+    'Leads Attempted': [200, 145, 122, 218, 173, 185, 210, 281, 179, 218],
+    'App Qualified': [123, 60, 62, 87, 79, 92, 87, 93, 105, 173],
+    'Signed Deals': [106, 55, 59, 80, 73, 90, 85, 91, 98, 100],
+    'Conversion_Rate': [35.3, 36.7, 46.1, 36.4, 40.6, 46.6, 40.1, 32.3, 49.5, 36.8], # Lead to Deal
+    'Win_Rate': [86, 92, 95, 92, 92, 98, 98, 98, 93, 58] # Qual to Deal
+}
+
+df = pd.DataFrame(data)
+
+# 2. CHART A: The "Performance Quadrant" (Scatter Plot)
+# X = Volume (Leads Attempted), Y = Efficiency (Conversion Rate)
+fig_scatter = px.scatter(
+    df,
+    x="Leads Attempted",
+    y="Conversion_Rate",
+    text="Rep Name",
+    size="Signed Deals", # Bubble size = Total Wins
+    color="Win_Rate",    # Color = Deal Quality (Red = low close rate)
+    color_continuous_scale="RdYlGn",
+    title="Sales Efficiency: Volume vs. Conversion",
+    labels={"Conversion_Rate": "Lead-to-Deal Conversion %", "Win_Rate": "Close Rate (Qual -> Deal)"},
+    template="plotly_white"
+)
+
+fig_scatter.update_traces(textposition='top center')
+fig_scatter.update_layout(height=600)
+
+# Save as interactive HTML
+fig_scatter.write_html("scatter_plot.html", include_plotlyjs='cdn', full_html=False)
+
+
+# 3. CHART B: The "Leakage" Comparison (Funnel)
+# Comparing the 'Archetypes': Emily (Efficiency) vs David (Leaky Bucket)
+categories = ['Leads Attempted', 'App Qualified', 'Signed Deals']
+emily_data = [200, 123, 106]
+david_data = [218, 173, 100]
+
+fig_funnel = go.Figure()
+
+fig_funnel.add_trace(go.Funnel(
+    name='Emily Jones (High Eff)',
+    y=categories,
+    x=emily_data,
+    textinfo="value+percent initial"
+))
+
+fig_funnel.add_trace(go.Funnel(
+    name='David Rodriguez (Leaky)',
+    y=categories,
+    x=david_data,
+    textinfo="value+percent initial"
+))
+
+fig_funnel.update_layout(
+    title="Funnel Leakage Comparison: The 'Sniper' vs. The 'Machine'",
+    template="plotly_white",
+    height=500
+)
+
+# Save as interactive HTML
+fig_funnel.write_html("funnel_chart.html", include_plotlyjs='cdn', full_html=False)
+
+print("Charts generated: scatter_plot.html and funnel_chart.html")
+#+END_SRC
+
+#+BEGIN_EXPORT html
+</div>
+</details>
+#+END_EXPORT
+
+*** A. The "High-Efficiency / Low-Volume" Performer (Emily Jones)
+- **Data:** Emily attempts only 67% of assigned leads (200/300) versus a team average of 90%, but maintains elite conversion rates at every subsequent stage:
+  - Contact → App Complete: 93% (vs. team avg 75%)
+  - App Qualified → Signed: 86% (vs. team avg 87%)
+  
+- **Hypothesis 1 (Behavioral):** Emily may be relationship-driven with long talk times and deep discovery calls. This drives exceptional conversion quality but limits throughput. She likely excels at building trust but may lack urgency in closing sequences or post-qualification follow-up.
+
+- **Hypothesis 2 (Strategic):** She may be pre-qualifying leads before logging attempts, working only high-confidence opportunities while allowing lower-quality leads to age in her queue.
+
+- **Diagnostic Tests:**
+  - Compare average talk time per contact vs. team average
+  - Measure time-to-first-attempt after lead assignment
+  - Review lead aging in her pipeline vs. peers
+  
+- **Risk:** If hypothesis 2 is correct, valuable leads are stagnating. High-quality leads that Emily doesn't prioritize could be worked by hungrier reps. If hypothesis 1 is correct, she simply needs coaching on urgency and time management—her skills are excellent.
+
+*** B. The "High-Volume / Low-Conversion" Reps (Michael Chen, Sarah Davis)
+- **Data:** These reps attempt 99%+ of assigned leads but show poor mid-funnel conversion:
+  - Michael: 36% Lead → App Complete (vs. team avg 52%)
+  - Sarah: 46% Lead → App Complete (vs. team avg 52%)
+  
+- **However:** Their App Qualified → Signed rates are elite:
+  - Michael: 98% (93/95 qualified apps closed)
+  - Sarah: 98% (85/87 qualified apps closed)
+  
+- **Diagnosis:** "Spray and Pray" methodology. They're burning through lead inventory rapidly with low-effort touches, filtering for "layup" deals—prospects so motivated they'll close with minimal sales effort. Any applications they complete are nearly guaranteed to close because they're only advancing slam-dunk opportunities.
+
+- **Risk:** High opportunity cost. Difficult-but-viable leads are being "scorched" by insufficient outreach. These leads could convert with proper nurturing but are being marked as dead after 2-3 cursory attempts.
+
+- **Opportunity (Cross-Functional Insight):** This behavior may actually identify a valuable customer segment—**high-urgency, low-complexity buyers**. Rather than forcing Michael and Sarah to adopt slower, relationship-driven approaches, consider:
+  1. **Routing Strategy:** Funnel hot inbound leads to them for rapid conversion
+  2. **Product Fit:** These customers may be ideal for self-service products or marketplace offerings where speed matters more than customization
+  3. **Upsell Potential:** Flag their closed deals for post-sale upsell into premium products—they converted on urgency, not on relationship, which means there's likely expansion revenue available once their immediate need is met
+
+*** C. The "Leaky Bucket" (David Rodriguez)
+- **Data:** David drives massive volume into the pipeline but catastrophically fails at the final stage:
+  - Highest absolute app completes: 198 (next closest is Emily at 140)
+  - Highest absolute qualified apps: 173 (next closest is Emily at 123)
+  - App Qualified → Signed: **58%** (100/173)
+  - Team average App Qualified → Signed: **87%**
+  
+- **Diagnosis:** Poor qualification discipline. David is pushing unqualified applications through the system, inflating his mid-funnel metrics while creating enormous waste at the bottom of the funnel. He's likely being rewarded for app volume without accountability for deal quality.
+
+- **Revenue Impact:** If David could match Jasmine's 95% close rate on qualified apps, he would deliver an additional **64 deals per period** (173 × 0.95 - 100 = 64.35) with zero additional lead acquisition cost. This represents the **single largest revenue recovery opportunity** in the dataset.
+
+- **Coaching Priority:** Pair David with Rachel Garcia (who has both high volume AND 93% qualified-to-signed rate) to learn rigorous qualification frameworks—specifically, what questions to ask before marking an app as "qualified."
+
+*** D. The "Balanced Excellence" Performers (Rachel Garcia, Daniel Wong, Jasmine Patel)
+- **Data:** These reps show consistent, above-average performance across all funnel stages with no major bottlenecks:
+  - Rachel: 90% attempt rate, 76% contact rate, 88% complete rate, 93% close rate
+  - Daniel: 96% attempt rate, 81% contact rate, 72% complete rate, 98% close rate
+  - Jasmine: 95% attempt rate, 92% contact rate, 67% complete rate, 95% close rate
+  
+- **Diagnosis:** These reps represent the **behavioral template** the team should be coached toward. They balance activity (high attempt rates), effectiveness (strong contact conversion), and discipline (elite closing efficiency).
+
+- **Application:** Use their techniques as the coaching baseline:
+  - Rachel's qualification rigor (to fix David)
+  - Jasmine's contact-to-complete conversion (to fix Michael/Sarah)
+  - Daniel's balanced consistency (general best practices)
+
+** 4. Strategic Recommendations
+
+#+BEGIN_EXPORT html
+<iframe src="/charts/funnel_chart.html" width="100%" height="550" style="border:none;"></iframe>
+#+END_EXPORT
+
+*** 4.1 Immediate Process Improvements
+
+**** Lead Distribution Logic Reform
+**Current State Diagnosis:** Based on my experience as a funding manager observing similar sales environments, the data strongly suggests a **self-regulated lead flow system**. In these systems, reps can see available leads and claim them at will, which creates cherry-picking behavior.
+
+**Observable Pattern:** High performers monitor pipeline dashboards and strategically claim leads during optimal windows (right after they come in, during business hours, from preferred industries). Lower performers work whatever remains—aged leads, off-hours inquiries, difficult industries.
+
+This creates a performance gap that *appears* to be skill-based but is actually *access-based*. Emily's 67% attempt rate is likely not laziness—it's selectivity. Michael's 99% attempt rate with poor conversion suggests he's claiming everything indiscriminately.
+
+**Recommended Fix: Cap-and-Recycle System**
+- Implement maximum lead assignment caps per rep based on their demonstrated throughput
+- Emily's cap: 200 leads/period (her current attempted volume) until her attempt rate rises to 85%+
+- Route Emily's overflow leads to Daniel and Rachel (proven high-performers with capacity)
+- Implement "lead aging" triggers: If a lead sits untouched for 48 hours, automatically reassign
+
+**Expected Impact:**
+- Reduces lead hoarding by top performers
+- Ensures all leads receive timely attention
+- Forces behavioral change (Emily must attempt more or lose access)
+
+**** Qualification Standards Audit
+**Problem:** David's 58% close rate on "qualified" apps indicates a fundamental misalignment on what constitutes "qualified."
+
+**Action Items:**
+1. Audit David's 73 closed-lost opportunities from qualified apps
+   - What commonalities exist? (Credit issues, business age, industry, decision-maker access)
+2. Compare against Rachel's closed-lost deals (she has only ~7 lost deals from 105 qualified)
+3. Codify the difference into mandatory qualification checkpoints:
+   - Credit pre-screen before marking as qualified
+   - Decision-maker confirmation (not just "spoke to someone")
+   - Budget/timeline verification
+   - Competitive situation assessment
+
+**Expected Impact:** Reduce David's qualified app volume by ~30%, but increase his close rate to 85%+, resulting in net positive deal flow.
+
+*** 4.2 Operational Enablement: Peer-Led Coaching (Pilot-Then-Scale)
+
+Rather than team-wide training rollouts, I recommend a **pilot-then-scale** approach that focuses resources on the highest-impact opportunities first.
+
+**** Phase 1: High-Impact Coaching Pairs (Weeks 1-4)
+
+**Pair 1: David Rodriguez (Leaky Bucket) + Rachel Garcia (Balanced Excellence)**
+- **Focus:** Qualification discipline
+- **Activities:**
+  - Rachel shadows 5 of David's qualification calls
+  - David shadows 5 of Rachel's qualification calls
+  - Joint debrief: What questions does Rachel ask that David skips?
+  - Document Rachel's qualification framework into a 1-page checklist
+- **Success Metric:** Move David's qualified-to-close rate from 58% to 75% (midpoint toward team average)
+- **Revenue Impact:** +29 additional deals if successful
+
+**Pair 2: Michael Chen (High-Volume/Low-Convert) + Jasmine Patel (Elite Mid-Funnel)**
+- **Focus:** Contact-to-application conversion
+- **Activities:**
+  - Compare objection-handling techniques
+  - Review Michael's "dead lead" list—are they truly dead, or insufficiently worked?
+  - Jasmine demonstrates her follow-up cadence (likely multi-touch, multi-channel)
+  - Document Jasmine's persistence framework
+- **Success Metric:** Move Michael's lead-to-app rate from 36% to 45% (halfway to team average)
+- **Revenue Impact:** +25 additional apps → ~24 additional deals
+
+**Pair 3: Emily Jones + Time Management Coach (External or Manager)**
+- **Focus:** Velocity without sacrificing quality
+- **Activities:**
+  - Time audit: Track Emily's hours-per-deal vs. team average
+  - If talk time is excessive, coach on qualifying-out faster ("Is this a fit? If not, let's save both our time")
+  - Implement time-boxing: Max 2 hours per lead before moving to next
+  - Add urgency frameworks to her closing sequences
+- **Success Metric:** Increase Emily's attempt rate from 67% to 85% while maintaining 80%+ close rate
+- **Revenue Impact:** +54 additional attempts → ~26 additional deals
+
+**** Phase 2: Document and Scale (Weeks 5-8)
+
+**Only if Phase 1 shows measurable improvement:**
+1. Record successful coaching sessions and create training library
+2. Extract specific techniques (call scripts, qualification questions, email templates, objection responses)
+3. Roll out to Kevin, Oliver, and Samantha through:
+   - Weekly recorded call reviews
+   - Practice sessions with successful reps
+   - Manager observation and feedback
+
+**Rationale for Phased Approach:** This de-risks the coaching investment. We validate what actually moves the needle before committing team-wide resources, and we focus first on reps with the largest revenue recovery potential (David's 64-deal gap >> Michael's 25-deal gap >> Emily's 26-deal gap).
+
+*** 4.3 Missing Metrics & Data Integrity
+
+To validate these hypotheses and make fully informed recommendations, I would need access to the following data points:
+
+**** Critical Missing Metrics
+1. **App Qualified to Signed Deal % (by rep)** – This isolates "closing ability" from "qualification discipline"
+   - I calculated this manually for key reps, but it should be a standard dashboard metric
+   
+2. **Activity Depth Metrics:**
+   - **Dials per lead before first contact** – Are low contact rates due to insufficient effort or bad lead data?
+   - **Average touches per lead before "Attempted" status** – Does "Attempted" mean one dial or a full sequence?
+   - **Channel mix breakdown** – Calls vs. emails vs. SMS vs. social outreach
+   - **Talk time per contact** – Validates the Emily hypothesis (high quality/low volume)
+   
+3. **Lead Aging Metrics:**
+   - **Time from assignment to first attempt (by rep)** – Identifies hoarding behavior
+   - **Leads older than 7 days in pipeline (by rep)** – Quantifies stagnation
+   
+4. **Cadence Adherence:**
+   - **% of leads receiving full prescribed sequence** – Are reps following the playbook or freelancing?
+   - **Time between touches** – Consistency matters as much as volume
+
+**** Why These Metrics Matter
+"Leads Attempted" is a binary metric that masks enormous variance in effort quality. Consider:
+- Rep A makes 15 dials over 3 days with personalized emails and LinkedIn touches
+- Rep B makes 2 dials at 10am on a Tuesday and marks it "attempted"
+
+Both show "1 attempted lead" in the current dashboard, but represent completely different behaviors. Without activity depth data, I'm diagnosing based on outcome patterns—which is effective but less precise than diagnosing based on actual behavior.
+
+*** 4.4 Expected Business Impact
+
+Implementing these recommendations in sequence would yield:
+
+#+CAPTION: Projected Revenue Recovery by Initiative
+#+ATTR_HTML: :class table table-striped :width 100%
+| Initiative                          | Current State | Target State              | Additional Deals/Period | Est. Revenue Impact* |
+|-------------------------------------+---------------+---------------------------+-------------------------+----------------------|
+| David's Closing Efficiency          | 58% close     | 75% close (conservative)  |                      29 | High                 |
+| Michael's Lead Utilization          | 36% to app    | 45% to app (conservative) |                      24 | High                 |
+| Emily's Lead Velocity               | 67% attempt   | 85% attempt               |                      26 | Medium-High          |
+| Lead Distribution Optimization      | Self-regulated | Cap-and-recycle          |                    10-15 | Medium               |
+| Sarah/Michael "Hot Lead" Routing    | Mixed routing | Segment-specific          |                     5-8 | Low (but strategic)  |
+|-------------------------------------+---------------+---------------------------+-------------------------+----------------------|
+| **TOTAL POTENTIAL**                 |               |                           |               **94-102** | **Very High**        |
+
+*Note: Revenue impact depends on average deal size, which is not provided in the dataset. If average deal value is $10K, this represents $940K-$1.02M in incremental revenue. If ADV is $50K, this represents $4.7M-$5.1M.*
+
+**Assumptions:**
+- Based on trailing quarter data
+- Assumes current lead quality and volume remain constant
+- Conservative targets (moving halfway to team average, not to best-in-class)
+- Does not account for compounding effects (e.g., David closing more deals → more confidence → even better performance)
+
+** 5. Executive Summary
+
+This analysis reveals that **lead inefficiency, not lead volume**, is the primary constraint to revenue growth.
+
+**Key Findings:**
+1. **David Rodriguez** represents a 64-deal recovery opportunity through qualification discipline
+2. **Emily Jones** is an underutilized asset—elite skills but artificial volume constraints
+3. **Michael Chen and Sarah Davis** may be optimally deployed on high-urgency segments rather than general pipeline
+4. **Self-regulated lead distribution** creates access inequality that appears as skill inequality
+
+**Strategic Recommendation:**
+By implementing territory-aware lead routing, peer-led coaching focused on the highest-impact gaps, and qualification standard reforms, this team can unlock an estimated **94-102 additional deals per quarter** (~11-12% revenue increase) without additional marketing spend.
+
+**The path forward prioritizes:**
+- Bottom-of-funnel fixes first (David's close rate)
+- Controllable behavior changes (activity coaching for Michael/Emily)
+- Process improvements that prevent future leakage (lead distribution reform)
+
+** 6. Implementation Roadmap (30-60-90 Days)
+
+*** Days 1-30: Discovery & Quick Wins
+- **Week 1:** Present findings to sales leadership; gather context on territories, seasonal patterns, recent team changes
+- **Week 2:** Shadow Emily Jones (1 full day) and Michael Chen (1 full day) to validate behavioral hypotheses
+- **Week 3:** Launch David + Rachel coaching pilot; begin qualification audit
+- **Week 4:** Implement lead aging alerts (48-hour reassignment triggers); collect baseline metrics for coaching pairs
+
+*** Days 31-60: Process Changes & Measurement
+- **Week 5:** Roll out Cap-and-Recycle lead distribution system
+- **Week 6:** Review Phase 1 coaching results; document successful techniques if metrics improved
+- **Week 7:** Begin Phase 2 rollout to Kevin, Oliver, Samantha (if Phase 1 successful)
+- **Week 8:** Add "App Qualified → Signed %" to weekly dashboards; establish rep-specific improvement targets
+
+*** Days 61-90: Scale & Optimize
+- **Week 9-10:** Scale successful coaching practices team-wide through recorded sessions and practice reviews
+- **Week 11:** Adjust lead routing rules based on 60-day performance data
+- **Week 12:** Present 90-day results to leadership; refine targets for next quarter; identify new optimization opportunities
+
+**Success Criteria:**
+- David's close rate: 58% → 75%+
+- Michael's lead-to-app: 36% → 45%+
+- Emily's attempt rate: 67% → 85%+
+- Team total deals: 837/quarter → 930+/quarter (+11%)
+
+#+BEGIN_EXPORT html
+<strong>Implementation Note:</strong>
+<p>These recommendations reflect analysis of trailing quarter data in isolation. Before implementation, I would:</p>
+<ol>
+  <li>Present findings to sales leadership to surface any territory/product/seasonal factors not visible in the data</li>
+  <li>Shadow 2-3 reps (David, Emily, Michael) to validate behavioral hypotheses through direct observation</li>
+  <li>Collaborate with Sales Operations and Enablement teams to ensure alignment with existing initiatives and avoid conflicting priorities</li>
+  <li>Prioritize based on organizational capacity, change management bandwidth, and strategic focus areas</li>
+</ol>
+<p><strong>Strong data analysis provides the <em>what</em>—but organizational context determines the <em>how</em> and <em>when</em>.</strong> The metrics point to opportunities; leadership judgment determines which opportunities to pursue first.</p>
+</div>
+#+END_EXPORT
+
+* Solving the "Blurry Line" Problem: Engineering a Python CLI for E-Ink Devices
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: projects
+:EXPORT_FILE_NAME: eink-template-gen
+:EXPORT_DATE: 2025-12-04
+:EXPORT_HUGO_CATEGORIES: "Engineering"
+:EXPORT_HUGO_TAGS: "Python" "Open Source" "Tooling" "Automation" "CI/CD"
+:END:
+** Introduction
+
+I love my Supernote Manta. It’s a fantastic e-ink writing tablet. But like many e-ink devices (reMarkable, Boox), it suffers from a specific hardware constraint: **no sub-pixel anti-aliasing**.
+
+If you take a standard PDF template —say, a ruled notebook page generated by a generic tool— and load it onto the device, the lines often look gray, fuzzy, or inconsistent. This happens because the lines land on fractional pixel coordinates (e.g., $y = 10.4$), forcing the display controller to dither the pixels. On a crisp 300 DPI e-ink screen, this blur is immediately noticeable and reduces the "paper-like" contrast.
+
+I spent the last few weeks building *[[https://github.com/calebc42/eink-template-gen][eink-template-gen]]*, a robust Python CLI tool designed to solve this exact problem using pixel-perfect integer math.
+
+** The Challenge: The "Half-Pixel" Problem
+
+Standard graphic design tools operate in vector space (infinite resolution) or floating-point coordinates. When you ask for lines spaced exactly "6mm" apart, the software calculates the position mathematically:
+
+#+BEGIN_SRC python
+dpi = 300
+mm_to_px = 300 / 25.4  # ~11.81 px/mm
+y_pos = 6 * mm_to_px   # 70.866 px
+#+END_SRC
+
+To a printer, $70.866$ is fine. To an e-ink screen, that $0.866$ results in aliasing. The line isn't black; it's a smear of gray pixels trying to represent a fraction.
+
+My goal was to build a generator that respects the **hardware reality** of ANY e-ink device.
+
+** The Solution: Architecture Overview
+
+I architected the application with three core layers:
+1.  **Hardware Abstraction:** A data-driven definition of device constraints.
+2.  **The Math Layer:** Utilities to snap floating-point requests to integer grids.
+3.  **The Logic Layer:** A registry-based system for template rendering.
+
+*** Tech Stack:** Python 3.13, PyCairo (for rendering), Pytest, GitHub Actions.
+
+*** Hardware Abstraction (Data-Driven Design)
+I didn't want to hardcode screen resolutions into Python classes. Instead, I implemented a data-driven approach where devices are defined in a simple JSON file. This makes the tool device-agnostic and extensible without code changes; users can add support for new devices just by editing a config file.
+
+#+BEGIN_SRC json
+// src/eink_template_gen/devices.json
+[
+  {
+    "id": "manta",
+    "width": 1920,
+    "height": 2560,
+    "dpi": 300,
+    "name": "Supernote Manta",
+    "default_margin_mm": 10
+  },
+  {
+    "id": "a5x",
+    "width": 1404,
+    "height": 1872,
+    "dpi": 226,
+    "name": "Supernote A5 X"
+  }
+]
+#+END_SRC
+
+*** The "Pixel Snapping" Algorithm
+This is the heart of the engine. When a user requests "6mm spacing," the tool doesn't just draw lines every 6mm. It performs a "snap-and-recalculate" operation:
+
+1.  Convert requested MM to Pixels.
+2.  Round to the nearest *whole* integer pixel.
+3.  Convert that integer back to MM for reporting.
+4.  Recalculate the total page margins to ensure the grid is perfectly centered.
+
+Here is the core logic from ~src/eink_template_gen/utils.py~:
+
+#+BEGIN_SRC python
+def snap_spacing_to_clean_pixels(spacing_mm, dpi, tolerance_mm=0.5):
+    """
+    Adjust spacing to nearest value that produces integer pixels
+    """
+    mm2px = dpi / 25.4
+    ideal_px = spacing_mm * mm2px
+
+    # Try rounding to nearest integer
+    rounded_px = round(ideal_px)
+    adjusted_mm = rounded_px / mm2px
+
+    # Check if adjustment is within tolerance
+    adjustment = abs(adjusted_mm - spacing_mm)
+
+    if adjustment <= tolerance_mm:
+        return adjusted_mm, float(rounded_px), adjustment > 0.001
+    else:
+        # Keep original if adjustment would be too large
+        return spacing_mm, ideal_px, False
+#+END_SRC
+
+This ensures that if you ask for a grid, every single line lands on an exact pixel coordinate, rendering as pure black (0x00) rather than dithered gray.
+
+** Advanced Geometry: Solving the "Half-Cell" Issue
+
+Solving the blurry line problem was only step one. The second major issue with generic generators is **grid misalignment**.
+
+If your device screen height is 1872 pixels, and your grid spacing is 71 pixels, you can fit 26.36 squares vertically. Most generators simply start at the top margin and draw until they hit the bottom, resulting in an ugly, cut-off "half-cell" at the bottom of the page. Even worse, if you use thicker "major lines" (e.g., every 5 squares), the page might end abruptly before completing a major section.
+
+I extended the math layer to treat margins not as *fluid buffers* instead of fixed boundaries.
+
+The tool calculates exactly how many *complete* cells (or major blocks) can fit within the safe area. It then takes the leftover space and distributes it evenly to the top and bottom or left and right margins.
+
+#+BEGIN_SRC python
+def calculate_major_aligned_margins(content_dimension, spacing_px, base_margin, major_every):
+    """
+    Calculate margins that force grid to end on major lines
+    """
+    major_unit_px = major_every * spacing_px
+    
+    # How many full major blocks fit?
+    num_complete_units = int(content_dimension / major_unit_px)
+    
+    # How much space is actually needed?
+    needed_space = num_complete_units * major_unit_px
+    
+    # Calculate the leftover space
+    leftover_space = content_dimension - needed_space
+
+    # Distribute leftover space to margins
+    start_addition = int(leftover_space / 2)
+    end_addition = int(leftover_space - start_addition)
+
+    return (base_margin + start_addition, base_margin + end_addition)
+#+END_SRC
+
+By calculating the layout "inside-out"—determining content first, then margins—the tool guarantees that every grid ends perfectly on a line. The result is a visually balanced page that feels like it was natively designed for the device.
+
+** Escape Hatches: Designing for Diverse Workflows
+
+While "pixel-perfect" is the default opinion of this tool, I recognized that software engineering requires handling edge cases where the default opinion is wrong.
+
+I implemented "escape hatches" for users who prioritize physical accuracy over visual crispness.
+
+*** 1. The "True Scale" Flag
+Engineers or architects might need a grid where "5mm" means *exactly* 5.000mm, because they are scaling physical drawings on the screen. For them, pixel snapping is a bug, not a feature.
+I added the ~--true-scale~ flag, which bypasses the integer rounding logic entirely. It accepts the anti-aliasing blur in exchange for dimensional precision.
+
+*** 2. Enforcing Margins
+Sometimes, a user wants a strict margin for printing, specific toolbar clearance or just a consistent presentation across pages and therefor wouldn't want the "fluid buffer" adjustment I described above.
+The ~--enforce-margins~ flag locks the margins to the user's input, forcing the grid to cut off if necessary.
+
+This flexibility ensures the tool serves both the aesthetic perfectionist and the technical pragmatist.
+
+** The Registry Pattern (Open/Closed Principle)
+
+To support a growing library of templates (Lined, Grid, Dotgrid, Music Staves, Isometric, etc.) without turning ~main.py~ into a spaghetti-code nightmare, I used the **Registry Pattern**.
+
+New templates can be added by defining a draw function and registering it in ~src/eink_template_gen/templates.py~. The rest of the application (CLI, Wizard, JSON engine) automatically discovers the new capability.
+
+#+BEGIN_SRC python
+TEMPLATE_REGISTRY = {
+    "lined": {
+        "draw_func": drawing.draw_lined_section,
+        "decorations": ["line_numbers"],
+        "specific_args_map": {
+            "line_width_px": "line_width",
+            "major_every": "major_every",
+        },
+    },
+    "isometric": {
+        "draw_func": drawing.draw_isometric_grid,
+        "decorations": [],
+        "specific_args_map": { ... },
+    },
+    # Adding a new template only requires adding an entry here
+}
+#+END_SRC
+
+I used this same pattern for the implementation of Cover pages and Divider lines.
+
+** User Experience: The State Machine Wizard
+
+While CLI flags are powerful (`eink-template-gen grid --spacing 5mm`), they are intimidating for non-technical users. I wanted this tool to be accessible to the general Supernote community.
+
+I implemented an interactive "Wizard" (~src/eink_template_gen/wizard.py~) using a **State Machine** approach. Instead of a linear script of `input()` calls, the wizard advances through discrete states (`_select_device`, `_select_template_type`, `_configure_spacing`).
+
+This architecture allows for complex navigation logic, such as:
+1.  **Conditional Branches:** If the user selects "Multi-Grid," ask for Rows/Columns. If "Lined," ask for Line Numbers.
+2.  **"Back" Functionality:** Users can type 'b' at any prompt to return to the previous state without restarting the script.
+
+#+BEGIN_SRC python
+def run(self):
+    steps = [
+        self._select_device,
+        self._select_template_type,
+        self._configure_spacing,
+        # ...
+    ]
+    current_step = 0
+
+    while 0 <= current_step < len(steps):
+        step_function = steps[current_step]
+        result = step_function()
+
+        if result == "back":
+            current_step -= 1
+        elif result == "next":
+            current_step += 1
+#+END_SRC
+
+** Parametric Design: Templates as Code
+
+In the DevOps world, we rarely configure servers manually; we define the desired state in code (IaC) and let an engine build it. I applied this same **"Configuration as Code"** philosophy to graphic design.
+
+Instead of forcing users to manually draw complex layouts, I built a parametric JSON engine. Users define a "manifest" describing the page structure—ratios, regions, and styles—and the tool renders it deterministically.
+
+For example, a user can define a "Cornell Notes" layout structurally, without ever touching a drawing tool:
+
+#+BEGIN_SRC json
+// examples/json_layouts/cornell_notes.json
+{
+  "device": "manta",
+  "master_spacing_mm": 7,
+  "page_layout": [
+    {
+      "name": "Cue Column",
+      "region_rect": [0, 0.12, 0.25, 0.68], // x, y, width, height (percentages)
+      "template": "lined",
+      "kwargs": { "line_width_px": 0.5 }
+    },
+    {
+      "name": "Summary Footer",
+      "region_rect": [0, 0.8, 1.0, 0.2],
+      "template": "grid",
+      "kwargs": { "major_every": 5 }
+    }
+  ]
+}
+#+END_SRC
+
+This approach decouples the *definition* of the template from its *rendering*. It allows users to version-control their notebook layouts just like they would version-control a Kubernetes manifest.
+
+** Algorithmic Art: L-Systems & Truchet Tiles
+
+Beyond utility templates, I wanted users to leverage the capabilities of high-res e-ink for personalization and intimacy. I implemented several generative algorithms for cover pages and divider lines:
+
+1.  **Truchet Tiles:** Uses randomized rotations of simple arc/line tiles to create complex, maze-like patterns.
+2.  **L-Systems (Fractals):** I implemented a string-rewriting engine to generate fractals like the Hilbert Curve and Koch Snowflake.
+
+The L-System engine (~src/eink_template_gen/lsystem.py~) generates a command string based on axioms and rules, which is then interpreted by a "turtle" renderer in PyCairo.
+
+#+BEGIN_SRC python
+L_SYSTEM_DEFINITIONS = {
+    "hilbert_curve": {
+        "axiom": "A",
+        "rules": {"A": "+BF-AFA-FB+", "B": "-AF+BFB+FA-"},
+        "angle": 90,
+    }
+}
+#+END_SRC
+
+** Engineering for Reliability
+
+This isn't just a script; it's a software product. I ensured reliability through:
+
+1.  **Automated Testing:** A comprehensive `pytest` suite covering everything from the math utilities to the CLI argument parsing.
+2.  **CI/CD Pipeline:** A GitHub Actions workflow (`ci.yml`) runs linting (Ruff/Black) and **executes tests across a matrix of Python versions (3.8, 3.11)** to ensure backward compatibility and robust environment management.
+3.  **Automated Publishing:** Releases are automatically built and pushed to PyPI when a new Release is created in GitHub (`publish.yml`).
+
+** Conclusion
+
+Visual artifacts on e-ink screens are a small annoyance, but fixing them required a deep dive into coordinate geometry and careful software architecture. By respecting the hardware limitations and building a flexible, data-driven architecture, *eink-template-gen* provides a tool that is both powerful for developers and accessible for users.
+
+You can check out the code or install the tool yourself:
+- **GitHub:** [[https://github.com/calebc42/eink-template-gen][calebc42/eink-template-gen]]
+- **PyPI:** ~pip install eink-template-gen~
+
+#+BEGIN_QUOTE
+"The details are not the details. They make the design." – Charles Eames
+#+END_QUOTE
+
+* Philosophy
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: essays
+:EXPORT_FILE_NAME: digital-sovereignty
+:EXPORT_DATE: 2025-11-20
+:EXPORT_HUGO_CATEGORIES: "Deep Dive"
+:EXPORT_HUGO_TAGS: "Cybersecurity" "Hardware" "Systems Thinking" "Philosophy"
+:END:
+** The Reality of Modern Hardware Ownership
+
+You own a laptop. It's five years old but functional—the hardware works, the screen is intact, the battery holds charge. Then the manufacturer stops releasing security updates.
+
+What happens next isn't a simple risk of data theft. An unsupported operating system becomes an exploitable entry point for the entire system. Known vulnerabilities in the OS kernel allow an attacker to gain root access. From there, they can exploit low-level system interfaces to write malicious code directly into the firmware—the UEFI or BIOS that loads before your operating system even starts.
+
+A firmware compromise is the ultimate persistent threat. It survives disk wipes. It evades antivirus software. It loads before any security mechanism you control. Your laptop has become a permanent, untrustworthy risk.
+
+For a user who wishes to maintain full, secure control of their hardware, the ideal response is to replace the vendor's firmware with an open-source alternative like Coreboot—something you can audit, update, and control. But when you investigate, you discover Intel Boot Guard: a hardware mechanism using physical, one-time programmable fuses to enforce cryptographic signature verification. Any attempt to load unauthorized firmware fails the check. The machine won't boot.
+
+*This is not ownership.*
+
+You paid for the hardware. You possess it. But the manufacturer retained the only key that matters—the ability to define what code it will run. "End of support" doesn't mean the hardware failed. It means the original transaction agreement expired and your right to use your property securely ended with it.
+
+This reality demands a response. If we cannot replace the foundation, we must verify and contain it.
+
+** The Problem: Ownership Without Control
+
+Modern consumer hardware operates under a fundamental conflict: you legally own a device, but the manufacturer retains ultimate control over its foundational software.
+
+*** The ECU Analogy
+
+Consider a modern vehicle's Engine Control Unit (ECU). The firmware is cryptographically signed by the manufacturer and verified at ignition. While you can perform mechanical maintenance—replacing fluids, filters, spark plugs—the ECU's operational logic remains sealed. Unauthorized modifications trigger failsafes or disable core functionality.
+
+This design prioritizes system integrity over user modification. For a vehicle, this trade-off is arguably reasonable—safety regulations, emissions compliance, and liability concerns justify manufacturer control.
+
+*** The Laptop Dilemma
+
+A laptop operates under similar constraints but with fundamentally different stakes.
+
+Like the ECU, its firmware is locked by mechanisms such as Intel Boot Guard, which uses physical fuses to verify cryptographic signatures before execution. Unlike the ECU, a general-purpose computer processes and stores a vastly wider range of sensitive data: credentials, communications, financial records, creative work.
+
+The attack surface is orders of magnitude larger. The consequences of compromise are far more personal. Yet the user has *less* control than a mechanic has over an engine.
+
+*** The Practical Consequence: Exclusion
+
+When firmware is immutable and unauditable, the entire software stack inherits its trust boundary—regardless of OS openness or patch status.
+
+The user cannot:
+- Replace outdated firmware after "end of support"
+- Audit for backdoors or telemetry
+- Verify integrity against supply chain attacks
+- Install open alternatives like Coreboot without bricking
+
+A compromised firmware image can subvert the OS, survive reinstalls, and evade userspace detection. The hardware becomes a persistent attack surface you cannot remediate.
+
+*** The False Dichotomy: Security vs. Control
+
+A common objection deserves direct address: "If firmware modification is dangerous, isn't Boot Guard protecting you? You can't argue the firmware is both too locked and not secure enough."
+
+This framing assumes only two options exist:
+1. Manufacturer-locked firmware (secure but unmodifiable)
+2. Unlocked firmware (modifiable but insecure)
+
+Both options grant the manufacturer permanent control. The real question is: 
+*who holds the signing key?*
+
+Boot Guard itself is sound cryptographic attestation—the hardware verifies firmware signatures before execution, preventing unauthorized code from running. The problem isn't the verification mechanism. It's that the key is permanently fused to recognize only the manufacturer's signatures.
+
+When support ends, you cannot:
+- Generate your own signing key
+- Program your key into the hardware fuses
+- Verify firmware you audited and compiled yourself
+- Transfer trust to any other authority
+
+The hardware enforces attestation, but recognizes only one authority—an authority that can unilaterally withdraw support while maintaining the lock.
+
+**Cryptographic attestation and user control are not opposites.** Platforms like Purism's Librem series or System76's open firmware demonstrate this: the hardware still performs cryptographic verification, but the *owner* controls the signing key. You maintain the security benefit of attestation while gaining the ability to replace, audit, and update the firmware yourself.
+
+This project doesn't argue against cryptographic verification. It argues against permanent, non-transferable manufacturer monopoly disguised as security architecture.
+
+Since we cannot transfer the signing key on consumer hardware, we build a verified checkpoint at the next available boundary.
+
+** The Solution: Verified Checkpoints
+
+If you cannot replace the foundation, build a verified checkpoint at its boundary.
+
+*** The Handoff
+
+After untrusted vendor firmware completes hardware initialization, we load a Type-1 hypervisor that orchestrates direct control of CPU, memory, and I/O.
+
+Trust is not assumed—it is established only after we cryptographically measure the hypervisor's memory footprint and verify that the IOMMU has successfully remapped all DMA-capable devices away from the firmware's control before any guest OS is allowed to run.
+
+The hypervisor's first task is to seize control of hardware resources like the IOMMU to ensure the untrusted firmware cannot exercise any further influence after the operating system boots. We verify this by testing whether IOMMU actually remaps DMA post-handoff.
+
+*** Reorienting Control
+
+This isn't circumvention of security. It's a reorientation to the *locus of control*.
+
+We accept the firmware's role as an untrusted loader and architect a verified transition to a transparent execution environment. The hypervisor becomes the new root of enforcement—a minimal, user-controlled layer where policies for isolation, measurement, and access can be defined and monitored.
+
+** From Trust to Verification
+
+Traditional security assumes trust in vendors, certificates, and update mechanisms. Sovereignty replaces assumption with measurement.
+
+Each of the five properties represents a specific trust boundary that must be verified rather than assumed:
+- P1: You control the encryption keys (not the vendor)
+- P2: You verify what's running (not trusting the build system)
+- P3: You confirm what's transmitted (not assuming "offline mode")
+- P4: You account for all storage (not trusting "no hidden partitions")
+- P5: You enforce hardware isolation (not assuming software barriers)
+
+These aren't paranoid edge cases. They're measurable, reproducible tests documented in FILE. The verification scripts transform "the vendor says it's secure" into "I verified it's secure."
+
+** The Broader Implication
+This project proves that user control over consumer hardware remains possible—even when manufacturers actively resist it.
+
+It's not about one laptop. It's about establishing that:
+- Technical ownership can still exist
+- Verification is achievable without specialized equipment
+- Open documentation enables others to reproduce and improve
+- The boundary between "consumer" and "professional" hardware is artificial
+
+When "end of support" means "forced obsolescence," the ability to verify and control becomes the difference between a functional tool and e-waste.
+
+** *In 2025, ownership is not assumed. It is proven.*
+The FILE demonstrates this principle in practice. The following sections document how each property translates into measurable verification.
+
+* CSS Stress Test
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: posts
+:EXPORT_FILE_NAME: css-stress-test
+:EXPORT_DATE: 2025-11-20
+:END:
+This post serves as a "unit test" for my design language, inspired by the Nier: Automata YoHRa UI. It contains examples of common Org Mode elements to ensure the Hugo CSS handles them correctly.
+
+** Typography and Inline Styles
+We need to verify that /italics/, *bold text*, +strikethrough text+, and _underlined text_ render cleanly. We also need to check distinct elements like ~code (tilde)~ and =verbatim (equals)=.
+
+This is the keybinding for ~find-file~: @@html: <kbd>C-x</kbd> <kbd>C-f</kbd>@@
+
+Here is a [[https://orgmode.org][standard hyperlink]] to an external site.
+
+** Lists and Definitions
+*** Unordered List
+- Level 1 item
+- Level 1 item
+  - Level 2 item (nested)
+  - Level 2 item
+    - Level 3 item
+
+*** Ordered List
+1. Step One
+2. Step Two
+   1. Sub-step A
+   2. Sub-step B
+
+*** Definition List (The Critical Test)
+This uses the standard ~- Term :: Definition~ syntax.
+- YoRHa :: An elite military force of androids charged with retaking Earth.
+- Bunker :: The orbital base of operations for YoRHa forces.
+- 2B :: A battle android deployed to Earth.
+
+** Block Elements
+*** Block Quotes
+#+begin_quote
+"Everything that lives is designed to end. We are perpetually trapped in a never-ending spiral of life and death."
+-- 2B, Nier: Automata
+#+end_quote
+
+*** Tables
+| Unit | Class    | Status | Load |
+|------+----------+--------+------|
+| 2B   | Battler  | Active | 98%  |
+| 9S   | Scanner  | Active | 100% |
+| A2   | Attacker | AWOL   | ???  |
+
+** Horizontal Rules
+The line below separates sections.
+-----
+** Admonition System Check
+#+begin_warning
+**Critical Failure**
+If you see this box with a red border and a "WARNING" label, the Elisp filter is working.
+#+end_warning
+
+#+begin_note
+**Observation**
+This should render as a neutral/accent colored note.
+#+end_note
+
+#+begin_tip
+You can use *bold* and /italics/ inside these blocks because the shortcode uses `markdownify`.
+#+end_tip
+** Technical Blocks
+*** Source Code (Terminal)
+#+begin_src python
+def mission_status(unit_id):
+    """
+    Checks the status of a YoRHa unit.
+    """
+    if unit_id == "9S":
+        return "Hacking in progress..."
+    return "Combat Mode Engaged"
+#+end_src
+
+*** Example Block
+This checks the styling for generic examples (often used for output or logs).
+#+begin_example
+[LOG] Pod 042 reports connection established.
+[LOG] Data upload to Bunker complete.
+[WARN] Black box signal unstable.
+#+end_example
+*** Fixed Width (Colon Syntax)
+Lines starting with a colon should render as literal text, similar to code but without the wrapper box.
+
+: This is a fixed-width line.
+: It should look like a typewriter output.
+: No syntax highlighting here.
+
+** Interactive & Meta Elements
+*** Collapsible Details (HTML Export)
+#+begin_export html
+<details>
+  <summary>ACCESS CLASSIFIED DATA [CLICK TO EXPAND]</summary>
+  <div style="padding-top: 1rem;">
+    <p>This data is concealed behind a standard HTML5 details element.</p>
+    <ul>
+      <li>Hidden Intel A</li>
+      <li>Hidden Intel B</li>
+    </ul>
+  </div>
+</details>
+#+end_export
+
+  
+*** Footnotes & Citations
+This is a statement that requires verification[fn:1].
+Here is another point that references the same source[fn:1].
+**** Footnotes
+[fn:1] This is the footnote content. It will jump to the bottom of the page.
