@@ -303,10 +303,41 @@ body.has-breadcrumb .progress-bar {
   padding-left: 1.25rem; /* Slide effect */
 }
 
-/* 5. Mobile Adjustments */
+/* --- Mobile Navigation Adjustments --- */
 @media (max-width: 768px) {
-  /* On mobile, we hide the dropdown entirely. 
-     Clicking the parent ("Posts") takes the user to the Index URL defined in toml. */
+  .site-header {
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between; 
+  }
+  
+  .header-left {
+    display: contents; /* This removes the wrapper from the layout flow */
+  }
+  
+  .logo {
+    order: 1;
+    flex: 0 1 auto; /* Takes available space on left */
+  }
+  
+  .theme-toggle {
+    order: 2;
+    margin-left: auto;
+    flex: 0 0 auto; /* Stays at its natural size */
+  }
+  
+  .site-nav {
+    order: 3;
+    width: 100%; /* Forces navigation to new row */
+    margin-top: var(--spacing-sm);
+  }
+  
+  .site-nav ul {
+    justify-content: flex-start;
+  }
+  
+  /* Keep existing dropdown rule */
   .dropdown-menu {
     display: none !important; 
   }
@@ -483,8 +514,18 @@ a.logo:hover {
    =================================================================== */
 
 .sidebar-toc-card {
-  padding: 0; /* Remove padding so the header touches the edges */
-  overflow: hidden; /* Ensure content stays inside rounded corners */
+  padding: 0;
+  overflow: hidden; 
+  
+  /* NEW: Sticky Positioning Logic */
+  position: -webkit-sticky; /* Safari support */
+  position: sticky;
+  top: 6rem; /* 45px Breadcrumb + ~50px Gap */
+  z-index: 10;
+  
+  /* Optional: Scroll within the card if the ToC is taller than the screen */
+  // max-height: calc(100vh - 8rem);
+  // overflow-y: auto;
 }
 
 .sidebar-toc-details {

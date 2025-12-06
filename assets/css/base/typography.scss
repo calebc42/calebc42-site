@@ -208,6 +208,17 @@
   background-color: var(--color-accent);
 }
 
+/* FIX: Scroll Offset for Fixed Headers/Breadcrumbs */
+.content h1, 
+.content h2, 
+.content h3, 
+.content h4, 
+.content h5, 
+.content h6 {
+  /* Breadcrumb Height (45px) + Visual Buffer (approx 50px) */
+  scroll-margin-top: 65px; 
+}
+
 /* --- Keyboard Element --- */
 kbd {
   display: inline-block;
@@ -364,3 +375,4 @@ hr {
   text-decoration: none;
   margin-left: 0.2rem;
 }
+
