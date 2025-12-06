@@ -95,6 +95,13 @@
     max-width: 60%;
   }
 
+  .site-nav {
+      width: 100%;
+      padding-bottom: 0;
+      /* Ensure no overflow is hidden, but we won't scroll */
+      overflow: visible; 
+  }
+  
   .site-nav ul {
     justify-content: space-between;
     flex-wrap: nowrap !important;
