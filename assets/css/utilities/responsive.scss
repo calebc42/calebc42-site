@@ -97,6 +97,7 @@
 
   .site-nav ul {
     justify-content: space-between;
+    flex-wrap: nowrap !important;
     font-size: var(--font-size-base);
     gap: var(--spacing-md);
   }
