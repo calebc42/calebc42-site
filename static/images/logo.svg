@@ -1,0 +1,50 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <filter id="hardShadow" x="-2%" y="-2%" width="104%" height="104%">
+      <feOffset result="offOut" in="SourceGraphic" dx="6" dy="6" />
+      <feColorMatrix result="matrixOut" in="offOut" type="matrix"
+      values="0 0 0 0 0.24 0 0 0 0 0.20 0 0 0 0 0.16 0 0 0 0.4 0" />
+      <feBlend in="SourceGraphic" in2="matrixOut" mode="normal" />
+    </filter>
+  </defs>
+
+  <path d="M 40 40 L 412 40 L 472 100 L 472 472 L 40 472 Z" 
+        fill="#D4C7B0" stroke="#3E342A" stroke-width="16" filter="url(#hardShadow)"/>
+
+  <path d="M 60 60 L 400 60 L 452 112 L 452 452 L 60 452 Z" 
+        fill="none" stroke="#3E342A" stroke-width="3" opacity="0.3"/>
+
+  <rect x="40" y="80" width="20" height="50" fill="#3E342A"/>
+  <rect x="58" y="88" width="6" height="34" fill="#cd664d" opacity="0.9"/>
+
+  <circle cx="85" cy="85" r="10" fill="#cd664d"/>
+  <circle cx="85" cy="85" r="4" fill="#3E342A" opacity="0.5"/>
+  
+  <circle cx="85" cy="427" r="10" fill="#cd664d"/>
+  <circle cx="85" cy="427" r="4" fill="#3E342A" opacity="0.5"/>
+  
+  <circle cx="427" cy="427" r="10" fill="#cd664d"/>
+  <circle cx="427" cy="427" r="4" fill="#3E342A" opacity="0.5"/>
+
+  <g transform="translate(116, 180)">
+    
+    <path d="M 0 0 L 80 0 L 80 32 L 32 32 L 32 118 L 80 118 L 80 150 L 0 150 Z" fill="#3E342A"/>
+    
+    <path d="M 100 0 L 132 0 L 132 58 L 148 58 L 148 0 L 180 0 L 180 150 L 148 150 L 148 90 L 100 90 Z" fill="#3E342A"/>
+    
+    <path d="M 200 0 L 280 0 L 280 90 L 232 90 L 232 118 L 280 118 L 280 150 L 200 150 L 200 60 L 248 60 L 248 32 L 200 32 Z" fill="#3E342A"/>
+  </g>
+
+  <g transform="translate(160, 390)">
+    <rect x="0" y="0" width="10" height="32" fill="#3E342A"/>
+    <rect x="15" y="0" width="5" height="32" fill="#3E342A"/>
+    <rect x="25" y="0" width="15" height="32" fill="#3E342A"/>
+    <rect x="45" y="0" width="5" height="32" fill="#3E342A"/>
+    <rect x="55" y="0" width="10" height="32" fill="#3E342A"/>
+  </g>
+
+  <text x="0" y="0" transform="translate(435, 256) rotate(90)" 
+        font-family="'Roboto Mono', monospace" font-weight="700" font-size="14" 
+        fill="#3E342A" letter-spacing="4" text-anchor="middle" opacity="0.6">REV.OPS</text>
+
+</svg>

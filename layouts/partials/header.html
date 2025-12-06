@@ -1,9 +1,16 @@
 {{ $currentPage := . }}
 <header class="site-header">
   <div class="header-left">
-    <a href="/" class="logo">
-      {{ .Site.Title }}
-      <br> >> Revenue Operations
+    
+    <a href="/" class="logo" style="display: flex; align-items: center; gap: 1rem; text-decoration: none;">
+      <div style="width: 48px; height: 48px; color: var(--text-primary); flex-shrink: 0;">
+        {{ readFile "static/images/logo.svg" | safeHTML }}
+      </div>
+
+      <div style="line-height: 1.2;">
+        {{ .Site.Title }}
+        <br> <span style="color: var(--color-accent); font-size: 0.8em;">>> Revenue Operations</span>
+      </div>
     </a>
     
     <nav class="site-nav">

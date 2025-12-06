@@ -1,0 +1,14 @@
+<svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+  <path d="M 2 2 L 26 2 L 30 6 L 30 30 L 2 30 Z" fill="#7D6B52" />
+
+  <path d="M 2 5 L 4 5 L 4 9 L 2 9 Z" fill="#D4C7B0" opacity="0.5"/>
+
+  <text x="16" y="20" 
+        font-family="monospace, sans-serif" 
+        font-weight="900" 
+        font-size="12" 
+        text-anchor="middle" 
+        fill="#D4C7B0" 
+        letter-spacing="-1">C42</text>
+
+</svg>

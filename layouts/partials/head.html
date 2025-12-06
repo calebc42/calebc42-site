@@ -5,6 +5,9 @@
   <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
   {{ with .Description }}<meta name="description" content="{{ . }}">{{ end }}
 
+  <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+  <link rel="alternate icon" href="/images/favicon.svg" type="image/svg+xml">
+
   {{ range .AlternativeOutputFormats -}}
     {{ printf `<link rel="%s" type="%s" href="%s" title="%s" />` .Rel .MediaType.Type .Permalink $.Site.Title | safeHTML }}
   {{ end -}}
