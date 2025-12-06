@@ -98,22 +98,31 @@
   .site-nav {
       width: 100%;
       padding-bottom: 0;
-      /* Ensure no overflow is hidden, but we won't scroll */
-      overflow: visible; 
+      overflow: hidden; /* 1. Disable scrolling */
   }
   
   .site-nav ul {
-    justify-content: space-between;
-    flex-wrap: nowrap !important;
-    font-size: var(--font-size-base);
-    gap: var(--spacing-md);
+    display: flex;
+    justify-content: space-between; /* 2. Space items evenly edge-to-edge */
+    flex-wrap: nowrap !important;   /* 3. Force single line */
+    gap: 0;                         /* 4. Remove gap to prevent overflow */
+    margin: 0;
+    width: 100%;
+  }
+
+  /* Target the list items to ensure they share space equally */
+  .site-nav li {
+    flex: 1;              /* 5. Grow/Shrink to fill available space */
+    text-align: center;   /* 6. Center the text within its slice */
+    min-width: 0;         /* 7. Allow flex item to shrink below content size if absolutely needed */
   }
 
   .site-nav a {
-      display: inline-block;
-      padding: 0.5rem 0.25rem !important;
-      white-space: nowrap;
-      display: inline-block;
+    display: block;       /* 8. Make click area fill the li */
+    padding: 0.5rem 0 !important; /* 9. Remove side padding */
+    white-space: nowrap;
+    font-size: 0.8rem;    /* 10. Adjust font slightly to ensure brackets fit */
+    width: 100%;
   }
   
   /* --- Tables (Horizontal Scroll) --- */
