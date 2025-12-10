@@ -1,5 +1,5 @@
 {{ define "main" }}
-<div class="resume-wrapper" style="max-width: 850px; margin: 0 auto;">
+<div class="resume-wrapper">
 
   <div class="card card-header" style="text-align: center; margin-bottom: 3rem;">
     <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">{{ .Site.Title }}</h1>
@@ -13,48 +13,66 @@
   </div>
 
   <div class="resume-timeline">
+    <h3 class="resume-section-title">// EXPERIENCE //</h3>
+    
     {{ range .Site.Data.experience }}
-    <div class="resume-entry card" style="margin-bottom: 2rem; position: relative;">
+    <div class="resume-entry card" style="margin-bottom: 2rem; position: relative; padding-bottom: 2rem; border-bottom: 1px dashed var(--border-color);">
       
-      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1rem; flex-wrap: wrap;">
-        <h2 style="margin: 0; font-size: 1.5rem;">{{ .role }}</h2>
-        <span style="font-family: var(--font-mono); font-size: 0.9rem; opacity: 0.8;">{{ .dates }}</span>
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 1rem;">
+        <h2 style="margin: 0; font-size: 1.5rem; line-height: 1.2;">{{ .role }}</h2>
+        
+        <div style="text-align: right;">
+            <span style="font-family: var(--font-mono); font-size: 0.9rem; opacity: 0.8; display: block;">
+                {{ dateFormat "Jan 2006" .startDate }} — {{ if .endDate }}{{ dateFormat "Jan 2006" .endDate }}{{ else }}Present{{ end }}
+            </span>
+            {{ if .type }}
+            <span style="font-size: 0.7rem; border: 1px solid var(--border-color); padding: 1px 6px; border-radius: 4px; text-transform: uppercase; opacity: 0.6; margin-top: 4px; display: inline-block;">
+                {{ .type }}
+            </span>
+            {{ end }}
+        </div>
       </div>
       
-      <div style="margin-bottom: 1.5rem; font-family: var(--font-mono); color: var(--color-accent); font-weight: bold;">
-        {{ .company }} <span style="color: var(--text-secondary); font-weight: normal;">| {{ .location }}</span>
+      <div style="margin-bottom: 1.25rem; font-family: var(--font-mono); color: var(--color-accent); font-weight: bold; font-size: 1.1rem;">
+        {{ .company }} <span style="color: var(--text-secondary); font-weight: normal; font-size: 0.9em;">| {{ .location }}</span>
       </div>
-
-      <p style="font-style: italic; opacity: 0.9; margin-bottom: 1.5rem;">
-        {{ .summary }}
-      </p>
 
       <ul style="list-style: none; padding: 0;">
         {{ range .highlights }}
-        <li style="margin-bottom: 1rem; padding-left: 1.5rem; position: relative;">
-          <span style="position: absolute; left: 0; top: 6px; color: var(--color-accent);">►</span>
+        <li style="margin-bottom: 1.25rem; display: flex; align-items: flex-start; gap: 0.75rem;">
           
-          <div style="display: inline;">
-            {{ .text }}
-            
-            {{ if .related_link }}
-              <a href="{{ .related_link }}" class="tag" style="margin-left: 0.5rem; text-decoration: none; border-bottom: none; display: inline-flex; align-items: center; gap: 4px;">
-                <span class="material-symbols-outlined" style="font-size: 12px;">link</span>
-                {{ .related_label | default "EVIDENCE" }}
-              </a>
-            {{ end }}
-          </div>
+          <span style="color: var(--color-accent); flex-shrink: 0; margin-top: 0.35rem; font-size: 0.8em;">►</span>
+          
+          <div style="flex: 1;">
+            <span style="display: block; margin-bottom: 0.5rem;">
+                {{ .text }}
+                {{ if .related_link }}
+                <a href="{{ .related_link }}" class="evidence-tag">
+                    <span class="material-symbols-outlined" style="font-size: 12px;">link</span>
+                    {{ .related_label | default "EVIDENCE" }}
+                </a>
+                {{ end }}
+            </span>
+          
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+                
+                {{ range .tech_stack }}
+                <span class="tech-pill">
+                    <span class="material-symbols-outlined" style="font-size: 10px; vertical-align: middle; margin-right: 2px;">terminal</span>{{ . }}
+                </span>
+                {{ end }}
 
-          {{ if .skills }}
-          <div style="margin-top: 0.4rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
-            {{ range .skills }}
-              <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" 
-                 style="font-size: 0.7rem; padding: 1px 6px; border: 1px solid var(--border-color); border-radius: 4px; color: var(--text-secondary); text-decoration: none; opacity: 0.7;">
-                 {{ . }}
-              </a>
-            {{ end }}
+                {{ if and .tech_stack .skills }}
+                <span style="color: var(--border-color); font-size: 0.7rem; opacity: 0.4;">|</span>
+                {{ end }}
+
+                {{ range .skills }}
+                <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="skill-tag">
+                    {{ . }}
+                </a>
+                {{ end }}
+            </div>
           </div>
-          {{ end }}
 
         </li>
         {{ end }}
@@ -64,5 +82,126 @@
     {{ end }}
   </div>
 
+  <div class="resume-skills" style="margin-top: 4rem; break-inside: avoid;">
+    <h3 class="resume-section-title">// SKILLS //</h3>
+    
+    <div class="skills-grid-compact">
+        {{ range .Site.Data.skills }}
+        <div class="card" style="padding: 1.5rem; border: 1px solid var(--border-color);">
+            <h4 style="color: var(--color-accent); margin-top: 0; margin-bottom: 1rem; font-size: 1rem; text-transform: uppercase;">
+                {{ .category }}
+            </h4>
+            <ul class="skill-list-compact">
+                {{ range .items }}
+                <li style="margin-bottom: 1rem;">
+                    <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 0.2rem;">
+                        {{ .label }}
+                    </div>
+                    <div style="font-size: 0.9rem;">
+                        {{ .value }}
+                    </div>
+                </li>
+                {{ end }}
+            </ul>
+        </div>
+        {{ end }}
+    </div>
+  </div>
+
 </div>
+
+<style>
+.resume-wrapper {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.resume-section-title {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.15em;
+  color: var(--text-secondary);
+  border-bottom: 1px solid var(--border-color);
+  margin-bottom: 2rem;
+  padding-bottom: 0.5rem;
+  opacity: 0.8;
+}
+
+/* Compact Grid */
+.skills-grid-compact {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.skill-list-compact {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Evidence Tag */
+.evidence-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: 6px;
+  padding: 1px 6px;
+  background-color: rgba(var(--color-accent-rgb), 0.05);
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: bold;
+  text-decoration: none;
+  border-radius: 3px;
+  vertical-align: middle;
+  transition: all 0.2s;
+}
+.evidence-tag:hover {
+    background-color: var(--color-accent);
+    color: var(--bg-primary);
+}
+
+/* Tech Pill (The "Hard" Skills) */
+.tech-pill {
+    display: inline-flex;
+    align-items: center;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    background: #2d2d2d; /* Dark background for code feel */
+    color: #e0e0e0;
+    padding: 2px 6px;
+    border-radius: 3px;
+    border: 1px solid #404040;
+}
+
+/* Light mode override to keep it readable if user is on light theme */
+[data-theme="light"] .tech-pill {
+    background: #f0f0f0;
+    color: #333;
+    border-color: #ccc;
+}
+
+/* Skill Tag (The "Soft" Skills) */
+.skill-tag {
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    border: 1px solid var(--border-color);
+    padding: 1px 6px;
+    border-radius: 10px; /* More rounded to distinguish from tech pills */
+    text-decoration: none;
+    transition: border-color 0.2s;
+}
+.skill-tag:hover {
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+}
+
+/* Timeline Hover Effect (Optional polish) */
+.resume-entry:hover {
+    border-bottom-color: var(--color-accent) !important;
+}
+</style>
 {{ end }}

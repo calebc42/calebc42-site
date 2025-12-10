@@ -1,42 +1,192 @@
 # data/experience.yaml
 
+- company: "T-Mobile"
+  company_id: "t_mobile"
+  role: "Retail Sales Associate"
+  type: "Part-Time"
+  startDate: "2024-07-01"
+  endDate: "2025-01-31"
+  location: "Riverton, Utah"
+  summary: |
+    Took a purposeful interim role during a family sabbatical to support the holiday season. Operated in a high-incentive sales environment while applying operational expertise to improve personal efficiency.
+  highlights:
+    - text: "Developed a custom tool to automate quote generation and track sales follow-ups."
+      tech_stack: ["Google AppSheet", "Google Sheets"]
+      skills: ["Technical Prototyping", "Process Improvement"]
+    - text: "Consistently met and exceeded sales targets for new customer acquisition."
+      skills: ["Full-Cycle Sales", "Negotiation"]
+
 - company: "Lendio"
+  company_id: "lendio"
+  role: "Commercial Loan Officer"
+  type: "Full-Time"
+  startDate: "2023-10-01"
+  endDate: "2024-03-31"
+  location: "Lehi, Utah"
+  summary: |
+    Financial consultant managing a full-cycle sales process. Expertly negotiated terms with a network of over 75 lenders to align clients with optimal financing solutions.
+  highlights:
+    - text: "Generated ~$67,000 in monthly revenue across ~25 units (35% offer-to-close rate)."
+      tech_stack: ["Salesforce"]
+      skills: ["Full-Cycle Sales", "Lead Generation", "Negotiation"]
+    - text: "Independently performed deep-dive cash flow analyses and structured creative financing."
+      skills: ["Financial Analysis", "SBA Regulations", "Stakeholder Management"]
+    - text: "Resolved Etran hold codes (tax liens, CAIVRS) to save deals from cancellation."
+      tech_stack: ["Etran", "SBA Connect"]
+      skills: ["SBA Regulations", "Commercial Lending"]
+
+- company: "Lendio"
+  company_id: "lendio"
   role: "GTM Team Lead (Founding Sales Team)"
-  dates: "May 2023 – Oct 2023"
-  location: "Lehi, UT"
-  summary: "Recruited to architect the operational framework for a new tax credit division. Scaled monthly revenue from $100k to $350k in 5 months."
+  type: "Full-Time"
+  startDate: "2023-05-01"
+  endDate: "2023-10-31"
+  location: "Lehi, Utah"
+  summary: |
+    Recruited to build a new Go-to-Market sales division from scratch. Architected the operational framework, hired the team, and implemented the technology stack.
   highlights:
-    - text: "Architected the end-to-end sales process and performance management system."
-      # This links DIRECTLY to your case study
-      related_link: "/case-studies/sales-funnel-efficiency/"
+    - text: "Architected the end-to-end sales process and built the team's performance management system."
+      related_link: "/posts/sales-funnel-efficiency"
       related_label: "READ CASE STUDY"
-      
-    - text: "Automated lead distribution workflows using Kixie and Salesforce for equitable routing."
-      skills: ["Salesforce", "Kixie", "Automation"]
-      
+      tech_stack: ["Salesforce", "Google Sheets", "Zapier"]
+      skills: ["Systems Thinking", "Process Architecture"]
+    - text: "Scaled monthly revenue from $100k to $350k (87% growth) in 5 months."
+      skills: ["GTM Strategy", "Strategic Planning", "Leadership"]
     - text: "Launched company's first offshore unit in Jamaica, reducing cost-per-rep by 50%."
-      skills: ["Leadership", "Cost Analysis"]
+      skills: ["Team Leadership", "Offshore Management", "Cost Analysis"]
+    - text: "Accelerated sales cycle 32% by refining disqualification logic based on FFCRA tax code."
+      skills: ["Process Improvement", "Data Analysis"]
+
+- company: "TCS Equipment Finance"
+  company_id: "tcs"
+  role: "Business Relationship Manager"
+  type: "Full-Time"
+  startDate: "2023-02-01"
+  endDate: "2023-05-31"
+  location: "Draper, Utah"
+  summary: |
+    Recruited into this role and formally trained on Sandler consultative selling. Tasked with full-cycle, middle-market prospecting.
+  highlights:
+    - text: "Identified systemic misalignment between high-volume GTM strategy and selective credit policy."
+      skills: ["Strategic Acumen", "GTM Strategy"]
+    - text: "Executed high-volume prospecting (100+ daily calls) to build C-level pipeline."
+      tech_stack: ["ZoomInfo", "D&B Hoovers"]
+      skills: ["Lead Generation", "Full-Cycle Sales"]
+    - text: "Onboarded two new Independent Sales Organizations (ISOs) and trained brokers."
+      skills: ["Sales Enablement", "Channel Development"]
 
 - company: "Lendio"
+  company_id: "lendio"
   role: "Traditional Lending SME"
-  dates: "Nov 2021 – Feb 2023"
-  location: "Lehi, UT"
-  summary: "Designed a data-driven enablement program to solve high-value borrower leakage."
+  type: "Full-Time"
+  startDate: "2021-11-01"
+  endDate: "2023-02-28"
+  location: "Lehi, Utah"
+  summary: |
+    Created a role to solve high-value borrower leakage. Designed and implemented a complete sales enablement system to equip a 15-person sales team to sell complex loan products.
   highlights:
-    - text: "Increased conversion rates on traditional products by 144% (+$700k revenue)."
-      related_link: "/case-studies/sales-funnel-efficiency/#2-dot-the-analytical-framework-right-to-left-prioritization"
+    - text: "Increased conversion rates on traditional products by 144% ($700k annual revenue)."
+      related_link: "/posts/sales-funnel-efficiency"
       related_label: "SEE ANALYSIS"
+      skills: ["Sales Enablement", "Performance Management", "Coaching"]
+    - text: "Created proactive lead identification process using DOMO and Sheets to surface opportunities."
+      tech_stack: ["DOMO", "Google Sheets", "Salesforce"]
+      skills: ["Lead Generation", "BI & Dashboarding"]
+    - text: "Automated the cash flow analysis submission process using a custom Slack Workflow."
+      tech_stack: ["Slack Workflow Builder", "Zapier"]
+      skills: ["Technical Prototyping", "Process Architecture"]
+    - text: "Leveraged Gong.io to analyze call data and deliver targeted 1:1 coaching."
+      tech_stack: ["Gong.io"]
+      skills: ["Conversation Intelligence", "Remote Leadership"]
 
-    - text: "Leveraged Gong.io for call analysis and targeted coaching."
-      skills: ["Gong.io", "Coaching"]
+- company: "Lendio"
+  company_id: "lendio"
+  role: "SBA PPP Loan Forgiveness Agent"
+  type: "Contract"
+  startDate: "2021-01-01"
+  endDate: "2021-11-30"
+  location: "Lehi, Utah"
+  summary: |
+    Temporary role during the chaotic SBA PPP rollout. Served as subject-matter expert guiding business owners through complex regulations.
+  highlights:
+    - text: "Consistently ranked in the top 3 of 24 agents (70-120 compliant apps/month)."
+      skills: ["Operations Management", "Stakeholder Management"]
+    - text: "Mastered evolving SBA guidelines to advise clients on maximizing forgiveness."
+      skills: ["SBA Regulations", "Financial Analysis"]
+
+- company: "T-Mobile"
+  company_id: "t_mobile"
+  role: "Integration Specialist"
+  type: "Contract" # Project-based
+  startDate: "2020-08-01"
+  endDate: "2021-02-28"
+  location: "Salt Lake City, Utah"
+  summary: |
+    Nominated for this project-based role during the Sprint/T-Mobile merger. Served as corporate SME for a third-party retail partner, bridging operational gaps.
+  highlights:
+    - text: "Facilitated systems integration for a five-location retail partner."
+      skills: ["Sales Enablement", "Training", "Change Management"]
+    - text: "Collaborated with national team to troubleshoot system errors and document workarounds."
+      tech_stack: ["Microsoft Teams", "POS Systems"]
+      skills: ["Problem Solving", "Documentation"]
+
+- company: "Sprint"
+  company_id: "sprint"
+  role: "Sr. Sales Representative"
+  type: "Full-Time"
+  startDate: "2019-05-01"
+  endDate: "2020-08-31"
+  location: "South Jordan, Utah"
+  summary: |
+    Expanded responsibilities to include manager-on-duty tasks. Architected and implemented coaching and sales process systems to drive team performance.
+  highlights:
+    - text: "Designed 'account audit' process transforming service visits into top B2B pipeline."
+      skills: ["Sales Process Architecture", "Lead Generation"]
+    - text: "Implemented pre-transaction 'huddle' system for real-time coaching."
+      skills: ["Team Leadership", "Sales Coaching"]
+
+- company: "Sprint"
+  company_id: "sprint"
+  role: "Sales Representative"
+  type: "Full-Time"
+  startDate: "2017-09-01"
+  endDate: "2019-05-31"
+  location: "West Jordan, Utah"
+  summary: |
+    Quickly became a top performer by using a consultative framework to exceed customer needs.
+  highlights:
+    - text: "Achieved average composite sales goal of 125% (Top 10% in district)."
+      skills: ["Performance Management", "Goal Setting"]
+    - text: "Used 'Live, Work, Play' framework to conduct consultative needs analysis."
+      skills: ["Consultative Sales", "Full-Cycle Sales"]
 
 - company: "Dynatronics"
+  company_id: "dynatronics"
   role: "Operations & Supply Chain Intern"
-  dates: "May 2018 – Aug 2018"
-  location: "Cottonwood Heights, UT"
-  summary: "Solved critical supply chain production delays using Lean principles."
+  type: "Internship"
+  startDate: "2018-05-01"
+  endDate: "2018-08-31"
+  location: "Cottonwood Heights, Utah"
+  summary: |
+    Summer internship solving critical supply chain production delays. Involved designing a new inventory system and performing root cause analysis.
   highlights:
-    - text: "Designed a physical Kanban system reducing stock-outs by 57%."
-      # If you write a post about this later, you just add the link here
-      related_link: "" 
-      skills: ["Kanban", "Lean Six Sigma"]
+    - text: "Designed physical Kanban system reducing stock-outs by 57%."
+      skills: ["Project Management", "Systems Thinking", "Lean Six Sigma"]
+    - text: "Performed 5-Why root cause analysis for international compliance."
+      skills: ["Process Improvement", "Root Cause Analysis"]
+
+- company: "Five Guys"
+  company_id: "five_guys"
+  role: "Shift Lead"
+  type: "Full-Time"
+  startDate: "2016-02-01"
+  endDate: "2018-08-31"
+  location: "West Jordan, Utah"
+  summary: |
+    Promoted to Shift Lead involving direct operational and financial management of a restaurant with over $1M in annual revenue.
+  highlights:
+    - text: "Maintained labor costs under 22% of revenue through strategic scheduling."
+      skills: ["Operations Management", "Financial Analysis"]
+    - text: "Reduced food waste/stock-outs using Excel to forecast demand."
+      tech_stack: ["Excel", "Radiant Database"]
+      skills: ["Inventory Control", "Data Analysis"]

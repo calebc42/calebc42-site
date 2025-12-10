@@ -27,6 +27,13 @@ I am currently seeking a Revenue Operations role where I can apply systems think
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: pages
 :EXPORT_FILE_NAME: experience
+:EXPORT_HUGO_LAYOUT: experience
+:END:
+* Contact
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: pages
+:EXPORT_FILE_NAME: contact
+:EXPORT_HUGO_LAYOUT: contact
 :END:
 
 ** Go-to-Market Team Lead (Founding Sales Team)

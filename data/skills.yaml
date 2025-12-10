@@ -1,52 +1,37 @@
 # data/skills.yaml
 
-- category: "Revenue Infrastructure"
+- category: "Revenue Architecture"
   items:
-    - label: "CRM & Automation"
-      value: "Salesforce (Admin & Experience Cloud), Slack Workflow Builder."
-      proficiency: "Intermediate"
-      tags: ["Salesforce", "Lead Flow", "Connector", "Implementation"]
-
     - label: "Sales Engagement"
-      value: "Kixie (Routing & Automation), AirCall, FileInvite, ZoomInfo."
+      value: "Kixie, AirCall, FileInvite, ZoomInfo, D&B Hoovers"
       proficiency: "Master"
-      tags: ["Kixie", "AirCall", "FileInvite", "ZoomInfo", "D&B Hoovers"]
-
-    - label: "Intelligence"
-      value: "Gong.io (Conversation Analytics), ZenDesk."
-      proficiency: "Master"
-      tags: ["Gong.io", "Call Analysis", "Keyword Analysis", "Best Practice Identification"]
-
-- category: "Data & Engineering"
-  items:
-    - label: "Languages"
-      value: "Python (Pandas, Plotly, Automation), SQL, HTML/CSS."
-      proficiency: "Proficient"
-      tags: ["Python", "SQL", "RAG", "LLM Integration", "API"]
-
-    - label: "Analysis"
-      value: "Advanced Google Sheets (Query, VLOOKUP), Excel Financial Modeling."
-      proficiency: "Master"
-      tags: ["Spreadsheets", "Pivot Tables", "Financial Modeling", "Forecasting"]
-
-    - label: "BI Tools"
-      value: "DOMO, Tableau, Power BI."
+    - label: "CRM & Admin"
+      value: "Salesforce (Admin, Experience Cloud), Slack Workflow Builder"
       proficiency: "Intermediate"
-      tags: ["Dashboard Creation", "KPI Reporting", "Data Visualization"]
+    - label: "Process Design"
+      value: "Lead Routing, GTM Strategy, Pipeline Architecture, FFCRA/SBA Regs"
+      proficiency: "Expert"
 
-- category: "Strategy & Frameworks"
+- category: "Data & Intelligence"
   items:
-    - label: "Sales Methodology"
-      value: "Sandler Consultative Selling (Formally Trained), SPIN Selling."
+    - label: "Analysis Stack"
+      value: "Python (Pandas/Plotly), SQL, Google Sheets (Advanced), Excel"
+      proficiency: "Proficient"
+    - label: "Visualization"
+      value: "DOMO, Tableau, Power BI, Google AppSheet"
+      proficiency: "Intermediate"
+    - label: "Conv. Intelligence"
+      value: "Gong.io (Analysis & Coaching), ZenDesk"
       proficiency: "Master"
-      tags: ["Consultative Selling", "Solution Selling", "Value Selling"]
 
+- category: "Methodology & Strategy"
+  items:
+    - label: "Sales Frameworks"
+      value: "Sandler (Certified), SPIN Selling, Consultative Needs Analysis"
+      proficiency: "Master"
     - label: "Operations"
-      value: "Lean Six Sigma / Kanban (Inventory Design), 5-Why Root Cause."
+      value: "Lean Six Sigma, Kanban, 5-Why Root Cause Analysis, Agile"
       proficiency: "Intermediate"
-      tags: ["Process Optimization", "Root Cause Analysis", "Kaizen", "Agile"]
-
-    - label: "Growth"
-      value: "GTM Architecture, Full-Cycle Pipeline Management."
+    - label: "Leadership"
+      value: "Sales Enablement, Performance Management, Offshore Management"
       proficiency: "Proficient"
-      tags: ["Product Launch", "Market Entry", "Sales Motion", "Value Proposition"]
