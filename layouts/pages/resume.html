@@ -1,103 +1,94 @@
 {{ define "main" }}
+<div style="text-align: right; display: flex; flex-direction: column; align-items: flex-end; gap: 0.75rem;">
+  
+  <a href="/pdf/resume.pdf" target="_blank" class="download-btn">
+    <span class="material-symbols-outlined" style="font-size: 18px;">download</span>
+    Download Resume PDF
+  </a>
+
+</div>
+
 <div class="resume-wrapper">
 
-  <div class="card card-header" style="text-align: center; margin-bottom: 3rem;">
-    <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">{{ .Site.Title }}</h1>
-    <div style="font-family: var(--font-mono); color: var(--color-accent);">
-      REVENUE OPERATIONS
-    </div>
-    <div style="margin-top: 1.5rem; display: flex; justify-content: center; gap: 1rem;">
-      <a href="mailto:connect@calebc42.com" class="btn">Email</a>
-      <a href="javascript:window.print()" class="btn">Print / PDF</a>
+  <div class="resume-header">
+    <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 2rem;">
+      
+      <div>
+        <h1 style="font-size: 3rem; margin: 0; line-height: 1;">{{ .Site.Title }}</h1>
+        <div style="font-family: var(--font-mono); color: var(--color-accent); letter-spacing: 0.1em; margin-top: 0.5rem; font-size: 1.1rem;">
+          >> REVENUE OPERATIONS
+        </div>
+      </div>
+      <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-secondary);">
+        <a href="mailto:connect@calebc42.com" class="contact-link">connect@calebc42.com</a>
+        <span style="margin: 0 6px; opacity: 0.5;">|</span>
+        <a href="https://linkedin.com/in/calebc42" class="contact-link">linkedin.com/in/calebc42</a>
+      </div>
     </div>
   </div>
 
-  <div class="resume-timeline">
-    <h3 class="resume-section-title">// EXPERIENCE //</h3>
+  <div class="resume-grid">
     
-    {{ range .Site.Data.experience }}
-    <div class="resume-entry card" style="margin-bottom: 2rem; position: relative; padding-bottom: 2rem; border-bottom: 1px dashed var(--border-color);">
-      
-      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 1rem;">
-        <h2 style="margin: 0; font-size: 1.5rem; line-height: 1.2;">{{ .role }}</h2>
+    <div class="resume-main">
+        <h3 class="resume-section-title">// ALL EXPERIENCE //</h3>
         
-        <div style="text-align: right;">
-            <span style="font-family: var(--font-mono); font-size: 0.9rem; opacity: 0.8; display: block;">
+        {{ range .Site.Data.experience }}
+        <div class="resume-entry" style="margin-bottom: 2.5rem;">
+          
+          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.25rem;">
+            <h2 style="margin: 0; font-size: 1.4rem;">{{ .role }}</h2>
+            <span style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-secondary);">
                 {{ dateFormat "Jan 2006" .startDate }} — {{ if .endDate }}{{ dateFormat "Jan 2006" .endDate }}{{ else }}Present{{ end }}
             </span>
-            {{ if .type }}
-            <span style="font-size: 0.7rem; border: 1px solid var(--border-color); padding: 1px 6px; border-radius: 4px; text-transform: uppercase; opacity: 0.6; margin-top: 4px; display: inline-block;">
-                {{ .type }}
-            </span>
-            {{ end }}
-        </div>
-      </div>
-      
-      <div style="margin-bottom: 1.25rem; font-family: var(--font-mono); color: var(--color-accent); font-weight: bold; font-size: 1.1rem;">
-        {{ .company }} <span style="color: var(--text-secondary); font-weight: normal; font-size: 0.9em;">| {{ .location }}</span>
-      </div>
+          </div>
+          
+          <div style="margin-bottom: 0.75rem; font-family: var(--font-mono); color: var(--color-accent); font-weight: bold; font-size: 1rem;">
+            {{ .company }} <span style="color: var(--text-secondary); font-weight: normal;">| {{ .location }}</span>
+          </div>
 
-      <ul style="list-style: none; padding: 0;">
-        {{ range .highlights }}
-        <li style="margin-bottom: 1.25rem; display: flex; align-items: flex-start; gap: 0.75rem;">
-          
-          <span style="color: var(--color-accent); flex-shrink: 0; margin-top: 0.35rem; font-size: 0.8em;">►</span>
-          
-          <div style="flex: 1;">
-            <span style="display: block; margin-bottom: 0.5rem;">
-                {{ .text }}
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            {{ range .highlights }}
+            <li style="margin-bottom: 0.75rem; position: relative; padding-left: 1rem;">
+              <span style="position: absolute; left: 0; top: 6px; color: var(--color-accent); font-size: 0.6rem;">▶</span>
+              <span style="color: var(--text-primary); line-height: 1.5;">
+                  {{ .text }}
+              </span>
+              
+              <div style="margin-top: 4px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center;">
                 {{ if .related_link }}
-                <a href="{{ .related_link }}" class="evidence-tag">
-                    <span class="material-symbols-outlined" style="font-size: 12px;">link</span>
+                <a href="{{ .related_link }}" class="evidence-pill">
+                    <span class="material-symbols-outlined" style="font-size: 10px;">folder_open</span>
                     {{ .related_label | default "EVIDENCE" }}
                 </a>
                 {{ end }}
-            </span>
-          
-            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
-                
+
                 {{ range .tech_stack }}
-                <span class="tech-pill">
-                    <span class="material-symbols-outlined" style="font-size: 10px; vertical-align: middle; margin-right: 2px;">terminal</span>{{ . }}
-                </span>
+                <span class="tech-pill">{{ . }}</span>
                 {{ end }}
-
-                {{ if and .tech_stack .skills }}
-                <span style="color: var(--border-color); font-size: 0.7rem; opacity: 0.4;">|</span>
-                {{ end }}
-
-                {{ range .skills }}
-                <a href="{{ "/tags/" | relLangURL }}{{ . | urlize }}" class="skill-tag">
-                    {{ . }}
-                </a>
-                {{ end }}
-            </div>
-          </div>
-
-        </li>
+              </div>
+            </li>
+            {{ end }}
+          </ul>
+        </div>
         {{ end }}
-      </ul>
-
     </div>
-    {{ end }}
-  </div>
 
-  <div class="resume-skills" style="margin-top: 4rem; break-inside: avoid;">
-    <h3 class="resume-section-title">// SKILLS //</h3>
-    
-    <div class="skills-grid-compact">
+    <div class="resume-sidebar">
+        
+        <h3 class="resume-section-title">// SKILLS & TECH //</h3>
+        
         {{ range .Site.Data.skills }}
-        <div class="card" style="padding: 1.5rem; border: 1px solid var(--border-color);">
-            <h4 style="color: var(--color-accent); margin-top: 0; margin-bottom: 1rem; font-size: 1rem; text-transform: uppercase;">
+        <div style="margin-bottom: 2rem;">
+            <h4 style="color: var(--text-primary); margin: 0 0 0.75rem 0; font-size: 0.9rem; text-transform: uppercase; font-weight: bold;">
                 {{ .category }}
             </h4>
-            <ul class="skill-list-compact">
+            <ul style="list-style: none; padding: 0;">
                 {{ range .items }}
                 <li style="margin-bottom: 1rem;">
-                    <div style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-secondary); text-transform: uppercase; margin-bottom: 0.2rem;">
+                    <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-secondary); margin-bottom: 2px;">
                         {{ .label }}
                     </div>
-                    <div style="font-size: 0.9rem;">
+                    <div style="font-size: 0.85rem; line-height: 1.4;">
                         {{ .value }}
                     </div>
                 </li>
@@ -105,103 +96,108 @@
             </ul>
         </div>
         {{ end }}
+
     </div>
+
   </div>
 
 </div>
 
 <style>
 .resume-wrapper {
-  max-width: 900px;
+  max-width: 1000px;
   margin: 0 auto;
+  padding: 2rem;
+}
+
+.resume-header {
+    margin-bottom: 3rem; 
+    border-bottom: 2px solid var(--border-color); 
+    padding-bottom: 2rem;
+}
+
+.resume-grid {
+    display: grid;
+    grid-template-columns: 2.5fr 1fr;
+    gap: 3rem;
 }
 
 .resume-section-title {
   font-family: var(--font-mono);
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   letter-spacing: 0.15em;
   color: var(--text-secondary);
-  border-bottom: 1px solid var(--border-color);
-  margin-bottom: 2rem;
+  border-bottom: 2px solid var(--border-color);
+  margin-bottom: 1.5rem;
   padding-bottom: 0.5rem;
-  opacity: 0.8;
 }
 
-/* Compact Grid */
-.skills-grid-compact {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 1.5rem;
+.contact-link {
+    color: var(--text-primary);
+    text-decoration: none;
+    transition: color 0.2s;
+}
+.contact-link:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
 }
 
-.skill-list-compact {
-  list-style: none;
-  padding: 0;
-  margin: 0;
+/* Header Download Button */
+.download-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    background-color: var(--color-accent);
+    color: var(--bg-primary); 
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: opacity 0.2s;
+}
+.download-btn:hover {
+    opacity: 0.9;
 }
 
-/* Evidence Tag */
-.evidence-tag {
+/* Evidence Pill Styling */
+.evidence-pill {
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  margin-left: 6px;
+  gap: 3px;
   padding: 1px 6px;
-  background-color: rgba(var(--color-accent-rgb), 0.05);
+  background-color: transparent;
   border: 1px solid var(--color-accent);
   color: var(--color-accent);
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   font-weight: bold;
   text-decoration: none;
   border-radius: 3px;
-  vertical-align: middle;
   transition: all 0.2s;
 }
-.evidence-tag:hover {
+.evidence-pill:hover {
     background-color: var(--color-accent);
     color: var(--bg-primary);
 }
 
-/* Tech Pill (The "Hard" Skills) */
+/* Tech Pill Styling */
 .tech-pill {
     display: inline-flex;
     align-items: center;
     font-family: var(--font-mono);
     font-size: 0.65rem;
-    background: #2d2d2d; /* Dark background for code feel */
-    color: #e0e0e0;
-    padding: 2px 6px;
-    border-radius: 3px;
-    border: 1px solid #404040;
-}
-
-/* Light mode override to keep it readable if user is on light theme */
-[data-theme="light"] .tech-pill {
-    background: #f0f0f0;
-    color: #333;
-    border-color: #ccc;
-}
-
-/* Skill Tag (The "Soft" Skills) */
-.skill-tag {
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
+    background: rgba(128, 128, 128, 0.1);
     color: var(--text-secondary);
-    border: 1px solid var(--border-color);
-    padding: 1px 6px;
-    border-radius: 10px; /* More rounded to distinguish from tech pills */
-    text-decoration: none;
-    transition: border-color 0.2s;
-}
-.skill-tag:hover {
-    border-color: var(--color-accent);
-    color: var(--color-accent);
+    padding: 1px 5px;
+    border-radius: 3px;
 }
 
-/* Timeline Hover Effect (Optional polish) */
-.resume-entry:hover {
-    border-bottom-color: var(--color-accent) !important;
+@media (max-width: 768px) {
+    .resume-grid { grid-template-columns: 1fr; }
+    .resume-header > div { flex-direction: column; align-items: flex-start !important; gap: 1.5rem; }
+    .resume-header div[style*="text-align: right"] { text-align: left !important; align-items: flex-start !important; }
 }
 </style>
 {{ end }}

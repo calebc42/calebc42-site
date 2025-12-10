@@ -8,54 +8,60 @@
   endDate: "2025-01-31"
   location: "Riverton, Utah"
   summary: |
-    Took a purposeful interim role during a family sabbatical to support the holiday season. Operated in a high-incentive sales environment while applying operational expertise to improve personal efficiency.
+    Took a purposeful interim role during a family sabbatical. I used this opportunity to implement frontline process improvements. I identified valid friction points in the quoting process and built a custom low-code application to automate follow-ups, proving my ability to optimize workflows in a fast-paced environment.
   highlights:
-    - text: "Developed a custom tool to automate quote generation and track sales follow-ups."
-      tech_stack: ["Google AppSheet", "Google Sheets"]
-      skills: ["Technical Prototyping", "Process Improvement"]
-    - text: "Consistently met and exceeded sales targets for new customer acquisition."
-      skills: ["Full-Cycle Sales", "Negotiation"]
+    - text: "Engineered a custom quoting and follow-up tool using Google AppSheet to streamline quote generation, effectively treating the sales floor as a sandbox for low-code process improvement."
+      related_link: "/artifacts/appsheet-prototype"
+      related_label: "VIEW PROTOTYPE"
+      tech_stack: ["Google AppSheet", "Google Sheets", "Low-Code"]
+      skills: ["Technical Prototyping", "Workflow Automation"]
+    - text: "Optimized the customer onboarding workflow to reduce transaction times while increasing service attachment rates, consistently exceeding new customer acquisition targets."
+      skills: ["Process Optimization", "Sales Performance"]
 
 - company: "Lendio"
   company_id: "lendio"
-  role: "Commercial Loan Officer"
+  role: "Account Executive, Commercial Lending"
   type: "Full-Time"
   startDate: "2023-10-01"
   endDate: "2024-03-31"
   location: "Lehi, Utah"
   summary: |
-    Financial consultant managing a full-cycle sales process. Expertly negotiated terms with a network of over 75 lenders to align clients with optimal financing solutions.
+    Served as a full-cycle financial consultant, but operated with the mindset of an underwriter. I specialized in deep-dive financial analysis (P&L, Balance Sheet) to structure creative bridge financing for clients who didn't fit the standard "credit box," effectively managing risk while maximizing Customer Lifetime Value (LTV).
   highlights:
-    - text: "Generated ~$67,000 in monthly revenue across ~25 units (35% offer-to-close rate)."
-      tech_stack: ["Salesforce"]
-      skills: ["Full-Cycle Sales", "Lead Generation", "Negotiation"]
-    - text: "Independently performed deep-dive cash flow analyses and structured creative financing."
-      skills: ["Financial Analysis", "SBA Regulations", "Stakeholder Management"]
-    - text: "Resolved Etran hold codes (tax liens, CAIVRS) to save deals from cancellation."
-      tech_stack: ["Etran", "SBA Connect"]
-      skills: ["SBA Regulations", "Commercial Lending"]
+    - text: "Drove ~$67k in average monthly revenue by independently structuring complex deals across 75+ lenders, mirroring underwriting risk mitigation strategies to maximize approval rates."
+      tech_stack: ["Salesforce", "Excel (Financial Modeling)"]
+      skills: ["Financial Analysis", "Deal Structuring", "Negotiation"]
+    - text: "Collaborated directly with SBA underwriters to resolve 3-4 Etran hold codes (tax liens, CAIVRS) per month, saving stalled deals through deep regulatory expertise."
+      related_link: "/artifacts/sba-compliance-checklist"
+      related_label: "SEE CHECKLIST"
+      tech_stack: ["SBA Etran", "SBA Connect"]
+      skills: ["Regulatory Compliance", "Stakeholder Management"]
+    - text: "Created long-term 'Funding Roadmaps' for high-risk clients, advising on financial structuring to qualify them for premier SBA 7(a) products over 12-month cycles."
+      skills: ["Strategic Advisory", "Customer Success"]
 
 - company: "Lendio"
-  company_id: "lendio"
+  company_id: "lendio_gtm"
   role: "GTM Team Lead (Founding Sales Team)"
   type: "Full-Time"
   startDate: "2023-05-01"
   endDate: "2023-10-31"
   location: "Lehi, Utah"
   summary: |
-    Recruited to build a new Go-to-Market sales division from scratch. Architected the operational framework, hired the team, and implemented the technology stack.
+    Recruited by the Director of Operations to architect a new sales division from zero. I functioned as the "Founding Operator," responsible for the entire Revenue Operations stack: designing the sales motion, selecting the technology (Kixie/Salesforce), building the performance dashboards, and hiring the team.
   highlights:
-    - text: "Architected the end-to-end sales process and built the team's performance management system."
-      related_link: "/posts/sales-funnel-efficiency"
-      related_label: "READ CASE STUDY"
+    - text: "Architected the end-to-end sales process and built the division's entire performance management system from scratch in Google Sheets and Salesforce, creating the 'operating OS' for the new team."
+      related_link: "/case-studies/building-gtm-dashboard"
+      related_label: "VIEW DASHBOARD"
       tech_stack: ["Salesforce", "Google Sheets", "Zapier"]
-      skills: ["Systems Thinking", "Process Architecture"]
-    - text: "Scaled monthly revenue from $100k to $350k (87% growth) in 5 months."
-      skills: ["GTM Strategy", "Strategic Planning", "Leadership"]
-    - text: "Launched company's first offshore unit in Jamaica, reducing cost-per-rep by 50%."
-      skills: ["Team Leadership", "Offshore Management", "Cost Analysis"]
-    - text: "Accelerated sales cycle 32% by refining disqualification logic based on FFCRA tax code."
-      skills: ["Process Improvement", "Data Analysis"]
+      skills: ["RevOps Architecture", "Systems Design"]
+    - text: "Scaled monthly revenue from $100k to over $350k ($4.05MM run rate) in under 5 months by optimizing lead routing logic and automating 'Speed to Lead' workflows."
+      skills: ["Scaling Strategy", "Data Analysis"]
+    - text: "Hired, trained, and managed the company's first successful offshore unit in Jamaica, reducing cost-per-rep by 50% via standardized playbooks and rigorous QA scorecards."
+      related_link: "/artifacts/offshore-training-manual"
+      related_label: "READ PLAYBOOK"
+      skills: ["Offshore Management", "Cost Optimization"]
+    - text: "Collaborated with developers to resolve critical CRM integration errors and refined disqualification logic based on FFCRA tax code, accelerating the sales cycle by 32%."
+      skills: ["Funnel Optimization", "Process Improvement"]
 
 - company: "TCS Equipment Finance"
   company_id: "tcs"
@@ -65,100 +71,91 @@
   endDate: "2023-05-31"
   location: "Draper, Utah"
   summary: |
-    Recruited into this role and formally trained on Sandler consultative selling. Tasked with full-cycle, middle-market prospecting.
+    Recruited to build a middle-market pipeline using Sandler methodology. Quickly identified a strategic disconnect between the high-volume GTM strategy and the conservative credit policy. Pivot was driven by my analysis of the "Systemic Misalignment" rather than sales failure.
   highlights:
-    - text: "Identified systemic misalignment between high-volume GTM strategy and selective credit policy."
-      skills: ["Strategic Acumen", "GTM Strategy"]
-    - text: "Executed high-volume prospecting (100+ daily calls) to build C-level pipeline."
+    - text: "Conducted a strategic GTM analysis that identified a fatal misalignment between the company's high-volume 'spray-and-pray' prospecting model and its highly selective 'A-Paper' credit policy."
+      skills: ["Strategic Analysis", "GTM Strategy"]
+    - text: "Built a robust C-level pipeline ($20MM-$100MM revenue targets) from scratch using high-volume prospecting tools like D&B Hoovers and ZoomInfo."
       tech_stack: ["ZoomInfo", "D&B Hoovers"]
-      skills: ["Lead Generation", "Full-Cycle Sales"]
-    - text: "Onboarded two new Independent Sales Organizations (ISOs) and trained brokers."
-      skills: ["Sales Enablement", "Channel Development"]
+      skills: ["Lead Generation", "Market Research"]
+    - text: "Successfully onboarded two new Independent Sales Organizations (ISOs) and trained their brokers on credit box alignment to diversify lead sources."
+      skills: ["Partnership Management", "Channel Sales"]
 
 - company: "Lendio"
-  company_id: "lendio"
-  role: "Traditional Lending SME"
+  company_id: "lendio_sme"
+  role: "Traditional Lending Subject-Matter-Expert (SME)"
   type: "Full-Time"
   startDate: "2021-11-01"
   endDate: "2023-02-28"
   location: "Lehi, Utah"
   summary: |
-    Created a role to solve high-value borrower leakage. Designed and implemented a complete sales enablement system to equip a 15-person sales team to sell complex loan products.
+    Created a "Sales Enablement" role to solve high-value borrower leakage. I acted as the bridge between the high-velocity sales floor and the complex underwriting team. I built the training, the tracking systems, and the feedback loops that allowed 15 reps to sell complex traditional loans.
   highlights:
-    - text: "Increased conversion rates on traditional products by 144% ($700k annual revenue)."
-      related_link: "/posts/sales-funnel-efficiency"
+    - text: "Increased conversion rates on traditional products by 144% (+$700k annual revenue) by designing a new sales-to-underwriting handoff process that bridged the gap between sales velocity and credit risk."
+      related_link: "/case-studies/sales-enablement-impact"
       related_label: "SEE ANALYSIS"
-      skills: ["Sales Enablement", "Performance Management", "Coaching"]
-    - text: "Created proactive lead identification process using DOMO and Sheets to surface opportunities."
+      skills: ["Sales Enablement", "Change Management"]
+    - text: "Built proactive lead surfacing dashboards in DOMO to identify high-value opportunities hidden within the existing pipeline, enabling a targeted 'account-based marketing' approach."
       tech_stack: ["DOMO", "Google Sheets", "Salesforce"]
-      skills: ["Lead Generation", "BI & Dashboarding"]
-    - text: "Automated the cash flow analysis submission process using a custom Slack Workflow."
+      skills: ["BI & Analytics", "Lead Scoring"]
+    - text: "Automated the manual cash flow analysis submission process by building a custom Slack Workflow, reducing data entry errors and accelerating turnaround time."
+      related_link: "/artifacts/slack-workflow-automation"
+      related_label: "VIEW WORKFLOW"
       tech_stack: ["Slack Workflow Builder", "Zapier"]
-      skills: ["Technical Prototyping", "Process Architecture"]
-    - text: "Leveraged Gong.io to analyze call data and deliver targeted 1:1 coaching."
+      skills: ["Process Automation", "No-Code Tools"]
+    - text: "Leveraged Gong.io Intelligence to analyze call data and deliver targeted 1:1 coaching, using data-driven scorecards to improve objection handling in a remote environment."
       tech_stack: ["Gong.io"]
-      skills: ["Conversation Intelligence", "Remote Leadership"]
+      skills: ["Conversation Intelligence", "Coaching Frameworks"]
 
 - company: "Lendio"
-  company_id: "lendio"
+  company_id: "lendio_ppp"
   role: "SBA PPP Loan Forgiveness Agent"
   type: "Contract"
   startDate: "2021-01-01"
   endDate: "2021-11-30"
   location: "Lehi, Utah"
   summary: |
-    Temporary role during the chaotic SBA PPP rollout. Served as subject-matter expert guiding business owners through complex regulations.
+    Entered FinTech during the chaotic SBA PPP rollout. Succeeded by becoming a rapid expert on changing federal regulations (SOP 50 10) and translating them into clear instructions for business owners.
   highlights:
-    - text: "Consistently ranked in the top 3 of 24 agents (70-120 compliant apps/month)."
-      skills: ["Operations Management", "Stakeholder Management"]
-    - text: "Mastered evolving SBA guidelines to advise clients on maximizing forgiveness."
-      skills: ["SBA Regulations", "Financial Analysis"]
+    - text: "Ranked in the top 3 of 24 agents (70-120 compliant apps/month) by managing a high-volume portfolio and making 100+ daily outbound calls to guide business owners through complex SBA regulations."
+      skills: ["Operations Management", "High-Volume Execution"]
+    - text: "Mastered evolving SBA guidelines to advise clients on maximizing forgiveness eligibility, specifically guiding them through the collection of IRS 941s and payroll reports."
+      skills: ["Regulatory Analysis", "Consultative Service"]
 
-- company: "T-Mobile"
-  company_id: "t_mobile"
-  role: "Integration Specialist"
-  type: "Contract" # Project-based
+- company: "T-Mobile / Sprint"
+  company_id: "t_mobile_integration"
+  role: "Integration Specialist (Post-Merger)"
+  type: "Contract / Project"
   startDate: "2020-08-01"
   endDate: "2021-02-28"
   location: "Salt Lake City, Utah"
   summary: |
-    Nominated for this project-based role during the Sprint/T-Mobile merger. Served as corporate SME for a third-party retail partner, bridging operational gaps.
+    Selected by District Leadership to manage the operational integration of the Sprint/T-Mobile merger for a third-party partner. I focused on systems training, error documentation, and change management for teams resisting the new processes.
   highlights:
-    - text: "Facilitated systems integration for a five-location retail partner."
-      skills: ["Sales Enablement", "Training", "Change Management"]
-    - text: "Collaborated with national team to troubleshoot system errors and document workarounds."
-      tech_stack: ["Microsoft Teams", "POS Systems"]
-      skills: ["Problem Solving", "Documentation"]
+    - text: "Selected by District Manager to lead post-merger integration for 5 retail locations, acting as the subject-matter expert to facilitate the migration of CRM and POS systems."
+      skills: ["Systems Integration", "Training & Development"]
+    - text: "Contributed to a national knowledge base of workarounds for systemic integration errors, documenting bugs and authoring SOPs to enable faster problem resolution for teams nationwide."
+      related_link: "/artifacts/integration-SOP"
+      related_label: "VIEW SOP"
+      tech_stack: ["Microsoft Teams", "Legacy POS"]
+      skills: ["Technical Documentation", "Problem Solving"]
+    - text: "Retained at-risk customers during network migration by explaining technical details (frequencies, licensing) to alleviate concerns, while simultaneously training staff on the new network architecture."
+      skills: ["Change Management", "Technical Communication"]
 
 - company: "Sprint"
-  company_id: "sprint"
+  company_id: "sprint_sr"
   role: "Sr. Sales Representative"
   type: "Full-Time"
   startDate: "2019-05-01"
   endDate: "2020-08-31"
   location: "South Jordan, Utah"
   summary: |
-    Expanded responsibilities to include manager-on-duty tasks. Architected and implemented coaching and sales process systems to drive team performance.
+    Expanded role to include "Manager on Duty" responsibilities. My key contribution was architecting a B2B pipeline process that turned a non-revenue service center (Repair) into a lead generation engine.
   highlights:
-    - text: "Designed 'account audit' process transforming service visits into top B2B pipeline."
-      skills: ["Sales Process Architecture", "Lead Generation"]
-    - text: "Implemented pre-transaction 'huddle' system for real-time coaching."
-      skills: ["Team Leadership", "Sales Coaching"]
-
-- company: "Sprint"
-  company_id: "sprint"
-  role: "Sales Representative"
-  type: "Full-Time"
-  startDate: "2017-09-01"
-  endDate: "2019-05-31"
-  location: "West Jordan, Utah"
-  summary: |
-    Quickly became a top performer by using a consultative framework to exceed customer needs.
-  highlights:
-    - text: "Achieved average composite sales goal of 125% (Top 10% in district)."
-      skills: ["Performance Management", "Goal Setting"]
-    - text: "Used 'Live, Work, Play' framework to conduct consultative needs analysis."
-      skills: ["Consultative Sales", "Full-Cycle Sales"]
+    - text: "Led the store to become the #1 generator of B2B revenue in the district by designing an 'Account Audit' workflow that transformed non-revenue service visits into high-quality sales leads."
+      skills: ["Pipeline Architecture", "Process Design"]
+    - text: "Implemented a pre-transaction 'Huddle' checkpoint system to provide real-time coaching on deal specifics before reps engaged with customers, ensuring quality control."
+      skills: ["Team Leadership", "Quality Assurance"]
 
 - company: "Dynatronics"
   company_id: "dynatronics"
@@ -168,25 +165,11 @@
   endDate: "2018-08-31"
   location: "Cottonwood Heights, Utah"
   summary: |
-    Summer internship solving critical supply chain production delays. Involved designing a new inventory system and performing root cause analysis.
+    My foundational experience in systems thinking. Tasked with solving production delays, I utilized Lean Six Sigma principles to rebuild the inventory replenishment system.
   highlights:
-    - text: "Designed physical Kanban system reducing stock-outs by 57%."
-      skills: ["Project Management", "Systems Thinking", "Lean Six Sigma"]
-    - text: "Performed 5-Why root cause analysis for international compliance."
-      skills: ["Process Improvement", "Root Cause Analysis"]
-
-- company: "Five Guys"
-  company_id: "five_guys"
-  role: "Shift Lead"
-  type: "Full-Time"
-  startDate: "2016-02-01"
-  endDate: "2018-08-31"
-  location: "West Jordan, Utah"
-  summary: |
-    Promoted to Shift Lead involving direct operational and financial management of a restaurant with over $1M in annual revenue.
-  highlights:
-    - text: "Maintained labor costs under 22% of revenue through strategic scheduling."
-      skills: ["Operations Management", "Financial Analysis"]
-    - text: "Reduced food waste/stock-outs using Excel to forecast demand."
-      tech_stack: ["Excel", "Radiant Database"]
-      skills: ["Inventory Control", "Data Analysis"]
+    - text: "Designed and deployed a physical Kanban system that reduced stock-outs by 57% and past-due orders by 70%, solving a critical supply chain bottleneck."
+      related_link: "/case-studies/kanban-optimization"
+      related_label: "READ CASE STUDY"
+      skills: ["Lean Six Sigma", "Inventory Management"]
+    - text: "Performed 5-Why Root Cause Analysis to develop CAPA plans for international medical device compliance, ensuring adherence to global regulatory standards."
+      skills: ["Root Cause Analysis", "Process Engineering"]

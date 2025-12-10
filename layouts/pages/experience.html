@@ -1,36 +1,67 @@
 {{ define "main" }}
-<div class="layout-narrow" style="max-width: 750px; margin: 0 auto; padding: 4rem 1rem;">
+<div class="layout-narrow" style="max-width: 900px; margin: 0 auto; padding: 4rem 1rem;">
 
-  <div style="margin-bottom: 4rem; border-left: 4px solid var(--color-accent); padding-left: 1.5rem;">
-    <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">Experience Summaries</h1>
-    <p style="font-family: var(--font-mono); color: var(--text-secondary); line-height: 1.6;">
-      >> A chronological account of each of my roles bridging strategy and execution.
+  <div style="margin-bottom: 5rem; border-left: 4px solid var(--color-accent); padding-left: 2rem;">
+    <h1 style="font-size: 2.5rem; margin-bottom: 0.5rem;">Professional Timeline</h1>
+    <p style="font-family: var(--font-mono); color: var(--text-secondary); line-height: 1.6; max-width: 600px;">
+      >> A chronological history of bridging the gap between Sales Strategy and Operational Execution.
     </p>
   </div>
 
   <div class="narrative-timeline">
     {{ range .Site.Data.experience }}
-    <section class="narrative-entry" style="margin-bottom: 5rem; position: relative;">
+    <section class="narrative-entry" style="margin-bottom: 6rem; position: relative;">
       
-      <div class="narrative-meta" style="display: flex; gap: 1rem; align-items: center; margin-bottom: 0.75rem;">
-        <span style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--color-accent); font-weight: bold;">
+      <div class="narrative-meta" style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem;">
+        <span style="font-family: var(--font-mono); font-size: 0.9rem; color: var(--color-accent); font-weight: bold; background: rgba(var(--color-accent-rgb), 0.1); padding: 4px 8px; border-radius: 4px;">
             {{ time.Format "Jan 2006" .startDate }} &ndash; {{ if .endDate }}{{ time.Format "Jan 2006" .endDate }}{{ else }}Present{{ end }}
         </span>
-        
         {{ if .type }}
-        <span class="badge badge-outline">
+        <span class="badge badge-outline" style="font-size: 0.8rem; letter-spacing: 0.05em;">
             {{ .type | upper }}
         </span>
         {{ end }}
       </div>
 
-      <h2 style="font-size: 1.8rem; margin: 0 0 0.25rem 0;">{{ .role }}</h2>
-      <h3 style="font-size: 1.1rem; font-family: var(--font-mono); color: var(--text-secondary); margin: 0 0 1.5rem 0; font-weight: normal;">
-        {{ .company }} <span style="opacity: 0.5;">| {{ .location }}</span>
+      <h2 style="font-size: 2rem; margin: 0 0 0.5rem 0;">{{ .role }}</h2>
+      <h3 style="font-size: 1.2rem; font-family: var(--font-mono); color: var(--text-secondary); margin: 0 0 2rem 0; font-weight: normal;">
+        <span style="color: var(--text-primary); font-weight: bold;">{{ .company }}</span> 
+        <span style="opacity: 0.5;"> | {{ .location }}</span>
       </h3>
 
-      <div class="narrative-content" style="font-size: 1.1rem; line-height: 1.8; color: var(--text-primary); opacity: 0.95;">
-        {{ .summary | markdownify }}
+      <div class="entry-grid">
+        
+        <div class="narrative-column">
+          <h4 style="font-family: var(--font-mono); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-secondary); margin-bottom: 1rem;">Summary</h4>
+          <div class="narrative-content" style="font-size: 1.05rem; line-height: 1.8; color: var(--text-primary); opacity: 0.9;">
+            {{ .summary | markdownify }}
+          </div>
+        </div>
+
+        <div class="impact-column">
+           <h4 style="font-family: var(--font-mono); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-secondary); margin-bottom: 1rem;">Key Systems & Outcomes</h4>
+           <ul style="list-style: none; padding: 0;">
+             {{ range .highlights }}
+             <li style="margin-bottom: 1rem; padding-bottom: 1rem; border-bottom: 1px dashed var(--border-color);">
+               <div style="font-size: 0.95rem; margin-bottom: 0.5rem;">{{ .text }}</div>
+               
+               <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                 {{ if .related_link }}
+                 <a href="{{ .related_link }}" class="tag-evidence">
+                    <span class="material-symbols-outlined" style="font-size: 12px; margin-right: 4px;">arrow_outward</span>
+                    {{ .related_label | default "EVIDENCE" }}
+                 </a>
+                 {{ end }}
+                 
+                 {{ range .tech_stack }}
+                  <span class="tag-tech">{{ . }}</span>
+                 {{ end }}
+               </div>
+             </li>
+             {{ end }}
+           </ul>
+        </div>
+
       </div>
 
       <div class="timeline-connector"></div>
@@ -39,29 +70,53 @@
     {{ end }}
   </div>
 
-  <div class="card card-interactive" style="text-align: center; margin-top: 2rem;">
-    <h3 style="margin-top: 0;">Need the technical details?</h3>
-    <p>View the interactive resume with artifacts, KPIs, and specific tech stacks.</p>
-    <a href="/pages/resume" class="btn">View Interactive Resume -></a>
+  <div class="card card-interactive" style="text-align: center; margin-top: 4rem; padding: 3rem; background: var(--bg-secondary);">
+    <h3 style="margin-top: 0;">Want the raw data?</h3>
+    <p>Switch to the Resume view for a dense, scannable list of skills and tools.</p>
+    <a href="/pages/resume" class="btn">View Technical Resume -></a>
   </div>
 
 </div>
 
 <style>
-/* Scoped Styles for Experience Page */
-.badge-outline {
+/* CSS Grid for Split Layout */
+.entry-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 3rem;
+}
+
+.tag-evidence {
+    font-family: var(--font-mono);
     font-size: 0.7rem;
+    color: var(--color-accent);
+    border: 1px solid var(--color-accent);
     padding: 2px 8px;
-    border: 1px solid var(--border-color);
     border-radius: 4px;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.2s;
+}
+
+.tag-evidence:hover {
+    background: var(--color-accent);
+    color: var(--bg-primary);
+}
+
+.tag-tech {
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
+    background: var(--bg-secondary);
     color: var(--text-secondary);
-    letter-spacing: 0.05em;
+    padding: 2px 6px;
+    border-radius: 4px;
 }
 
 .timeline-connector {
     position: absolute;
-    left: -20px;
-    top: 3.5rem;
+    left: -30px;
+    top: 5rem;
     bottom: -3rem;
     width: 2px;
     background: var(--border-color);
@@ -69,6 +124,7 @@
 }
 
 @media (max-width: 768px) {
+    .entry-grid { grid-template-columns: 1fr; gap: 1.5rem; }
     .timeline-connector { display: none; }
 }
 </style>
