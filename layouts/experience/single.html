@@ -1,0 +1,28 @@
+{{ define "main" }}
+<div class="layout-wrapper">
+    
+    <div class="card card-header">
+        <div class="card-label">CASE STUDY: {{ .Params.company }}</div>
+        <h1>{{ .Title }}</h1>
+        <div style="font-family: var(--font-mono); color: var(--text-secondary); margin-bottom: 1rem;">
+            {{ .Date.Format "Jan 2006" }} | {{ .Params.location }}
+        </div>
+        <p>{{ .Summary }}</p>
+        
+        <div style="margin-top: 1.5rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            {{ range .Params.tags }}
+            <a href="/tags/{{ . | urlize }}" class="tag-tech">{{ . }}</a>
+            {{ end }}
+        </div>
+    </div>
+
+    <div class="content">
+        {{ .Content }}
+    </div>
+
+    <div style="margin-top: 3rem; text-align: center;">
+        <a href="/experience/" class="btn"><< Return to Timeline</a>
+    </div>
+
+</div>
+{{ end }}

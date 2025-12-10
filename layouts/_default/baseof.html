@@ -7,7 +7,7 @@
     <div class="layout-wrapper">
       {{ partial "header.html" . }}
 
-      <main class="site-main {{ if or .IsHome (eq .Type "pages") }}full-width{{ end }}">
+      <main class="site-main {{ if ne .Section "posts" }}full-width{{ end }}">
         {{ block "main" . }}{{ end }}
       </main>
 
