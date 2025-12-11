@@ -1,16 +1,15 @@
 +++
 title = "Retail Sales Associate"
 author = ["desktop"]
-date = 2024-07-01
-layout = "list"
-lastmod = 2025-12-10T15:25:20-07:00
+date = 2025-12-10
+lastmod = 2025-12-10T17:28:23-07:00
 draft = false
 company = "T-Mobile"
 location = "Riverton, Utah"
 type = "Part-Time"
 end_date = "Jan 2025"
 summary = "Took a purposeful interim role during a family sabbatical to support the holiday season. Operated in a high-incentive sales environment while applying operational expertise to improve personal efficiency."
-outcomes = "Engineered a custom quoting and follow-up tool using Google AppSheet to streamline quote generation, effectively treating the sales floor as a sandbox for low-code process improvement."
+outcomes = "Reduced transaction times and eliminated manual follow-up errors by engineering a custom low-code tool, maximizing efficiency in a high-volume retail environment."
 competencies = ["Google AppSheet", "Google Sheets", "Low-Code", "Workflow Automation"]
 prototype_link = "/artifacts/appsheet-prototype"
 +++

@@ -1,16 +1,15 @@
 +++
 title = "SBA PPP Loan Forgiveness Agent"
 author = ["desktop"]
-date = 2021-01-01
-layout = "list"
-lastmod = 2025-12-10T15:25:20-07:00
+date = 2025-12-10
+lastmod = 2025-12-10T17:28:23-07:00
 draft = false
 company = "Lendio"
 location = "Lehi, Utah"
 type = "Contract"
 end_date = "Nov 2021"
 summary = "Entered FinTech during the chaotic SBA PPP rollout. Succeeded by becoming a rapid expert on changing federal regulations (SOP 50 10) and translating them into clear instructions for business owners."
-outcomes = "Ranked in the top 3 of 24 agents (70-120 compliant apps/month) by managing a high-volume portfolio and making 100+ daily outbound calls to guide business owners through complex SBA regulations."
+outcomes = "Ranked Top 3 of 24 agents, processing 70-120 compliant applications monthly through high-volume regulatory consultation (100+ dials/day)."
 competencies = ["Operations Management", "High-Volume Execution", "Regulatory Analysis", "Consultative Service"]
 +++
 
@@ -31,19 +30,3 @@ competencies = ["Operations Management", "High-Volume Execution", "Regulatory An
 -   **Task:** To manage a high-volume portfolio, build trust with clients, and drive the completion of forgiveness applications.
 -   **Action:** Made 100+ daily outbound calls to business owners to build trust, provide expert guidance, and drive the collection of applications.
 -   **Result:** Consistently ranked in the top 3 out of 24 agents by successfully submitting 70-120 compliant forgiveness applications per month.
-
-
-### Financial Document Analysis and Guidance {#financial-document-analysis-and-guidance}
-
--   **Situation:** To receive forgiveness, business owners had to submit complex financial documentation.
--   **Task:** To guide clients in calculating their forgiveness amounts and collecting the required financial documentation.
--   **Action:** Guided clients through the process of calculating their precise forgiveness amounts and collecting complex financial documents (IRS Form 941s, payroll reports).
--   **Result:** Enabled clients to submit complete and compliant applications by providing expert guidance.
-
-
-### Performance-Based Transition to Full-Time {#performance-based-transition-to-full-time}
-
--   **Situation:** The role was initially a temporary contract position.
--   **Task:** To perform at a high enough level to warrant a full-time employment offer.
--   **Action:** Consistently exceeded all performance targets and ranked as one of the top agents on the team.
--   **Result:** Earned a transition from a temporary contract to a full-time employee role based on exceptional performance.

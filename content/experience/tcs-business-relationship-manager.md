@@ -1,16 +1,15 @@
 +++
 title = "Business Relationship Manager"
 author = ["desktop"]
-date = 2023-02-01
-layout = "list"
-lastmod = 2025-12-10T15:25:20-07:00
+date = 2025-12-10
+lastmod = 2025-12-10T17:28:23-07:00
 draft = false
 company = "TCS Equipment Finance"
 location = "Draper, Utah"
 type = "Full-Time"
 end_date = "May 2023"
 summary = "Recruited to build a middle-market pipeline using Sandler methodology. Quickly identified a strategic disconnect between the high-volume GTM strategy and the conservative credit policy."
-outcomes = "Conducted a strategic GTM analysis that identified a fatal misalignment between the company's high-volume 'spray-and-pray' prospecting model and its highly selective 'A-Paper' credit policy."
+outcomes = "Built a robust middle-market pipeline from scratch and diagnosed a critical strategic flaw in the GTM architecture (Volume vs. Credit Policy misalignment)."
 competencies = ["GTM Strategy", "ZoomInfo", "D&B Hoovers", "Market Research", "Channel Sales"]
 +++
 
@@ -31,14 +30,6 @@ competencies = ["GTM Strategy", "ZoomInfo", "D&B Hoovers", "Market Research", "C
 -   **Task:** To apply the Sandler methodology to conduct needs analysis and collect full financial packages for underwriting review.
 -   **Action:** Applied the Sandler methodology to engage executives and conducted thorough needs analysis. Packaged loan documents and conducted DSCR and cash flow analysis.
 -   **Result:** Effectively managed a consultative sales process with sophisticated executive buyers, from initial engagement to underwriting submission.
-
-
-### Channel Partner Development {#channel-partner-development}
-
--   **Situation:** To supplement direct prospecting efforts, the company utilized a channel partner strategy.
--   **Task:** To onboard new ISOs and train their brokers to generate additional funding opportunities.
--   **Action:** Successfully onboarded two new Independent Sales Organizations (ISOs) and trained their brokers on our specific credit box and product-market fit.
--   **Result:** Generated additional funding opportunities by successfully developing and enabling new channel partners.
 
 
 ### Strategic Business Model Analysis {#strategic-business-model-analysis}

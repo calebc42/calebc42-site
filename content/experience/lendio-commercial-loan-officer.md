@@ -1,16 +1,15 @@
 +++
 title = "Commercial Loan Officer"
 author = ["desktop"]
-date = 2023-10-01
-layout = "list"
-lastmod = 2025-12-10T15:25:20-07:00
+date = 2025-12-10
+lastmod = 2025-12-10T17:28:23-07:00
 draft = false
 company = "Lendio"
 location = "Lehi, Utah"
 type = "Full-Time"
 end_date = "Mar 2024"
 summary = "Served as a full-cycle financial consultant, managing the entire sales funnel from initial contact to close. Expertly negotiated terms with a network of over 75 lenders to align clients with optimal financing solutions."
-outcomes = "Drove ~$67k in average monthly revenue by independently structuring complex deals across 75+ lenders, mirroring underwriting risk mitigation strategies to maximize approval rates."
+outcomes = "Generated ~$67k in average monthly revenue with a 35% close rate by independently structuring complex deal packages across a network of 75+ lenders."
 competencies = ["Salesforce", "Excel", "Financial Analysis", "Deal Structuring", "Negotiation"]
 +++
 
@@ -47,43 +46,3 @@ competencies = ["Salesforce", "Excel", "Financial Analysis", "Deal Structuring",
 -   **Task:** To collaborate with underwriters and external parties to resolve Etran hold codes and ensure compliance with SBA SOP 50 10.
 -   **Action:** Collaborated with internal underwriters to resolve Etran hold codes and worked with external parties to gather necessary documentation.
 -   **Result:** Successfully resolved an average of 3-4 Etran hold codes per month, saving deals that would have otherwise been lost.
-
-
-### Referral Network Development {#referral-network-development}
-
--   **Situation:** To supplement the pipeline of company-provided leads, it was beneficial to generate personal leads through a professional network.
--   **Task:** To develop a referral network to generate a consistent pipeline of new leads.
--   **Action:** Actively networked and developed a referral network of vendors, CPAs, and business coaches.
--   **Result:** Generated a consistent pipeline of new leads in addition to the company-provided inbound leads.
-
-
-### Financial Analysis {#financial-analysis}
-
--   **Situation:** Clients needed to understand the financial implications and potential return on investment for various complex financing options.
--   **Task:** To conduct detailed ROI and financial analyses to help clients make informed decisions.
--   **Action:** Conducted detailed ROI analyses comparing various strategic financing options and performed in-depth financial analysis (Cash Flow, DSCR) on tax returns.
--   **Result:** Empowered clients to make informed financial decisions and identified the optimal funding solutions for their specific needs.
-
-
-### SBA Loan Packaging and Closing {#sba-loan-packaging-and-closing}
-
--   **Situation:** Closing SBA loans requires specialized knowledge of SBA SOPs and the ability to prepare bank-compliant loan packages.
--   **Task:** To prepare and package bank-compliant loan documents to successfully close SBA 7(a) and Express loans.
--   **Action:** Prepared and packaged all necessary documents for SBA 7(a) and Express loans, ensuring compliance with bank and SBA requirements.
--   **Result:** Closed an average of 7 SBA 7(a) and Express loans per month, demonstrating expertise in SBA loan packaging and closing.
-
-
-### High-Volume Loan Origination {#high-volume-loan-origination}
-
--   **Situation:** The primary goal of the role was to generate significant loan volume for the company.
--   **Task:** To apply a consultative sales approach to a pipeline of inbound leads to originate a high volume of loans.
--   **Action:** Applied a highly consultative sales approach to diagnose business needs and match clients with the best financing solutions from a network of over 75 lenders.
--   **Result:** Successfully originated over $5MM in total loan volume during my tenure in the role.
-
-
-### Full-Cycle Sales Management {#full-cycle-sales-management}
-
--   **Situation:** The role required managing a high-volume, full-cycle sales process for inbound leads.
--   **Task:** To manage the process from initial contact through negotiation and closing.
--   **Action:** Managed a pipeline following an SDR hand-off, initiating the process with an in-depth "Merchant Interview" and executing a multi-step negotiation process.
--   **Result:** Achieved an average 35% offer-to-close rate, generating $67K in average monthly revenue.
