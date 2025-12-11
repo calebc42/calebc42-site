@@ -10,12 +10,27 @@
   </div>
 
   <div class="narrative-timeline">
-    {{ range .Pages.ByDate.Reverse }}
+    {{ range (.Pages.ByParam "start_date").Reverse }}
     <section class="narrative-entry" style="margin-bottom: 6rem; position: relative;">
       
       <div class="narrative-meta" style="display: flex; gap: 1rem; align-items: center; margin-bottom: 1rem;">
         <span style="font-family: var(--font-mono); font-size: 0.9rem; color: var(--color-accent); font-weight: bold; background: rgba(var(--color-accent-rgb), 0.1); padding: 4px 8px; border-radius: 4px;">
-            {{ .Date.Format "Jan 2006" }} &ndash; {{ if .Params.end_date }}{{ .Params.end_date }}{{ else }}Present{{ end }}
+            
+            {{/* DATE LOGIC START */}}
+            {{ $start := .Params.start_date }} 
+            
+            {{/* Fallback if start_date is missing (prevents errors) */}}
+            {{ if not $start }}{{ $start = .Date }}{{ end }}
+            
+            {{ dateFormat "Jan 2006" $start }} &ndash; 
+            
+            {{ if .Params.end_date }}
+                {{ dateFormat "Jan 2006" .Params.end_date }}
+            {{ else }}
+                Present
+            {{ end }}
+            {{/* DATE LOGIC END */}}
+
         </span>
         <span class="badge badge-outline" style="font-size: 0.8rem; letter-spacing: 0.05em; border: 1px solid #444; padding: 2px 8px; border-radius: 4px; color: #888;">
             {{ .Params.type | upper }}
@@ -33,7 +48,7 @@
         <div class="narrative-column" style="display: flex; flex-direction: column; justify-content: space-between;">
           <div>
             <h4 style="font-family: var(--font-mono); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-secondary); margin-bottom: 1rem;">
-                // SUMMARY //
+                // SUMMARY
             </h4>
             <div class="narrative-content" style="font-size: 1.05rem; line-height: 1.8; color: var(--text-primary); opacity: 0.9;">
               {{ .Summary }}
@@ -42,14 +57,14 @@
           
           <div style="margin-top: 2rem;">
              <a href="{{ .Permalink }}" class="btn" style="font-size: 0.8rem; padding: 0.5rem 1.5rem;">
-                 READ MORE... ->
+                 FULL ANALYSIS ->
              </a>
           </div>
         </div>
 
         <div class="impact-column">
            <h4 style="font-family: var(--font-mono); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-secondary); margin-bottom: 1rem;">
-               // KEY RESULTS //
+               // KEY RESULTS
            </h4>
            
            <div style="margin-bottom: 1.5rem; font-size: 0.95rem; line-height: 1.6; color: var(--text-primary); border-left: 2px solid var(--color-accent); padding-left: 1rem;">
@@ -81,7 +96,7 @@
   <div class="card card-interactive" style="text-align: center; margin-top: 4rem; padding: 3rem; background: var(--bg-secondary);">
     <h3 style="margin-top: 0;">Want the raw data?</h3>
     <p>Switch to the Resume view for a dense, scannable list of skills and tools.</p>
-    <a href="/pages/resume" class="btn">View Technical Resume -></a>
+    <a href="/pages/resume" class="btn">View Interactive Resume -></a>
   </div>
 
 </div>

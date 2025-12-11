@@ -2,12 +2,13 @@
 title = "Integration Specialist"
 author = ["desktop"]
 date = 2025-12-10
-lastmod = 2025-12-10T17:28:23-07:00
+lastmod = 2025-12-10T17:45:48-07:00
 draft = false
 company = "T-Mobile / Sprint"
 location = "Salt Lake City, Utah"
 type = "Contract"
-end_date = "Feb 2021"
+start_date = 2020-08-01
+end_date = 2021-02-28
 summary = "Selected to lead the operational integration of the Sprint/T-Mobile merger for a third-party partner. Focused on systems training, error documentation, and change management."
 outcomes = "Facilitated the technical migration of 5 retail locations and reduced national system errors by contributing key workarounds to a central knowledge base."
 competencies = ["Change Management", "Technical Training", "CRM Admin", "Process Documentation", "Stakeholder Management"]
@@ -17,7 +18,7 @@ prototype_link = "/artifacts/integration-SOP"
 ## Key Accomplishments {#key-accomplishments}
 
 
-### Subject-Matter Expert for Merger Integration {#subject-matter-expert-for-merger-integration}
+#### Subject-Matter Expert for Merger Integration {#subject-matter-expert-for-merger-integration}
 
 -   **Situation:** During the complex Sprint/T-Mobile merger, a third-party retail partner with five locations required expert guidance to navigate the transition.
 -   **Task:** To serve as the corporate subject-matter expert for the Utah District of this retail partner, facilitating their integration.
@@ -25,7 +26,7 @@ prototype_link = "/artifacts/integration-SOP"
 -   **Result:** Nominated by the Sprint District Manager for the role based on a track record of high performance.
 
 
-### National-Level System Troubleshooting {#national-level-system-troubleshooting}
+#### National-Level System Troubleshooting {#national-level-system-troubleshooting}
 
 -   **Situation:** The merger created numerous unforeseen system errors and process conflicts that required a coordinated national response.
 -   **Task:** To identify system errors, and engineer and document workarounds and best practices.

@@ -2,12 +2,13 @@
 title = "Commercial Loan Officer"
 author = ["desktop"]
 date = 2025-12-10
-lastmod = 2025-12-10T17:28:23-07:00
+lastmod = 2025-12-10T17:45:47-07:00
 draft = false
 company = "Lendio"
 location = "Lehi, Utah"
 type = "Full-Time"
-end_date = "Mar 2024"
+start_date = 2023-10-01
+end_date = 2024-03-31
 summary = "Served as a full-cycle financial consultant, managing the entire sales funnel from initial contact to close. Expertly negotiated terms with a network of over 75 lenders to align clients with optimal financing solutions."
 outcomes = "Generated ~$67k in average monthly revenue with a 35% close rate by independently structuring complex deal packages across a network of 75+ lenders."
 competencies = ["Salesforce", "Excel", "Financial Analysis", "Deal Structuring", "Negotiation"]
@@ -16,7 +17,7 @@ competencies = ["Salesforce", "Excel", "Financial Analysis", "Deal Structuring",
 ## Key Accomplishments {#key-accomplishments}
 
 
-### Revenue Generation {#revenue-generation}
+#### Revenue Generation {#revenue-generation}
 
 -   **Situation:** The company's business model depended on converting a high volume of inbound leads to meet aggressive monthly revenue targets.
 -   **Task:** To manage the entire sales funnel from initial contact to close, consistently meeting or exceeding monthly revenue and unit goals.
@@ -24,7 +25,7 @@ competencies = ["Salesforce", "Excel", "Financial Analysis", "Deal Structuring",
 -   **Result:** Consistently generated approximately $67,000 in revenue across an average of 25 units each month, maintaining a strong 35% offer-to-close rate.
 
 
-### Autonomous Performance {#autonomous-performance}
+#### Autonomous Performance {#autonomous-performance}
 
 -   **Situation:** The role required a high degree of expertise in complex financial analysis and creative deal structuring.
 -   **Task:** To perform all duties of the prior Traditional Lending SME role with full autonomy.
@@ -32,7 +33,7 @@ competencies = ["Salesforce", "Excel", "Financial Analysis", "Deal Structuring",
 -   **Result:** Demonstrated the ability to operate with full autonomy at a subject-matter expert level within a full-cycle sales role.
 
 
-### Strategic Funding Roadmaps {#strategic-funding-roadmaps}
+#### Strategic Funding Roadmaps {#strategic-funding-roadmaps}
 
 -   **Situation:** Some clients did not qualify for premier loan products immediately but could with strategic financial planning.
 -   **Task:** To create long-term funding roadmaps for clients to prepare them for future funding eligibility.
@@ -40,7 +41,7 @@ competencies = ["Salesforce", "Excel", "Financial Analysis", "Deal Structuring",
 -   **Result:** Increased customer LTV and renewal rates by structuring creative financing solutions that prepared clients for future eligibility for premier loan products.
 
 
-### SBA Compliance {#sba-compliance}
+#### SBA Compliance {#sba-compliance}
 
 -   **Situation:** SBA loan applications are often put on hold in the Etran system due to compliance issues like tax liens or CAIVRS errors.
 -   **Task:** To collaborate with underwriters and external parties to resolve Etran hold codes and ensure compliance with SBA SOP 50 10.

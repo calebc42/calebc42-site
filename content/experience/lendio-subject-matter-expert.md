@@ -2,12 +2,13 @@
 title = "Traditional Lending, Subject-Matter-Expert (SME)"
 author = ["desktop"]
 date = 2025-12-10
-lastmod = 2025-12-10T17:28:23-07:00
+lastmod = 2025-12-10T17:45:48-07:00
 draft = false
 company = "Lendio"
 location = "Lehi, Utah"
 type = "Full-Time"
-end_date = "Feb 2023"
+start_date = 2021-11-01
+end_date = 2023-02-28
 summary = "Designed a data-driven enablement system to solve high-value borrower leakage. Increased conversion rates by 144% by bridging the gap between sales velocity and underwriting risk."
 outcomes = "Increased traditional product conversion rates by 144% (+$700k ARR) by architecting a data-driven sales enablement system and bridging the gap between sales and underwriting."
 competencies = ["Sales Enablement", "Data Analysis", "Process Improvement", "Stakeholder Management", "Financial Analysis", "Conversation Intelligence"]
@@ -17,7 +18,7 @@ prototype_link = "/case-studies/sales-enablement-impact"
 ## Key Accomplishments {#key-accomplishments}
 
 
-### Architecting a Data-Driven Sales Enablement Program {#architecting-a-data-driven-sales-enablement-program}
+#### Architecting a Data-Driven Sales Enablement Program {#architecting-a-data-driven-sales-enablement-program}
 
 -   **Situation:** Lendio was losing high-value borrowers because the sales team was not equipped to sell complex traditional loans, and no system existed to identify or enable these opportunities.
 -   **Task:** To design and implement a comprehensive system to enable a 15-person sales team to successfully sell traditional loan products.
@@ -25,7 +26,7 @@ prototype_link = "/case-studies/sales-enablement-impact"
 -   **Result:** The system increased traditional financing conversion rates by 144%, directly driving an additional $700K in annual revenue.
 
 
-### Proactive Lead Identification and Pipeline Analysis {#proactive-lead-identification-and-pipeline-analysis}
+#### Proactive Lead Identification and Pipeline Analysis {#proactive-lead-identification-and-pipeline-analysis}
 
 -   **Situation:** High-potential leads for traditional loans were getting lost in the main sales pipeline.
 -   **Task:** To develop a proactive process for identifying and segmenting the best opportunities for traditional loans from the main pipeline.
@@ -33,7 +34,7 @@ prototype_link = "/case-studies/sales-enablement-impact"
 -   **Result:** Created a proactive, data-driven lead identification process that ensured high-value borrowers were correctly routed for specialized engagement.
 
 
-### Process Automation with Slack {#process-automation-with-slack}
+#### Process Automation with Slack {#process-automation-with-slack}
 
 -   **Situation:** The process for submitting deals for cash flow analysis was manual, slow, and difficult to track.
 -   **Task:** To streamline and automate the cash flow analysis submission process.
@@ -41,7 +42,7 @@ prototype_link = "/case-studies/sales-enablement-impact"
 -   **Result:** Streamlined a key workflow, reducing manual effort, improving data tracking, and accelerating the analysis process.
 
 
-### ROI Modeling for Sales Enablement {#roi-modeling-for-sales-enablement}
+#### ROI Modeling for Sales Enablement {#roi-modeling-for-sales-enablement}
 
 -   **Situation:** Customers often had difficulty seeing the long-term financial benefit of equipment loans.
 -   **Task:** To create a tool that would provide a compelling, quantifiable ROI for clients.

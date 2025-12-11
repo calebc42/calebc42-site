@@ -2,12 +2,13 @@
 title = "Sr. Sales Representative"
 author = ["desktop"]
 date = 2025-12-10
-lastmod = 2025-12-10T17:28:23-07:00
+lastmod = 2025-12-10T17:45:48-07:00
 draft = false
 company = "Sprint"
 location = "South Jordan, Utah"
 type = "Full-Time"
-end_date = "Aug 2020"
+start_date = 2019-05-01
+end_date = 2020-08-31
 summary = "Expanded role to include Manager on Duty responsibilities. My key contribution was architecting a B2B pipeline process that turned a non-revenue service center (Repair) into a lead generation engine."
 outcomes = "Became the #1 district generator of B2B revenue by designing an 'Account Audit' workflow that converted non-revenue service visits into sales leads."
 competencies = ["Pipeline Architecture", "Process Design", "Team Leadership", "Quality Assurance"]
@@ -16,7 +17,7 @@ competencies = ["Pipeline Architecture", "Process Design", "Team Leadership", "Q
 ## Key Accomplishments {#key-accomplishments}
 
 
-### Store Operations Management {#store-operations-management}
+#### Store Operations Management {#store-operations-management}
 
 -   **Situation:** In the absence of senior management, a designated leader was needed to ensure the store continued to operate smoothly and securely.
 -   **Task:** To manage all daily store operations, including customer queue management, opening/closing procedures, cash handling, and inventory.
@@ -24,7 +25,7 @@ competencies = ["Pipeline Architecture", "Process Design", "Team Leadership", "Q
 -   **Result:** Entrusted with keyholder responsibilities, ensuring the store was managed efficiently and securely during all shifts.
 
 
-### Architecting a B2B Revenue Stream from a Service Function {#architecting-a-b2b-revenue-stream-from-a-service-function}
+#### Architecting a B2B Revenue Stream from a Service Function {#architecting-a-b2b-revenue-stream-from-a-service-function}
 
 -   **Situation:** The store's status as a district repair hub created a high volume of non-revenue service traffic.
 -   **Task:** To create a process to convert service interactions into a consistent sales pipeline.

@@ -38,9 +38,9 @@ Below is a timeline of my career. Click on any role to view the full "STAR" anal
 :EXPORT_HUGO_SECTION: experience
 :EXPORT_FILE_NAME: t-mobile-retail-associate
 :EXPORT_DATE: 2025-12-10
-:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :company "T-Mobile" :location "Riverton, Utah" :type "Part-Time" :end_date "Jan 2025" :summary "Took a purposeful interim role during a family sabbatical to support the holiday season. Operated in a high-incentive sales environment while applying operational expertise to improve personal efficiency." :outcomes "Reduced transaction times and eliminated manual follow-up errors by engineering a custom low-code tool, maximizing efficiency in a high-volume retail environment." :competencies '("Google AppSheet" "Google Sheets" "Low-Code" "Workflow Automation") :prototype_link "/artifacts/appsheet-prototype"
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :company "T-Mobile" :location "Riverton, Utah" :type "Part-Time" :start_date "2024-07-01" :end_date "2025-01-31" :summary "Took a purposeful interim role during a family sabbatical to support the holiday season. Operated in a high-incentive sales environment while applying operational expertise to improve personal efficiency." :outcomes "Reduced transaction times and eliminated manual follow-up errors by engineering a custom low-code tool, maximizing efficiency in a high-volume retail environment." :competencies '("Google AppSheet" "Google Sheets" "Low-Code" "Workflow Automation") :prototype_link "/artifacts/appsheet-prototype"
 :END:
-*** Key Accomplishments
+** Key Accomplishments
 **** Workflow Automation (Low-Code Development)
 - *Situation:* The standard process for generating quotes and following up with customers was manual and disorganized.
 - *Task:* To streamline the quoting and follow-up process to improve personal efficiency.
@@ -57,9 +57,9 @@ Below is a timeline of my career. Click on any role to view the full "STAR" anal
 :EXPORT_HUGO_SECTION: experience
 :EXPORT_FILE_NAME: lendio-commercial-loan-officer
 :EXPORT_DATE: 2025-12-10
-:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :company "Lendio" :location "Lehi, Utah" :type "Full-Time" :end_date "Mar 2024" :summary "Served as a full-cycle financial consultant, managing the entire sales funnel from initial contact to close. Expertly negotiated terms with a network of over 75 lenders to align clients with optimal financing solutions." :outcomes "Generated ~$67k in average monthly revenue with a 35% close rate by independently structuring complex deal packages across a network of 75+ lenders." :competencies '("Salesforce" "Excel" "Financial Analysis" "Deal Structuring" "Negotiation")
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :company "Lendio" :location "Lehi, Utah" :type "Full-Time" :start_date "2023-10-01" :end_date "2024-03-31" :summary "Served as a full-cycle financial consultant, managing the entire sales funnel from initial contact to close. Expertly negotiated terms with a network of over 75 lenders to align clients with optimal financing solutions." :outcomes "Generated ~$67k in average monthly revenue with a 35% close rate by independently structuring complex deal packages across a network of 75+ lenders." :competencies '("Salesforce" "Excel" "Financial Analysis" "Deal Structuring" "Negotiation")
 :END:
-*** Key Accomplishments
+** Key Accomplishments
 **** Revenue Generation
 - *Situation:* The company's business model depended on converting a high volume of inbound leads to meet aggressive monthly revenue targets.
 - *Task:* To manage the entire sales funnel from initial contact to close, consistently meeting or exceeding monthly revenue and unit goals.
@@ -86,9 +86,9 @@ Below is a timeline of my career. Click on any role to view the full "STAR" anal
 :EXPORT_HUGO_SECTION: experience
 :EXPORT_FILE_NAME: lendio-gtm-sales-manager
 :EXPORT_DATE: 2025-12-10
-:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :company "Lendio" :location "Lehi, Utah" :type "Full-Time" :end_date "Oct 2023" :summary "Recruited as a founding operator to architect a new sales division. Built the end-to-end sales process, implemented the tech stack, and scaled revenue from $100k to $350k/mo." :outcomes "Scaled monthly revenue to $350k ($4.05MM run rate) and reduced cost-per-rep by 50% by launching the company's first successful offshore sales unit." :competencies '("GTM Strategy" "Sales Process Architecture" "Systems Thinking" "Performance Management" "Sales Enablement" "Data Visualization" "CRM Admin") :prototype_link "/case-studies/building-gtm-dashboard"
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :company "Lendio" :location "Lehi, Utah" :type "Full-Time" :start_date "2023-05-01" :end_date "2023-10-31" :summary "Recruited as a founding operator to architect a new sales division. Built the end-to-end sales process, implemented the tech stack, and scaled revenue from $100k to $350k/mo." :outcomes "Scaled monthly revenue to $350k ($4.05MM run rate) and reduced cost-per-rep by 50% by launching the company's first successful offshore sales unit." :competencies '("GTM Strategy" "Sales Process Architecture" "Systems Thinking" "Performance Management" "Sales Enablement" "Data Visualization" "CRM Admin") :prototype_link "/case-studies/building-gtm-dashboard"
 :END:
-*** Key Accomplishments
+** Key Accomplishments
 **** Rapid Onboarding and Training Program Development
 - *Situation:* The team was scaling rapidly and needed a way to onboard new reps and make them productive as quickly as possible.
 - *Task:* To create a fast and effective onboarding program for new hires.
@@ -120,9 +120,9 @@ Below is a timeline of my career. Click on any role to view the full "STAR" anal
 :EXPORT_HUGO_SECTION: experience
 :EXPORT_FILE_NAME: tcs-business-relationship-manager
 :EXPORT_DATE: 2025-12-10
-:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :company "TCS Equipment Finance" :location "Draper, Utah" :type "Full-Time" :end_date "May 2023" :summary "Recruited to build a middle-market pipeline using Sandler methodology. Quickly identified a strategic disconnect between the high-volume GTM strategy and the conservative credit policy." :outcomes "Built a robust middle-market pipeline from scratch and diagnosed a critical strategic flaw in the GTM architecture (Volume vs. Credit Policy misalignment)." :competencies '("GTM Strategy" "ZoomInfo" "D&B Hoovers" "Market Research" "Channel Sales")
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :company "TCS Equipment Finance" :location "Draper, Utah" :type "Full-Time" :start_date "2023-02-01" :end_date "2023-05-31" :summary "Recruited to build a middle-market pipeline using Sandler methodology. Quickly identified a strategic disconnect between the high-volume GTM strategy and the conservative credit policy." :outcomes "Built a robust middle-market pipeline from scratch and diagnosed a critical strategic flaw in the GTM architecture (Volume vs. Credit Policy misalignment)." :competencies '("GTM Strategy" "ZoomInfo" "D&B Hoovers" "Market Research" "Channel Sales")
 :END:
-*** Key Accomplishments
+** Key Accomplishments
 **** High-Volume Prospecting
 - *Situation:* The role required building a new pipeline of middle-market opportunities from scratch.
 - *Task:* To execute a high-volume prospecting strategy to identify and engage qualified leads at companies with $20MM-$100MM in annual revenue.
@@ -144,9 +144,9 @@ Below is a timeline of my career. Click on any role to view the full "STAR" anal
 :EXPORT_HUGO_SECTION: experience
 :EXPORT_FILE_NAME: lendio-subject-matter-expert
 :EXPORT_DATE: 2025-12-10
-:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :company "Lendio" :location "Lehi, Utah" :type "Full-Time" :end_date "Feb 2023" :summary "Designed a data-driven enablement system to solve high-value borrower leakage. Increased conversion rates by 144% by bridging the gap between sales velocity and underwriting risk." :outcomes "Increased traditional product conversion rates by 144% (+$700k ARR) by architecting a data-driven sales enablement system and bridging the gap between sales and underwriting." :competencies '("Sales Enablement" "Data Analysis" "Process Improvement" "Stakeholder Management" "Financial Analysis" "Conversation Intelligence") :prototype_link "/case-studies/sales-enablement-impact"
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :company "Lendio" :location "Lehi, Utah" :type "Full-Time" :start_date "2021-11-01" :end_date "2023-02-28" :summary "Designed a data-driven enablement system to solve high-value borrower leakage. Increased conversion rates by 144% by bridging the gap between sales velocity and underwriting risk." :outcomes "Increased traditional product conversion rates by 144% (+$700k ARR) by architecting a data-driven sales enablement system and bridging the gap between sales and underwriting." :competencies '("Sales Enablement" "Data Analysis" "Process Improvement" "Stakeholder Management" "Financial Analysis" "Conversation Intelligence") :prototype_link "/case-studies/sales-enablement-impact"
 :END:
-*** Key Accomplishments
+** Key Accomplishments
 **** Architecting a Data-Driven Sales Enablement Program
 - *Situation:* Lendio was losing high-value borrowers because the sales team was not equipped to sell complex traditional loans, and no system existed to identify or enable these opportunities.
 - *Task:* To design and implement a comprehensive system to enable a 15-person sales team to successfully sell traditional loan products.
@@ -173,9 +173,9 @@ Below is a timeline of my career. Click on any role to view the full "STAR" anal
 :EXPORT_HUGO_SECTION: experience
 :EXPORT_FILE_NAME: lendio-ppp-agent
 :EXPORT_DATE: 2025-12-10
-:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :company "Lendio" :location "Lehi, Utah" :type "Contract" :end_date "Nov 2021" :summary "Entered FinTech during the chaotic SBA PPP rollout. Succeeded by becoming a rapid expert on changing federal regulations (SOP 50 10) and translating them into clear instructions for business owners." :outcomes "Ranked Top 3 of 24 agents, processing 70-120 compliant applications monthly through high-volume regulatory consultation (100+ dials/day)." :competencies '("Operations Management" "High-Volume Execution" "Regulatory Analysis" "Consultative Service")
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :company "Lendio" :location "Lehi, Utah" :type "Contract" :start_date "2021-01-01" :end_date "2021-11-30" :summary "Entered FinTech during the chaotic SBA PPP rollout. Succeeded by becoming a rapid expert on changing federal regulations (SOP 50 10) and translating them into clear instructions for business owners." :outcomes "Ranked Top 3 of 24 agents, processing 70-120 compliant applications monthly through high-volume regulatory consultation (100+ dials/day)." :competencies '("Operations Management" "High-Volume Execution" "Regulatory Analysis" "Consultative Service")
 :END:
-*** Key Accomplishments
+** Key Accomplishments
 **** Subject-Matter Expertise in a Complex Regulatory Environment
 - *Situation:* During the SBA PPP Loan Forgiveness phase, business owners were faced with widespread confusion and constantly evolving government guidelines.
 - *Task:* To become a subject-matter expert on the shifting regulations and advise clients on how to maximize their loan forgiveness amount.
@@ -192,9 +192,9 @@ Below is a timeline of my career. Click on any role to view the full "STAR" anal
 :EXPORT_HUGO_SECTION: experience
 :EXPORT_FILE_NAME: tmobile-integration-specialist
 :EXPORT_DATE: 2025-12-10
-:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :company "T-Mobile / Sprint" :location "Salt Lake City, Utah" :type "Contract" :end_date "Feb 2021" :summary "Selected to lead the operational integration of the Sprint/T-Mobile merger for a third-party partner. Focused on systems training, error documentation, and change management." :outcomes "Facilitated the technical migration of 5 retail locations and reduced national system errors by contributing key workarounds to a central knowledge base." :competencies '("Change Management" "Technical Training" "CRM Admin" "Process Documentation" "Stakeholder Management") :prototype_link "/artifacts/integration-SOP"
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :company "T-Mobile / Sprint" :location "Salt Lake City, Utah" :type "Contract" :start_date "2020-08-01" :end_date "2021-02-28" :summary "Selected to lead the operational integration of the Sprint/T-Mobile merger for a third-party partner. Focused on systems training, error documentation, and change management." :outcomes "Facilitated the technical migration of 5 retail locations and reduced national system errors by contributing key workarounds to a central knowledge base." :competencies '("Change Management" "Technical Training" "CRM Admin" "Process Documentation" "Stakeholder Management") :prototype_link "/artifacts/integration-SOP"
 :END:
-*** Key Accomplishments
+** Key Accomplishments
 **** Subject-Matter Expert for Merger Integration
 - *Situation:* During the complex Sprint/T-Mobile merger, a third-party retail partner with five locations required expert guidance to navigate the transition.
 - *Task:* To serve as the corporate subject-matter expert for the Utah District of this retail partner, facilitating their integration.
@@ -211,9 +211,9 @@ Below is a timeline of my career. Click on any role to view the full "STAR" anal
 :EXPORT_HUGO_SECTION: experience
 :EXPORT_FILE_NAME: sprint-sr-sales-rep
 :EXPORT_DATE: 2025-12-10
-:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :company "Sprint" :location "South Jordan, Utah" :type "Full-Time" :end_date "Aug 2020" :summary "Expanded role to include Manager on Duty responsibilities. My key contribution was architecting a B2B pipeline process that turned a non-revenue service center (Repair) into a lead generation engine." :outcomes "Became the #1 district generator of B2B revenue by designing an 'Account Audit' workflow that converted non-revenue service visits into sales leads." :competencies '("Pipeline Architecture" "Process Design" "Team Leadership" "Quality Assurance")
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :company "Sprint" :location "South Jordan, Utah" :type "Full-Time" :start_date "2019-05-01" :end_date "2020-08-31" :summary "Expanded role to include Manager on Duty responsibilities. My key contribution was architecting a B2B pipeline process that turned a non-revenue service center (Repair) into a lead generation engine." :outcomes "Became the #1 district generator of B2B revenue by designing an 'Account Audit' workflow that converted non-revenue service visits into sales leads." :competencies '("Pipeline Architecture" "Process Design" "Team Leadership" "Quality Assurance")
 :END:
-*** Key Accomplishments
+** Key Accomplishments
 **** Store Operations Management
 - *Situation:* In the absence of senior management, a designated leader was needed to ensure the store continued to operate smoothly and securely.
 - *Task:* To manage all daily store operations, including customer queue management, opening/closing procedures, cash handling, and inventory.
@@ -230,9 +230,9 @@ Below is a timeline of my career. Click on any role to view the full "STAR" anal
 :EXPORT_HUGO_SECTION: experience
 :EXPORT_FILE_NAME: sprint-sales-rep
 :EXPORT_DATE: 2025-12-10
-:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :company "Sprint" :location "Salt Lake City, Utah" :type "Full-Time" :end_date "May 2019" :summary "Started career in sales, using a consultative framework to exceed customer needs. Responsibilities included maintaining deep product knowledge and coordinating in-store events to drive traffic." :outcomes "Consistently achieved 125% of sales quota and ranked in the top 10% of the district through consultative selling and proactive event coordination." :competencies '("Consultative Selling" "Customer Service" "Goal Setting" "Events Management")
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :company "Sprint" :location "Salt Lake City, Utah" :type "Full-Time" :start_date "2017-09-01" :end_date "2019-05-31" :summary "Started career in sales, using a consultative framework to exceed customer needs. Responsibilities included maintaining deep product knowledge and coordinating in-store events to drive traffic." :outcomes "Consistently achieved 125% of sales quota and ranked in the top 10% of the district through consultative selling and proactive event coordination." :competencies '("Consultative Selling" "Customer Service" "Goal Setting" "Events Management")
 :END:
-*** Key Accomplishments
+** Key Accomplishments
 **** Personal Goal Setting and Quota Attainment
 - *Situation:* Consistent performance in a sales role requires proactive planning.
 - *Task:* To set daily and weekly personal sales goals to consistently meet or exceed monthly sales quotas.
@@ -244,9 +244,9 @@ Below is a timeline of my career. Click on any role to view the full "STAR" anal
 :EXPORT_HUGO_SECTION: experience
 :EXPORT_FILE_NAME: dynatronics-operations-intern
 :EXPORT_DATE: 2025-12-10
-:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :company "Dynatronics" :location "Cottonwood Heights, Utah" :type "Internship" :end_date "Aug 2018" :summary "Foundational experience in systems thinking. Solved critical production delays by designing and deploying a physical Kanban inventory system." :outcomes "Reduced stock-outs by 57% and past-due orders by 70% by designing and deploying a physical Kanban system to resolve critical supply chain bottlenecks." :competencies '("Lean Six Sigma" "Project Management" "Process Improvement" "Data Analysis" "Inventory Management") :prototype_link "/case-studies/kanban-optimization"
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :company "Dynatronics" :location "Cottonwood Heights, Utah" :type "Internship" :start_date "2018-05-01" :end_date "2018-08-31" :summary "Foundational experience in systems thinking. Solved critical production delays by designing and deploying a physical Kanban inventory system." :outcomes "Reduced stock-outs by 57% and past-due orders by 70% by designing and deploying a physical Kanban system to resolve critical supply chain bottlenecks." :competencies '("Lean Six Sigma" "Project Management" "Process Improvement" "Data Analysis" "Inventory Management") :prototype_link "/case-studies/kanban-optimization"
 :END:
-*** Key Accomplishments
+** Key Accomplishments
 **** Kanban System Design and Implementation
 - *Situation:* The company was experiencing frequent stock-outs of critical components, leading to production delays.
 - *Task:* To design and implement a new inventory replenishment process, ensuring adoption by long-tenured warehouse staff.
@@ -263,9 +263,9 @@ Below is a timeline of my career. Click on any role to view the full "STAR" anal
 :EXPORT_HUGO_SECTION: experience
 :EXPORT_FILE_NAME: five-guys-shift-lead
 :EXPORT_DATE: 2025-12-10
-:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :company "Five Guys" :location "Salt Lake City, Utah" :type "Full-Time" :end_date "Aug 2018" :summary "Promoted to Shift Lead based on performance. Involved direct operational and financial management of a restaurant with over $1M in annual revenue." :outcomes "Maintained labor costs under the 22% KPI and optimized kitchen throughput for a $1M+ annual revenue location through strategic staff management." :competencies '("Team Leadership" "Kitchen Operations" "Financial Management" "Inventory Control")
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :company "Five Guys" :location "Salt Lake City, Utah" :type "Full-Time" :start_date "2016-02-01" :end_date "2018-08-31" :summary "Promoted to Shift Lead based on performance. Involved direct operational and financial management of a restaurant with over $1M in annual revenue." :outcomes "Maintained labor costs under the 22% KPI and optimized kitchen throughput for a $1M+ annual revenue location through strategic staff management." :competencies '("Team Leadership" "Kitchen Operations" "Financial Management" "Inventory Control")
 :END:
-*** Key Accomplishments
+** Key Accomplishments
 **** Labor Cost Control and KPI Achievement
 - *Situation:* Keeping labor costs within the corporate KPI was a primary responsibility.
 - *Task:* To consistently maintain labor costs under the KPI of 22% of total daily revenue.
@@ -282,9 +282,9 @@ Below is a timeline of my career. Click on any role to view the full "STAR" anal
 :EXPORT_HUGO_SECTION: experience
 :EXPORT_FILE_NAME: five-guys-crew-member
 :EXPORT_DATE: 2025-12-10
-:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :company "Five Guys" :location "Salt Lake City, Utah" :type "Part-Time" :end_date "Feb 2016" :summary "Required versatility and a commitment to quality across all kitchen and customer-facing operations. Mastered every workstation in a rotational system." :outcomes "Mastered every rotational workstation and earned a promotion to Shift Lead within 7 months by maintaining high standards of order accuracy." :competencies '("Operations" "Customer Service" "Teamwork")
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :company "Five Guys" :location "Salt Lake City, Utah" :type "Part-Time" :start_date "2015-07-01" :end_date "2016-02-01" :summary "Required versatility and a commitment to quality across all kitchen and customer-facing operations. Mastered every workstation in a rotational system." :outcomes "Mastered every rotational workstation and earned a promotion to Shift Lead within 7 months by maintaining high standards of order accuracy." :competencies '("Operations" "Customer Service" "Teamwork")
 :END:
-*** Key Accomplishments
+** Key Accomplishments
 **** Versatile Kitchen Operations
 - *Situation:* The operational model relies on a rotational system where crew members must be proficient in all areas.
 - *Task:* To operate all kitchen workstations effectively.

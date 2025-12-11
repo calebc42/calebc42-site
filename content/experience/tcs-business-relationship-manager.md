@@ -2,12 +2,13 @@
 title = "Business Relationship Manager"
 author = ["desktop"]
 date = 2025-12-10
-lastmod = 2025-12-10T17:28:23-07:00
+lastmod = 2025-12-10T17:45:48-07:00
 draft = false
 company = "TCS Equipment Finance"
 location = "Draper, Utah"
 type = "Full-Time"
-end_date = "May 2023"
+start_date = 2023-02-01
+end_date = 2023-05-31
 summary = "Recruited to build a middle-market pipeline using Sandler methodology. Quickly identified a strategic disconnect between the high-volume GTM strategy and the conservative credit policy."
 outcomes = "Built a robust middle-market pipeline from scratch and diagnosed a critical strategic flaw in the GTM architecture (Volume vs. Credit Policy misalignment)."
 competencies = ["GTM Strategy", "ZoomInfo", "D&B Hoovers", "Market Research", "Channel Sales"]
@@ -16,7 +17,7 @@ competencies = ["GTM Strategy", "ZoomInfo", "D&B Hoovers", "Market Research", "C
 ## Key Accomplishments {#key-accomplishments}
 
 
-### High-Volume Prospecting {#high-volume-prospecting}
+#### High-Volume Prospecting {#high-volume-prospecting}
 
 -   **Situation:** The role required building a new pipeline of middle-market opportunities from scratch.
 -   **Task:** To execute a high-volume prospecting strategy to identify and engage qualified leads at companies with $20MM-$100MM in annual revenue.
@@ -24,7 +25,7 @@ competencies = ["GTM Strategy", "ZoomInfo", "D&B Hoovers", "Market Research", "C
 -   **Result:** Successfully built a robust pipeline of middle-market opportunities and demonstrated proficiency in high-volume cold calling.
 
 
-### Consultative Selling and Financial Analysis {#consultative-selling-and-financial-analysis}
+#### Consultative Selling and Financial Analysis {#consultative-selling-and-financial-analysis}
 
 -   **Situation:** Engaging C-level executives and securing financial packages required a sophisticated, consultative sales approach.
 -   **Task:** To apply the Sandler methodology to conduct needs analysis and collect full financial packages for underwriting review.
@@ -32,7 +33,7 @@ competencies = ["GTM Strategy", "ZoomInfo", "D&B Hoovers", "Market Research", "C
 -   **Result:** Effectively managed a consultative sales process with sophisticated executive buyers, from initial engagement to underwriting submission.
 
 
-### Strategic Business Model Analysis {#strategic-business-model-analysis}
+#### Strategic Business Model Analysis {#strategic-business-model-analysis}
 
 -   **Situation:** Despite successfully building a pipeline, deals were not progressing through the credit committee.
 -   **Task:** To understand the root cause of the bottleneck between sales and credit approval.
