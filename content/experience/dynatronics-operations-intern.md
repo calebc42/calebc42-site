@@ -2,7 +2,7 @@
 title = "Operations Intern"
 author = ["desktop"]
 date = 2025-12-10
-lastmod = 2025-12-10T17:45:48-07:00
+lastmod = 2025-12-10T21:01:03-07:00
 draft = false
 company = "Dynatronics"
 location = "Cottonwood Heights, Utah"
@@ -11,7 +11,7 @@ start_date = 2018-05-01
 end_date = 2018-08-31
 summary = "Foundational experience in systems thinking. Solved critical production delays by designing and deploying a physical Kanban inventory system."
 outcomes = "Reduced stock-outs by 57% and past-due orders by 70% by designing and deploying a physical Kanban system to resolve critical supply chain bottlenecks."
-competencies = ["Lean Six Sigma", "Project Management", "Process Improvement", "Data Analysis", "Inventory Management"]
+skills = ["Lean Six Sigma", "Project Management", "Process Improvement", "Data Analysis", "Inventory Management", "Kanban System Design", "Root Cause Analysis (5-Why)"]
 prototype_link = "/case-studies/kanban-optimization"
 +++
 

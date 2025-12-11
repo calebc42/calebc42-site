@@ -1,37 +1,207 @@
 # data/skills.yaml
 
-- category: "Revenue Architecture"
+- domain: "Revenue Architecture & Operations"
   items:
-    - label: "Sales Engagement"
-      value: "Kixie, AirCall, FileInvite, ZoomInfo, D&B Hoovers"
+    - label: "Sales Process Architecture"
       proficiency: "Master"
-    - label: "CRM & Admin"
-      value: "Salesforce (Admin, Experience Cloud), Slack Workflow Builder"
+      skills:
+        - "Sales Process Design"
+        - "Sales Workflow Automation"
+        - "Scalable Process Architecture"
+        - "Sales Playbook Creation"
+        - "Process Standardization"
+        - "FFCRA Tax Code Analysis"
+
+    - label: "Go-to-Market (GTM) Strategy"
+      proficiency: "Proficient"
+      skills:
+        - "GTM Execution"
+        - "Product Launch"
+        - "Market Entry Strategy"
+        - "Sales Motion Design"
+        - "Value Proposition Design"
+        - "Product-Market Fit Analysis"
+        - "Revenue Strategy"
+
+    - label: "Lead Generation & Prospecting"
+      proficiency: "Proficient"
+      technologies:
+        - "ZoomInfo"
+        - "D&B Hoovers"
+      skills:
+        - "High-Volume Prospecting"
+        - "Cold Calling (100+ dials/day)"
+        - "C-Level Engagement"
+        - "Lead Qualification"
+        - "Channel Partner Development (ISOs)"
+        - "Referral Network Development"
+
+- domain: "Data & Intelligence"
+  items:
+    - label: "Data Analysis"
+      proficiency: "Master"
+      technologies:
+        - "SQL"
+        - "Python"
+      skills:
+        - "Quantitative Analysis"
+        - "Pipeline Analysis"
+        - "Funnel Analysis"
+        - "Trend Analysis"
+        - "Rejection/Error Analysis"
+        - "Data-Driven Decision Making"
+
+    - label: "BI & Visualization"
+      proficiency: "Master"
+      technologies:
+        - "DOMO"
+        - "Tableau"
+        - "Power BI"
+        - "Google Sheets"
+        - "Microsoft Excel"
+        - "Salesforce Connector"
+      skills:
+        - "Dashboard Creation"
+        - "KPI Reporting"
+        - "Performance Dashboards"
+        - "Financial Modeling"
+        - "Pivot Tables"
+        - "VLOOKUP/IMPORTRANGE"
+
+    - label: "Conversation Intelligence"
+      proficiency: "Master"
+      technologies:
+        - "Gong.io"
+      skills:
+        - "Call Data Analysis"
+        - "Keyword Analysis"
+        - "Best Practice Identification"
+        - "Call Shadowing"
+
+- domain: "Process, Systems & Technology"
+  items:
+    - label: "CRM & Sales Tech"
       proficiency: "Intermediate"
-    - label: "Process Design"
-      value: "Lead Routing, GTM Strategy, Pipeline Architecture, FFCRA/SBA Regs"
+      technologies:
+        - "Salesforce (SFDC)"
+        - "Salesforce Experience Cloud"
+        - "Kixie"
+        - "AirCall"
+        - "ZenDesk"
+        - "FileInvite"
+        - "Slack Workflow Builder"
+      skills:
+        - "CRM Management"
+        - "Lead Flow Management"
+        - "Technology Evaluation"
+        - "Vendor Selection"
+        - "Software Implementation"
+
+    - label: "Technical Prototyping"
+      proficiency: "Proficient"
+      technologies:
+        - "Python"
+        - "ChromaDB"
+        - "LangChain"
+        - "SentenceTransformers"
+      skills:
+        - "Data Engineering"
+        - "RAG (Retrieval-Augmented Generation)"
+        - "AI/LLM Integration"
+        - "API Integration"
+
+    - label: "Process Improvement"
+      proficiency: "Intermediate"
+      skills:
+        - "Process Optimization"
+        - "Lean Manufacturing Principles"
+        - "Kanban System Design"
+        - "Root Cause Analysis (5-Why)"
+        - "CAPA (Corrective Action)"
+        - "Agile Methodology"
+        - "Six Sigma"
+
+- domain: "Sales & Enablement"
+  items:
+    - label: "Sales Enablement"
+      proficiency: "Master"
+      skills:
+        - "Sales Coaching"
+        - "Performance Management"
+        - "Training Program Design"
+        - "Onboarding & Ramp"
+        - "Objection Handling"
+        - "Call Scoring"
+        - "Sales Huddles"
+        - "Knowledge Transfer"
+
+    - label: "Performance Management"
+      proficiency: "Proficient"
+      skills:
+        - "Data-Driven Coaching"
+        - "Scorecard Design"
+        - "Sales Analytics"
+        - "Quota Attainment Analysis"
+        - "KPI Development"
+        - "OKRs (Objectives & Key Results)"
+        - "Performance Improvement Plans (PIPs)"
+
+    - label: "Full-Cycle Sales"
       proficiency: "Expert"
+      skills:
+        - "B2B Sales"
+        - "Middle-Market Sales"
+        - "Pipeline Management"
+        - "Deal Structuring"
+        - "Consultative Selling"
+        - "Solution Selling"
+        - "Negotiation"
+        - "Closing Techniques"
 
-- category: "Data & Intelligence"
+- domain: "Finance & Lending"
   items:
-    - label: "Analysis Stack"
-      value: "Python (Pandas/Plotly), SQL, Google Sheets (Advanced), Excel"
-      proficiency: "Proficient"
-    - label: "Visualization"
-      value: "DOMO, Tableau, Power BI, Google AppSheet"
-      proficiency: "Intermediate"
-    - label: "Conv. Intelligence"
-      value: "Gong.io (Analysis & Coaching), ZenDesk"
-      proficiency: "Master"
+    - label: "Commercial Lending"
+      proficiency: "Expert"
+      technologies:
+        - "SBA Etran"
+      skills:
+        - "SBA Lending (7a/Express)"
+        - "Alternative Financing"
+        - "Equipment Financing"
+        - "Loan Origination"
+        - "Credit Policy"
+        - "Funding Roadmapping"
+        - "SBA SOP 50 10 Compliance"
 
-- category: "Methodology & Strategy"
-  items:
-    - label: "Sales Frameworks"
-      value: "Sandler (Certified), SPIN Selling, Consultative Needs Analysis"
+    - label: "Financial Analysis"
       proficiency: "Master"
-    - label: "Operations"
-      value: "Lean Six Sigma, Kanban, 5-Why Root Cause Analysis, Agile"
+      skills:
+        - "Cash Flow Analysis"
+        - "DSCR (Debt-Service Coverage)"
+        - "P&L Analysis"
+        - "Balance Sheet Review"
+        - "Tax Return Analysis"
+        - "Risk Assessment"
+        - "Underwriting Collaboration"
+
+- domain: "Leadership & Management"
+  items:
+    - label: "Strategic Acumen"
+      proficiency: "Expert"
+      skills:
+        - "Business Model Analysis"
+        - "Profitability Analysis"
+        - "Cost Control"
+        - "Strategic Planning"
+        - "Intrapreneurship"
+
+    - label: "Team Leadership"
       proficiency: "Intermediate"
-    - label: "Leadership"
-      value: "Sales Enablement, Performance Management, Offshore Management"
-      proficiency: "Proficient"
+      skills:
+        - "Team Building"
+        - "Hiring & Interviewing"
+        - "Remote Team Management"
+        - "Offshore Team Management"
+        - "Change Management"
+        - "Stakeholder Management"
+        - "Cross-Functional Collaboration"

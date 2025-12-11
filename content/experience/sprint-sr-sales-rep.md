@@ -2,7 +2,7 @@
 title = "Sr. Sales Representative"
 author = ["desktop"]
 date = 2025-12-10
-lastmod = 2025-12-10T17:45:48-07:00
+lastmod = 2025-12-10T21:01:03-07:00
 draft = false
 company = "Sprint"
 location = "South Jordan, Utah"
@@ -11,7 +11,7 @@ start_date = 2019-05-01
 end_date = 2020-08-31
 summary = "Expanded role to include Manager on Duty responsibilities. My key contribution was architecting a B2B pipeline process that turned a non-revenue service center (Repair) into a lead generation engine."
 outcomes = "Became the #1 district generator of B2B revenue by designing an 'Account Audit' workflow that converted non-revenue service visits into sales leads."
-competencies = ["Pipeline Architecture", "Process Design", "Team Leadership", "Quality Assurance"]
+skills = ["Pipeline Architecture", "Process Design", "Team Leadership", "Quality Assurance"]
 +++
 
 ## Key Accomplishments {#key-accomplishments}

@@ -2,7 +2,7 @@
 title = "Business Relationship Manager"
 author = ["desktop"]
 date = 2025-12-10
-lastmod = 2025-12-10T17:45:48-07:00
+lastmod = 2025-12-10T21:01:03-07:00
 draft = false
 company = "TCS Equipment Finance"
 location = "Draper, Utah"
@@ -11,7 +11,8 @@ start_date = 2023-02-01
 end_date = 2023-05-31
 summary = "Recruited to build a middle-market pipeline using Sandler methodology. Quickly identified a strategic disconnect between the high-volume GTM strategy and the conservative credit policy."
 outcomes = "Built a robust middle-market pipeline from scratch and diagnosed a critical strategic flaw in the GTM architecture (Volume vs. Credit Policy misalignment)."
-competencies = ["GTM Strategy", "ZoomInfo", "D&B Hoovers", "Market Research", "Channel Sales"]
+technologies = ["ZoomInfo", "D&B Hoovers", "Excel"]
+skills = ["GTM Strategy", "Market Research", "Channel Sales", "High-Volume Prospecting", "Consultative Selling", "C-Level Engagement", "Strategic Planning", "Market Entry Strategy", "Product-Market Fit Analysis", "Equipment Financing", "Credit Policy", "Middle-Market Sales", "Solution Selling", "Cold Calling (100+ dials/day)", "Lead Qualification", "Channel Partner Development (ISOs)"]
 +++
 
 ## Key Accomplishments {#key-accomplishments}

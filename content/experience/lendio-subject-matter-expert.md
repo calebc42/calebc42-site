@@ -2,7 +2,7 @@
 title = "Traditional Lending, Subject-Matter-Expert (SME)"
 author = ["desktop"]
 date = 2025-12-10
-lastmod = 2025-12-10T17:45:48-07:00
+lastmod = 2025-12-10T21:01:03-07:00
 draft = false
 company = "Lendio"
 location = "Lehi, Utah"
@@ -11,7 +11,8 @@ start_date = 2021-11-01
 end_date = 2023-02-28
 summary = "Designed a data-driven enablement system to solve high-value borrower leakage. Increased conversion rates by 144% by bridging the gap between sales velocity and underwriting risk."
 outcomes = "Increased traditional product conversion rates by 144% (+$700k ARR) by architecting a data-driven sales enablement system and bridging the gap between sales and underwriting."
-competencies = ["Sales Enablement", "Data Analysis", "Process Improvement", "Stakeholder Management", "Financial Analysis", "Conversation Intelligence"]
+technologies = ["Gong.io", "DOMO", "Salesforce", "Google Sheets", "SQL", "FileInvite", "Salesforce Connector"]
+skills = ["Sales Enablement", "Data Analysis", "Pipeline Analysis", "Process Improvement", "Stakeholder Management", "Conversation Intelligence", "Coaching", "Dashboard Creation", "KPI Reporting", "Performance Dashboards", "Call Data Analysis", "Keyword Analysis", "Best Practice Identification", "Call Shadowing", "Training Program Design", "Objection Handling", "Call Scoring", "Knowledge Transfer", "Data-Driven Coaching", "Scorecard Design", "Underwriting Collaboration", "Cross-Functional Collaboration"]
 prototype_link = "/case-studies/sales-enablement-impact"
 +++
 

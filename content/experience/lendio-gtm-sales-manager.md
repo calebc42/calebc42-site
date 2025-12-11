@@ -2,7 +2,7 @@
 title = "Go-to-Market Sales Manager"
 author = ["desktop"]
 date = 2025-12-10
-lastmod = 2025-12-10T17:45:47-07:00
+lastmod = 2025-12-10T21:01:03-07:00
 draft = false
 company = "Lendio"
 location = "Lehi, Utah"
@@ -11,7 +11,8 @@ start_date = 2023-05-01
 end_date = 2023-10-31
 summary = "Recruited as a founding operator to architect a new sales division. Built the end-to-end sales process, implemented the tech stack, and scaled revenue from $100k to $350k/mo."
 outcomes = "Scaled monthly revenue to $350k ($4.05MM run rate) and reduced cost-per-rep by 50% by launching the company's first successful offshore sales unit."
-competencies = ["GTM Strategy", "Sales Process Architecture", "Systems Thinking", "Performance Management", "Sales Enablement", "Data Visualization", "CRM Admin"]
+technologies = ["Salesforce", "Kixie", "Google Sheets", "Slack Workflow Builder", "Zapier", "AirCall"]
+skills = ["GTM Strategy", "GTM Execution", "Sales Process Architecture", "Sales Playbook Creation", "Sales Workflow Automation", "Scalable Process Architecture", "Process Standardization", "Performance Management", "Sales Enablement", "Hiring & Interviewing", "Offshore Team Management", "Remote Team Management", "CRM Management", "Lead Flow Management", "Technology Evaluation", "Vendor Selection", "Software Implementation", "Agile Methodology", "Sales Analytics", "KPI Development", "OKRs (Objectives & Key Results)", "Performance Improvement Plans (PIPs)", "Business Model Analysis", "Profitability Analysis", "Cost Control", "Intrapreneurship", "Change Management", "Funnel Analysis", "Revenue Strategy", "Sales Motion Design"]
 prototype_link = "/case-studies/building-gtm-dashboard"
 +++
 

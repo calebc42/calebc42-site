@@ -6,6 +6,8 @@ theme = []
 [taxonomies]
   tag = "tags"
   category = "categories"
+  skill = "skills"
+  technology = "technologies"
 
 # Render hooks for cleaner HTML
 [markup]
@@ -20,7 +22,7 @@ theme = []
     guessSyntax = false
 
 [params]
-  description = "My Knowledge Base"
+  description = "Revenue Operations Portfolio"
   author = "Caleb Christensen"
 
 [menu]

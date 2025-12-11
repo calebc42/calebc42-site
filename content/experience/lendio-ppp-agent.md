@@ -2,7 +2,7 @@
 title = "SBA PPP Loan Forgiveness Agent"
 author = ["desktop"]
 date = 2025-12-10
-lastmod = 2025-12-10T17:45:48-07:00
+lastmod = 2025-12-10T21:01:03-07:00
 draft = false
 company = "Lendio"
 location = "Lehi, Utah"
@@ -11,7 +11,8 @@ start_date = 2021-01-01
 end_date = 2021-11-30
 summary = "Entered FinTech during the chaotic SBA PPP rollout. Succeeded by becoming a rapid expert on changing federal regulations (SOP 50 10) and translating them into clear instructions for business owners."
 outcomes = "Ranked Top 3 of 24 agents, processing 70-120 compliant applications monthly through high-volume regulatory consultation (100+ dials/day)."
-competencies = ["Operations Management", "High-Volume Execution", "Regulatory Analysis", "Consultative Service"]
+technologies = ["ZenDesk", "SBA Etran"]
+skills = ["Operations Management", "High-Volume Execution", "Regulatory Analysis", "Consultative Service", "SBA SOP 50 10 Compliance"]
 +++
 
 ## Key Accomplishments {#key-accomplishments}

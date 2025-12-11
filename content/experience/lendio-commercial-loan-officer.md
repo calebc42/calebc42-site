@@ -2,7 +2,7 @@
 title = "Commercial Loan Officer"
 author = ["desktop"]
 date = 2025-12-10
-lastmod = 2025-12-10T17:45:47-07:00
+lastmod = 2025-12-10T21:01:03-07:00
 draft = false
 company = "Lendio"
 location = "Lehi, Utah"
@@ -11,7 +11,8 @@ start_date = 2023-10-01
 end_date = 2024-03-31
 summary = "Served as a full-cycle financial consultant, managing the entire sales funnel from initial contact to close. Expertly negotiated terms with a network of over 75 lenders to align clients with optimal financing solutions."
 outcomes = "Generated ~$67k in average monthly revenue with a 35% close rate by independently structuring complex deal packages across a network of 75+ lenders."
-competencies = ["Salesforce", "Excel", "Financial Analysis", "Deal Structuring", "Negotiation"]
+technologies = ["Salesforce", "Excel", "SBA Etran"]
+skills = ["Financial Analysis", "Deal Structuring", "Negotiation", "Full-Cycle Sales", "SBA Regulations", "Funding Roadmapping", "SBA Lending (7a/Express)", "Alternative Financing", "Loan Origination", "Cash Flow Analysis", "DSCR (Debt-Service Coverage)", "P&L Analysis", "Balance Sheet Review", "Tax Return Analysis", "Risk Assessment", "Closing Techniques"]
 +++
 
 ## Key Accomplishments {#key-accomplishments}

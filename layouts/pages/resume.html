@@ -30,72 +30,87 @@
   <div class="resume-grid">
     
     <div class="resume-main">
-        <h3 class="resume-section-title">// ALL EXPERIENCE //</h3>
+      <h3 class="resume-section-title">// ALL EXPERIENCE //</h3>
+      
+      {{ range .Site.Data.experience }}
+      <div class="resume-entry" style="margin-bottom: 2.5rem;">
         
-        {{ range .Site.Data.experience }}
-        <div class="resume-entry" style="margin-bottom: 2.5rem;">
-          
-          <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.25rem;">
-            <h2 style="margin: 0; font-size: 1.4rem;">{{ .role }}</h2>
-            <span style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-secondary);">
-                {{ dateFormat "Jan 2006" .startDate }} — {{ if .endDate }}{{ dateFormat "Jan 2006" .endDate }}{{ else }}Present{{ end }}
-            </span>
-          </div>
-          
-          <div style="margin-bottom: 0.75rem; font-family: var(--font-mono); color: var(--color-accent); font-weight: bold; font-size: 1rem;">
-            {{ .company }} <span style="color: var(--text-secondary); font-weight: normal;">| {{ .location }}</span>
-          </div>
-
-          <ul style="list-style: none; padding: 0; margin: 0;">
-            {{ range .highlights }}
-            <li style="margin-bottom: 0.75rem; position: relative; padding-left: 1rem;">
-              <span style="position: absolute; left: 0; top: 6px; color: var(--color-accent); font-size: 0.6rem;">▶</span>
-              <span style="color: var(--text-primary); line-height: 1.5;">
-                  {{ .text }}
-              </span>
-              
-              <div style="margin-top: 4px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center;">
-                {{ if .related_link }}
-                <a href="{{ .related_link }}" class="evidence-pill">
-                    <span class="material-symbols-outlined" style="font-size: 10px;">folder_open</span>
-                    {{ .related_label | default "EVIDENCE" }}
-                </a>
-                {{ end }}
-
-                {{ range .tech_stack }}
-                <span class="tech-pill">{{ . }}</span>
-                {{ end }}
-              </div>
-            </li>
-            {{ end }}
-          </ul>
+        <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.25rem;">
+          <h2 style="margin: 0; font-size: 1.4rem;">{{ .role }}</h2>
+          <span style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-secondary);">
+            {{ dateFormat "Jan 2006" .startDate }} — {{ if .endDate }}{{ dateFormat "Jan 2006" .endDate }}{{ else }}Present{{ end }}
+          </span>
         </div>
-        {{ end }}
+        
+        <div style="margin-bottom: 0.75rem; font-family: var(--font-mono); color: var(--color-accent); font-weight: bold; font-size: 1rem;">
+          {{ .company }} <span style="color: var(--text-secondary); font-weight: normal;">| {{ .location }}</span>
+        </div>
+
+        <ul style="list-style: none; padding: 0; margin: 0;">
+          {{ range .highlights }}
+          <li style="margin-bottom: 0.75rem; position: relative; padding-left: 1rem;">
+            <span style="position: absolute; left: 0; top: 6px; color: var(--color-accent); font-size: 0.6rem;">▶</span>
+            <span style="color: var(--text-primary); line-height: 1.5;">
+              {{ .text }}
+            </span>
+            
+            <div style="margin-top: 4px; display: flex; flex-wrap: wrap; gap: 6px; align-items: center;">
+              {{ if .related_link }}
+              <a href="{{ .related_link }}" class="evidence-pill">
+                <span class="material-symbols-outlined" style="font-size: 10px;">folder_open</span>
+                {{ .related_label | default "EVIDENCE" }}
+              </a>
+              {{ end }}
+
+              {{ range .tech_stack }}
+              <a href="/skills/{{ . | urlize }}" class="tech-pill link-active">{{ . }}</a>
+              {{ end }}
+            </div>
+          </li>
+          {{ end }}
+        </ul>
+      </div>
+      {{ end }}
     </div>
 
     <div class="resume-sidebar">
+      
+      <h3 class="resume-section-title">// SKILLS & TECH //</h3>
+      
+      {{ range .Site.Data.skills }} <div style="margin-bottom: 2rem;">
+        <h4 style="color: var(--text-primary); margin: 0 0 0.75rem 0; font-size: 0.9rem; text-transform: uppercase; font-weight: bold;">
+          {{ .domain }} 
+        </h4>
         
-        <h3 class="resume-section-title">// SKILLS & TECH //</h3>
-        
-        {{ range .Site.Data.skills }}
-        <div style="margin-bottom: 2rem;">
-            <h4 style="color: var(--text-primary); margin: 0 0 0.75rem 0; font-size: 0.9rem; text-transform: uppercase; font-weight: bold;">
-                {{ .category }}
-            </h4>
-            <ul style="list-style: none; padding: 0;">
-                {{ range .items }}
-                <li style="margin-bottom: 1rem;">
-                    <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-secondary); margin-bottom: 2px;">
-                        {{ .label }}
-                    </div>
-                    <div style="font-size: 0.85rem; line-height: 1.4;">
-                        {{ .value }}
-                    </div>
-                </li>
-                {{ end }}
-            </ul>
-        </div>
-        {{ end }}
+        <ul style="list-style: none; padding: 0;">
+          {{ range .items }}
+          <li style="margin-bottom: 1.5rem;">
+            <div style="font-family: var(--font-mono); font-size: 0.7rem; color: var(--text-secondary); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.05em;">
+              {{ .label }}
+            </div>
+            
+            <div class="skill-cluster">
+              
+              {{/* TECHNOLOGIES */}}
+              {{ with .technologies }}
+              {{ range . }}
+              <a href="/technologies/{{ . | urlize }}" class="skill-link tech">{{ . }}</a>
+              {{ end }}
+              {{ end }}
+
+              {{/* SKILLS */}}
+              {{ with .skills }}
+              {{ range . }}
+              <a href="/skills/{{ . | urlize }}" class="skill-link concept">{{ . }}</a>
+              {{ end }}
+              {{ end }}
+
+            </div>
+          </li>
+          {{ end }}
+        </ul>
+      </div>
+      {{ end }}
 
     </div>
 
@@ -104,100 +119,137 @@
 </div>
 
 <style>
-.resume-wrapper {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 2rem;
+  .resume-wrapper {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem;
+  }
+
+  .resume-header {
+      margin-bottom: 3rem; 
+      border-bottom: 2px solid var(--border-color); 
+      padding-bottom: 2rem;
+  }
+
+  .resume-grid {
+      display: grid;
+      grid-template-columns: 2.5fr 1fr;
+      gap: 3rem;
+  }
+
+  .resume-section-title {
+      font-family: var(--font-mono);
+      font-size: 0.9rem;
+      letter-spacing: 0.15em;
+      color: var(--text-secondary);
+      border-bottom: 2px solid var(--border-color);
+      margin-bottom: 1.5rem;
+      padding-bottom: 0.5rem;
+  }
+
+  .contact-link {
+      color: var(--text-primary);
+      text-decoration: none;
+      transition: color 0.2s;
+  }
+  .contact-link:hover {
+      color: var(--color-accent);
+      text-decoration: underline;
+  }
+
+  /* Header Download Button */
+  .download-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      background-color: var(--color-accent);
+      color: var(--bg-primary); 
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: opacity 0.2s;
+  }
+  .download-btn:hover {
+      opacity: 0.9;
+  }
+
+  /* Evidence Pill Styling */
+  .evidence-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+      padding: 1px 6px;
+      background-color: transparent;
+      border: 1px solid var(--color-accent);
+      color: var(--color-accent);
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      font-weight: bold;
+      text-decoration: none;
+      border-radius: 3px;
+      transition: all 0.2s;
+  }
+  .evidence-pill:hover {
+      background-color: var(--color-accent);
+      color: var(--bg-primary);
+  }
+
+  /* Tech Pill Styling */
+  .tech-pill {
+      display: inline-flex;
+      align-items: center;
+      font-family: var(--font-mono);
+      font-size: 0.65rem;
+      background: rgba(128, 128, 128, 0.1);
+      color: var(--text-secondary);
+      padding: 1px 5px;
+      border-radius: 3px;
+  }
+
+  @media (max-width: 768px) {
+      .resume-grid { grid-template-columns: 1fr; }
+      .resume-header > div { flex-direction: column; align-items: flex-start !important; gap: 1.5rem; }
+      .resume-header div[style*="text-align: right"] { text-align: left !important; align-items: flex-start !important; }
+  }
+
+  /* Layout for the group of chips */
+.skill-cluster {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem; /* Space between chips */
+    line-height: 1; /* Reset line height so chips don't overlap awkwardly */
 }
 
-.resume-header {
-    margin-bottom: 3rem; 
-    border-bottom: 2px solid var(--border-color); 
-    padding-bottom: 2rem;
-}
-
-.resume-grid {
-    display: grid;
-    grid-template-columns: 2.5fr 1fr;
-    gap: 3rem;
-}
-
-.resume-section-title {
-  font-family: var(--font-mono);
-  font-size: 0.9rem;
-  letter-spacing: 0.15em;
-  color: var(--text-secondary);
-  border-bottom: 2px solid var(--border-color);
-  margin-bottom: 1.5rem;
-  padding-bottom: 0.5rem;
-}
-
-.contact-link {
-    color: var(--text-primary);
+/* The "Chip" Style - Matches .tag-tech / .meta-tags a */
+.skill-link {
+    display: inline-block;
+    font-family: var(--font-mono);
+    font-size: 0.7rem;
     text-decoration: none;
-    transition: color 0.2s;
-}
-.contact-link:hover {
+    padding: 3px 8px;
+    
+    /* The "YoRHa" Industrial Look */
     color: var(--color-accent);
-    text-decoration: underline;
+    border: 1px solid var(--border-color);
+    background-color: rgba(0,0,0,0.05); /* Subtle shading */
+    border-radius: 2px; /* Sharp Nier corners */
+    
+    transition: all 0.2s ease;
 }
 
-/* Header Download Button */
-.download-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
+/* Interactive Hover State */
+.skill-link:hover {
     background-color: var(--color-accent);
     color: var(--bg-primary); 
-    font-family: var(--font-mono);
-    font-size: 0.85rem;
-    font-weight: bold;
-    text-decoration: none;
-    border-radius: 4px;
-    transition: opacity 0.2s;
-}
-.download-btn:hover {
-    opacity: 0.9;
+    border-color: var(--color-accent);
+    cursor: pointer;
+    transform: translateY(-1px); /* Micro-interaction lift */
 }
 
-/* Evidence Pill Styling */
-.evidence-pill {
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-  padding: 1px 6px;
-  background-color: transparent;
-  border: 1px solid var(--color-accent);
-  color: var(--color-accent);
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  font-weight: bold;
-  text-decoration: none;
-  border-radius: 3px;
-  transition: all 0.2s;
-}
-.evidence-pill:hover {
-    background-color: var(--color-accent);
-    color: var(--bg-primary);
-}
-
-/* Tech Pill Styling */
-.tech-pill {
-    display: inline-flex;
-    align-items: center;
-    font-family: var(--font-mono);
-    font-size: 0.65rem;
-    background: rgba(128, 128, 128, 0.1);
-    color: var(--text-secondary);
-    padding: 1px 5px;
-    border-radius: 3px;
-}
-
-@media (max-width: 768px) {
-    .resume-grid { grid-template-columns: 1fr; }
-    .resume-header > div { flex-direction: column; align-items: flex-start !important; gap: 1.5rem; }
-    .resume-header div[style*="text-align: right"] { text-align: left !important; align-items: flex-start !important; }
-}
+/* Optional: Distinguish Tech vs Skills slightly if desired */
+/* .skill-link.tech { border-color: var(--text-secondary); } */
 </style>
 {{ end }}

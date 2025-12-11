@@ -9,10 +9,28 @@
         </div>
         <p>{{ .Summary }}</p>
         
-        <div style="margin-top: 1.5rem; display: flex; gap: 0.5rem; flex-wrap: wrap;">
-            {{ range .Params.tags }}
-            <a href="/tags/{{ . | urlize }}" class="tag-tech">{{ . }}</a>
+        <div style="margin-top: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
+            
+            {{/* 1. Skills (The "Hard" Skills) */}}
+            {{ with .Params.skills }}
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+                <span style="font-family: var(--font-mono); font-size: 0.7rem; opacity: 0.6;">SKILLS:</span>
+                {{ range . }}
+                <a href="/skills/{{ . | urlize }}" class="tag-tech" style="border-color: var(--color-accent);">{{ . }}</a>
+                {{ end }}
+            </div>
             {{ end }}
+
+            {{/* 2. Tags (The Context/Metadata) */}}
+            {{ with .Params.tags }}
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; align-items: center;">
+                <span style="font-family: var(--font-mono); font-size: 0.7rem; opacity: 0.6;">TAGS:</span>
+                {{ range . }}
+                <a href="/tags/{{ . | urlize }}" class="tag-tech" style="border: 1px dashed var(--border-color); opacity: 0.8;">{{ . }}</a>
+                {{ end }}
+            </div>
+            {{ end }}
+
         </div>
     </div>
 

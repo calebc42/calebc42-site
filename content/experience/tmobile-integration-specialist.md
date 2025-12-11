@@ -2,7 +2,7 @@
 title = "Integration Specialist"
 author = ["desktop"]
 date = 2025-12-10
-lastmod = 2025-12-10T17:45:48-07:00
+lastmod = 2025-12-10T21:01:03-07:00
 draft = false
 company = "T-Mobile / Sprint"
 location = "Salt Lake City, Utah"
@@ -11,7 +11,7 @@ start_date = 2020-08-01
 end_date = 2021-02-28
 summary = "Selected to lead the operational integration of the Sprint/T-Mobile merger for a third-party partner. Focused on systems training, error documentation, and change management."
 outcomes = "Facilitated the technical migration of 5 retail locations and reduced national system errors by contributing key workarounds to a central knowledge base."
-competencies = ["Change Management", "Technical Training", "CRM Admin", "Process Documentation", "Stakeholder Management"]
+skills = ["Change Management", "Technical Training", "CRM Admin", "Process Documentation", "Stakeholder Management"]
 prototype_link = "/artifacts/integration-SOP"
 +++
 

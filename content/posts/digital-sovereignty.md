@@ -2,7 +2,7 @@
 title = "Philosophy"
 author = ["desktop"]
 date = 2025-11-20
-lastmod = 2025-12-10T17:45:48-07:00
+lastmod = 2025-12-10T21:01:03-07:00
 tags = ["cybersecurity", "hardware", "sovereignty", "philosophy"]
 categories = ["Tutorial"]
 draft = false

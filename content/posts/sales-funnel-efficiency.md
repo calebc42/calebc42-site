@@ -2,10 +2,13 @@
 title = "Sales Funnel Efficiency & Rep Performance Analysis"
 author = ["desktop"]
 date = 2025-12-01
-lastmod = 2025-12-10T17:45:48-07:00
+layout = "list"
+lastmod = 2025-12-10T21:01:03-07:00
 tags = ["sales", "strategy", "python", "data-analysis", "pipeline-optimization", "tableau"]
 categories = ["Portfolio"]
 draft = false
+technologies = ["Python", "Pandas", "Plotly", "Tableau"]
+skills = ["Data Analysis", "Pipeline Optimization", "Sales Strategy", "Performance Analysis"]
 +++
 
 ## Overview {#overview}
