@@ -156,6 +156,10 @@
       skills: ["Pipeline Architecture", "Process Design"]
     - text: "Implemented a pre-transaction 'Huddle' checkpoint system to provide real-time coaching on deal specifics before reps engaged with customers, ensuring quality control."
       skills: ["Team Leadership", "Quality Assurance"]
+    - text: "Managed daily store operations as Manager-on-Duty, overseeing cash handling, inventory audits, and opening/closing procedures for a high-volume district repair hub."
+      skills: ["Operational Management", "Inventory Control"]
+    - text: "Implemented a pre-transaction 'Huddle' checkpoint system to provide real-time coaching on deal specifics before reps engaged with customers."
+      skills: ["Team Leadership", "Quality Assurance"]
 
 - company: "Dynatronics"
   company_id: "dynatronics"
@@ -173,3 +177,6 @@
       skills: ["Lean Six Sigma", "Inventory Management"]
     - text: "Performed 5-Why Root Cause Analysis to develop CAPA plans for international medical device compliance, ensuring adherence to global regulatory standards."
       skills: ["Root Cause Analysis", "Process Engineering"]
+    - text: "Managed vendor relationships by placing purchase orders, confirming lead times, and issuing RMAs, ensuring supply chain reliability during a production surge."
+      skills: ["Vendor Management", "Supply Chain Operations"]
+
