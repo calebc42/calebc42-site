@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default "en-us" }}">
+  {{ partial "head.html" . }}
+  
+  <body class="handwritten-layout">
+    <!-- Minimal header for handwritten pages -->
+    <header class="handwritten-header">
+      <div class="handwritten-nav">
+        <a href="{{ .Site.BaseURL }}" class="back-link">
+          <span class="material-symbols-outlined">arrow_back</span>
+          <span>Home</span>
+        </a>
+        
+        <div class="handwritten-meta">
+          <span class="card-label">{{ .Date.Format "2006-01-02" }}</span>
+          <h1 class="handwritten-title">{{ .Title }}</h1>
+        </div>
+
+        <button class="theme-toggle" aria-label="Toggle Theme">
+          <span class="material-symbols-outlined icon-sun">light_mode</span>
+          <span class="material-symbols-outlined icon-moon">dark_mode</span>
+        </button>
+      </div>
+    </header>
+
+    <main class="handwritten-main">
+      {{ .Content }}
+    </main>
+
+    <footer class="handwritten-footer">
+      <p>// NOTICE: [END_OF_TRANSMISSION] //</p>
+      <p>&copy; {{ now.Year }} {{ .Site.Params.author }}</p>
+    </footer>
+
+    <div class="progress-bar"><div class="progress-bar-fill"></div></div>
+
+    {{ $js := resources.Get "js/main.js" | resources.Minify | fingerprint }}
+    <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
+  </body>
+</html>

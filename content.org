@@ -1601,6 +1601,7 @@ While this project involved physical inventory, the principles are identical to 
   :EXPORT_HUGO_SECTION: posts
   :EXPORT_FILE_NAME: handwritten-test
   :EXPORT_HUGO_CATEGORIES: test
+  :EXPORT_HUGO_LAYOUT: handwritten
   :END:
 
 Check out my handwriting below:

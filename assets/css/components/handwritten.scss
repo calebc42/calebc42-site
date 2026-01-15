@@ -1,12 +1,8 @@
-/* ===================================================================
-   HANDWRITTEN BLOG SYSTEM
-   =================================================================== */
-
 .handwritten-wrapper {
   position: relative;
   width: 100%;
-  max-width: 900px; /* Aligns with your standard reading width */
-  margin: var(--spacing-xxl) auto; /* Uses your YoRHa section spacing */
+  max-width: 900px;
+  margin: 0 auto;
   overflow: hidden;
   
   .handwritten-svg {
@@ -14,44 +10,34 @@
     height: auto;
     display: block;
 
-    /* 1. Hides original Supernote binary data and baked-in paper */
-    image, 
-    use, 
-    defs { 
-      display: none !important; 
+    /* Hide Supernote binary data/embedded assets */
+    image, use, defs > * { 
+      display: none; 
     }
 
-    /* 2. Styling the Ruled Lines injected by the Shortcode */
     .template-line {
       stroke: var(--border-color);
-      stroke-width: 2; /* Scaled relative to the 1920-unit canvas */
+      stroke-width: 2;
       opacity: 0.5;
       transition: stroke 0.3s ease;
     }
 
-    /* 3. The Handwriting Strokes */
-    .ink-strokes path {
-      stroke: var(--text-primary) !important;
-      stroke-width: 6; /* Matches the feel of the Supernote pen */
+    .ink-strokes path,
+    .signature-strokes path {
+      stroke: var(--text-primary);
+      stroke-width: 6;
       stroke-linecap: round;
       stroke-linejoin: round;
-      fill: none !important;
-      
-      /* Essential for the scroll-drawing animation */
+      fill: none;
       transition: stroke-dashoffset 0.1s linear;
     }
   }
 
-  /* =================================================================
-     REVEAL TOGGLE (FAST FORWARD)
-     ================================================================= */
-  /* Update this block in handwritten.scss */
   .handwriting-toggle {
     position: absolute;
-    top: 10px;    /* Moved from bottom */
-    left: 10px;   /* Moved from right */
+    inset: 10px auto auto 10px;
     z-index: 50;
-    opacity: 0.4; /* Subtle until needed */
+    opacity: 0.4;
     background: var(--bg-primary);
     border: 1px solid var(--border-color);
     color: var(--text-primary);
@@ -61,9 +47,9 @@
     transition: all 0.3s ease;
     
     &:hover {
-        opacity: 1;
-        background: var(--color-accent);
-        color: var(--bg-primary);
+      opacity: 1;
+      background: var(--color-accent);
+      color: var(--bg-primary);
     }
 
     .material-symbols-outlined {
@@ -71,31 +57,42 @@
     }
   }
 
-  /* =================================================================
-     COMPLETED STATE
-     When .is-completed is added by JS, force the pen to finish
-     ================================================================= */
-  &.is-completed .ink-strokes path {
+  &.is-completed .ink-strokes path,
+  &.is-completed .signature-strokes path {
     stroke-dashoffset: 0 !important;
     transition: stroke-dashoffset 0.5s ease-in-out !important;
   }
 }
 
-/* ===================================================================
-   DARK MODE ADAPTATION
-   =================================================================== */
+/* Mobile: Make SVG larger and allow horizontal scroll if needed */
+@media (max-width: 768px) {
+  .handwritten-layout .handwritten-main {
+    padding: var(--spacing-md) 0; // Remove side padding
+    overflow-x: auto; // Allow horizontal scroll
+  }
 
-[data-theme="dark"] {
   .handwritten-wrapper {
-    .template-line {
-      /* Subtle white/parchment lines for the dark background */
-      stroke: rgba(255, 255, 255, 0.15);
-      opacity: 0.1;
+    max-width: none; // Remove max-width constraint
+    width: 100vw; // Full viewport width
+    margin: 0;
+    
+    .handwritten-svg {
+      // Force SVG to be larger on mobile
+      min-width: 600px; // Supernote aspect ratio preserved
+      width: 140%; // 40% larger than viewport
+      margin: 0 auto;
     }
+  }
+}
 
-    .ink-strokes path {
-      /* Simulates digital ink glow against dark parchment */
-      filter: drop-shadow(0 0 1px var(--accent-glow-color));
+/* Tablet: Intermediate sizing */
+@media (min-width: 769px) and (max-width: 1024px) {
+  .handwritten-wrapper {
+    max-width: 100%;
+    
+    .handwritten-svg {
+      width: 95%;
+      margin: 0 auto;
     }
   }
 }
@@ -104,4 +101,95 @@
   stroke: var(--error-color);
   stroke-width: 2;
   opacity: 0.3;
+}
+
+[data-theme="dark"] {
+  .handwritten-wrapper {
+    .template-line {
+      stroke: rgba(250, 240, 220, 0.25);
+      opacity: 0.5;
+    }
+
+    .ink-strokes path,
+    .signature-strokes path {
+      filter: drop-shadow(0 0 1.5px var(--accent-glow-color));
+    }
+  }
+}
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  .handwritten-wrapper {
+    .ink-strokes path,
+    .signature-strokes path {
+      stroke-dashoffset: 0 !important;
+      transition: none !important;
+    }
+    
+    .handwriting-toggle {
+      display: none; // Hide toggle when animations disabled
+    }
+  }
+}
+
+.handwritten-multipage {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: var(--spacing-xxl) auto;
+  
+  // Single toggle for entire document
+  .handwriting-toggle {
+    position: sticky;
+    top: 10px;
+    left: 10px;
+    z-index: 100;
+    opacity: 0.4;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 6px;
+    cursor: pointer;
+    border-radius: var(--border-radius);
+    transition: all 0.3s ease;
+    margin-bottom: -40px; // Pull up so it overlays first page
+    
+    &:hover {
+      opacity: 1;
+      background: var(--color-accent);
+      color: var(--bg-primary);
+    }
+  }
+  
+  .handwritten-page {
+    position: relative;
+    margin-bottom: var(--spacing-xl);
+    
+    // Page separator
+    &:not(:last-child)::after {
+      content: '';
+      display: block;
+      width: 60%;
+      height: 2px;
+      margin: var(--spacing-lg) auto;
+      background: linear-gradient(
+        to right,
+        transparent,
+        var(--border-color) 20%,
+        var(--border-color) 80%,
+        transparent
+      );
+      opacity: 0.3;
+    }
+    
+    .page-number {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+      opacity: 0.5;
+      font-family: var(--font-mono);
+    }
+  }
 }

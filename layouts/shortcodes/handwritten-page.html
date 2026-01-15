@@ -1,30 +1,19 @@
-{{/* 
-  Supernote Handwriting Shortcode
-  
-  Parameters:
-    - src: path to SVG file (relative to static/)
-    - offset: vertical offset in pixels (default: 0)
-  
-  Constants:
-    - lineSpacing: 94.48px = 8mm at 300ppi (Supernote's ruled line setting)
-    - margin: 118px = Supernote toolbar width
-    - viewBox: 1920x2442 (Supernote Manta native resolution, accounting for margins)
-*/}}
-
+{{/* Single page within a multi-page document */}}
 {{ $path := printf "static/%s" (.Get "src") }}
-{{ $offset := .Get "offset" | default "0" }} 
+{{ $offset := .Get "offset" | default "0" }}
+{{ $pageNum := .Ordinal }}
 
 {{/* Supernote Manta: 8mm line spacing at 300ppi */}}
 {{ $lineSpacingMM := 8 }}
 {{ $ppi := 300 }}
-{{ $lineSpacing := div (mul $lineSpacingMM $ppi) 25.4 }}  {{/* = 94.48 */}}
+{{ $lineSpacing := div (mul $lineSpacingMM $ppi) 25.4 }}
 
 {{ if (fileExists $path) }}
   {{ $svgContent := readFile $path }}
   
   {{/* Generate ruled lines */}}
   {{ $gridLines := "" }}
-  {{ $maxLines := 30 }}  {{/* Could calculate: ceil(2442 / 94.48) */}}
+  {{ $maxLines := 30 }}
   
   {{ range seq 0 $maxLines }}
     {{ $y := add (float $offset) (mul . $lineSpacing) }}
@@ -32,22 +21,18 @@
     {{ $gridLines = print $gridLines $line }}
   {{ end }}
 
-  {{/* Extract paths from Supernote SVG */}}
+  {{/* Extract paths */}}
   {{ $innerPaths := replaceRE `(?s).*<svg[^>]*>(.*)</svg>.*` "$1" $svgContent }}
   
-  {{/* Validate we actually got paths */}}
   {{ if not (findRE `<path` $innerPaths) }}
     {{ errorf "No paths found in SVG: %s" $path }}
   {{ end }}
   
-  <div class="handwritten-wrapper">
-    <button class="handwriting-toggle" title="Show All" aria-label="Reveal handwriting">
-      <span class="material-symbols-outlined">fast_forward</span>
-    </button>
+  <div class="handwritten-page" data-page="{{ $pageNum }}">
+    <div class="page-number">Page {{ $pageNum }}</div>
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 2442" class="handwritten-svg">
       <defs>
         <style>
-          /* Inline critical styles to prevent FOUC */
           .template-line { stroke: currentColor; opacity: 0.1; }
           .margin-line { stroke: var(--error-color, #e74c3c); opacity: 0.3; }
         </style>
@@ -62,7 +47,6 @@
       <g class="ink-strokes">
         {{ $innerPaths | safeHTML }}
       </g>
-      {{/* Supernote toolbar margin indicator */}}
       <line x1="118" y1="0" x2="118" y2="2442" class="margin-line" />
     </svg>
   </div>

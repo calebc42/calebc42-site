@@ -1,0 +1,16 @@
+{{/* 
+  Multi-Page Handwritten Content
+  
+  Usage:
+    {{< handwritten-multipage >}}
+      {{< handwritten-page src="handwritten/journal-2025-01-01-p1.svg" >}}
+      {{< handwritten-page src="handwritten/journal-2025-01-01-p2.svg" offset="50" >}}
+      {{< handwritten-page src="handwritten/journal-2025-01-01-p3.svg" >}}
+    {{< /handwritten-multipage >}}
+*/}}
+
+{{ $pages := .Inner }}
+
+<div class="handwritten-multipage">
+  {{ $pages | safeHTML }}
+</div>

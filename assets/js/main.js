@@ -129,7 +129,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         container.appendChild(button);
     });
-});
 
     // =================================================================
     // 5. FLOATING TOC TOGGLE
@@ -145,12 +144,11 @@ document.addEventListener('DOMContentLoaded', () => {
             // Icon Swap Logic
             const icon = tocBtn.querySelector('.material-symbols-outlined');
             if (tocPopup.classList.contains('visible')) {
-                icon.innerText = 'close'; // Changes hamburger to X
-                // Optional: Make the button "active" colored while open
+                icon.innerText = 'close';
                 tocBtn.style.borderColor = 'var(--color-accent)'; 
                 tocBtn.style.color = 'var(--color-accent)';
             } else {
-                icon.innerText = 'toc';   // Changes X back to hamburger
+                icon.innerText = 'toc';
                 tocBtn.style.borderColor = '';
                 tocBtn.style.color = '';
             }
@@ -161,7 +159,6 @@ document.addEventListener('DOMContentLoaded', () => {
             if (tocPopup.classList.contains('visible') && !tocPopup.contains(e.target) && !tocBtn.contains(e.target)) {
                 tocPopup.classList.remove('visible');
                 
-                // Reset Icon
                 const icon = tocBtn.querySelector('.material-symbols-outlined');
                 icon.innerText = 'toc';
                 tocBtn.style.borderColor = '';
@@ -170,96 +167,322 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-document.addEventListener("DOMContentLoaded", () => {
-    const wrapper = document.querySelector(".handwritten-wrapper");
-    if (!wrapper) return;
+    // =================================================================
+    // 6. HANDWRITING ANIMATOR CLASS
+    // =================================================================
+    class HandwritingAnimator {
+        constructor(wrapper, options = {}) {
+            this.wrapper = wrapper;
+            
+            // Check if user prefers reduced motion
+            this.prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+            
+            this.options = {
+                triggerMode: 'scroll',      // 'scroll' | 'viewport'
+                viewportThreshold: 0.5,
+                scrollTriggerStart: 0.75,
+                scrollTriggerEnd: 0.15,
+                strokeStagger: 0.2,
+                allowToggle: true,
+                pathSelector: '.ink-strokes path, .signature-strokes path',
+                penPressure: true,          // Simulate pressure variation
+                penLiftDelay: 150,          // ms pause between discontinuous strokes
+                strokeSpeedVariation: true, // Vary speed based on path length
+                ...options
+            };
+            
+            this.paths = [];
+            this.totalLength = 0;
+            this.isCompleted = false;
+            this.hasPlayed = false;
+            this.lastAngle = 0;
+            
+            this.init();
+        }
 
-    // Target paths explicitly inside the strokes group
-    const paths = Array.from(wrapper.querySelectorAll(".ink-strokes path"));
-    const toggleBtn = wrapper.querySelector(".handwriting-toggle");
-    let totalLength = 0;
-    
-    const pathData = paths.map(path => {
-        const length = path.getTotalLength();
-        const startAt = totalLength;
-        totalLength += length;
-        path.style.strokeDasharray = `${length} ${length}`;
-        path.style.strokeDashoffset = length;
-        return { path, length, startAt };
-    });
+        init() {
+            const pathElements = this.wrapper.querySelectorAll(this.options.pathSelector);
+            
+            this.paths = Array.from(pathElements).map((path, index) => {
+                const length = path.getTotalLength();
+                const startAt = this.totalLength;
+                this.totalLength += length;
+                
+                // Detect if this stroke is disconnected from previous (pen lift)
+                const prevPath = index > 0 ? pathElements[index - 1] : null;
+                const isPenLift = prevPath ? this.detectPenLift(prevPath, path) : false;
+                
+                // Calculate stroke complexity for speed variation
+                const complexity = this.calculateComplexity(path);
+                
+                path.style.strokeDasharray = `${length} ${length}`;
+                
+                // If reduced motion is preferred, show everything immediately
+                if (this.prefersReducedMotion) {
+                    path.style.strokeDashoffset = 0;
+                } else {
+                    path.style.strokeDashoffset = length;
+                }
+                
+                // Apply pen pressure effect (thicker at endpoints)
+                if (this.options.penPressure) {
+                    this.applyPenPressure(path);
+                }
+                
+                return { path, length, startAt, isPenLift, complexity };
+            });
 
-    if (toggleBtn) {
-        toggleBtn.addEventListener('click', () => {
-            wrapper.classList.toggle('is-completed');
-            const icon = toggleBtn.querySelector('.material-symbols-outlined');
-            icon.innerText = wrapper.classList.contains('is-completed') ? 'restart_alt' : 'fast_forward';
-            if (!wrapper.classList.contains('is-completed')) handleDrawing();
-        });
-    }
+            // Skip animation setup if reduced motion preferred
+            if (this.prefersReducedMotion) {
+                this.isCompleted = true;
+                this.wrapper.classList.add('is-completed');
+                // Hide the toggle button since animation is disabled
+                const btn = this.wrapper.querySelector('.handwriting-toggle');
+                if (btn) btn.style.display = 'none';
+                return;
+            }
 
-    const handleDrawing = () => {
-        if (wrapper.classList.contains('is-completed')) return;
+            if (this.options.triggerMode === 'viewport') {
+                this.setupViewportTrigger();
+            } else {
+                this.setupScrollTrigger();
+            }
 
-        const rect = wrapper.getBoundingClientRect();
-        const windowHeight = window.innerHeight;
-        const startPoint = windowHeight * 0.75; // Adjusted for a smoother trigger
-        const endPoint = windowHeight * 0.15;
+            if (this.options.allowToggle) {
+                this.setupToggle();
+            }
+        }
 
-        // Fallback for non-scrollable pages or small windows
-        const isScrollable = document.documentElement.scrollHeight > windowHeight;
-        
-        let progress;
-        if (!isScrollable || rect.bottom < windowHeight * 0.5) {
-            progress = 1;
-        } else {
-            progress = (startPoint - rect.top) / (startPoint - endPoint);
+        detectPenLift(prevPath, currentPath) {
+            // Get end point of previous path and start point of current
+            const prevEnd = prevPath.getPointAtLength(prevPath.getTotalLength());
+            const currentStart = currentPath.getPointAtLength(0);
+            
+            // If distance > 10px, it's a pen lift
+            const distance = Math.sqrt(
+                Math.pow(currentStart.x - prevEnd.x, 2) + 
+                Math.pow(currentStart.y - prevEnd.y, 2)
+            );
+            
+            return distance > 10;
         }
         
-        progress = Math.min(Math.max(progress, 0), 1);
-        const currentTargetLength = totalLength * progress;
-
-        pathData.forEach(({ path, length, startAt }) => {
-            if (currentTargetLength < startAt) {
-                path.style.strokeDashoffset = length;
-            } else if (currentTargetLength > (startAt + length)) {
-                path.style.strokeDashoffset = 0;
-            } else {
-                path.style.strokeDashoffset = length - (currentTargetLength - startAt);
+        calculateComplexity(path) {
+            // Sample points to estimate curvature
+            const samples = 10;
+            const length = path.getTotalLength();
+            let totalAngleChange = 0;
+            let lastAngle = 0;
+            
+            for (let i = 1; i < samples; i++) {
+                const p1 = path.getPointAtLength((i - 1) * length / samples);
+                const p2 = path.getPointAtLength(i * length / samples);
+                const angle = Math.atan2(p2.y - p1.y, p2.x - p1.x);
+                if (i > 1) {
+                    totalAngleChange += Math.abs(angle - lastAngle);
+                }
+                lastAngle = angle;
             }
-        });
-    };
+            
+            // Normalize: 0 = straight line, 1 = very curvy
+            return Math.min(totalAngleChange / Math.PI, 1);
+        }
+        
+        applyPenPressure(path) {
+            // Add subtle styling for pressure effect
+            path.style.strokeLinecap = 'round';
+            path.style.strokeLinejoin = 'round';
+        }
 
-    window.addEventListener("scroll", handleDrawing, { passive: true });
-    window.addEventListener("resize", handleDrawing);
-    handleDrawing(); 
-});
+        setupScrollTrigger() {
+            const handleScroll = () => {
+                if (this.isCompleted) return;
+                
+                // Simple approach: map document scroll percentage to animation progress
+                const scrollTop = window.scrollY || document.documentElement.scrollTop;
+                const docHeight = document.documentElement.scrollHeight;
+                const windowHeight = window.innerHeight;
+                const maxScroll = docHeight - windowHeight;
+                
+                // Get wrapper's position in the document
+                const wrapperRect = this.wrapper.getBoundingClientRect();
+                const wrapperOffsetTop = scrollTop + wrapperRect.top;
+                const wrapperHeight = wrapperRect.height;
+                
+                let progress;
+                
+                // Start animating when wrapper enters viewport
+                const animationStartScroll = wrapperOffsetTop - windowHeight;
+                // Finish animating when we've scrolled through the entire wrapper
+                const animationEndScroll = wrapperOffsetTop + wrapperHeight;
+                const animationScrollRange = animationEndScroll - animationStartScroll;
+                
+                if (scrollTop < animationStartScroll) {
+                    progress = 0;
+                } else if (scrollTop > animationEndScroll) {
+                    progress = 1;
+                } else {
+                    progress = (scrollTop - animationStartScroll) / animationScrollRange;
+                }
+                
+                progress = Math.min(Math.max(progress, 0), 1);
+                
+                console.log({
+                    scrollTop,
+                    maxScroll,
+                    animationStartScroll,
+                    animationEndScroll,
+                    progress
+                });
+                
+                this.setProgress(progress);
+            };
 
-document.addEventListener("DOMContentLoaded", () => {
-    const sigWrapper = document.querySelector(".signature-wrapper");
-    if (!sigWrapper) return;
+            window.addEventListener('scroll', handleScroll, { passive: true });
+            window.addEventListener('resize', handleScroll);
+            handleScroll();
+        }
 
-    const paths = sigWrapper.querySelectorAll(".signature-strokes path");
+        setupViewportTrigger() {
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && !this.hasPlayed) {
+                        this.playAnimation();
+                        this.hasPlayed = true;
+                    }
+                });
+            }, { threshold: this.options.viewportThreshold });
+
+            observer.observe(this.wrapper);
+        }
+
+        playAnimation() {
+            this.paths.forEach(({ path }, index) => {
+                const delay = index * this.options.strokeStagger;
+                path.style.transition = `stroke-dashoffset 0.8s ease-in-out ${delay}s`;
+                path.style.strokeDashoffset = '0';
+            });
+        }
+
+        setProgress(progress) {
+            const currentLength = this.totalLength * progress;
+            let accumulatedDelay = 0;
+            
+            this.paths.forEach(({ path, length, startAt, isPenLift, complexity }, index) => {
+                // Add pen lift delay
+                if (isPenLift && index > 0) {
+                    accumulatedDelay += this.options.penLiftDelay;
+                }
+                
+                // Adjust effective start based on accumulated delays
+                const delayOffset = (accumulatedDelay / 1000) * this.totalLength * 0.1;
+                const adjustedStart = startAt + delayOffset;
+                
+                if (currentLength < adjustedStart) {
+                    path.style.strokeDashoffset = length;
+                } else if (currentLength > (adjustedStart + length)) {
+                    path.style.strokeDashoffset = 0;
+                } else {
+                    // Speed variation based on complexity
+                    let speedMultiplier = 1;
+                    if (this.options.strokeSpeedVariation) {
+                        // Simpler strokes draw faster, complex strokes slower
+                        speedMultiplier = 0.7 + (complexity * 0.6);
+                    }
+                    
+                    const effectiveLength = length * speedMultiplier;
+                    const drawProgress = (currentLength - adjustedStart) / effectiveLength;
+                    path.style.strokeDashoffset = length - (length * Math.min(drawProgress, 1));
+                }
+            });
+        }
+
+        setupToggle() {
+            const btn = this.wrapper.querySelector('.handwriting-toggle');
+            if (!btn) return;
+
+            btn.addEventListener('click', () => {
+                this.isCompleted = !this.isCompleted;
+                this.wrapper.classList.toggle('is-completed', this.isCompleted);
+                
+                const icon = btn.querySelector('.material-symbols-outlined');
+                icon.innerText = this.isCompleted ? 'restart_alt' : 'fast_forward';
+                
+                if (!this.isCompleted) {
+                    this.paths.forEach(({ path, length }) => {
+                        path.style.strokeDashoffset = length;
+                    });
+                    window.dispatchEvent(new Event('scroll'));
+                }
+            });
+        }
+    }
+
+    // =================================================================
+    // 7. INITIALIZE HANDWRITING ANIMATIONS
+    // =================================================================
     
-    // Setup paths for auto-animation
-    paths.forEach(path => {
-        const length = path.getTotalLength();
-        path.style.strokeDasharray = length;
-        path.style.strokeDashoffset = length;
+    // Single-page handwritten content (scroll-based)
+    document.querySelectorAll('.handwritten-wrapper').forEach(wrapper => {
+        new HandwritingAnimator(wrapper, {
+            triggerMode: 'scroll',
+            allowToggle: true,
+            pathSelector: '.ink-strokes path'
+        });
     });
 
-    const signatureObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                // Trigger the writing animation for each stroke
-                paths.forEach((path, index) => {
-                    // Stagger the strokes slightly for realism
-                    path.style.transition = `stroke-dashoffset 0.8s ease-in-out ${index * 0.2}s`;
-                    path.style.strokeDashoffset = "0";
-                });
-                signatureObserver.unobserve(entry.target);
+    // Multi-page handwriting (coordinates animation across pages)
+    document.querySelectorAll('.handwritten-multipage').forEach(container => {
+        const pages = Array.from(container.querySelectorAll('.handwritten-page'));
+        const animators = [];
+        
+        // Initialize each page
+        pages.forEach(page => {
+            const animator = new HandwritingAnimator(page, {
+                triggerMode: 'scroll',
+                allowToggle: false, // Individual pages don't get toggles
+                pathSelector: '.ink-strokes path'
+            });
+            animators.push(animator);
+        });
+        
+        // Add single toggle for entire document
+        const toggleBtn = document.createElement('button');
+        toggleBtn.className = 'handwriting-toggle';
+        toggleBtn.title = 'Show All Pages';
+        toggleBtn.innerHTML = '<span class="material-symbols-outlined">fast_forward</span>';
+        container.insertBefore(toggleBtn, container.firstChild);
+        
+        let allCompleted = false;
+        toggleBtn.addEventListener('click', () => {
+            allCompleted = !allCompleted;
+            const icon = toggleBtn.querySelector('.material-symbols-outlined');
+            icon.innerText = allCompleted ? 'restart_alt' : 'fast_forward';
+            
+            animators.forEach(animator => {
+                animator.isCompleted = allCompleted;
+                animator.wrapper.classList.toggle('is-completed', allCompleted);
+                
+                if (!allCompleted) {
+                    animator.paths.forEach(({ path, length }) => {
+                        path.style.strokeDashoffset = length;
+                    });
+                }
+            });
+            
+            if (!allCompleted) {
+                window.dispatchEvent(new Event('scroll'));
             }
         });
-    }, { threshold: 0.5 });
+    });
 
-    signatureObserver.observe(sigWrapper);
+    // Signatures (auto-play on viewport)
+    document.querySelectorAll('.signature-wrapper').forEach(wrapper => {
+        new HandwritingAnimator(wrapper, {
+            triggerMode: 'viewport',
+            viewportThreshold: 0.5,
+            allowToggle: false,
+            pathSelector: '.signature-strokes path'
+        });
+    });
 });
