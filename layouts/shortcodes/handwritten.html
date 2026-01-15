@@ -1,0 +1,33 @@
+{{ $path := printf "static/%s" (.Get "src") }}
+{{ $offset := .Get "offset" | default "0" }} 
+
+{{ if (fileExists $path) }}
+  {{ $svgContent := readFile $path }}
+  
+  {{/* 1. Calculate the 8mm grid lines */}}
+  {{ $lineSpacing := 94.48 }}
+  {{ $gridLines := "" }}
+  {{ range seq 0 30 }}
+    {{ $y := add (float $offset) (mul . $lineSpacing) }}
+    {{ $line := printf `<line x1="0" y1="%f" x2="1920" y2="%f" class="template-line" />` $y $y }}
+    {{ $gridLines = print $gridLines $line }}
+  {{ end }}
+
+  {{/* 2. Extract the paths from the Supernote SVG */}}
+  {{ $innerPaths := replaceRE `(?s).*<svg[^>]*>(.*)</svg>.*` "$1" $svgContent }}
+  
+  <div class="handwritten-wrapper">
+    <button class="handwriting-toggle" title="Show All" aria-label="Reveal handwriting">
+        <span class="material-symbols-outlined">fast_forward</span>
+    </button>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1920 2442" class="handwritten-svg">
+      <g class="static-grid">
+        {{ $gridLines | safeHTML }}
+      </g>
+      <g class="ink-strokes">
+        {{ $innerPaths | safeHTML }}
+      </g>
+      <line x1="118" y1="0" x2="118" y2="2442" class="margin-line" />
+    </svg>
+  </div>
+{{ end }}

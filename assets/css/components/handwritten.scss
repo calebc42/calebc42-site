@@ -1,0 +1,107 @@
+/* ===================================================================
+   HANDWRITTEN BLOG SYSTEM
+   =================================================================== */
+
+.handwritten-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 900px; /* Aligns with your standard reading width */
+  margin: var(--spacing-xxl) auto; /* Uses your YoRHa section spacing */
+  overflow: hidden;
+  
+  .handwritten-svg {
+    width: 100%;
+    height: auto;
+    display: block;
+
+    /* 1. Hides original Supernote binary data and baked-in paper */
+    image, 
+    use, 
+    defs { 
+      display: none !important; 
+    }
+
+    /* 2. Styling the Ruled Lines injected by the Shortcode */
+    .template-line {
+      stroke: var(--border-color);
+      stroke-width: 2; /* Scaled relative to the 1920-unit canvas */
+      opacity: 0.5;
+      transition: stroke 0.3s ease;
+    }
+
+    /* 3. The Handwriting Strokes */
+    .ink-strokes path {
+      stroke: var(--text-primary) !important;
+      stroke-width: 6; /* Matches the feel of the Supernote pen */
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      fill: none !important;
+      
+      /* Essential for the scroll-drawing animation */
+      transition: stroke-dashoffset 0.1s linear;
+    }
+  }
+
+  /* =================================================================
+     REVEAL TOGGLE (FAST FORWARD)
+     ================================================================= */
+  /* Update this block in handwritten.scss */
+  .handwriting-toggle {
+    position: absolute;
+    top: 10px;    /* Moved from bottom */
+    left: 10px;   /* Moved from right */
+    z-index: 50;
+    opacity: 0.4; /* Subtle until needed */
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 6px;
+    cursor: pointer;
+    border-radius: var(--border-radius);
+    transition: all 0.3s ease;
+    
+    &:hover {
+        opacity: 1;
+        background: var(--color-accent);
+        color: var(--bg-primary);
+    }
+
+    .material-symbols-outlined {
+      font-size: 20px;
+    }
+  }
+
+  /* =================================================================
+     COMPLETED STATE
+     When .is-completed is added by JS, force the pen to finish
+     ================================================================= */
+  &.is-completed .ink-strokes path {
+    stroke-dashoffset: 0 !important;
+    transition: stroke-dashoffset 0.5s ease-in-out !important;
+  }
+}
+
+/* ===================================================================
+   DARK MODE ADAPTATION
+   =================================================================== */
+
+[data-theme="dark"] {
+  .handwritten-wrapper {
+    .template-line {
+      /* Subtle white/parchment lines for the dark background */
+      stroke: rgba(255, 255, 255, 0.15);
+      opacity: 0.1;
+    }
+
+    .ink-strokes path {
+      /* Simulates digital ink glow against dark parchment */
+      filter: drop-shadow(0 0 1px var(--accent-glow-color));
+    }
+  }
+}
+
+.margin-line {
+  stroke: var(--error-color);
+  stroke-width: 2;
+  opacity: 0.3;
+}

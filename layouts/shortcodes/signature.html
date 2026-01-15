@@ -1,0 +1,13 @@
+{{ $path := printf "static/%s" (.Get "src") }}
+{{ if (fileExists $path) }}
+  {{ $svgContent := readFile $path }}
+  {{ $innerPaths := replaceRE `(?s).*<svg[^>]*>(.*)</svg>.*` "$1" $svgContent }}
+  
+  <div class="signature-wrapper">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200" class="signature-svg">
+      <g class="signature-strokes">
+        {{ $innerPaths | safeHTML }}
+      </g>
+    </svg>
+  </div>
+{{ end }}

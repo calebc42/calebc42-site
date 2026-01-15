@@ -169,3 +169,97 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+document.addEventListener("DOMContentLoaded", () => {
+    const wrapper = document.querySelector(".handwritten-wrapper");
+    if (!wrapper) return;
+
+    // Target paths explicitly inside the strokes group
+    const paths = Array.from(wrapper.querySelectorAll(".ink-strokes path"));
+    const toggleBtn = wrapper.querySelector(".handwriting-toggle");
+    let totalLength = 0;
+    
+    const pathData = paths.map(path => {
+        const length = path.getTotalLength();
+        const startAt = totalLength;
+        totalLength += length;
+        path.style.strokeDasharray = `${length} ${length}`;
+        path.style.strokeDashoffset = length;
+        return { path, length, startAt };
+    });
+
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+            wrapper.classList.toggle('is-completed');
+            const icon = toggleBtn.querySelector('.material-symbols-outlined');
+            icon.innerText = wrapper.classList.contains('is-completed') ? 'restart_alt' : 'fast_forward';
+            if (!wrapper.classList.contains('is-completed')) handleDrawing();
+        });
+    }
+
+    const handleDrawing = () => {
+        if (wrapper.classList.contains('is-completed')) return;
+
+        const rect = wrapper.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        const startPoint = windowHeight * 0.75; // Adjusted for a smoother trigger
+        const endPoint = windowHeight * 0.15;
+
+        // Fallback for non-scrollable pages or small windows
+        const isScrollable = document.documentElement.scrollHeight > windowHeight;
+        
+        let progress;
+        if (!isScrollable || rect.bottom < windowHeight * 0.5) {
+            progress = 1;
+        } else {
+            progress = (startPoint - rect.top) / (startPoint - endPoint);
+        }
+        
+        progress = Math.min(Math.max(progress, 0), 1);
+        const currentTargetLength = totalLength * progress;
+
+        pathData.forEach(({ path, length, startAt }) => {
+            if (currentTargetLength < startAt) {
+                path.style.strokeDashoffset = length;
+            } else if (currentTargetLength > (startAt + length)) {
+                path.style.strokeDashoffset = 0;
+            } else {
+                path.style.strokeDashoffset = length - (currentTargetLength - startAt);
+            }
+        });
+    };
+
+    window.addEventListener("scroll", handleDrawing, { passive: true });
+    window.addEventListener("resize", handleDrawing);
+    handleDrawing(); 
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+    const sigWrapper = document.querySelector(".signature-wrapper");
+    if (!sigWrapper) return;
+
+    const paths = sigWrapper.querySelectorAll(".signature-strokes path");
+    
+    // Setup paths for auto-animation
+    paths.forEach(path => {
+        const length = path.getTotalLength();
+        path.style.strokeDasharray = length;
+        path.style.strokeDashoffset = length;
+    });
+
+    const signatureObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                // Trigger the writing animation for each stroke
+                paths.forEach((path, index) => {
+                    // Stagger the strokes slightly for realism
+                    path.style.transition = `stroke-dashoffset 0.8s ease-in-out ${index * 0.2}s`;
+                    path.style.strokeDashoffset = "0";
+                });
+                signatureObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    signatureObserver.observe(sigWrapper);
+});

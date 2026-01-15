@@ -2,7 +2,7 @@
 title = "Commercial Loan Officer"
 author = ["desktop"]
 date = 2025-12-10
-lastmod = 2025-12-21T09:53:26-07:00
+lastmod = 2026-01-14T17:46:21-07:00
 draft = false
 company = "Lendio"
 location = "Lehi, Utah"

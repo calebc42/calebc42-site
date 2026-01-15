@@ -1,0 +1,20 @@
+.signature-wrapper {
+    width: 100%;
+    max-width: 300px; /* Signatures are usually smaller */
+    margin: var(--spacing-lg) 0 var(--spacing-xl) auto; /* Right-aligned sign-off */
+    
+    .signature-svg {
+        width: 100%;
+        height: auto;
+        
+        image, use, defs { display: none; }
+        
+        path {
+            stroke: var(--text-primary);
+            stroke-width: 4;
+            stroke-linecap: round;
+            fill: none;
+            /* No scroll transition here, handled by JS animation */
+        }
+    }
+}
