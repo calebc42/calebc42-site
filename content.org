@@ -1596,10 +1596,10 @@ While this project involved physical inventory, the principles are identical to 
 2.  **Systematize the Signal:** We moved from a "Push" forecast (guessing) to a "Pull" system (reacting to actual demand)—a concept that applies directly to lead generation and pipeline management.
 3.  **Adoption is King:** A perfect software implementation fails if the team ignores it. Sometimes, the "low-tech" solution is the strategic choice.
 
-* My Handwritten Thoughts :test:
+* A Handwritten Test                                                   :test:
   :PROPERTIES:
   :EXPORT_HUGO_SECTION: posts
-  :EXPORT_FILE_NAME: my-handwritten-post
+  :EXPORT_FILE_NAME: handwritten-test
   :EXPORT_HUGO_CATEGORIES: test
   :END:
 
@@ -1609,7 +1609,5 @@ Check out my handwriting below:
 {{< handwritten src="handwriting/wok1.svg" offset="148" >}}
 {{< signature src="handwriting/my-signature.svg" >}}
 #+end_export
-
-
 
 This text appears after you've scrolled through the drawing.

@@ -2,7 +2,7 @@
 title = "Building a RAG Pipeline for Personal Knowledge Management"
 author = ["desktop"]
 date = 2025-12-08
-lastmod = 2026-01-14T17:46:22-07:00
+lastmod = 2026-01-14T20:25:33-07:00
 tags = ["python", "ai", "data-engineering"]
 categories = ["Project"]
 draft = false

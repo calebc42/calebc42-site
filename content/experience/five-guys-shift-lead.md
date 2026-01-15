@@ -2,7 +2,7 @@
 title = "Shift Lead"
 author = ["desktop"]
 date = 2025-12-10
-lastmod = 2026-01-14T17:46:21-07:00
+lastmod = 2026-01-14T20:25:33-07:00
 draft = false
 company = "Five Guys"
 location = "Salt Lake City, Utah"
