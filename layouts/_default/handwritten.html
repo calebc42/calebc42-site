@@ -34,6 +34,13 @@
 
     <div class="progress-bar"><div class="progress-bar-fill"></div></div>
 
+    <div id="handwritten-modal" class="handwritten-lightbox">
+      <button class="lightbox-close">
+        <span class="material-symbols-outlined">close</span>
+      </button>
+      <div class="lightbox-content"></div>
+    </div>
+
     {{ $js := resources.Get "js/main.js" | resources.Minify | fingerprint }}
     <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}"></script>
   </body>

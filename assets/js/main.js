@@ -134,6 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!this.prefersReducedMotion) {
                 this.setupScrollTrigger();
                 this.setupToggle();
+                this.setupLightbox();
             }
         }
 
@@ -208,6 +209,91 @@ document.addEventListener('DOMContentLoaded', () => {
                 if(icon) icon.innerText = this.isCompleted ? 'restart_alt' : 'fast_forward';
                 if (!this.isCompleted) this.updateProgress();
             });
+        }
+
+        setupLightbox() {
+            const modal = document.getElementById('handwritten-modal');
+            if (!modal) return;
+            
+            const modalContent = modal.querySelector('.lightbox-content');
+            const closeBtn = modal.querySelector('.lightbox-close');
+
+            let scale = 1;
+            let pointX = 0;
+            let pointY = 0;
+            let start = { x: 0, y: 0 };
+            let isPanning = false;
+
+            const setTransform = () => {
+                // Apply transform to a nested container or the SVG itself
+                // to avoid moving the close button
+                const target = modalContent.querySelector('svg');
+                if (target) {
+                    target.style.transform = `translate(${pointX}px, ${pointY}px) scale(${scale})`;
+                    target.style.transformOrigin = "center";
+                }
+            };
+
+            this.wrapper.addEventListener('click', (e) => {
+                if (e.target.closest('.handwriting-toggle')) return;
+
+                const svgClone = this.wrapper.querySelector('svg').cloneNode(true);
+                
+                // Clean up internal styles that might interfere
+                svgClone.style.width = "100%";
+                svgClone.style.height = "auto";
+                
+                modalContent.innerHTML = '';
+                modalContent.appendChild(svgClone);
+                
+                // Reset view
+                scale = 1; pointX = 0; pointY = 0;
+                setTransform();
+                
+                modalContent.querySelectorAll('path').forEach(p => p.style.strokeDashoffset = '0');
+                modal.classList.add('is-active');
+                document.body.style.overflow = 'hidden';
+            });
+
+            // Close button logic - Explicitly stop propagation
+            closeBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                modal.classList.remove('is-active');
+                document.body.style.overflow = '';
+            });
+
+            // --- PANNING LOGIC ---
+            modal.onpointerdown = (e) => {
+                e.preventDefault();
+                isPanning = true;
+                start = { x: e.clientX - pointX, y: e.clientY - pointY };
+            };
+
+            modal.onpointerup = () => { isPanning = false; };
+            
+            modal.onpointermove = (e) => {
+                if (!isPanning) return;
+                pointX = e.clientX - start.x;
+                pointY = e.clientY - start.y;
+                setTransform();
+            };
+
+            // --- ZOOMING LOGIC (Wheel) ---
+            modal.onwheel = (e) => {
+                e.preventDefault();
+                const delta = -e.deltaY;
+                const factor = delta > 0 ? 1.1 : 0.9;
+                scale *= factor;
+                // Limit zoom
+                scale = Math.min(Math.max(0.5, scale), 5);
+                setTransform();
+            };
+
+            closeBtn.onclick = () => {
+                modal.classList.remove('is-active');
+                document.body.style.overflow = '';
+            };
         }
     }
 

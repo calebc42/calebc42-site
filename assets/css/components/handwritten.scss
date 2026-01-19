@@ -106,21 +106,32 @@
 /* 4. RESPONSIVE & ACCESSIBILITY */
 @media (max-width: 768px) {
   .handwritten-wrapper {
-    max-width: none;
-    width: 100vw;
-    margin: 0;
+    max-width: 100%; 
+    width: 100%;
+    margin: var(--spacing-md) auto;
+    overflow: visible;
     
     .handwritten-svg {
-      min-width: 600px; 
-      width: 140%; 
-      margin: 0 auto;
+      min-width: unset; /* Prevents horizontal cutoff */
+      width: 100%;      
+      
+      .ink-strokes path {
+        /* Force thinner strokes for the preview only */
+        stroke-width: 0.7px !important; 
+        vector-effect: none !important; 
+      }
     }
   }
 }
 
-[data-theme="dark"] .handwritten-wrapper {
+/* Lightbox specific styling to restore fidelity */
+.handwritten-lightbox .lightbox-content {
+  background: var(--bg-primary); /* Uses your site's current theme background */
+  
   .ink-strokes path {
-    filter: drop-shadow(0 0 1px rgba(255, 255, 255, 0.1));
+    stroke-width: 2.5px !important;
+    vector-effect: non-scaling-stroke !important;
+    stroke: var(--text-primary) !important; /* Ensures ink matches theme */
   }
 }
 
@@ -132,4 +143,59 @@
     }
     .handwriting-toggle { display: none; }
   }
+}
+
+.handwritten-lightbox {
+  position: fixed;
+  inset: 0;
+  background: var(--bg-primary);
+  z-index: 2000;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  touch-action: none;
+
+  &.is-active { display: flex; }
+
+  .lightbox-close {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: vat(--bg-secondary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    padding: 10px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+  }
+
+.lightbox-content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: grab;
+    background: transparent;
+
+    &:active { cursor: grabbing; }
+
+    /* The SVG inside the lightbox should now follow your site's ink colors */
+    .ink-strokes path {
+      stroke: var(--text-primary) !important;
+      stroke-width: 2.5px !important;
+      vector-effect: non-scaling-stroke !important;
+    }
+  }
+}
+
+.expand-hint {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  opacity: 0.5;
+  pointer-events: none;
+  font-size: 18px;
 }
