@@ -1,7 +1,7 @@
 +++
 title = "About Me"
 author = ["desktop"]
-lastmod = 2026-01-16T16:57:38-07:00
+lastmod = 2026-01-19T16:19:01-07:00
 draft = false
 +++
 

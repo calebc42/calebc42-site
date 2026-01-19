@@ -2,7 +2,7 @@
 title = "Business Relationship Manager"
 author = ["desktop"]
 date = 2025-12-10
-lastmod = 2026-01-16T16:57:38-07:00
+lastmod = 2026-01-19T16:19:01-07:00
 draft = false
 company = "TCS Equipment Finance"
 location = "Draper, Utah"
