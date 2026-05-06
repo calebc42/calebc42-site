@@ -1612,3 +1612,239 @@ Check out my handwriting below:
 #+end_export
 
 This text appears after you've scrolled through the drawing.
+
+
+* Sovereign Digest: May 2026 Automated Showcase :emacs:automation:ai:
+:PROPERTIES:
+:EXPORT_HUGO_SECTION: posts
+:EXPORT_FILE_NAME: sovereign-digest-may-2026
+:EXPORT_DATE: 2026-05-06
+:EXPORT_HUGO_CATEGORIES: "Showcase"
+:EXPORT_HUGO_CUSTOM_FRONT_MATTER: :technologies '("Python" "Ollama" "Qwen 2.5") :skills '("LLM Triage" "Pipeline Automation")
+:END:
+
+** Overview
+Following up on my project to build a local-first, LLM-powered Emacs news aggregator, I wanted to share what the actual output looks like. 
+
+As a quick refresher: I built a literate Org-Babel pipeline that pulls from 9 different feeds, runs them through local LLMs via Ollama (~qwen2.5-coder:14b~ for strict JSON triage, ~qwen2.5:14b~ for prose summaries), and outputs a deduplicated Org file. 
+
+What you are reading below is the direct, unedited output of that pipeline for May 2026. No manual editorializing—just systems doing what they do best: filtering the noise so we can focus on the signal.
+
+---
+
+** Core Editor Updates (Git)
+
+*** Feature: Introduce 'margin' face for window margin background
+:PROPERTIES:
+:COMMIT: d24b10ca75f
+:DATE: 2026-05-05
+:CONFIDENCE: 4/5
+:END:
+- *Author:* Andrea Alberti
+- *Note:* Introduces a new 'margin' face for window margin background, enhancing customization options for users.
+
+*** Architecture: Jsonrpc: rework sync request handling (bug#80623)
+:PROPERTIES:
+:COMMIT: 9b3855e164d
+:DATE: 2026-05-04
+:CONFIDENCE: 4/5
+:END:
+- *Author:* João Távora
+- *Note:* This commit refactors the JSON-RPC handling to improve robustness and clarity, which is significant for users relying on complex interactions with remote endpoints.
+
+*** Architecture: Try to resize or resize-and-move child frames in one update
+:PROPERTIES:
+:COMMIT: a6a3b32208c
+:DATE: 2026-05-01
+:CONFIDENCE: 4/5
+:END:
+- *Author:* Dmitry Gutov
+- *Note:* This commit significantly improves the handling of child frame resizing and positioning, which can affect daily workflow by ensuring smoother and more efficient updates to window dimensions.
+
+*** Architecture: Only perform erc-log-insert-log-on-open setup once
+:PROPERTIES:
+:COMMIT: cf9728c4be8
+:DATE: 2026-04-30
+:CONFIDENCE: 4/5
+:END:
+- *Author:* F. Jason Park
+- *Note:* This commit refactors the ERC logging system, improving its setup and teardown processes, which could affect daily workflow for users relying on ERC's logging features.
+
+*** Architecture: In tree-sitter, signal if predicate function causes reparse
+:PROPERTIES:
+:COMMIT: 4e420d0b20e
+:DATE: 2026-04-29
+:CONFIDENCE: 4/5
+:END:
+- *Author:* Yuan Fu
+- *Note:* This change introduces a new mechanism to handle reparses in tree-sitter, which could affect the stability and correctness of buffer parsing operations.
+
+*** Feature: Update to Org 9.8.3
+:PROPERTIES:
+:COMMIT: 0d8ccbfe595
+:DATE: 2026-04-19
+:CONFIDENCE: 4/5
+:END:
+- *Author:* Kyle Meyer
+- *Note:* Updating Org mode to version 9.8.3 introduces new features and improvements that enhance the user's workflow for managing notes, tasks, and documents.
+
+*** Feature: Update to Org 9.8.2
+:PROPERTIES:
+:COMMIT: ca33663e506
+:DATE: 2026-04-12
+:CONFIDENCE: 4/5
+:END:
+- *Author:* Kyle Meyer
+- *Note:* Updating Org mode to version 9.8.2 introduces new features and improvements that enhance the user's workflow for managing notes, tasks, and documents.
+
+*** Architecture: Improve performance of icalendar-recur.el and its tests
+:PROPERTIES:
+:COMMIT: 6eea0153377
+:DATE: 2026-04-12
+:CONFIDENCE: 4/5
+:END:
+- *Author:* Richard Lawrence
+- *Note:* This commit significantly improves the performance of iCalendar recurrence handling, which is a core feature for many users.
+
+*** Feature: Support 24-bit TrueColor on MS-Windows console
+:PROPERTIES:
+:COMMIT: 2bca4ac0ed7
+:DATE: 2026-04-08
+:CONFIDENCE: 5/5
+:END:
+- *Author:* ewantown
+- *Note:* This commit adds significant new functionality for supporting 24-bit TrueColor on MS-Windows console, which is a major enhancement for experienced Emacs users.
+
+** Community Pulse (Reddit)
+
+*** Workflow: Emacs as a Math Notebook and Advanced Symbolic Solver!
+:PROPERTIES:
+:OP: u/_DonK4rma
+:DATE: 2026-04-14
+:SCORE: 309 ↑
+:COMMENTS: 24
+:END:
+- *Link:* https://www.reddit.com/gallery/1slq1lp
+- *Why it matters:* This workflow showcases how Emacs can serve as a powerful math notebook, potentially saving time and improving understanding for users dealing with complex mathematical concepts.
+- *Summary:* The post demonstrates using Emacs and Org mode as an effective tool for taking math notes and solving advanced symbolic problems, inspired by Karthink's video. The user shares their experience with learning abstract mathematical concepts like eigenvectors and magnetic flux within Emacs. While the technical implementation details are not explicitly provided, the discussion highlights the use of Org mode for beautiful note-taking and equation previews, which is a significant workflow enhancement for mathematicians and scientists using Emacs. However, there's an open question about portability to LaTeX and compatibility with AUCTeX preview.
+- *Community voice:* “I do want to share the positive experience emacs has become while learning a topic that was very abstract to me for the first time.”
+
+*** Workflow: Sidetabs using side windows.
+:PROPERTIES:
+:OP: u/Nicolas-Rougier
+:DATE: 2026-04-28
+:SCORE: 246 ↑
+:COMMENTS: 18
+:END:
+- *Link:* https://i.redd.it/mq2who2szyxg1.png
+- *Why it matters:* Experienced users interested in enhancing their workflow through custom UI elements will find this discussion valuable, as it addresses both the technical implementation and usability concerns of sidetabs.
+- *Summary:* The post demonstrates a novel Emacs workflow using side windows for sidetabs, which allows users to view and manage buffers in a sidebar. The implementation leverages custom code available on GitHub, with discussions around the visual aesthetics and functionality of such an interface. Users express interest but also highlight UX issues like buffer ordering and current-buffer indication. This reveals ongoing challenges in creating effective side window interfaces for Emacs.
+- *Community voice:* “how do you achieve such nice border lines in emacs?”
+
+*** Blog: Stealing from the Best Emacs Configs
+:PROPERTIES:
+:OP: u/isus_copilul_minune
+:DATE: 2026-04-07
+:SCORE: 187 ↑
+:COMMENTS: 20
+:END:
+- *Link:* https://emacsredux.com/blog/2026/04/07/stealing-from-the-best-emacs-configs/
+- *Why it matters:* Experienced Emacs users can significantly enhance their productivity by applying proven configuration tweaks from established setups.
+- *Summary:* The post discusses optimizing Emacs configurations by adopting settings from popular existing setups. It highlights specific configuration tweaks such as increasing `read-process-output-max` for better performance with eglot and lsp-mode, and setting `reb-re-syntax` to 'rx' for easier regex testing in re-builder mode. The community comments add insights into the nuances of these optimizations and their potential impacts.
+- *Community voice:* “&gt; The default `read-process-output-max` is 64KB, which is still quite conservative.”
+
+*** Package: I hand-tuned a color theme in CIELAB space — Ember, a warm graphite theme with three variants
+:PROPERTIES:
+:OP: u/OkAdhesiveness1951
+:DATE: 2026-04-11
+:SCORE: 158 ↑
+:COMMENTS: 32
+:END:
+- *Link:* https://i.redd.it/jt2h5cgokkug1.png
+- *Why it matters:* For Emacs users seeking a more comfortable color scheme for extended coding sessions, Ember offers a carefully crafted theme with perceptual color tuning, addressing common issues like saturation and contrast fatigue.
+- *Summary:* The post introduces Ember, a hand-tuned Emacs color theme designed for long-term use and comfort. The author used CIELAB perceptual color space to ensure balanced brightness levels across colors, aiming for visual consistency over extended periods. Three variants are provided: the main dark theme 'Ember', a softer contrast version 'Ember Soft', and a light mode variant 'Ember Light'. However, some users noted that hard-coding major and minor modes might limit user flexibility.
+- *Community voice:* “Every color was tuned in CIELAB perceptual color space rather than HSL, which makes a noticeable difference in how balanced the palette feels across different brightness levels.”
+
+*** Discussion: Skeeto: "I have officially retired from Emacs" -- looking for maintainers for Elfeed etc.
+:PROPERTIES:
+:OP: u/nonreligious2
+:DATE: 2026-04-26
+:SCORE: 143 ↑
+:COMMENTS: 39
+:END:
+- *Link:* https://nullprogram.com/blog/2026/04/26/
+- *Why it matters:* This post underscores the critical need for community support in maintaining key Emacs packages, especially as original developers retire or move on.
+- *Summary:* Skeeto, a prominent Emacs developer, has announced retirement from maintaining Elfeed and other packages. This post highlights the community's reliance on these tools and raises concerns about finding new maintainers to take over. The discussion includes reflections on the technical challenges of maintenance and potential alternatives like `newsticker`. It also touches on broader questions regarding the future impact of AI on Emacs development.
+- *Community voice:* “Wish skeeto the best, his blog and packages are amazing.”
+
+*** Package: Package announcement: buffer-to-pdf (by prot)
+:PROPERTIES:
+:OP: u/ImJustPassinBy
+:DATE: 2026-05-03
+:SCORE: 133 ↑
+:COMMENTS: 9
+:END:
+- *Link:* https://www.youtube.com/watch?v=JG4R-d0N-is
+- *Why it matters:* For experienced Emacs users who frequently need to share or print buffers with consistent formatting, this package offers a streamlined solution that maintains high-quality output across different themes.
+- *Summary:* The package `buffer-to-pdf` allows users to export the current buffer view (including font and colors) directly into a PDF file with high fidelity. This is particularly useful for those who need to share or print Emacs buffers in a visually consistent manner, especially when using dark themes where default printing methods produce poor results. The package leverages existing Emacs capabilities but enhances them significantly by improving the visual quality of the exported PDFs. Community reactions highlight its utility and potential applications beyond simple document sharing.
+- *Community voice:* “Very interesting package, I wasn't aware that exporting the current "view" (meaning font and colours) to a pdf is even possible.”
+
+*** Package: tamagotchi on emacs!
+:PROPERTIES:
+:OP: u/leledonde
+:DATE: 2026-04-09
+:SCORE: 122 ↑
+:COMMENTS: 9
+:END:
+- *Link:* https://i.redd.it/8d47dn1pn6ug1.png
+- *Why it matters:* It offers a unique way to engage with Emacs beyond productivity tools, potentially increasing user retention and enjoyment among beginners and enthusiasts alike.
+- *Summary:* The post introduces a novel Emacs package called 'tamagotchi', which allows users to care for a virtual pet within their Emacs environment. The package includes basic commands like feeding, cleaning, sleeping, and hugging the tamagotchi, each affecting its hunger, happiness, and energy levels. If neglected, the tamagotchi dies. This playful addition highlights creative uses of Emacs Lisp but lacks detailed implementation details or advanced features.
+- *Community voice:* “\- care your tamagotchi with M-x tamacare feed, clean, sleep, hug”
+
+** Blogosphere (Planet Emacslife)
+
+*** Charlie Holland: Emacs Completion Showcase with VOMPECCC (video)
+:PROPERTIES:
+:DATE: 2026-05-05
+:END:
+- *Author:* Charlie Holland
+- *Link:* https://www.chiply.dev/post-vompeccc-showcase
+- *Why it matters:* Experienced Emacs users will find this valuable for enhancing their workflow with advanced completion features.
+- *Summary:* The post showcases VOMPECCC, a comprehensive Emacs completion framework that integrates various completion backends. It demonstrates how to set up and use VOMPECCC for efficient code navigation and command invocation in Emacs. The author highlights the benefits of using multiple completion engines but does not delve into performance implications or potential conflicts with other packages.
+
+*** Irreal: Emacs Keyboard Ergonomics
+:PROPERTIES:
+:DATE: 2026-05-05
+:END:
+- *Author:* Irreal
+- *Link:* https://irreal.org/blog/?p=13788
+- *Why it matters:* This matters for Emacs users who prioritize ergonomic setups to prevent long-term physical strain.
+- *Summary:* The post discusses strategies for improving Emacs keyboard ergonomics to prevent repetitive strain injury (RSI). It highlights the use of split keyboards and a technique called 'one shot modifiers' where modifier keys are tapped rather than held down. The author notes that while split keyboards can help, configuring one-shot modifiers was particularly effective in reducing finger movement.
+
+** Package Ecosystem
+
+*** Tracked Package Releases
+
+**** transient: v0.13.2
+:PROPERTIES:
+:DATE: 2026-05-01
+:END:
+- *Link:* https://github.com/magit/transient/releases/tag/v0.13.2
+
+**** org-mode: release_9.8.4
+:PROPERTIES:
+:DATE: 2026-05-02
+:END:
+- *Link:* https://github.com/bzg/org-mode/releases/tag/release_9.8.4
+
+** Upstream Discussions (emacs-devel)
+
+*** Proposal: HTTPS URLs of the GNU and NonGNU ELPA source code repositories
+- *Author:* Roi Martin (jroi.martin@gmail.com)
+- *Link:* https://yhetil.org/emacs-devel/87h5okd3mp.fsf@gmail.com/
+- *Summary:* A proposal to update the GNU and NonGNU ELPA source code repositories to use HTTPS URLs for enhanced security.
+
+*** Discussion: Tail recursion
+- *Author:* Stefan Monnier (monnier@iro.umontreal.ca)
+- *Link:* https://yhetil.org/emacs-devel/jwvmrycr6n0.fsf-monnier+emacs@gnu.org/
+- *Summary:* A technical discussion about tail recursion optimization in Emacs Lisp.
