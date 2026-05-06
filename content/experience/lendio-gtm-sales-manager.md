@@ -2,7 +2,7 @@
 title = "Go-to-Market Sales Manager"
 author = ["desktop"]
 date = 2025-12-10
-lastmod = 2026-01-19T16:19:01-07:00
+lastmod = 2026-05-06T17:54:54-06:00
 draft = false
 company = "Lendio"
 location = "Lehi, Utah"
