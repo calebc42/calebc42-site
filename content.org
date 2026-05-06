@@ -1613,7 +1613,6 @@ Check out my handwriting below:
 
 This text appears after you've scrolled through the drawing.
 
-
 * Sovereign Digest: May 2026 Automated Showcase :emacs:automation:ai:
 :PROPERTIES:
 :EXPORT_HUGO_SECTION: posts

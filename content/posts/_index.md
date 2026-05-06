@@ -2,7 +2,7 @@
 title = "Portfolio"
 author = ["desktop"]
 layout = "list"
-lastmod = 2026-05-06T17:54:55-06:00
+lastmod = 2026-05-06T17:57:26-06:00
 draft = false
 summary = "A collection of technical deep-dives, system architectures, and operational tools engineered to solve revenue problems."
 +++
